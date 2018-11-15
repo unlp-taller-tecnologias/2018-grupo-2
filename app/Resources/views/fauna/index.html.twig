@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Faunas list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Weight</th>
+                <th>Healthobservations</th>
+                <th>Image</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for fauna in faunas %}
+            <tr>
+                <td><a href="{{ path('fauna_show', { 'id': fauna.id }) }}">{{ fauna.id }}</a></td>
+                <td>{{ fauna.name }}</td>
+                <td>{{ fauna.weight }}</td>
+                <td>{{ fauna.healthObservations }}</td>
+                <td>{{ fauna.image }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('fauna_show', { 'id': fauna.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('fauna_edit', { 'id': fauna.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('fauna_new') }}">Create a new fauna</a>
+        </li>
+    </ul>
+{% endblock %}
