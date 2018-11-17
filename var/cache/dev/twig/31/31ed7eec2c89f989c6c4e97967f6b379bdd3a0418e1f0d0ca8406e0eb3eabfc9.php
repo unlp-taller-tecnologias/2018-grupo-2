@@ -823,6 +823,6 @@ class __TwigTemplate_4591dd24fb39ca0dea104acddd3c55293ce037a8996bf8478cc247c5b7f
         {% endif %}
     {% endfor %}
 {% endblock %}
-", "SwiftmailerBundle:Collector:swiftmailer.html.twig", "/opt/lampp/htdocs/bioParque/vendor/symfony/swiftmailer-bundle/Resources/views/Collector/swiftmailer.html.twig");
+", "SwiftmailerBundle:Collector:swiftmailer.html.twig", "/opt/lampp/htdocs/2018-grupo-2/vendor/symfony/swiftmailer-bundle/Resources/views/Collector/swiftmailer.html.twig");
     }
 }

@@ -396,6 +396,6 @@ class __TwigTemplate_a623690903531674d3c75fa257e5349df566f457b7602f27cfd07482381
 {% block body %}
     {% include '@Twig/Exception/exception.html.twig' %}
 {% endblock %}
-", "TwigBundle:Exception:exception_full.html.twig", "/opt/lampp/htdocs/bioParque/vendor/symfony/symfony/src/Symfony/Bundle/TwigBundle/Resources/views/Exception/exception_full.html.twig");
+", "TwigBundle:Exception:exception_full.html.twig", "/opt/lampp/htdocs/2018-grupo-2/vendor/symfony/symfony/src/Symfony/Bundle/TwigBundle/Resources/views/Exception/exception_full.html.twig");
     }
 }

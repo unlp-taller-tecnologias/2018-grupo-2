@@ -59,6 +59,6 @@ class __TwigTemplate_519db39764fcd3b9f4954f20ae07d45292de966f85ae3bf53badee2fb60
         <?php echo \$view['form']->widget(\$form); ?>
     </td>
 </tr>
-", "@Framework/FormTable/button_row.html.php", "/opt/lampp/htdocs/bioParque/vendor/symfony/symfony/src/Symfony/Bundle/FrameworkBundle/Resources/views/FormTable/button_row.html.php");
+", "@Framework/FormTable/button_row.html.php", "/opt/lampp/htdocs/2018-grupo-2/vendor/symfony/symfony/src/Symfony/Bundle/FrameworkBundle/Resources/views/FormTable/button_row.html.php");
     }
 }

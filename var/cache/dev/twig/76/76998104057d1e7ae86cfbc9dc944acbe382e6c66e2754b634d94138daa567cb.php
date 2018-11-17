@@ -66,6 +66,6 @@ class __TwigTemplate_1bd808cc29f8d0d7fa828ce0d800910c94c2e64b1c91543a7346fb2f94f
     public function getSourceContext()
     {
         return new Twig_Source("{% block panel '' %}
-", "WebProfilerBundle:Profiler:ajax_layout.html.twig", "/opt/lampp/htdocs/bioParque/vendor/symfony/symfony/src/Symfony/Bundle/WebProfilerBundle/Resources/views/Profiler/ajax_layout.html.twig");
+", "WebProfilerBundle:Profiler:ajax_layout.html.twig", "/opt/lampp/htdocs/2018-grupo-2/vendor/symfony/symfony/src/Symfony/Bundle/WebProfilerBundle/Resources/views/Profiler/ajax_layout.html.twig");
     }
 }

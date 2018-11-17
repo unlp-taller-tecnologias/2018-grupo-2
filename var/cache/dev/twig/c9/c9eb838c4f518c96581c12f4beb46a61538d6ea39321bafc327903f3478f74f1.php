@@ -49,6 +49,6 @@ class __TwigTemplate_c6e418d1e801265001184c75af70532ab9f1057404875278bce53bb4025
     public function getSourceContext()
     {
         return new Twig_Source("<textarea <?php echo \$view['form']->block(\$form, 'widget_attributes') ?>><?php echo \$view->escape(\$value) ?></textarea>
-", "@Framework/Form/textarea_widget.html.php", "/opt/lampp/htdocs/bioParque/vendor/symfony/symfony/src/Symfony/Bundle/FrameworkBundle/Resources/views/Form/textarea_widget.html.php");
+", "@Framework/Form/textarea_widget.html.php", "/opt/lampp/htdocs/2018-grupo-2/vendor/symfony/symfony/src/Symfony/Bundle/FrameworkBundle/Resources/views/Form/textarea_widget.html.php");
     }
 }

@@ -187,6 +187,6 @@ class __TwigTemplate_e3f611f1bea8007632d6b9efbd55429753fede9378a7a22e983b0a8cf47
         </div>
     </body>
 </html>
-", "@FOSUser/layout.html.twig", "/opt/lampp/htdocs/bioParque/vendor/friendsofsymfony/user-bundle/Resources/views/layout.html.twig");
+", "@FOSUser/layout.html.twig", "/opt/lampp/htdocs/2018-grupo-2/vendor/friendsofsymfony/user-bundle/Resources/views/layout.html.twig");
     }
 }

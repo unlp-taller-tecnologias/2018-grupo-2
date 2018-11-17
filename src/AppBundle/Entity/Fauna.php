@@ -57,6 +57,18 @@ class Fauna
     private $attendants;
 
     /**
+     * @ORM\ManyToOne(targetEntity="Destination", inversedBy="faunas")
+     * @ORM\JoinColumn(name="destination_id", referencedColumnName="id", nullable=true)
+     */
+    private $destination;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="FASubspecie", inversedBy="faunas")
+     * @ORM\JoinColumn(name="subspecie_id", referencedColumnName="id")
+     */
+    private $subspecie;
+
+    /**
      * Get id.
      *
      * @return int
@@ -160,5 +172,53 @@ class Fauna
     public function getImage()
     {
         return $this->image;
+    }
+
+    /**
+     * Set destination.
+     *
+     * @param string $destination
+     *
+     * @return Fauna
+     */
+    public function setDestination($destination)
+    {
+        $this->destination = $destination;
+
+        return $this;
+    }
+
+    /**
+     * Get destination.
+     *
+     * @return string
+     */
+    public function getDestination()
+    {
+        return $this->destination;
+    }
+
+    /**
+     * Set subspecie.
+     *
+     * @param string $subspecie
+     *
+     * @return Fauna
+     */
+    public function setSubspecie($subspecie)
+    {
+        $this->subspecie = $subspecie;
+
+        return $this;
+    }
+
+    /**
+     * Get subspecie.
+     *
+     * @return string
+     */
+    public function getSubspecie()
+    {
+        return $this->subspecie;
     }
 }

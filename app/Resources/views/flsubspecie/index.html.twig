@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Flsubspecies list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for fLSubspecie in fLSubspecies %}
+            <tr>
+                <td><a href="{{ path('flsubspecie_show', { 'id': fLSubspecie.id }) }}">{{ fLSubspecie.id }}</a></td>
+                <td>{{ fLSubspecie.name }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('flsubspecie_show', { 'id': fLSubspecie.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('flsubspecie_edit', { 'id': fLSubspecie.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('flsubspecie_new') }}">Create a new fLSubspecie</a>
+        </li>
+    </ul>
+{% endblock %}

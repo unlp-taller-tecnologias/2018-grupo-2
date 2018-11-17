@@ -157,6 +157,6 @@ class __TwigTemplate_845a8631c3c71ca1dd3e348eae38f09c9569c060feaec0790b4d4051ebb
         {%- endfor -%}
     </pre>
 {% endif %}
-", "DoctrineBundle:Collector:explain.html.twig", "/opt/lampp/htdocs/bioParque/vendor/doctrine/doctrine-bundle/Resources/views/Collector/explain.html.twig");
+", "DoctrineBundle:Collector:explain.html.twig", "/opt/lampp/htdocs/2018-grupo-2/vendor/doctrine/doctrine-bundle/Resources/views/Collector/explain.html.twig");
     }
 }

@@ -73,6 +73,6 @@ class __TwigTemplate_e8be44f881fb68cc7acb3b4adee0355285d227512b3815983c4026c76f3
     <p>{{ 'profile.show.username'|trans }}: {{ user.username }}</p>
     <p>{{ 'profile.show.email'|trans }}: {{ user.email }}</p>
 </div>
-", "FOSUserBundle:Profile:show_content.html.twig", "/opt/lampp/htdocs/bioParque/vendor/friendsofsymfony/user-bundle/Resources/views/Profile/show_content.html.twig");
+", "FOSUserBundle:Profile:show_content.html.twig", "/opt/lampp/htdocs/2018-grupo-2/vendor/friendsofsymfony/user-bundle/Resources/views/Profile/show_content.html.twig");
     }
 }

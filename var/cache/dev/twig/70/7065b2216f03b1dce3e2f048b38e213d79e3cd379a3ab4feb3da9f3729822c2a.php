@@ -127,6 +127,6 @@ class __TwigTemplate_df15ecf55913e068d9afd8f4db28fffeb1dad2ab38dcc6df405fb77b340
 {% endautoescape %}
 {% endblock %}
 {% block body_html %}{% endblock %}
-", "FOSUserBundle:Resetting:email.txt.twig", "/opt/lampp/htdocs/bioParque/vendor/friendsofsymfony/user-bundle/Resources/views/Resetting/email.txt.twig");
+", "FOSUserBundle:Resetting:email.txt.twig", "/opt/lampp/htdocs/2018-grupo-2/vendor/friendsofsymfony/user-bundle/Resources/views/Resetting/email.txt.twig");
     }
 }

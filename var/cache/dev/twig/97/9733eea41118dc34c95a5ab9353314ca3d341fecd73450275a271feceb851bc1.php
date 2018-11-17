@@ -86,6 +86,6 @@ class __TwigTemplate_a1ddb1b0a6e7f1f8ddc9ae4b73533470d401abc80fb108359af8c51e351
 {% block fos_user_content %}
     <p>{{ 'registration.check_email'|trans({'%email%': user.email}) }}</p>
 {% endblock fos_user_content %}
-", "FOSUserBundle:Registration:check_email.html.twig", "/opt/lampp/htdocs/bioParque/vendor/friendsofsymfony/user-bundle/Resources/views/Registration/check_email.html.twig");
+", "FOSUserBundle:Registration:check_email.html.twig", "/opt/lampp/htdocs/2018-grupo-2/vendor/friendsofsymfony/user-bundle/Resources/views/Registration/check_email.html.twig");
     }
 }

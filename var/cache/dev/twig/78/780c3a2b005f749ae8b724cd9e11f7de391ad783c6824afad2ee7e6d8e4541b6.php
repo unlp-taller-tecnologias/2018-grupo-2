@@ -80,6 +80,6 @@ class __TwigTemplate_82484a41f4ce75f3d636b2e51fc591f4b35ca23bd393c4eb41363794e42
     {% endfor %}
     </ul>
 </div>
-", "FOSUserBundle:Group:list_content.html.twig", "/opt/lampp/htdocs/bioParque/vendor/friendsofsymfony/user-bundle/Resources/views/Group/list_content.html.twig");
+", "FOSUserBundle:Group:list_content.html.twig", "/opt/lampp/htdocs/2018-grupo-2/vendor/friendsofsymfony/user-bundle/Resources/views/Group/list_content.html.twig");
     }
 }

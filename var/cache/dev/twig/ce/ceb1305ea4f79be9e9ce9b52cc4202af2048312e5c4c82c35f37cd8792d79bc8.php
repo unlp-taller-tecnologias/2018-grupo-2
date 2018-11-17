@@ -99,6 +99,6 @@ class __TwigTemplate_8b0afd2b11607ef37dd6f5669bd8cc306d398330dc4f5bd3435bc2762a0
     <p><a href=\"{{ targetUrl }}\">{{ 'registration.back'|trans }}</a></p>
     {% endif %}
 {% endblock fos_user_content %}
-", "FOSUserBundle:Registration:confirmed.html.twig", "/opt/lampp/htdocs/bioParque/vendor/friendsofsymfony/user-bundle/Resources/views/Registration/confirmed.html.twig");
+", "FOSUserBundle:Registration:confirmed.html.twig", "/opt/lampp/htdocs/2018-grupo-2/vendor/friendsofsymfony/user-bundle/Resources/views/Registration/confirmed.html.twig");
     }
 }

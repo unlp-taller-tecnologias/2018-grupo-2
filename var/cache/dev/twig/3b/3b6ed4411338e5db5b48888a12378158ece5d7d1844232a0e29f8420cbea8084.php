@@ -196,6 +196,6 @@ a.doc:hover {
     top: -7em;
     visibility: hidden;
 }
-", "WebProfilerBundle:Profiler:open.css.twig", "/opt/lampp/htdocs/bioParque/vendor/symfony/symfony/src/Symfony/Bundle/WebProfilerBundle/Resources/views/Profiler/open.css.twig");
+", "WebProfilerBundle:Profiler:open.css.twig", "/opt/lampp/htdocs/2018-grupo-2/vendor/symfony/symfony/src/Symfony/Bundle/WebProfilerBundle/Resources/views/Profiler/open.css.twig");
     }
 }

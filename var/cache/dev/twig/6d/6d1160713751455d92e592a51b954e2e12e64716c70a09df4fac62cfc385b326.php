@@ -79,6 +79,6 @@ class __TwigTemplate_00cb55cda4730becea9bd4e7880f875fe762f25e14f63b48a83af2ae2ef
         <input type=\"submit\" value=\"{{ 'change_password.submit'|trans }}\" />
     </div>
 {{ form_end(form) }}
-", "FOSUserBundle:ChangePassword:change_password_content.html.twig", "/opt/lampp/htdocs/bioParque/vendor/friendsofsymfony/user-bundle/Resources/views/ChangePassword/change_password_content.html.twig");
+", "FOSUserBundle:ChangePassword:change_password_content.html.twig", "/opt/lampp/htdocs/2018-grupo-2/vendor/friendsofsymfony/user-bundle/Resources/views/ChangePassword/change_password_content.html.twig");
     }
 }

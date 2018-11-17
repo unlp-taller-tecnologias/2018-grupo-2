@@ -79,6 +79,6 @@ class __TwigTemplate_575e6bb1837a325182e0ea801bb8bb5740ee978ef64fbc26d9d13631beb
         <input type=\"submit\" value=\"{{ 'profile.edit.submit'|trans }}\" />
     </div>
 {{ form_end(form) }}
-", "FOSUserBundle:Profile:edit_content.html.twig", "/opt/lampp/htdocs/bioParque/vendor/friendsofsymfony/user-bundle/Resources/views/Profile/edit_content.html.twig");
+", "FOSUserBundle:Profile:edit_content.html.twig", "/opt/lampp/htdocs/2018-grupo-2/vendor/friendsofsymfony/user-bundle/Resources/views/Profile/edit_content.html.twig");
     }
 }

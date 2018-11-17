@@ -91,6 +91,6 @@ class __TwigTemplate_36db3213cc2b3fd49b12eacb56f3b3069d13eb1342f17e93b2de4975029
         ?>
     </div>
 <?php endif ?>
-", "@Framework/Form/time_widget.html.php", "/opt/lampp/htdocs/bioParque/vendor/symfony/symfony/src/Symfony/Bundle/FrameworkBundle/Resources/views/Form/time_widget.html.php");
+", "@Framework/Form/time_widget.html.php", "/opt/lampp/htdocs/2018-grupo-2/vendor/symfony/symfony/src/Symfony/Bundle/FrameworkBundle/Resources/views/Form/time_widget.html.php");
     }
 }

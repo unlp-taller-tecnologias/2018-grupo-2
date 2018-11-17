@@ -250,6 +250,6 @@ class __TwigTemplate_6483ce3545008525dc873739add3ca5506b001f2581a8a26bed80846466
     }
 </style>
 {% endblock %}
-", ":default:index.html.twig", "/opt/lampp/htdocs/bioParque/app/Resources/views/default/index.html.twig");
+", ":default:index.html.twig", "/opt/lampp/htdocs/2018-grupo-2/app/Resources/views/default/index.html.twig");
     }
 }

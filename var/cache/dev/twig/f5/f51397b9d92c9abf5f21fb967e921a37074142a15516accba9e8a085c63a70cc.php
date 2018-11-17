@@ -474,6 +474,6 @@ class __TwigTemplate_adeff73b25268f6d2dbc181b67a9c40ade16fee5879a183d879a95adcd9
         {% endif %}
     </div>
 </div>
-", "TwigBundle:Exception:exception.html.twig", "/opt/lampp/htdocs/bioParque/vendor/symfony/symfony/src/Symfony/Bundle/TwigBundle/Resources/views/Exception/exception.html.twig");
+", "TwigBundle:Exception:exception.html.twig", "/opt/lampp/htdocs/2018-grupo-2/vendor/symfony/symfony/src/Symfony/Bundle/TwigBundle/Resources/views/Exception/exception.html.twig");
     }
 }

@@ -905,6 +905,6 @@ class __TwigTemplate_404ba31040a24f0e0a3411100c43b1ea7a061a3b329dfb01f64e8fb63eb
     {% if form is not rootform %}</span>{% else %}</div>{% endif %}
     {%- endif %}
 {%- endblock form_errors %}
-", "bootstrap_3_layout.html.twig", "/opt/lampp/htdocs/bioParque/vendor/symfony/symfony/src/Symfony/Bridge/Twig/Resources/views/Form/bootstrap_3_layout.html.twig");
+", "bootstrap_3_layout.html.twig", "/opt/lampp/htdocs/2018-grupo-2/vendor/symfony/symfony/src/Symfony/Bridge/Twig/Resources/views/Form/bootstrap_3_layout.html.twig");
     }
 }

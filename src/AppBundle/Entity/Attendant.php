@@ -41,7 +41,7 @@ class Attendant
      * @ORM\Column(name="last_name", type="string", length=50)
      */
     private $lastName;
-   
+
     /**
      * @ORM\ManyToOne(targetEntity="Category", inversedBy="attendants")
      * @ORM\JoinColumn(name="category_id", referencedColumnName="id")
@@ -134,5 +134,33 @@ class Attendant
     public function getLastName()
     {
         return $this->lastName;
+    }
+
+    /**
+     * Set category.
+     *
+     * @param string $category
+     *
+     * @return Attendant
+     */
+    public function setCategory($category)
+    {
+        $this->category = $category;
+
+        return $this;
+    }
+
+    /**
+     * Get category.
+     *
+     * @return string
+     */
+    public function getCategory()
+    {
+        return $this->category;
+    }
+
+    public function __toString(){
+        return $this->name." ".$this->lastName;
     }
 }

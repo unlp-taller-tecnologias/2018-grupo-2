@@ -1659,6 +1659,6 @@ class __TwigTemplate_265af89d9b228cbf498e1c0c18de271f09f115cf8796018e7c8a7d38908
         </tbody>
     </table>
 {% endmacro %}
-", "DoctrineBundle:Collector:db.html.twig", "/opt/lampp/htdocs/bioParque/vendor/doctrine/doctrine-bundle/Resources/views/Collector/db.html.twig");
+", "DoctrineBundle:Collector:db.html.twig", "/opt/lampp/htdocs/2018-grupo-2/vendor/doctrine/doctrine-bundle/Resources/views/Collector/db.html.twig");
     }
 }

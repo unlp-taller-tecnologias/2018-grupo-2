@@ -127,6 +127,6 @@ class __TwigTemplate_ffeb5c40cf3fa26272c737fb02fd3f37909b6db04d6412df2d988a2d267
 {% endautoescape %}
 {% endblock %}
 {% block body_html %}{% endblock %}
-", "FOSUserBundle:Registration:email.txt.twig", "/opt/lampp/htdocs/bioParque/vendor/friendsofsymfony/user-bundle/Resources/views/Registration/email.txt.twig");
+", "FOSUserBundle:Registration:email.txt.twig", "/opt/lampp/htdocs/2018-grupo-2/vendor/friendsofsymfony/user-bundle/Resources/views/Registration/email.txt.twig");
     }
 }

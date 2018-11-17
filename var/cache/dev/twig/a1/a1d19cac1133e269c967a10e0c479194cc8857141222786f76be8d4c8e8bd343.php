@@ -81,6 +81,6 @@ class __TwigTemplate_b5c3d622a124345002d69c39d31a65fb2347722414dbaccf0314f897551
 {% block fos_user_content %}
 {% include \"@FOSUser/Group/edit_content.html.twig\" %}
 {% endblock fos_user_content %}
-", "FOSUserBundle:Group:edit.html.twig", "/opt/lampp/htdocs/bioParque/vendor/friendsofsymfony/user-bundle/Resources/views/Group/edit.html.twig");
+", "FOSUserBundle:Group:edit.html.twig", "/opt/lampp/htdocs/2018-grupo-2/vendor/friendsofsymfony/user-bundle/Resources/views/Group/edit.html.twig");
     }
 }

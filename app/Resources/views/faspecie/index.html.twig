@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Faspecies list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for fASpecie in fASpecies %}
+            <tr>
+                <td><a href="{{ path('faspecie_show', { 'id': fASpecie.id }) }}">{{ fASpecie.id }}</a></td>
+                <td>{{ fASpecie.name }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('faspecie_show', { 'id': fASpecie.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('faspecie_edit', { 'id': fASpecie.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('faspecie_new') }}">Create a new fASpecie</a>
+        </li>
+    </ul>
+{% endblock %}

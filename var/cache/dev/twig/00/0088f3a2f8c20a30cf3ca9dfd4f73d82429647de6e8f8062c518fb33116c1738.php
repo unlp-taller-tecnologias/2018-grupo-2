@@ -121,6 +121,6 @@ class __TwigTemplate_5f8455bcc78e3fd21ed9ff1c6a661fbf520c2fbead90e716d4840847f95
 .exception-message-wrapper .container {
     min-height: auto;
 }
-", "WebProfilerBundle:Collector:exception.css.twig", "/opt/lampp/htdocs/bioParque/vendor/symfony/symfony/src/Symfony/Bundle/WebProfilerBundle/Resources/views/Collector/exception.css.twig");
+", "WebProfilerBundle:Collector:exception.css.twig", "/opt/lampp/htdocs/2018-grupo-2/vendor/symfony/symfony/src/Symfony/Bundle/WebProfilerBundle/Resources/views/Collector/exception.css.twig");
     }
 }

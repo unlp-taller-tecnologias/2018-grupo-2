@@ -107,6 +107,82 @@ class appDevDebugProjectContainerUrlMatcher extends Symfony\Bundle\FrameworkBund
 
         }
 
+        elseif (0 === strpos($pathinfo, '/area')) {
+            // area_index
+            if ('/area' === $trimmedPathinfo) {
+                $ret = array (  '_controller' => 'AppBundle\\Controller\\AreaController::indexAction',  '_route' => 'area_index',);
+                if ('/' === substr($pathinfo, -1)) {
+                    // no-op
+                } elseif ('GET' !== $canonicalMethod) {
+                    goto not_area_index;
+                } else {
+                    return array_replace($ret, $this->redirect($rawPathinfo.'/', 'area_index'));
+                }
+
+                return $ret;
+            }
+            not_area_index:
+
+            // area_new
+            if ('/area/new' === $pathinfo) {
+                return array (  '_controller' => 'AppBundle\\Controller\\AreaController::newAction',  '_route' => 'area_new',);
+            }
+
+            // area_show
+            if (preg_match('#^/area/(?P<id>[^/]++)$#sD', $pathinfo, $matches)) {
+                return $this->mergeDefaults(array_replace($matches, array('_route' => 'area_show')), array (  '_controller' => 'AppBundle\\Controller\\AreaController::showAction',));
+            }
+
+            // area_edit
+            if (preg_match('#^/area/(?P<id>[^/]++)/edit$#sD', $pathinfo, $matches)) {
+                return $this->mergeDefaults(array_replace($matches, array('_route' => 'area_edit')), array (  '_controller' => 'AppBundle\\Controller\\AreaController::editAction',));
+            }
+
+            // area_delete
+            if (preg_match('#^/area/(?P<id>[^/]++)$#sD', $pathinfo, $matches)) {
+                return $this->mergeDefaults(array_replace($matches, array('_route' => 'area_delete')), array (  '_controller' => 'AppBundle\\Controller\\AreaController::deleteAction',));
+            }
+
+        }
+
+        elseif (0 === strpos($pathinfo, '/attendant')) {
+            // attendant_index
+            if ('/attendant' === $trimmedPathinfo) {
+                $ret = array (  '_controller' => 'AppBundle\\Controller\\AttendantController::indexAction',  '_route' => 'attendant_index',);
+                if ('/' === substr($pathinfo, -1)) {
+                    // no-op
+                } elseif ('GET' !== $canonicalMethod) {
+                    goto not_attendant_index;
+                } else {
+                    return array_replace($ret, $this->redirect($rawPathinfo.'/', 'attendant_index'));
+                }
+
+                return $ret;
+            }
+            not_attendant_index:
+
+            // attendant_new
+            if ('/attendant/new' === $pathinfo) {
+                return array (  '_controller' => 'AppBundle\\Controller\\AttendantController::newAction',  '_route' => 'attendant_new',);
+            }
+
+            // attendant_show
+            if (preg_match('#^/attendant/(?P<id>[^/]++)$#sD', $pathinfo, $matches)) {
+                return $this->mergeDefaults(array_replace($matches, array('_route' => 'attendant_show')), array (  '_controller' => 'AppBundle\\Controller\\AttendantController::showAction',));
+            }
+
+            // attendant_edit
+            if (preg_match('#^/attendant/(?P<id>[^/]++)/edit$#sD', $pathinfo, $matches)) {
+                return $this->mergeDefaults(array_replace($matches, array('_route' => 'attendant_edit')), array (  '_controller' => 'AppBundle\\Controller\\AttendantController::editAction',));
+            }
+
+            // attendant_delete
+            if (preg_match('#^/attendant/(?P<id>[^/]++)$#sD', $pathinfo, $matches)) {
+                return $this->mergeDefaults(array_replace($matches, array('_route' => 'attendant_delete')), array (  '_controller' => 'AppBundle\\Controller\\AttendantController::deleteAction',));
+            }
+
+        }
+
         elseif (0 === strpos($pathinfo, '/category')) {
             // category_index
             if ('/category' === $trimmedPathinfo) {
@@ -160,7 +236,279 @@ class appDevDebugProjectContainerUrlMatcher extends Symfony\Bundle\FrameworkBund
         }
         not_homepage:
 
-        if (0 === strpos($pathinfo, '/login')) {
+        if (0 === strpos($pathinfo, '/destination')) {
+            // destination_index
+            if ('/destination' === $trimmedPathinfo) {
+                $ret = array (  '_controller' => 'AppBundle\\Controller\\DestinationController::indexAction',  '_route' => 'destination_index',);
+                if ('/' === substr($pathinfo, -1)) {
+                    // no-op
+                } elseif ('GET' !== $canonicalMethod) {
+                    goto not_destination_index;
+                } else {
+                    return array_replace($ret, $this->redirect($rawPathinfo.'/', 'destination_index'));
+                }
+
+                return $ret;
+            }
+            not_destination_index:
+
+            // destination_new
+            if ('/destination/new' === $pathinfo) {
+                return array (  '_controller' => 'AppBundle\\Controller\\DestinationController::newAction',  '_route' => 'destination_new',);
+            }
+
+            // destination_show
+            if (preg_match('#^/destination/(?P<id>[^/]++)$#sD', $pathinfo, $matches)) {
+                return $this->mergeDefaults(array_replace($matches, array('_route' => 'destination_show')), array (  '_controller' => 'AppBundle\\Controller\\DestinationController::showAction',));
+            }
+
+            // destination_edit
+            if (preg_match('#^/destination/(?P<id>[^/]++)/edit$#sD', $pathinfo, $matches)) {
+                return $this->mergeDefaults(array_replace($matches, array('_route' => 'destination_edit')), array (  '_controller' => 'AppBundle\\Controller\\DestinationController::editAction',));
+            }
+
+            // destination_delete
+            if (preg_match('#^/destination/(?P<id>[^/]++)$#sD', $pathinfo, $matches)) {
+                return $this->mergeDefaults(array_replace($matches, array('_route' => 'destination_delete')), array (  '_controller' => 'AppBundle\\Controller\\DestinationController::deleteAction',));
+            }
+
+        }
+
+        elseif (0 === strpos($pathinfo, '/fa')) {
+            if (0 === strpos($pathinfo, '/faspecie')) {
+                // faspecie_index
+                if ('/faspecie' === $trimmedPathinfo) {
+                    $ret = array (  '_controller' => 'AppBundle\\Controller\\FASpecieController::indexAction',  '_route' => 'faspecie_index',);
+                    if ('/' === substr($pathinfo, -1)) {
+                        // no-op
+                    } elseif ('GET' !== $canonicalMethod) {
+                        goto not_faspecie_index;
+                    } else {
+                        return array_replace($ret, $this->redirect($rawPathinfo.'/', 'faspecie_index'));
+                    }
+
+                    return $ret;
+                }
+                not_faspecie_index:
+
+                // faspecie_new
+                if ('/faspecie/new' === $pathinfo) {
+                    return array (  '_controller' => 'AppBundle\\Controller\\FASpecieController::newAction',  '_route' => 'faspecie_new',);
+                }
+
+                // faspecie_show
+                if (preg_match('#^/faspecie/(?P<id>[^/]++)$#sD', $pathinfo, $matches)) {
+                    return $this->mergeDefaults(array_replace($matches, array('_route' => 'faspecie_show')), array (  '_controller' => 'AppBundle\\Controller\\FASpecieController::showAction',));
+                }
+
+                // faspecie_edit
+                if (preg_match('#^/faspecie/(?P<id>[^/]++)/edit$#sD', $pathinfo, $matches)) {
+                    return $this->mergeDefaults(array_replace($matches, array('_route' => 'faspecie_edit')), array (  '_controller' => 'AppBundle\\Controller\\FASpecieController::editAction',));
+                }
+
+                // faspecie_delete
+                if (preg_match('#^/faspecie/(?P<id>[^/]++)$#sD', $pathinfo, $matches)) {
+                    return $this->mergeDefaults(array_replace($matches, array('_route' => 'faspecie_delete')), array (  '_controller' => 'AppBundle\\Controller\\FASpecieController::deleteAction',));
+                }
+
+            }
+
+            elseif (0 === strpos($pathinfo, '/fasubspecie')) {
+                // fasubspecie_index
+                if ('/fasubspecie' === $trimmedPathinfo) {
+                    $ret = array (  '_controller' => 'AppBundle\\Controller\\FASubspecieController::indexAction',  '_route' => 'fasubspecie_index',);
+                    if ('/' === substr($pathinfo, -1)) {
+                        // no-op
+                    } elseif ('GET' !== $canonicalMethod) {
+                        goto not_fasubspecie_index;
+                    } else {
+                        return array_replace($ret, $this->redirect($rawPathinfo.'/', 'fasubspecie_index'));
+                    }
+
+                    return $ret;
+                }
+                not_fasubspecie_index:
+
+                // fasubspecie_new
+                if ('/fasubspecie/new' === $pathinfo) {
+                    return array (  '_controller' => 'AppBundle\\Controller\\FASubspecieController::newAction',  '_route' => 'fasubspecie_new',);
+                }
+
+                // fasubspecie_show
+                if (preg_match('#^/fasubspecie/(?P<id>[^/]++)$#sD', $pathinfo, $matches)) {
+                    return $this->mergeDefaults(array_replace($matches, array('_route' => 'fasubspecie_show')), array (  '_controller' => 'AppBundle\\Controller\\FASubspecieController::showAction',));
+                }
+
+                // fasubspecie_edit
+                if (preg_match('#^/fasubspecie/(?P<id>[^/]++)/edit$#sD', $pathinfo, $matches)) {
+                    return $this->mergeDefaults(array_replace($matches, array('_route' => 'fasubspecie_edit')), array (  '_controller' => 'AppBundle\\Controller\\FASubspecieController::editAction',));
+                }
+
+                // fasubspecie_delete
+                if (preg_match('#^/fasubspecie/(?P<id>[^/]++)$#sD', $pathinfo, $matches)) {
+                    return $this->mergeDefaults(array_replace($matches, array('_route' => 'fasubspecie_delete')), array (  '_controller' => 'AppBundle\\Controller\\FASubspecieController::deleteAction',));
+                }
+
+            }
+
+            elseif (0 === strpos($pathinfo, '/fauna')) {
+                // fauna_index
+                if ('/fauna' === $trimmedPathinfo) {
+                    $ret = array (  '_controller' => 'AppBundle\\Controller\\FaunaController::indexAction',  '_route' => 'fauna_index',);
+                    if ('/' === substr($pathinfo, -1)) {
+                        // no-op
+                    } elseif ('GET' !== $canonicalMethod) {
+                        goto not_fauna_index;
+                    } else {
+                        return array_replace($ret, $this->redirect($rawPathinfo.'/', 'fauna_index'));
+                    }
+
+                    return $ret;
+                }
+                not_fauna_index:
+
+                // fauna_new
+                if ('/fauna/new' === $pathinfo) {
+                    return array (  '_controller' => 'AppBundle\\Controller\\FaunaController::newAction',  '_route' => 'fauna_new',);
+                }
+
+                // fauna_show
+                if (preg_match('#^/fauna/(?P<id>[^/]++)$#sD', $pathinfo, $matches)) {
+                    return $this->mergeDefaults(array_replace($matches, array('_route' => 'fauna_show')), array (  '_controller' => 'AppBundle\\Controller\\FaunaController::showAction',));
+                }
+
+                // fauna_edit
+                if (preg_match('#^/fauna/(?P<id>[^/]++)/edit$#sD', $pathinfo, $matches)) {
+                    return $this->mergeDefaults(array_replace($matches, array('_route' => 'fauna_edit')), array (  '_controller' => 'AppBundle\\Controller\\FaunaController::editAction',));
+                }
+
+                // fauna_delete
+                if (preg_match('#^/fauna/(?P<id>[^/]++)$#sD', $pathinfo, $matches)) {
+                    return $this->mergeDefaults(array_replace($matches, array('_route' => 'fauna_delete')), array (  '_controller' => 'AppBundle\\Controller\\FaunaController::deleteAction',));
+                }
+
+            }
+
+        }
+
+        elseif (0 === strpos($pathinfo, '/fl')) {
+            if (0 === strpos($pathinfo, '/flspecie')) {
+                // flspecie_index
+                if ('/flspecie' === $trimmedPathinfo) {
+                    $ret = array (  '_controller' => 'AppBundle\\Controller\\FLSpecieController::indexAction',  '_route' => 'flspecie_index',);
+                    if ('/' === substr($pathinfo, -1)) {
+                        // no-op
+                    } elseif ('GET' !== $canonicalMethod) {
+                        goto not_flspecie_index;
+                    } else {
+                        return array_replace($ret, $this->redirect($rawPathinfo.'/', 'flspecie_index'));
+                    }
+
+                    return $ret;
+                }
+                not_flspecie_index:
+
+                // flspecie_new
+                if ('/flspecie/new' === $pathinfo) {
+                    return array (  '_controller' => 'AppBundle\\Controller\\FLSpecieController::newAction',  '_route' => 'flspecie_new',);
+                }
+
+                // flspecie_show
+                if (preg_match('#^/flspecie/(?P<id>[^/]++)$#sD', $pathinfo, $matches)) {
+                    return $this->mergeDefaults(array_replace($matches, array('_route' => 'flspecie_show')), array (  '_controller' => 'AppBundle\\Controller\\FLSpecieController::showAction',));
+                }
+
+                // flspecie_edit
+                if (preg_match('#^/flspecie/(?P<id>[^/]++)/edit$#sD', $pathinfo, $matches)) {
+                    return $this->mergeDefaults(array_replace($matches, array('_route' => 'flspecie_edit')), array (  '_controller' => 'AppBundle\\Controller\\FLSpecieController::editAction',));
+                }
+
+                // flspecie_delete
+                if (preg_match('#^/flspecie/(?P<id>[^/]++)$#sD', $pathinfo, $matches)) {
+                    return $this->mergeDefaults(array_replace($matches, array('_route' => 'flspecie_delete')), array (  '_controller' => 'AppBundle\\Controller\\FLSpecieController::deleteAction',));
+                }
+
+            }
+
+            elseif (0 === strpos($pathinfo, '/flsubspecie')) {
+                // flsubspecie_index
+                if ('/flsubspecie' === $trimmedPathinfo) {
+                    $ret = array (  '_controller' => 'AppBundle\\Controller\\FLSubspecieController::indexAction',  '_route' => 'flsubspecie_index',);
+                    if ('/' === substr($pathinfo, -1)) {
+                        // no-op
+                    } elseif ('GET' !== $canonicalMethod) {
+                        goto not_flsubspecie_index;
+                    } else {
+                        return array_replace($ret, $this->redirect($rawPathinfo.'/', 'flsubspecie_index'));
+                    }
+
+                    return $ret;
+                }
+                not_flsubspecie_index:
+
+                // flsubspecie_new
+                if ('/flsubspecie/new' === $pathinfo) {
+                    return array (  '_controller' => 'AppBundle\\Controller\\FLSubspecieController::newAction',  '_route' => 'flsubspecie_new',);
+                }
+
+                // flsubspecie_show
+                if (preg_match('#^/flsubspecie/(?P<id>[^/]++)$#sD', $pathinfo, $matches)) {
+                    return $this->mergeDefaults(array_replace($matches, array('_route' => 'flsubspecie_show')), array (  '_controller' => 'AppBundle\\Controller\\FLSubspecieController::showAction',));
+                }
+
+                // flsubspecie_edit
+                if (preg_match('#^/flsubspecie/(?P<id>[^/]++)/edit$#sD', $pathinfo, $matches)) {
+                    return $this->mergeDefaults(array_replace($matches, array('_route' => 'flsubspecie_edit')), array (  '_controller' => 'AppBundle\\Controller\\FLSubspecieController::editAction',));
+                }
+
+                // flsubspecie_delete
+                if (preg_match('#^/flsubspecie/(?P<id>[^/]++)$#sD', $pathinfo, $matches)) {
+                    return $this->mergeDefaults(array_replace($matches, array('_route' => 'flsubspecie_delete')), array (  '_controller' => 'AppBundle\\Controller\\FLSubspecieController::deleteAction',));
+                }
+
+            }
+
+            elseif (0 === strpos($pathinfo, '/flora')) {
+                // flora_index
+                if ('/flora' === $trimmedPathinfo) {
+                    $ret = array (  '_controller' => 'AppBundle\\Controller\\FloraController::indexAction',  '_route' => 'flora_index',);
+                    if ('/' === substr($pathinfo, -1)) {
+                        // no-op
+                    } elseif ('GET' !== $canonicalMethod) {
+                        goto not_flora_index;
+                    } else {
+                        return array_replace($ret, $this->redirect($rawPathinfo.'/', 'flora_index'));
+                    }
+
+                    return $ret;
+                }
+                not_flora_index:
+
+                // flora_new
+                if ('/flora/new' === $pathinfo) {
+                    return array (  '_controller' => 'AppBundle\\Controller\\FloraController::newAction',  '_route' => 'flora_new',);
+                }
+
+                // flora_show
+                if (preg_match('#^/flora/(?P<id>[^/]++)$#sD', $pathinfo, $matches)) {
+                    return $this->mergeDefaults(array_replace($matches, array('_route' => 'flora_show')), array (  '_controller' => 'AppBundle\\Controller\\FloraController::showAction',));
+                }
+
+                // flora_edit
+                if (preg_match('#^/flora/(?P<id>[^/]++)/edit$#sD', $pathinfo, $matches)) {
+                    return $this->mergeDefaults(array_replace($matches, array('_route' => 'flora_edit')), array (  '_controller' => 'AppBundle\\Controller\\FloraController::editAction',));
+                }
+
+                // flora_delete
+                if (preg_match('#^/flora/(?P<id>[^/]++)$#sD', $pathinfo, $matches)) {
+                    return $this->mergeDefaults(array_replace($matches, array('_route' => 'flora_delete')), array (  '_controller' => 'AppBundle\\Controller\\FloraController::deleteAction',));
+                }
+
+            }
+
+        }
+
+        elseif (0 === strpos($pathinfo, '/login')) {
             // fos_user_security_login
             if ('/login' === $pathinfo) {
                 $ret = array (  '_controller' => 'fos_user.security.controller:loginAction',  '_route' => 'fos_user_security_login',);

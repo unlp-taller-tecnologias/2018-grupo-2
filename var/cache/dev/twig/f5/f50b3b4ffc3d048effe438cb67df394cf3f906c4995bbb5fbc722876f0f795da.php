@@ -79,6 +79,6 @@ class __TwigTemplate_5a27dc5aa0bb9edd256e8a7152aab50f9388f74bf435ced33e16233abc0
         <input type=\"submit\" value=\"{{ 'group.edit.submit'|trans }}\" />
     </div>
 {{ form_end(form) }}
-", "FOSUserBundle:Group:edit_content.html.twig", "/opt/lampp/htdocs/bioParque/vendor/friendsofsymfony/user-bundle/Resources/views/Group/edit_content.html.twig");
+", "FOSUserBundle:Group:edit_content.html.twig", "/opt/lampp/htdocs/2018-grupo-2/vendor/friendsofsymfony/user-bundle/Resources/views/Group/edit_content.html.twig");
     }
 }

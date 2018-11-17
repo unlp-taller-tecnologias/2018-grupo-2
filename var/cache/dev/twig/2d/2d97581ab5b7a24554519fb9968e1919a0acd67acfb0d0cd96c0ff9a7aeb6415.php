@@ -79,6 +79,6 @@ class __TwigTemplate_05e5d9131fb9707bd2d184b9c9c7d7be1c9729eab7bb2a9f90172015c06
         <input type=\"submit\" value=\"{{ 'registration.submit'|trans }}\" />
     </div>
 {{ form_end(form) }}
-", "FOSUserBundle:Registration:register_content.html.twig", "/opt/lampp/htdocs/bioParque/vendor/friendsofsymfony/user-bundle/Resources/views/Registration/register_content.html.twig");
+", "FOSUserBundle:Registration:register_content.html.twig", "/opt/lampp/htdocs/2018-grupo-2/vendor/friendsofsymfony/user-bundle/Resources/views/Registration/register_content.html.twig");
     }
 }

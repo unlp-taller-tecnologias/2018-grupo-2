@@ -57,6 +57,6 @@ class __TwigTemplate_fd1fd75da76d4e3f390e921fb91d5cd9f0f4b8e30f6ba2ba980144d31c8
     <?php echo \$view['form']->errors(\$form) ?>
     <?php echo \$view['form']->widget(\$form) ?>
 </div>
-", "@Framework/Form/form_row.html.php", "/opt/lampp/htdocs/bioParque/vendor/symfony/symfony/src/Symfony/Bundle/FrameworkBundle/Resources/views/Form/form_row.html.php");
+", "@Framework/Form/form_row.html.php", "/opt/lampp/htdocs/2018-grupo-2/vendor/symfony/symfony/src/Symfony/Bundle/FrameworkBundle/Resources/views/Form/form_row.html.php");
     }
 }

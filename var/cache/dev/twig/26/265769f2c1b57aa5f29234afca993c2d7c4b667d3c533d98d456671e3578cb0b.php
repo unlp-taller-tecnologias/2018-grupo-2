@@ -61,6 +61,6 @@ class __TwigTemplate_016197a5f7a2a4af4207a25d8f8bd4916870595f420d151fd6fa3cea310
         <?php endforeach; ?>
     </ul>
 <?php endif ?>
-", "@Framework/Form/form_errors.html.php", "/opt/lampp/htdocs/bioParque/vendor/symfony/symfony/src/Symfony/Bundle/FrameworkBundle/Resources/views/Form/form_errors.html.php");
+", "@Framework/Form/form_errors.html.php", "/opt/lampp/htdocs/2018-grupo-2/vendor/symfony/symfony/src/Symfony/Bundle/FrameworkBundle/Resources/views/Form/form_errors.html.php");
     }
 }

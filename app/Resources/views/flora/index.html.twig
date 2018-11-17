@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Floras list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Observations</th>
+                <th>Age</th>
+                <th>Image</th>
+                <th>Name</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for flora in floras %}
+            <tr>
+                <td><a href="{{ path('flora_show', { 'id': flora.id }) }}">{{ flora.id }}</a></td>
+                <td>{{ flora.observations }}</td>
+                <td>{{ flora.age }}</td>
+                <td>{{ flora.image }}</td>
+                <td>{{ flora.name }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('flora_show', { 'id': flora.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('flora_edit', { 'id': flora.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('flora_new') }}">Create a new flora</a>
+        </li>
+    </ul>
+{% endblock %}

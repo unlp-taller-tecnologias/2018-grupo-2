@@ -140,6 +140,6 @@ class __TwigTemplate_6a19c34f1307bb2259b9d875c7d9d87c9fc5547a71c56ecfec762540c06
     {{ filename|file_excerpt(line, -1) }}
 </div>
 {% endblock %}
-", "WebProfilerBundle:Profiler:open.html.twig", "/opt/lampp/htdocs/bioParque/vendor/symfony/symfony/src/Symfony/Bundle/WebProfilerBundle/Resources/views/Profiler/open.html.twig");
+", "WebProfilerBundle:Profiler:open.html.twig", "/opt/lampp/htdocs/2018-grupo-2/vendor/symfony/symfony/src/Symfony/Bundle/WebProfilerBundle/Resources/views/Profiler/open.html.twig");
     }
 }

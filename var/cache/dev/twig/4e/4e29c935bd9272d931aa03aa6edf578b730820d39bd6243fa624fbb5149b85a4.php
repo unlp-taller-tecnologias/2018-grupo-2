@@ -2011,6 +2011,6 @@ class __TwigTemplate_23aa4f3d4c0243f49fd2aeafe857f499a705c9c5dbaf5ff4379c9f1743e
         {{ tree.form_tree_details(childName, childData, forms_by_hash) }}
     {% endfor %}
 {% endmacro %}
-", "WebProfilerBundle:Collector:form.html.twig", "/opt/lampp/htdocs/bioParque/vendor/symfony/symfony/src/Symfony/Bundle/WebProfilerBundle/Resources/views/Collector/form.html.twig");
+", "WebProfilerBundle:Collector:form.html.twig", "/opt/lampp/htdocs/2018-grupo-2/vendor/symfony/symfony/src/Symfony/Bundle/WebProfilerBundle/Resources/views/Collector/form.html.twig");
     }
 }

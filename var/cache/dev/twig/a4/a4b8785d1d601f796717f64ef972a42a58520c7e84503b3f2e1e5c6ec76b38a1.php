@@ -81,6 +81,6 @@ class __TwigTemplate_a1f8adfa9721247c2820570e028dfb49a2e34ec329c657b7af6bc348231
 {% block fos_user_content %}
 {% include \"@FOSUser/Resetting/reset_content.html.twig\" %}
 {% endblock fos_user_content %}
-", "FOSUserBundle:Resetting:reset.html.twig", "/opt/lampp/htdocs/bioParque/vendor/friendsofsymfony/user-bundle/Resources/views/Resetting/reset.html.twig");
+", "FOSUserBundle:Resetting:reset.html.twig", "/opt/lampp/htdocs/2018-grupo-2/vendor/friendsofsymfony/user-bundle/Resources/views/Resetting/reset.html.twig");
     }
 }

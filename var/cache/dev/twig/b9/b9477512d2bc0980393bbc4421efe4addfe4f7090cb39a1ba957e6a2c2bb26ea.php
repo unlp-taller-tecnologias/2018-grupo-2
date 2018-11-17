@@ -79,6 +79,6 @@ class __TwigTemplate_6c2da15ba98189360ecc9430cecec0715ef2f4d57d403136fc5afc6beed
         <input type=\"submit\" value=\"{{ 'resetting.reset.submit'|trans }}\" />
     </div>
 {{ form_end(form) }}
-", "FOSUserBundle:Resetting:reset_content.html.twig", "/opt/lampp/htdocs/bioParque/vendor/friendsofsymfony/user-bundle/Resources/views/Resetting/reset_content.html.twig");
+", "FOSUserBundle:Resetting:reset_content.html.twig", "/opt/lampp/htdocs/2018-grupo-2/vendor/friendsofsymfony/user-bundle/Resources/views/Resetting/reset_content.html.twig");
     }
 }

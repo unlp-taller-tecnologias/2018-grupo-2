@@ -127,6 +127,6 @@ class __TwigTemplate_7599a65a3bb341482346a669d28e2afbd9e5816d47fe11508dd40fcd79c
 
     <input type=\"submit\" id=\"_submit\" name=\"_submit\" value=\"{{ 'security.login.submit'|trans }}\" />
 </form>
-", "FOSUserBundle:Security:login_content.html.twig", "/opt/lampp/htdocs/bioParque/vendor/friendsofsymfony/user-bundle/Resources/views/Security/login_content.html.twig");
+", "FOSUserBundle:Security:login_content.html.twig", "/opt/lampp/htdocs/2018-grupo-2/vendor/friendsofsymfony/user-bundle/Resources/views/Security/login_content.html.twig");
     }
 }

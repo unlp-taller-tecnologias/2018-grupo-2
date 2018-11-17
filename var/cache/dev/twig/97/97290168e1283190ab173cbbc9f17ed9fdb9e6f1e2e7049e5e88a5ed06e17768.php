@@ -1,6 +1,6 @@
 <?php
 
-/* category/edit.html.twig */
+/* :category:edit.html.twig */
 class __TwigTemplate_734df6a815b91bfe33f9cf25a54048df28a6c8e495b86b3fda21cc354539cb46 extends Twig_Template
 {
     private $source;
@@ -12,7 +12,7 @@ class __TwigTemplate_734df6a815b91bfe33f9cf25a54048df28a6c8e495b86b3fda21cc35453
         $this->source = $this->getSourceContext();
 
         // line 1
-        $this->parent = $this->loadTemplate("base.html.twig", "category/edit.html.twig", 1);
+        $this->parent = $this->loadTemplate("base.html.twig", ":category:edit.html.twig", 1);
         $this->blocks = array(
             'body' => array($this, 'block_body'),
         );
@@ -26,10 +26,10 @@ class __TwigTemplate_734df6a815b91bfe33f9cf25a54048df28a6c8e495b86b3fda21cc35453
     protected function doDisplay(array $context, array $blocks = array())
     {
         $__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e = $this->extensions["Symfony\\Bundle\\WebProfilerBundle\\Twig\\WebProfilerExtension"];
-        $__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e->enter($__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e_prof = new Twig_Profiler_Profile($this->getTemplateName(), "template", "category/edit.html.twig"));
+        $__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e->enter($__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e_prof = new Twig_Profiler_Profile($this->getTemplateName(), "template", ":category:edit.html.twig"));
 
         $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02 = $this->extensions["Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension"];
-        $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02->enter($__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02_prof = new Twig_Profiler_Profile($this->getTemplateName(), "template", "category/edit.html.twig"));
+        $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02->enter($__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02_prof = new Twig_Profiler_Profile($this->getTemplateName(), "template", ":category:edit.html.twig"));
 
         $this->parent->display($context, array_merge($this->blocks, $blocks));
         
@@ -96,7 +96,7 @@ class __TwigTemplate_734df6a815b91bfe33f9cf25a54048df28a6c8e495b86b3fda21cc35453
 
     public function getTemplateName()
     {
-        return "category/edit.html.twig";
+        return ":category:edit.html.twig";
     }
 
     public function isTraitable()
@@ -132,6 +132,6 @@ class __TwigTemplate_734df6a815b91bfe33f9cf25a54048df28a6c8e495b86b3fda21cc35453
         </li>
     </ul>
 {% endblock %}
-", "category/edit.html.twig", "/home/milagros/workspace/2018-grupo-2/app/Resources/views/category/edit.html.twig");
+", ":category:edit.html.twig", "/opt/lampp/htdocs/2018-grupo-2/app/Resources/views/category/edit.html.twig");
     }
 }

@@ -456,6 +456,6 @@ class __TwigTemplate_f5812ab8e5160f5f22e84a27f3f846dd424fc9d31b551204d5375a77d98
         </div>
     {% endfor %}
 {% endblock %}
-", "WebProfilerBundle:Collector:validator.html.twig", "/opt/lampp/htdocs/bioParque/vendor/symfony/symfony/src/Symfony/Bundle/WebProfilerBundle/Resources/views/Collector/validator.html.twig");
+", "WebProfilerBundle:Collector:validator.html.twig", "/opt/lampp/htdocs/2018-grupo-2/vendor/symfony/symfony/src/Symfony/Bundle/WebProfilerBundle/Resources/views/Collector/validator.html.twig");
     }
 }
