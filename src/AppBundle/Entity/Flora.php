@@ -56,7 +56,7 @@ class Flora
     private $area;
 
     /**
-     * @ORM\ManyToOne(targetEntity="FLSubspecie", inversedBy="faunas")
+     * @ORM\ManyToOne(targetEntity="FLSubspecie", inversedBy="floras")
      * @ORM\JoinColumn(name="subspecie_id", referencedColumnName="id")
      */
     private $subspecie;
