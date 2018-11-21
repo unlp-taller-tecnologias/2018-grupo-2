@@ -1,9 +1,11 @@
 {% extends 'base.html.twig' %}
-
+{% block stylesheets %}
+<link rel="stylesheet" type="text/css" href="{{ asset('scripts/dataTables/datatables.min.css') }}">
+{% endblock %}
 {% block body %}
     <h1>Areas list</h1>
 
-    <table>
+    <table id="table_id">
         <thead>
             <tr>
                 <th>Id</th>
@@ -38,4 +40,12 @@
             <a href="{{ path('area_new') }}">Create a new area</a>
         </li>
     </ul>
+{% endblock %}
+{% block javascripts %}
+<script src="{{ asset('scripts/dataTables/datatables.min.js') }}"></script>
+<script>
+$(document).ready( function () {
+    $('#table_id').DataTable();
+} );
+</script>
 {% endblock %}
