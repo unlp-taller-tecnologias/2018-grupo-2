@@ -36,7 +36,7 @@ class FLSubspecie
     private $floras;
 
     /**
-     * @ORM\ManyToOne(targetEntity="FLSpecie", inversedBy="subespecies")
+     * @ORM\ManyToOne(targetEntity="FLSpecie", inversedBy="subspecies")
      * @ORM\JoinColumn(name="specie_id", referencedColumnName="id")
      */
     private $specie;

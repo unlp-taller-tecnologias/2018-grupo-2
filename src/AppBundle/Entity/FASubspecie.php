@@ -36,7 +36,7 @@ class FASubspecie
     private $faunas;
 
     /**
-     * @ORM\ManyToOne(targetEntity="FASpecie", inversedBy="subespecies")
+     * @ORM\ManyToOne(targetEntity="FASpecie", inversedBy="subspecies")
      * @ORM\JoinColumn(name="specie_id", referencedColumnName="id")
      */
     private $specie;
