@@ -1,52 +1,122 @@
 <!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="UTF-8" />
-        <link rel="stylesheet" href="{{ asset('bootstrap/css/bootstrap.min.css') }}">
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        {% block stylesheets %}{% endblock %}
-        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
-    </head>
-    <body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-      <a class="navbar-brand" href="#">Navbar</a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block title %}Bioparque{% endblock %}</title>
+    {% block stylesheets %}{% endblock %}
+    <!-- Bootstrap core CSS -->
+    <link href="{{ asset('bootstrap/css/theme.css') }}" rel="stylesheet">
+    <link href="{{ asset('bootstrap/css/style.css') }}" rel="stylesheet">
+    <link href="{{ asset('bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
+    
+    <!-- Custom styles for this template -->
+    <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+    <link href="{{ asset('images/fav.png') }}" rel="icon">
+    <link href="{{ asset('https://fonts.googleapis.com/css?family=Montserrat:300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i') }}" rel="stylesheet">
+    <link href="{{ asset('https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i') }}" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('bootstrap/css/pushy.css') }}">
+    <link rel="stylesheet" href="{{ asset('bootstrap/css/masonry.css') }}">
+    <link rel="stylesheet" href="{{ asset('bootstrap/css/animate.css') }}">
+    <link rel="stylesheet" href="{{ asset('bootstrap/css/magnific-popup.css') }}">
+    <link rel="stylesheet" href="{{ asset('bootstrap/css/odometer-theme-default.css') }}">
+    <script>
+      window.odometerOptions = {
+        selector: '.odometer',
+        format: '(,ddd)', // Change how digit groups are formatted, and how many digits are shown after the decimal point
+        duration: 13000, // Change how long the javascript expects the CSS animation to take
+        theme: 'default'
+      };
+    </script>
+  </head>
+  <body>
+    <div class="site-overlay"></div>
+      <nav>
+        <div class="container-fluid">
+          <div class="row">  
+            <img src="{{ asset('images/logo_mlp.png') }}" alt="Logo de la Municipalidad de La Plata" class="img-responsive">
+            <img src="{{ asset('images/juntos_en_todo.png') }}" alt="Logo Juntos en todo" class="img-responsive">
+            <img src="{{ asset('images/bioparque_laplata_sm.png') }}" alt="Logo del Bioparque" class="img-responsive">
+          </div>   
 
-<div class="collapse navbar-collapse" id="navbarSupportedContent">
-  <ul class="navbar-nav mr-auto">
-    <li class="nav-item active">
-      <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" href="#">Link</a>
-    </li>
-    <li class="nav-item dropdown">
-      <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-        Dropdown
-      </a>
-      <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-        <a class="dropdown-item" href="#">Action</a>
-        <a class="dropdown-item" href="#">Another action</a>
-        <div class="dropdown-divider"></div>
-        <a class="dropdown-item" href="#">Something else here</a>
-      </div>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link disabled" href="#">Disabled</a>
-    </li>
-  </ul>
-  <form class="form-inline my-2 my-lg-0">
-    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-  </form>
-</div>
-</nav>
+          <div class="row">
+            <div class="navbar navbar-expand-lg navbar-light bg-light">
+              <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav">
+                  <li class="nav-item">
+                    <a class="nav-link" href="{{path('attendant_index')}}">Encargados</a>
+                  </li>
+                  
+                  <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Individuos</a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                      <a class="dropdown-item" href="{{path('fauna_index')}}">Fauna</a>
+                      <a class="dropdown-item" href="{{path('flora_index')}}">Flora</a>
+                    </div>
+                  </li>
+
+                  <li class="nav-item">
+                    <a class="nav-link" href="{{path('area_index')}}">Áreas</a>
+                  </li>
+
+                  <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      Especies
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                      <a class="dropdown-item" href="{{path('faspecie_index')}}">Fauna</a>
+                      <a class="dropdown-item" href="{{path('flspecie_index')}}">Flora</a>
+                    </div>
+                  </li>
+
+                  <li class="nav-item">
+                    <a class="nav-link" href="#">Admin</a>
+                  </li>
+                </ul>
+                
+              </div>
+            </nav>
+          </div>
+        </div>
+        <div id="line"></div>
+      </nav>
+
+      <section class="principal">
         {% block body %}{% endblock %}
-        <script src="{{ asset('scripts/jquery.js') }}"></script>
-        <script>window.jQuery || document.write('<script src="scripts/jquery.js"><\/script>')</script>
-        <script src="{{ asset('bootstrap/js/bootstrap.min.js') }}"></script>
-        {% block javascripts %}{% endblock %}
-    </body>
+      </section>
+
+    <footer>
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+            <img src="{{ asset('images/juntos_en_todo.png') }}" alt="Logo Juntos en todo" class="text-center mg-auto">
+          </div>                    
+        </div>
+      </div>
+    </footer>
+
+    <script src="{{ asset('scripts/jquery.js') }}"></script>
+    <script>window.jQuery || document.write('<script src="scripts/jquery.js"><\/script>')</script>
+    <script src="{{ asset('bootstrap/js/bootstrap.min.js') }}"></script>
+    
+    {% block javascripts %}{% endblock %}     
+      
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="{{ asset('bootstrap/js/jquery.min.js') }}"></script>
+    <script src="{{ asset('bootstrap/js/bootstrap.min.js') }}"></script>
+    <script src="{{ asset('https://netdna.bootstrapcdn.com/twitter-bootstrap/2.0.4/js/bootstrap-scrollspy.js') }}"></script>
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="{{ asset('bootstrap/js/ie10-viewport-bug-workaround.js') }}"></script>
+    <script src="{{ asset('http://masonry.desandro.com/masonry.pkgd.js') }}"></script>
+    <script src="{{ asset('bootstrap/js/masonry.js') }}"></script>
+    <script src="{{ asset('bootstrap/js/pushy.min.js') }}"></script>
+    <script src="{{ asset('bootstrap/js/jquery.magnific-popup.min.js') }}"></script>
+    <script src="{{ asset('bootstrap/js/wow.min.js') }}"></script>
+    <script src="{{ asset('bootstrap/js/scripts.js') }}"></script>
+    <script src="{{ asset('bootstrap/js/odometer.js') }}"></script>
+  </body>
 </html>
