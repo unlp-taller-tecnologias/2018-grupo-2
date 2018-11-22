@@ -51,13 +51,13 @@ class Flora
 
     /**
      * @ORM\ManyToOne(targetEntity="Area", inversedBy="floras")
-     * @ORM\JoinColumn(name="area_id", referencedColumnName="id")
+     * @ORM\JoinColumn(name="area_id", referencedColumnName="id", nullable=false)
      */
     private $area;
 
     /**
      * @ORM\ManyToOne(targetEntity="FLSubspecie", inversedBy="floras")
-     * @ORM\JoinColumn(name="subspecie_id", referencedColumnName="id")
+     * @ORM\JoinColumn(name="subspecie_id", referencedColumnName="id", nullable=false)
      */
     private $subspecie;
 
@@ -196,7 +196,7 @@ class Flora
      *
      * @param string $subspecie
      *
-     * @return Fauna
+     * @return Flora
      */
     public function setSubspecie($subspecie)
     {

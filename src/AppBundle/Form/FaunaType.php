@@ -13,7 +13,7 @@ class FaunaType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('name')->add('weight')->add('healthObservations')->add('image');
+        $builder->add('name')->add('weight')->add('healthObservations')->add('image')->add('attendants')->add('destination')->add('subspecie');
     }/**
      * {@inheritdoc}
      */

@@ -64,7 +64,7 @@ class Fauna
 
     /**
      * @ORM\ManyToOne(targetEntity="FASubspecie", inversedBy="faunas")
-     * @ORM\JoinColumn(name="subspecie_id", referencedColumnName="id")
+     * @ORM\JoinColumn(name="subspecie_id", referencedColumnName="id", nullable=false)
      */
     private $subspecie;
 
@@ -220,5 +220,29 @@ class Fauna
     public function getSubspecie()
     {
         return $this->subspecie;
+    }
+
+    /**
+     * Set attendants.
+     *
+     * @param string $attendants
+     *
+     * @return Fauna
+     */
+    public function setAttendants($attendants)
+    {
+        $this->attendants = $attendants;
+
+        return $this;
+    }
+
+    /**
+     * Get attendants.
+     *
+     * @return string
+     */
+    public function getAttendants()
+    {
+        return $this->attendants;
     }
 }

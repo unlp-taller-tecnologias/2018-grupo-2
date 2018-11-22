@@ -37,7 +37,7 @@ class FASubspecie
 
     /**
      * @ORM\ManyToOne(targetEntity="FASpecie", inversedBy="subspecies")
-     * @ORM\JoinColumn(name="specie_id", referencedColumnName="id")
+     * @ORM\JoinColumn(name="specie_id", referencedColumnName="id", nullable=false)
      */
     private $specie;
 

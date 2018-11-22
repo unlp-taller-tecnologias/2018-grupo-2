@@ -29,9 +29,9 @@ class Area
     private $name;
 
     /**
-     * @var string
+     * @var string|null
      *
-     * @ORM\Column(name="polygon", type="string", length=255)
+     * @ORM\Column(name="polygon", type="string", length=255, nullable=true)
      */
     private $polygon;
 
