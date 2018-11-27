@@ -1,43 +1,38 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>Attendants list</h1>
+    <div class="container">
+    <h1>Encargados</h1>
 
-    <table>
+    <table class="table">
         <thead>
             <tr>
-                <th>Id</th>
                 <th>Email</th>
-                <th>Name</th>
-                <th>Lastname</th>
-                <th>Actions</th>
+                <th>Nombre</th>
+                <th>Nombre completo</th>
+                <th></th>
             </tr>
         </thead>
         <tbody>
         {% for attendant in attendants %}
             <tr>
-                <td><a href="{{ path('attendant_show', { 'id': attendant.id }) }}">{{ attendant.id }}</a></td>
                 <td>{{ attendant.email }}</td>
                 <td>{{ attendant.name }}</td>
                 <td>{{ attendant.lastName }}</td>
                 <td>
-                    <ul>
-                        <li>
-                            <a href="{{ path('attendant_show', { 'id': attendant.id }) }}">show</a>
-                        </li>
-                        <li>
-                            <a href="{{ path('attendant_edit', { 'id': attendant.id }) }}">edit</a>
-                        </li>
-                    </ul>
+                    <a href="{{ path('attendant_show', { 'id': attendant.id }) }}">show</a>
+                    <a href="{{ path('attendant_edit', { 'id': attendant.id }) }}">edit</a>    
                 </td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
 
-    <ul>
+     <ul>
         <li>
             <a href="{{ path('attendant_new') }}">Create a new attendant</a>
         </li>
     </ul>
+</div>
+
 {% endblock %}

@@ -12,6 +12,12 @@ p {
     margin: 0 0 1.5em 0;
 }
 
+.col-center {
+    float: none;
+    margin-left: auto;
+    margin-right: auto;
+}
+
 /*------------------------------------*\
   NAV
 \*------------------------------------*/

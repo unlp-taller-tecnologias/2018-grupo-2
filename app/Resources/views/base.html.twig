@@ -7,7 +7,6 @@
     <title>{% block title %}Bioparque{% endblock %}</title>
     {% block stylesheets %}{% endblock %}
     <!-- Bootstrap core CSS -->
-    <link href="{{ asset('bootstrap/css/theme.css') }}" rel="stylesheet">
     <link href="{{ asset('bootstrap/css/style.css') }}" rel="stylesheet">
     <link href="{{ asset('bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
     
@@ -51,8 +50,8 @@
                   <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Individuos</a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                      <a class="dropdown-item" href="{{path('fauna_index')}}">Fauna</a>
-                      <a class="dropdown-item" href="{{path('flora_index')}}">Flora</a>
+                      <a class="dropdown-item" href="{{ path('fauna_index') }}">Fauna</a>
+                      <a class="dropdown-item" href="{{ path('flora_index') }}">Flora</a>
                     </div>
                   </li>
 
@@ -65,8 +64,8 @@
                       Especies
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                      <a class="dropdown-item" href="{{path('faspecie_index')}}">Fauna</a>
-                      <a class="dropdown-item" href="{{path('flspecie_index')}}">Flora</a>
+                      <a class="dropdown-item" href="{{ path('faspecie_index') }}">Fauna</a>
+                      <a class="dropdown-item" href="{{ path('flspecie_index') }}">Flora</a>
                     </div>
                   </li>
 
@@ -96,16 +95,10 @@
       </div>
     </footer>
 
-    <script src="{{ asset('scripts/jquery.js') }}"></script>
-    <script>window.jQuery || document.write('<script src="scripts/jquery.js"><\/script>')</script>
-    <script src="{{ asset('bootstrap/js/bootstrap.min.js') }}"></script>
-    
-    {% block javascripts %}{% endblock %}     
-      
-
     <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
+    <script src="{{ asset('scripts/jquery.js') }}"></script>
     <script src="{{ asset('bootstrap/js/jquery.min.js') }}"></script>
     <script src="{{ asset('bootstrap/js/bootstrap.min.js') }}"></script>
     <script src="{{ asset('https://netdna.bootstrapcdn.com/twitter-bootstrap/2.0.4/js/bootstrap-scrollspy.js') }}"></script>
@@ -118,5 +111,6 @@
     <script src="{{ asset('bootstrap/js/wow.min.js') }}"></script>
     <script src="{{ asset('bootstrap/js/scripts.js') }}"></script>
     <script src="{{ asset('bootstrap/js/odometer.js') }}"></script>
+    {% block javascripts %}{% endblock %}   
   </body>
 </html>

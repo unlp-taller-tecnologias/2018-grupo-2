@@ -1,35 +1,31 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>Area</h1>
+  <h1>Área</h1>
 
-    <table>
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ area.id }}</td>
-            </tr>
-            <tr>
-                <th>Name</th>
-                <td>{{ area.name }}</td>
-            </tr>
-            <tr>
-                <th>Polygon</th>
-                <td>{{ area.polygon }}</td>
-            </tr>
-        </tbody>
-    </table>
+  <table>
+    <tbody>
+      <tr>
+        <th>Nombre</th>
+        <td>{{ area.name }}</td>
+      </tr>
+      <tr>
+        <th>Polígono</th>
+        <td>{{ area.polygon }}</td>
+      </tr>
+    </tbody>
+  </table>
 
     <ul>
         <li>
-            <a href="{{ path('area_index') }}">Back to the list</a>
+            <a href="{{ path('area_index') }}">Volver al listado</a>
         </li>
         <li>
-            <a href="{{ path('area_edit', { 'id': area.id }) }}">Edit</a>
+            <a href="{{ path('area_edit', { 'id': area.id }) }}">Editar</a>
         </li>
         <li>
             {{ form_start(delete_form) }}
-                <input type="submit" value="Delete">
+                <input type="submit" value="Eliminar">
             {{ form_end(delete_form) }}
         </li>
     </ul>

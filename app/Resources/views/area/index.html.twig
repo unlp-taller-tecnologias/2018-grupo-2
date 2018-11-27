@@ -1,51 +1,68 @@
 {% extends 'base.html.twig' %}
 {% block stylesheets %}
-<link rel="stylesheet" type="text/css" href="{{ asset('scripts/dataTables/datatables.min.css') }}">
+  <link rel="stylesheet" type="text/css" href="{{ asset('scripts/dataTables/datatables.min.css') }}">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 {% endblock %}
 {% block body %}
-    <h1>Areas list</h1>
 
-    <table id="table_id">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Name</th>
-                <th>Polygon</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for area in areas %}
-            <tr>
-                <td><a href="{{ path('area_show', { 'id': area.id }) }}">{{ area.id }}</a></td>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-10 col-center">
+        <br>
+        <h1>Áreas</h1>
+        <br>
+        <a class="btn btn-info float-right" style="margin-right: 5%" href="{{ path('area_new') }}">Nueva área</a>
+
+          <table id="area-table" class="row-border hover stripe">
+            <thead>
+              <tr>
+                <th width="50%">Nombre</th>
+                <th width="30%">Polígono</th>
+                <th width="20%"></th>
+              </tr>
+            </thead>
+            <tbody>
+            {% for area in areas %}
+              <tr>
                 <td>{{ area.name }}</td>
                 <td>{{ area.polygon }}</td>
                 <td>
-                    <ul>
-                        <li>
-                            <a href="{{ path('area_show', { 'id': area.id }) }}">show</a>
-                        </li>
-                        <li>
-                            <a href="{{ path('area_edit', { 'id': area.id }) }}">edit</a>
-                        </li>
-                    </ul>
+                  <a class="btn btn-info" href="{{ path('area_show', { 'id': area.id }) }}">
+                    <i class="fa fa-eye"></i>
+                  </a>
+                  <a class="btn btn-success" href="{{ path('area_edit', { 'id': area.id }) }}">
+                    <i class="fa fa-pencil"></i>
+                  </a>
                 </td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
 
-    <ul>
-        <li>
-            <a href="{{ path('area_new') }}">Create a new area</a>
-        </li>
-    </ul>
+      </div>
+    </div>
+  </div>
+
 {% endblock %}
 {% block javascripts %}
+
 <script src="{{ asset('scripts/dataTables/datatables.min.js') }}"></script>
 <script>
-$(document).ready( function () {
-    $('#table_id').DataTable();
-} );
+  $(document).ready(function(){
+    $('#area-table').DataTable({
+      searching: false, 
+      info: false,
+      lengthChange: false,
+      language: {
+        processing: "Procesando...",
+        paginate: {
+          first: "Inicio",
+          last: "Fin",
+          next: "Siguiente",
+          previous: "Anterior"
+        }
+      }
+    });
+  });
 </script>
 {% endblock %}
