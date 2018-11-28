@@ -5,6 +5,8 @@ security:
         FOS\UserBundle\Model\UserInterface: bcrypt
 
     role_hierarchy:
+        ROLE_DATA_ENTRY:  ROLE_USER
+        ROLE_RESPONSABLE: ROLE_USER
         ROLE_ADMIN:       ROLE_USER
         ROLE_SUPER_ADMIN: ROLE_ADMIN
 
@@ -31,7 +33,17 @@ security:
 
 
     access_control:
-        # - { path: ^/login$, role: IS_AUTHENTICATED_ANONYMOUSLY }
+         - { path: ^/login$, role: IS_AUTHENTICATED_ANONYMOUSLY }
+         - { path: ^/flora, role: IS_AUTHENTICATED_FULLY }
+         - { path: ^/fauna, role: IS_AUTHENTICATED_FULLY }
+         - { path: ^/flspecie, role: ROLE_ADMIN }
+         - { path: ^/flsubspecie, role: ROLE_ADMIN }
+         - { path: ^/faspecie, role: ROLE_ADMIN }
+         - { path: ^/fasubspecie, role: ROLE_ADMIN }
+         - { path: ^/attendant, role: ROLE_ADMIN }
+         - { path: ^/area, role: ROLE_ADMIN }
+         - { path: ^/category, role: ROLE_ADMIN }
+         - { path: ^/destination, role: ROLE_ADMIN }
         # - { path: ^/register, role: IS_AUTHENTICATED_ANONYMOUSLY }
         # - { path: ^/*, role: IS_AUTHENTICATED_ANONYMOUSLY }
         # - { path: ^/resetting, role: IS_AUTHENTICATED_ANONYMOUSLY }
