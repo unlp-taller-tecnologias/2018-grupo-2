@@ -272,45 +272,7 @@ class appDevDebugProjectContainerUrlMatcher extends Symfony\Bundle\FrameworkBund
         }
         not_homepage:
 
-        if (0 === strpos($pathinfo, '/destination')) {
-            // destination_index
-            if ('/destination' === $trimmedPathinfo) {
-                $ret = array (  '_controller' => 'AppBundle\\Controller\\DestinationController::indexAction',  '_route' => 'destination_index',);
-                if ('/' === substr($pathinfo, -1)) {
-                    // no-op
-                } elseif ('GET' !== $canonicalMethod) {
-                    goto not_destination_index;
-                } else {
-                    return array_replace($ret, $this->redirect($rawPathinfo.'/', 'destination_index'));
-                }
-
-                return $ret;
-            }
-            not_destination_index:
-
-            // destination_new
-            if ('/destination/new' === $pathinfo) {
-                return array (  '_controller' => 'AppBundle\\Controller\\DestinationController::newAction',  '_route' => 'destination_new',);
-            }
-
-            // destination_show
-            if (preg_match('#^/destination/(?P<id>[^/]++)$#sD', $pathinfo, $matches)) {
-                return $this->mergeDefaults(array_replace($matches, array('_route' => 'destination_show')), array (  '_controller' => 'AppBundle\\Controller\\DestinationController::showAction',));
-            }
-
-            // destination_edit
-            if (preg_match('#^/destination/(?P<id>[^/]++)/edit$#sD', $pathinfo, $matches)) {
-                return $this->mergeDefaults(array_replace($matches, array('_route' => 'destination_edit')), array (  '_controller' => 'AppBundle\\Controller\\DestinationController::editAction',));
-            }
-
-            // destination_delete
-            if (preg_match('#^/destination/(?P<id>[^/]++)$#sD', $pathinfo, $matches)) {
-                return $this->mergeDefaults(array_replace($matches, array('_route' => 'destination_delete')), array (  '_controller' => 'AppBundle\\Controller\\DestinationController::deleteAction',));
-            }
-
-        }
-
-        elseif (0 === strpos($pathinfo, '/fa')) {
+        if (0 === strpos($pathinfo, '/fa')) {
             if (0 === strpos($pathinfo, '/faspecie')) {
                 // faspecie_index
                 if ('/faspecie' === $trimmedPathinfo) {

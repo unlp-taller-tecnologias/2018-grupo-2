@@ -57,10 +57,18 @@ class Fauna
     private $attendants;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Destination", inversedBy="faunas")
-     * @ORM\JoinColumn(name="destination_id", referencedColumnName="id", nullable=true)
+     * @var string
+     *
+     * @ORM\Column(name="destination", type="string", length=80, unique=false, nullable=true)
      */
     private $destination;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="departure_date",type="datetime", nullable=true)
+     */
+    private $departure_date;
 
     /**
      * @ORM\ManyToOne(targetEntity="FASubspecie", inversedBy="faunas")
@@ -196,6 +204,30 @@ class Fauna
     public function getDestination()
     {
         return $this->destination;
+    }
+
+    /**
+     * Set departure_date.
+     *
+     * @param \DateTime $departure_date
+     *
+     * @return Fauna
+     */
+    public function setDepartureDate($departure_date)
+    {
+        $this->departure_date = $departure_date;
+
+        return $this;
+    }
+
+    /**
+     * Get departure_date.
+     *
+     * @return \DateTime
+     */
+    public function getDepartureDate()
+    {
+        return $this->departure_date;
     }
 
     /**

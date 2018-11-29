@@ -43,6 +43,7 @@ class AppFixtures extends Fixture
             $attendant->setLastName($this->generateRandomString(8));
             $attendant->setCategory($this->getReference('category'.rand(0, 9)));
             $manager->persist($attendant);
+            $this->addReference('attendant'.$i, $attendant);
         }
 
         //crea 20 especies de fauna
@@ -59,6 +60,7 @@ class AppFixtures extends Fixture
             $subspecie_fauna->setName('SubespecieFauna '.$i);
             $subspecie_fauna->setSpecie($this->getReference('faspecie'.rand(0,19)));
             $manager->persist($subspecie_fauna);
+            $this->addReference('fasubspecie'.$i, $subspecie_fauna);
         }
 
         //crea 20 especies de flora
@@ -88,6 +90,18 @@ class AppFixtures extends Fixture
             $flora->setArea($this->getReference('area'.rand(0, 19)));
             $flora->setSubspecie($this->getReference('flsubspecie'.rand(0,9)));
             $manager->persist($flora);
+        }
+
+        //crea 50 individuos de fauna
+        for ($i = 0; $i < 50; $i++) {
+            $fauna=new Fauna();
+            $fauna->setName('animalito '.$i);
+            $fauna->setWeight(rand(3,150));
+            $fauna->setHealthObservations($this->generateRandomString(30));
+            $fauna->setAttendants(array($this->getReference('attendant'.rand(0,19))));
+            $fauna->setDestination($this->generateRandomString(10));
+            $fauna->setSubspecie($this->getReference('fasubspecie'.rand(0,9)));
+            $manager->persist($fauna);
         }
 
 
