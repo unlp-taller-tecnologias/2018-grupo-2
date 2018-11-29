@@ -681,7 +681,7 @@ UPGRADE FROM 2.x to 3.0
    As a value for the option you must provide the fully-qualified class name (FQCN)
    now as well.
 
- * The `FormIntegrationTestCase` and `FormPerformanceTestCase` classes were moved form the `Symfony\Component\Form\Tests` namespace to the `Symfony\Component\Form\Test` namespace.
+ * The `FormIntegrationTestCase` and `FormPerformanceTestCase` classes were moved from the `Symfony\Component\Form\Tests` namespace to the `Symfony\Component\Form\Test` namespace.
 
  * The constants `ROUND_HALFEVEN`, `ROUND_HALFUP` and `ROUND_HALFDOWN` in class
    `NumberToLocalizedStringTransformer` were renamed to `ROUND_HALF_EVEN`,
@@ -881,6 +881,34 @@ UPGRADE FROM 2.x to 3.0
    framework:
        templating:
            engines: ['php']
+   ```
+
+ * The assets settings under `framework.templating` were moved to `framework.assets`.
+
+   Before:
+
+   ```yml
+   framework:
+       templating:
+           assets_version: 'v123'
+           assets_version_format: '%%s?version=%%s'
+           assets_base_urls:
+               http: ['http://cdn.example.com']
+               ssl:  ['https://secure.example.com']
+           packages:
+               # ...
+   ```
+
+   After:
+
+   ```yml
+   framework:
+       assets:
+           version: 'v123'
+           version_format: '%%s?version=%%s'
+           base_urls: ['http://cdn.example.com', 'https://secure.example.com']
+           packages:
+               # ...
    ```
 
  * The `form.csrf_provider` service is removed as it implements an adapter for

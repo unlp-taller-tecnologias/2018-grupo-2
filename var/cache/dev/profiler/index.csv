@@ -1,0 +1,9 @@
+d547f3,127.0.0.1,GET,http://localhost:8000/,1543493190,,200
+dd8a99,127.0.0.1,GET,http://localhost:8000/images/fav.png,1543493191,25e62d,200
+25e62d,127.0.0.1,GET,http://localhost:8000/images/fav.png,1543493191,,404
+0a4fcc,127.0.0.1,GET,http://localhost:8000/area/,1543493192,,302
+630cc4,127.0.0.1,GET,http://localhost:8000/login,1543493192,,200
+00b68f,127.0.0.1,POST,http://localhost:8000/login_check,1543493198,,302
+5eb986,127.0.0.1,GET,http://localhost:8000/login,1543493198,,200
+bd1b89,127.0.0.1,GET,http://localhost:8000/register,1543493204,,301
+89b76c,127.0.0.1,GET,http://localhost:8000/register/,1543493204,,200

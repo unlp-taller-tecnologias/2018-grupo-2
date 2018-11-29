@@ -29,6 +29,11 @@ services:
         public: true
         tags: ['controller.service_arguments']
 
+    # Product service
+    AppBundle\DataFixtures\:
+        resource: '../../src/AppBundle/DataFixtures/AppFixtures.php'
+        tags: ['doctrine.fixture.orm']
+        #exclude: '../../src/DataFixtures/{Entity,Repository,Tests}'
     # add more services, or override services that need manual wiring
     # AppBundle\Service\ExampleService:
     #     arguments:
