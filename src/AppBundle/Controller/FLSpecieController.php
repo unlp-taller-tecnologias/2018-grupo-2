@@ -48,28 +48,12 @@ class FLSpecieController extends Controller
             $em->persist($fLSpecie);
             $em->flush();
 
-            return $this->redirectToRoute('flspecie_show', array('id' => $fLSpecie->getId()));
+            return $this->redirectToRoute('flspecie_index');
         }
 
         return $this->render('flspecie/new.html.twig', array(
             'fLSpecie' => $fLSpecie,
             'form' => $form->createView(),
-        ));
-    }
-
-    /**
-     * Finds and displays a fLSpecie entity.
-     *
-     * @Route("/{id}", name="flspecie_show")
-     * @Method("GET")
-     */
-    public function showAction(FLSpecie $fLSpecie)
-    {
-        $deleteForm = $this->createDeleteForm($fLSpecie);
-
-        return $this->render('flspecie/show.html.twig', array(
-            'fLSpecie' => $fLSpecie,
-            'delete_form' => $deleteForm->createView(),
         ));
     }
 
@@ -88,7 +72,7 @@ class FLSpecieController extends Controller
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('flspecie_edit', array('id' => $fLSpecie->getId()));
+            return $this->redirectToRoute('flspecie_index');
         }
 
         return $this->render('flspecie/edit.html.twig', array(

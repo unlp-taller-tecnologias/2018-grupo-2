@@ -1,24 +1,27 @@
 {% extends 'base.html.twig' %}
+
+{% block title %} Áreas {% endblock %}
+
 {% block stylesheets %}
   <link rel="stylesheet" type="text/css" href="{{ asset('scripts/dataTables/datatables.min.css') }}">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 {% endblock %}
-{% block body %}
 
+{% block body %}
   <div class="container">
     <div class="row">
       <div class="col-md-10 col-center">
         <br>
         <h1>Áreas</h1>
         <br>
-        <a class="btn btn-info float-right" style="margin-right: 5%" href="{{ path('area_new') }}">Nueva área</a>
+        <a class="btn btn-info float-right btn-m-r" href="{{ path('area_new') }}">Nueva área</a>
 
           <table id="area-table" class="row-border hover stripe">
             <thead>
               <tr>
                 <th width="50%">Nombre</th>
-                <th width="30%">Polígono</th>
-                <th width="20%"></th>
+                <th width="35%">Polígono</th>
+                <th width="15%"></th>
               </tr>
             </thead>
             <tbody>
@@ -27,11 +30,11 @@
                 <td>{{ area.name }}</td>
                 <td>{{ area.polygon }}</td>
                 <td>
-                  <a class="btn btn-info" href="{{ path('area_show', { 'id': area.id }) }}">
-                    <i class="fa fa-eye"></i>
-                  </a>
                   <a class="btn btn-success" href="{{ path('area_edit', { 'id': area.id }) }}">
                     <i class="fa fa-pencil"></i>
+                  </a>
+                  <a class="btn btn-danger" href="{{ path('area_delete', { 'id': area.id }) }}">
+                    <i class="fa fa-trash"></i>
                   </a>
                 </td>
               </tr>
@@ -55,6 +58,7 @@
       lengthChange: false,
       language: {
         processing: "Procesando...",
+        emptyTable: "No se han encontrado áreas",
         paginate: {
           first: "Inicio",
           last: "Fin",

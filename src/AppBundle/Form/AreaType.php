@@ -17,13 +17,17 @@ class AreaType extends AbstractType
         $builder->add(
                     'name', TextType::class, array(
                         'label' => 'Nombre', 
-                        'required' => true, 
-                        'data' => 'Ingrese un nombre...')
+                        'required' => true,
+                        'attr' => array(
+                            'class' => 'form-control mb-lg-3',
+                            'placeholder' => 'Ingrese un nombre...'))
                     )
                 ->add(
                     'polygon', TextType::class, array(
-                        'label' => 'Polígono', 
-                        'data' => 'Ingrese un polígono...')
+                        'label' => 'Polígono',
+                        'attr' => array(
+                            'class' => 'form-control mb-lg-3', 
+                            'placeholder' => 'Ingrese un polígono...'))
                     );
     }
     /**

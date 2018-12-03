@@ -3,10 +3,12 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * FASubspecie
  *
+ * @UniqueEntity("name", message="El nombre ya está en uso.")
  * @ORM\Table(name="f_a_subspecie")
  * @ORM\Entity(repositoryClass="AppBundle\Repository\FASubspecieRepository")
  */

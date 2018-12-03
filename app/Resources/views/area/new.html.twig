@@ -1,19 +1,23 @@
 {% extends 'base.html.twig' %}
 
+{% block title %} Nueva área {% endblock %}
+
 {% block body %}
   <div class="container">
     <div class="row">
-      <div class="col-center">
-        <h1>Nueva área</h1>
+      <div class="col-md-5 col-center">
+        <h1 class="text-center">Nueva área</h1>
         <br>
         <br>
 
         {{ form_start(form) }}
             {{ form_widget(form) }}
-            <div class="input-group">
-              <input type="submit" class="btn btn-primary btn-xs" value="Crear área" />
-              <a class="btn btn-success btn-xs" href="{{ path('area_index') }}">Volver al listado</a>
+          
+            <div class="text-center">
+              <input type="submit" class="btn btn-success btn-md mt-lg-3" value="Crear área" />
+              <a class="btn btn-primary btn-md mt-lg-3 ml-md-1" href="{{ path('area_index') }}">Volver al listado</a>
             </div>
+        
         {{ form_end(form) }}
 
       </div>

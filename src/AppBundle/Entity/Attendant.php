@@ -3,10 +3,12 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * Attendant
  *
+ * @UniqueEntity("email", message="El email ya está en uso.")
  * @ORM\Table(name="attendant")
  * @ORM\Entity(repositoryClass="AppBundle\Repository\AttendantRepository")
  */
@@ -162,5 +164,16 @@ class Attendant
 
     public function __toString(){
         return $this->name." ".$this->lastName;
+    }
+
+
+    /**
+     * Get faunas.
+     *
+     * @return Fauna
+     */
+    public function getFaunas()
+    {
+        return $this->faunas;
     }
 }

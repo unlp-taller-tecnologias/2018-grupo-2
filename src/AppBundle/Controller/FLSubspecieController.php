@@ -48,28 +48,12 @@ class FLSubspecieController extends Controller
             $em->persist($fLSubspecie);
             $em->flush();
 
-            return $this->redirectToRoute('flsubspecie_show', array('id' => $fLSubspecie->getId()));
+            return $this->redirectToRoute('flsubspecie_index');
         }
 
         return $this->render('flsubspecie/new.html.twig', array(
             'fLSubspecie' => $fLSubspecie,
             'form' => $form->createView(),
-        ));
-    }
-
-    /**
-     * Finds and displays a fLSubspecie entity.
-     *
-     * @Route("/{id}", name="flsubspecie_show")
-     * @Method("GET")
-     */
-    public function showAction(FLSubspecie $fLSubspecie)
-    {
-        $deleteForm = $this->createDeleteForm($fLSubspecie);
-
-        return $this->render('flsubspecie/show.html.twig', array(
-            'fLSubspecie' => $fLSubspecie,
-            'delete_form' => $deleteForm->createView(),
         ));
     }
 
@@ -88,7 +72,7 @@ class FLSubspecieController extends Controller
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('flsubspecie_edit', array('id' => $fLSubspecie->getId()));
+            return $this->redirectToRoute('flsubspecie_index');
         }
 
         return $this->render('flsubspecie/edit.html.twig', array(

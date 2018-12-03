@@ -48,28 +48,12 @@ class FASpecieController extends Controller
             $em->persist($fASpecie);
             $em->flush();
 
-            return $this->redirectToRoute('faspecie_show', array('id' => $fASpecie->getId()));
+            return $this->redirectToRoute('faspecie_index');
         }
 
         return $this->render('faspecie/new.html.twig', array(
             'fASpecie' => $fASpecie,
             'form' => $form->createView(),
-        ));
-    }
-
-    /**
-     * Finds and displays a fASpecie entity.
-     *
-     * @Route("/{id}", name="faspecie_show")
-     * @Method("GET")
-     */
-    public function showAction(FASpecie $fASpecie)
-    {
-        $deleteForm = $this->createDeleteForm($fASpecie);
-
-        return $this->render('faspecie/show.html.twig', array(
-            'fASpecie' => $fASpecie,
-            'delete_form' => $deleteForm->createView(),
         ));
     }
 
@@ -88,7 +72,7 @@ class FASpecieController extends Controller
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('faspecie_edit', array('id' => $fASpecie->getId()));
+            return $this->redirectToRoute('faspecie_index');
         }
 
         return $this->render('faspecie/edit.html.twig', array(
