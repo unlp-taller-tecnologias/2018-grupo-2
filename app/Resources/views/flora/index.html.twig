@@ -1,45 +1,80 @@
 {% extends 'base.html.twig' %}
 
-{% block body %}
-    <h1>Floras list</h1>
+{% block title %} individuos flora {% endblock %}
 
-    <table>
+{% block stylesheets %}
+  <link rel="stylesheet" type="text/css" href="{{ asset('scripts/dataTables/datatables.min.css') }}">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+{% endblock %}
+
+{% block body %}
+<div class="container">
+  <div class="row">
+    <div class="col-md-12 col-center">
+      <br>
+      <h1>Individuos Flora</h1>
+      <br>
+      <a class="btn btn-info float-right btn-m-r" href="{{ path('flora_new') }}">Nuevo individuo</a>
+    <table id="flora-table" class="row-border hover stripe">
         <thead>
             <tr>
-                <th>Id</th>
-                <th>Observations</th>
-                <th>Age</th>
-                <th>Image</th>
-                <th>Name</th>
-                <th>Actions</th>
+                <th>Especie</th>
+                <th>Subespecie</th>
+                <th>Nombre</th>
+                <th>Area</th>
+                <th>Año plantación</th>
+                <th>Acciones</th>
             </tr>
         </thead>
         <tbody>
         {% for flora in floras %}
             <tr>
-                <td><a href="{{ path('flora_show', { 'id': flora.id }) }}">{{ flora.id }}</a></td>
-                <td>{{ flora.observations }}</td>
-                <td>{{ flora.age }}</td>
-                <td>{{ flora.image }}</td>
+                <td>{{flora.subspecie.specie.name}}</td>
+                <td>{{ flora.subspecie.name }}</td>
                 <td>{{ flora.name }}</td>
+                <td>{{ flora.area.name }}</td>
+                <td>{{ flora.age}}</td>
                 <td>
-                    <ul>
-                        <li>
-                            <a href="{{ path('flora_show', { 'id': flora.id }) }}">show</a>
-                        </li>
-                        <li>
-                            <a href="{{ path('flora_edit', { 'id': flora.id }) }}">edit</a>
-                        </li>
-                    </ul>
+                <a class="btn btn-info" href="{{ path('flora_show', { 'id': flora.id }) }}">
+                  <i class="fa fa-eye"></i>
+                </a>
+                <a class="btn btn-success" href="{{ path('flora_edit', { 'id': flora.id }) }}">
+                  <i class="fa fa-pencil"></i>
+                </a>
+                <a class="btn btn-danger" href="{{ path('flora_delete', { 'id': flora.id }) }}">
+                  <i class="fa fa-trash"></i>
+                </a>
                 </td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
 
-    <ul>
-        <li>
-            <a href="{{ path('flora_new') }}">Create a new flora</a>
-        </li>
-    </ul>
+    </div>
+  </div>
+</div>
+
+{% endblock %}
+
+{% block javascripts %}
+<script src="{{ asset('scripts/dataTables/datatables.min.js') }}"></script>
+<script>
+  $(document).ready(function(){
+    $('#flora-table').DataTable({
+      searching: false,
+      info: false,
+      lengthChange: false,
+      language: {
+        processing: "Procesando...",
+        emptyTable: "No se han encontrado individuos",
+        paginate: {
+          first: "Inicio",
+          last: "Fin",
+          next: "Siguiente",
+          previous: "Anterior"
+        }
+      }
+    });
+  });
+</script>
 {% endblock %}
