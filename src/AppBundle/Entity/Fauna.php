@@ -277,4 +277,30 @@ class Fauna
     {
         return $this->attendants;
     }
+
+    private $specie;
+
+    /**
+     * Set specie.
+     *
+     * @param string $specie
+     *
+     * @return Fauna
+     */
+    public function setSpecie($specie)
+    {
+        $this->specie = $specie;
+
+        return $this;
+    }
+
+    /**
+     * Get specie.
+     *
+     * @return string
+     */
+    public function getSpecie()
+    {
+        return $this->specie;
+    }
 }

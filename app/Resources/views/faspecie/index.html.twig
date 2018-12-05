@@ -1,6 +1,14 @@
 {% extends 'base.html.twig' %}
 
+{% block title %} Especies de Fauna {% endblock %}
+
+{% block stylesheets %}
+  <link rel="stylesheet" type="text/css" href="{{ asset('scripts/dataTables/datatables.min.css') }}">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+{% endblock %}
+
 {% block body %}
+
     <h1>Faspecies list</h1>
     <table class="table">
     <thead>
@@ -31,10 +39,65 @@
         </tr>
     </tfoot>
 </table>
+<!--
+  <div class="container">
+    <div class="row">
+      <div class="col-md-8 col-center">
+        <br>
+        <h1>Especies de Fauna</h1>
+        <br>
+        <a class="btn btn-info float-right btn-m-r" href="{{ path('faspecie_new') }}">Nueva especie</a>
 
-    <ul>
-        <li>
-            <a href="{{ path('faspecie_new') }}">Create a new fASpecie</a>
-        </li>
-    </ul>
+          <table id="faspecie-table" class="row-border hover stripe">
+            <thead>
+              <tr>
+                <th width="65%">Nombre</th>
+                <th width="35%"></th>
+              </tr>
+            </thead>
+            <tbody>
+            {% for fASpecie in fASpecies %}
+              <tr>
+                <td>{{ fASpecie.name }}</td>
+                <td>
+                  <a class="btn btn-primary" href="#">Subespecies</a>
+                  <a class="btn btn-success" href="{{ path('faspecie_edit', { 'id': fASpecie.id }) }}">
+                    <i class="fa fa-pencil"></i>
+                  </a>
+                  <a class="btn btn-danger" href="{{ path('faspecie_delete', { 'id': fASpecie.id }) }}">
+                    <i class="fa fa-trash"></i>
+                  </a>
+                </td>
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+
+      </div>
+    </div>
+  </div> -->
+
+{% endblock %}
+{% block javascripts %}
+
+<script src="{{ asset('scripts/dataTables/datatables.min.js') }}"></script>
+<script>
+  $(document).ready(function(){
+    $('#faspecie-table').DataTable({
+      searching: false,
+      info: false,
+      lengthChange: false,
+      language: {
+        emptyTable: "No se han encontrado especies",
+        processing: "Procesando...",
+        paginate: {
+          first: "Inicio",
+          last: "Fin",
+          next: "Siguiente",
+          previous: "Anterior"
+        }
+      }
+    });
+  });
+</script>
 {% endblock %}

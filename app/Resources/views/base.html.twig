@@ -20,6 +20,7 @@
     <link rel="stylesheet" href="{{ asset('bootstrap/css/animate.css') }}">
     <link rel="stylesheet" href="{{ asset('bootstrap/css/magnific-popup.css') }}">
     <link rel="stylesheet" href="{{ asset('bootstrap/css/odometer-theme-default.css') }}">
+
     <script>
       window.odometerOptions = {
         selector: '.odometer',
@@ -44,19 +45,15 @@
               <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav">
                   <li class="nav-item">
-                    <a class="nav-link" href="{{path('attendant_index')}}">Encargados</a>
-                  </li>
-                  
-                  <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Individuos</a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                      <a class="dropdown-item" href="{{ path('fauna_index') }}">Fauna</a>
-                      <a class="dropdown-item" href="{{ path('flora_index') }}">Flora</a>
-                    </div>
+                    <a class="nav-link" href="{{path('area_index')}}">Áreas</a>
                   </li>
 
                   <li class="nav-item">
-                    <a class="nav-link" href="{{path('area_index')}}">Áreas</a>
+                    <a class="nav-link" href="{{path('attendant_index')}}">Encargados</a>
+                  </li>
+
+                  <li class="nav-item">
+                    <a class="nav-link" href="{{path('category_index')}}">Categorías</a>
                   </li>
 
                   <li class="nav-item dropdown">
@@ -66,6 +63,24 @@
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                       <a class="dropdown-item" href="{{ path('faspecie_index') }}">Fauna</a>
                       <a class="dropdown-item" href="{{ path('flspecie_index') }}">Flora</a>
+                    </div>
+                  </li>
+
+                  <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      Subespecies
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                      <a class="dropdown-item" href="{{ path('fasubspecie_index') }}">Fauna</a>
+                      <a class="dropdown-item" href="{{ path('flsubspecie_index') }}">Flora</a>
+                    </div>
+                  </li>
+                  
+                  <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Individuos</a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                      <a class="dropdown-item" href="{{ path('fauna_index') }}">Fauna</a>
+                      <a class="dropdown-item" href="{{ path('flora_index') }}">Flora</a>
                     </div>
                   </li>
 

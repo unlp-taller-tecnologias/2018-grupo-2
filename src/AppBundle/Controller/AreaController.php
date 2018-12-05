@@ -48,28 +48,12 @@ class AreaController extends Controller
             $em->persist($area);
             $em->flush();
 
-            return $this->redirectToRoute('area_show', array('id' => $area->getId()));
+            return $this->redirectToRoute('area_index');
         }
 
         return $this->render('area/new.html.twig', array(
             'area' => $area,
             'form' => $form->createView(),
-        ));
-    }
-
-    /**
-     * Finds and displays a area entity.
-     *
-     * @Route("/{id}", name="area_show")
-     * @Method("GET")
-     */
-    public function showAction(Area $area)
-    {
-        $deleteForm = $this->createDeleteForm($area);
-
-        return $this->render('area/show.html.twig', array(
-            'area' => $area,
-            'delete_form' => $deleteForm->createView(),
         ));
     }
 
@@ -88,7 +72,7 @@ class AreaController extends Controller
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('area_edit', array('id' => $area->getId()));
+            return $this->redirectToRoute('area_index');
         }
 
         return $this->render('area/edit.html.twig', array(

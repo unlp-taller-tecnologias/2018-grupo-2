@@ -1,38 +1,79 @@
 {% extends 'base.html.twig' %}
 
+{% block title %} Encargados {% endblock %}
+
+{% block stylesheets %}
+  <link rel="stylesheet" type="text/css" href="{{ asset('scripts/dataTables/datatables.min.css') }}">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+{% endblock %}
+
 {% block body %}
-    <div class="container">
-    <h1>Encargados</h1>
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Email</th>
-                <th>Nombre</th>
-                <th>Nombre completo</th>
-                <th></th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for attendant in attendants %}
-            <tr>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12 col-center">
+        <br>
+        <h1>Encargados</h1>
+        <br>
+        <a class="btn btn-info float-right btn-m-r" href="{{ path('attendant_new') }}">Nuevo encargado</a>
+
+          <table id="attendant-table" class="row-border hover stripe">
+            <thead>
+              <tr>
+                <th width="35%">Nombre</th>
+                <th width="30%">Email</th>
+                <th width="20%">Categoría</th>
+                <th width="25%"></th>
+              </tr>
+            </thead>
+            <tbody>
+            {% for attendant in attendants %}
+              <tr>
+                <td>{{ attendant.lastName }}, {{ attendant.name }}</td>
                 <td>{{ attendant.email }}</td>
-                <td>{{ attendant.name }}</td>
-                <td>{{ attendant.lastName }}</td>
+                <td>{{ attendant.category }}</td>
                 <td>
-                    <a href="{{ path('attendant_show', { 'id': attendant.id }) }}">show</a>
-                    <a href="{{ path('attendant_edit', { 'id': attendant.id }) }}">edit</a>    
+                  <a class="btn btn-info" href="{{ path('attendant_show', { 'id': attendant.id }) }}">
+                    <i class="fa fa-eye"></i>
+                  </a>
+                  <a class="btn btn-success" href="{{ path('attendant_edit', { 'id': attendant.id }) }}">
+                    <i class="fa fa-pencil"></i>
+                  </a>
+                  <a class="btn btn-danger" href="{{ path('attendant_delete', { 'id': attendant.id }) }}">
+                    <i class="fa fa-trash"></i>
+                  </a>
                 </td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
 
-     <ul>
-        <li>
-            <a href="{{ path('attendant_new') }}">Create a new attendant</a>
-        </li>
-    </ul>
-</div>
+      </div>
+    </div>
+  </div>
 
 {% endblock %}
+{% block javascripts %}
+
+<script src="{{ asset('scripts/dataTables/datatables.min.js') }}"></script>
+<script>
+  $(document).ready(function(){
+    $('#attendant-table').DataTable({
+      searching: false, 
+      info: false,
+      lengthChange: false,
+      language: {
+        processing: "Procesando...",
+        emptyTable: "No se han encontrado encargados",
+        paginate: {
+          first: "Inicio",
+          last: "Fin",
+          next: "Siguiente",
+          previous: "Anterior"
+        }
+      }
+    });
+  });
+</script>
+{% endblock %}
+

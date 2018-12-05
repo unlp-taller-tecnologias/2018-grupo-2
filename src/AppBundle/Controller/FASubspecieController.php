@@ -48,28 +48,12 @@ class FASubspecieController extends Controller
             $em->persist($fASubspecie);
             $em->flush();
 
-            return $this->redirectToRoute('fasubspecie_show', array('id' => $fASubspecie->getId()));
+            return $this->redirectToRoute('fasubspecie_index');
         }
 
         return $this->render('fasubspecie/new.html.twig', array(
             'fASubspecie' => $fASubspecie,
             'form' => $form->createView(),
-        ));
-    }
-
-    /**
-     * Finds and displays a fASubspecie entity.
-     *
-     * @Route("/{id}", name="fasubspecie_show")
-     * @Method("GET")
-     */
-    public function showAction(FASubspecie $fASubspecie)
-    {
-        $deleteForm = $this->createDeleteForm($fASubspecie);
-
-        return $this->render('fasubspecie/show.html.twig', array(
-            'fASubspecie' => $fASubspecie,
-            'delete_form' => $deleteForm->createView(),
         ));
     }
 
@@ -88,7 +72,7 @@ class FASubspecieController extends Controller
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('fasubspecie_edit', array('id' => $fASubspecie->getId()));
+            return $this->redirectToRoute('fasubspecie_index');
         }
 
         return $this->render('fasubspecie/edit.html.twig', array(

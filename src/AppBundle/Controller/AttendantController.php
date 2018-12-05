@@ -88,7 +88,7 @@ class AttendantController extends Controller
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('attendant_edit', array('id' => $attendant->getId()));
+            return $this->redirectToRoute('attendant_show', array('id' => $attendant->getId()));
         }
 
         return $this->render('attendant/edit.html.twig', array(

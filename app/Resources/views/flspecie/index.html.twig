@@ -1,39 +1,71 @@
 {% extends 'base.html.twig' %}
 
-{% block body %}
-    <h1>Flspecies list</h1>
+{% block title %} Especies de Flora {% endblock %}
 
-    <table>
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Name</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for fLSpecie in fLSpecies %}
-            <tr>
-                <td><a href="{{ path('flspecie_show', { 'id': fLSpecie.id }) }}">{{ fLSpecie.id }}</a></td>
+{% block stylesheets %}
+  <link rel="stylesheet" type="text/css" href="{{ asset('scripts/dataTables/datatables.min.css') }}">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+{% endblock %}
+
+{% block body %}
+  <div class="container">
+    <div class="row">
+      <div class="col-md-8 col-center">
+        <br>
+        <h1>Especies de Flora</h1>
+        <br>
+        <a class="btn btn-info float-right btn-m-r" href="{{ path('flspecie_new') }}">Nueva especie</a>
+
+          <table id="flspecie-table" class="row-border hover stripe">
+            <thead>
+              <tr>
+                <th width="65%">Nombre</th>
+                <th width="35%"></th>
+              </tr>
+            </thead>
+            <tbody>
+            {% for fLSpecie in fLSpecies %}
+              <tr>
                 <td>{{ fLSpecie.name }}</td>
                 <td>
-                    <ul>
-                        <li>
-                            <a href="{{ path('flspecie_show', { 'id': fLSpecie.id }) }}">show</a>
-                        </li>
-                        <li>
-                            <a href="{{ path('flspecie_edit', { 'id': fLSpecie.id }) }}">edit</a>
-                        </li>
-                    </ul>
+                  <a class="btn btn-primary" href="#">Subespecies</a>
+                  <a class="btn btn-success" href="{{ path('flspecie_edit', { 'id': fLSpecie.id }) }}">
+                    <i class="fa fa-pencil"></i>
+                  </a>
+                  <a class="btn btn-danger" href="{{ path('flspecie_delete', { 'id': fLSpecie.id }) }}">
+                    <i class="fa fa-trash"></i>
+                  </a>
                 </td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
 
-    <ul>
-        <li>
-            <a href="{{ path('flspecie_new') }}">Create a new fLSpecie</a>
-        </li>
-    </ul>
+      </div>
+    </div>
+  </div>
+
+{% endblock %}
+{% block javascripts %}
+
+<script src="{{ asset('scripts/dataTables/datatables.min.js') }}"></script>
+<script>
+  $(document).ready(function(){
+    $('#flspecie-table').DataTable({
+      searching: false, 
+      info: false,
+      lengthChange: false,
+      language: {
+        emptyTable: "No se han encontrado especies",
+        processing: "Procesando...",
+        paginate: {
+          first: "Inicio",
+          last: "Fin",
+          next: "Siguiente",
+          previous: "Anterior"
+        }
+      }
+    });
+  });
+</script>
 {% endblock %}

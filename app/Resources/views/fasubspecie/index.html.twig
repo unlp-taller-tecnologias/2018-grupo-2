@@ -1,39 +1,72 @@
 {% extends 'base.html.twig' %}
 
+{% block title %} Subespecies de Fauna {% endblock %}
+
+{% block stylesheets %}
+  <link rel="stylesheet" type="text/css" href="{{ asset('scripts/dataTables/datatables.min.css') }}">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+{% endblock %}
+
 {% block body %}
-    <h1>Fasubspecies list</h1>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-8 col-center">
+        <br>
+        <h1>Subespecies de Fauna</h1>
+        <br>
+        <a class="btn btn-info float-right btn-m-r" href="{{ path('fasubspecie_new') }}">Nueva subespecie</a>
 
-    <table>
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Name</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for fASubspecie in fASubspecies %}
-            <tr>
-                <td><a href="{{ path('fasubspecie_show', { 'id': fASubspecie.id }) }}">{{ fASubspecie.id }}</a></td>
-                <td>{{ fASubspecie.name }}</td>
+          <table id="fasubspecie-table" class="row-border hover stripe">
+            <thead>
+              <tr>
+                <th width="50%">Nombre</th>
+                <th width="35%">Especie</th>
+                <th width="25%"></th>
+              </tr>
+            </thead>
+            <tbody>
+            {% for fASubspecie in fASubspecies %}
+              <tr>
+                <td>{{ fASubspecie.name }}</ts>
+                <td>{{ fASubspecie.specie }}</td>
                 <td>
-                    <ul>
-                        <li>
-                            <a href="{{ path('fasubspecie_show', { 'id': fASubspecie.id }) }}">show</a>
-                        </li>
-                        <li>
-                            <a href="{{ path('fasubspecie_edit', { 'id': fASubspecie.id }) }}">edit</a>
-                        </li>
-                    </ul>
+                  <a class="btn btn-success" href="{{ path('fasubspecie_edit', { 'id': fASubspecie.id }) }}">
+                    <i class="fa fa-pencil"></i>
+                  </a>
+                  <a class="btn btn-danger" href="{{ path('fasubspecie_delete', { 'id': fASubspecie.id }) }}">
+                    <i class="fa fa-trash"></i>
+                  </a>
                 </td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
 
-    <ul>
-        <li>
-            <a href="{{ path('fasubspecie_new') }}">Create a new fASubspecie</a>
-        </li>
-    </ul>
+      </div>
+    </div>
+  </div>
+
+{% endblock %}
+{% block javascripts %}
+
+<script src="{{ asset('scripts/dataTables/datatables.min.js') }}"></script>
+<script>
+  $(document).ready(function(){
+    $('#fasubspecie-table').DataTable({
+      searching: false, 
+      info: false,
+      lengthChange: false,
+      language: {
+        emptyTable: "No se han encontrado subespecies",
+        processing: "Procesando...",
+        paginate: {
+          first: "Inicio",
+          last: "Fin",
+          next: "Siguiente",
+          previous: "Anterior"
+        }
+      }
+    });
+  });
+</script>
 {% endblock %}
