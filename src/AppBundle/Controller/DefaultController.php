@@ -18,4 +18,21 @@ class DefaultController extends Controller
             'base_dir' => realpath($this->getParameter('kernel.project_dir')).DIRECTORY_SEPARATOR,
         ]);
     }
+
+    /**
+     * @Route("/faspecie/", name="app_list_faspecie")FASpecieRepository
+     */
+    public function listFaspecieAction(Request $request)
+    {
+        $db = $this->getDoctrine()->getManager();
+
+        $listFASpecie = $db->getRepository('AppBundle:FASpecie')->findByPage(
+            $request->query->getInt('page', 1),
+            5
+        );
+
+        return $this->render('faspecie/index.html.twig', array(
+            'listFASpecie' => $listFASpecie
+        ));
+    }
 }
