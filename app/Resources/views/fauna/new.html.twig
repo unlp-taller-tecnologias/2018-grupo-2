@@ -1,9 +1,7 @@
 {% extends 'base.html.twig' %}
 
 {% block stylesheets %}
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.2/css/select2.min.css" rel="stylesheet" />
-  <link href ="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0-beta1/jquery.min.js" rel="stylesheet" />
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.2/js/select2.min.js"></script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
 {% endblock %}
 
 {% block title %} Nuevo individuo de fauna {% endblock %}
@@ -18,15 +16,25 @@
 
         {{ form_start(form) }}
             {{ form_widget(form) }}
-          
+
             <div class="text-center">
               <input type="submit" class="btn btn-success btn-md mt-lg-3" value="Crear individuo" />
               <a class="btn btn-primary btn-md mt-lg-3 ml-md-1" href="{{ path('fauna_index') }}">Volver al listado</a>
             </div>
-        
+
         {{ form_end(form) }}
 
       </div>
     </div>
   </div>
+{% endblock %}
+
+{% block javascripts %}
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
+<script>
+$(document).ready(function() {
+    $('#appbundle_fauna_attendants').select2();
+});
+</script>
 {% endblock %}

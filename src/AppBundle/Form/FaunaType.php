@@ -7,6 +7,8 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
 
 class FaunaType extends AbstractType
 {
@@ -16,8 +18,24 @@ class FaunaType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder->add(
+                    'specie',ChoiceType::class, array(
+                    'label' => 'Especie',
+                    'required' => true,
+                    'attr' => array(
+                    'class' => 'form-control mb-lg-3',
+                    'placeholder' => 'Seleccione una especie...'))
+                  )
+                  ->add(
+                      'subspecie', null, array(
+                          'label' => 'Subespecie',
+                          'required' => true,
+                          'attr' => array(
+                          'class' => 'form-control mb-lg-3',
+                          'placeholder' => 'Seleccione una subespecie...'))
+                    )
+                ->add(
                     'name', TextType::class, array(
-                        'label' => 'Nombre', 
+                        'label' => 'Nombre',
                         'required' => true,
                         'attr' => array(
                             'class' => 'form-control mb-lg-3',
@@ -25,7 +43,7 @@ class FaunaType extends AbstractType
                     )
                 ->add(
                     'weight', TextType::class, array(
-                        'label' => 'Peso', 
+                        'label' => 'Peso',
                         'required' => true,
                         'attr' => array(
                             'class' => 'form-control mb-lg-3',
@@ -33,10 +51,10 @@ class FaunaType extends AbstractType
                     )
                 ->add(
                     'healthObservations', TextareaType::class, array(
-                        'label' => 'Observación',
+                        'label' => 'Observaciones',
                         'attr' => array(
                             'class' => 'form-control mb-lg-3',
-                            'placeholder' => 'Ingrese una observación...'))
+                            'placeholder' => 'Ingrese las observaciones...'))
                     )
                 ->add(
                     'image', null, array(
@@ -47,32 +65,30 @@ class FaunaType extends AbstractType
                     )
                 ->add(
                     'attendants', null, array(
-                        'label' => 'Encargados', 
+                        'label' => 'Encargados',
                         'required' => true,
                         'multiple' => true,
                         'attr' => array(
                             'class' => 'form-control mb-lg-3',
-                            'id' => 'attendants'
                         ),
-                        'placeholder' => 'Seleccione un encargado...')
+                        'placeholder' => 'Seleccione un/os encargado/s...')
                     )
                 ->add(
                     'destination', TextType::class, array(
-                        'label' => 'Próximo destino', 
+                        'label' => 'Próximo destino',
                         'required' => true,
                         'attr' => array(
                             'class' => 'form-control mb-lg-3',
                             'placeholder' => 'Ingrese próximo destino...'))
                     )
                 ->add(
-                    'subspecie', null, array(
-                        'label' => 'Especie', 
+                    'departure_date', DateType::class, array(
+                        'label' => 'Fecha de traslado',
                         'required' => true,
-                        'attr' => array(
-                            'class' => 'form-control mb-lg-3'
-                        ),
-                        'placeholder' => 'Seleccione una especie...')
-                    );
+                        'widget' => 'single_text',
+                        'html5' => false,
+                        'attr' => ['class' => 'js-datepicker'],)
+                        );
     }/**
      * {@inheritdoc}
      */

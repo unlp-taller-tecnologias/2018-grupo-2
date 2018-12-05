@@ -1,45 +1,77 @@
 {% extends 'base.html.twig' %}
 
-{% block body %}
-    <h1>Faunas list</h1>
+{% block title %} individuos fauna {% endblock %}
 
-    <table>
+{% block stylesheets %}
+  <link rel="stylesheet" type="text/css" href="{{ asset('scripts/dataTables/datatables.min.css') }}">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+{% endblock %}
+
+{% block body %}
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-12 col-center">
+      <br>
+      <h1>Individuos Fauna</h1>
+      <br>
+      <a class="btn btn-info float-right btn-m-r" href="{{ path('fauna_new') }}">Nuevo individuo</a>
+    <table id="fauna-table" class="row-border hover stripe">
         <thead>
             <tr>
-                <th>Id</th>
-                <th>Name</th>
-                <th>Weight</th>
-                <th>Healthobservations</th>
-                <th>Image</th>
-                <th>Actions</th>
+                <th>Especie</th>
+                <th>Subespecie</th>
+                <th>Nombre</th>
+                <th>Peso</th>
+                <th>Acciones</th>
             </tr>
         </thead>
         <tbody>
         {% for fauna in faunas %}
             <tr>
-                <td><a href="{{ path('fauna_show', { 'id': fauna.id }) }}">{{ fauna.id }}</a></td>
+                <td>{{fauna.subspecie.specie.name}}</td>
+                <td>{{ fauna.subspecie.name }}</td>
                 <td>{{ fauna.name }}</td>
                 <td>{{ fauna.weight }}</td>
-                <td>{{ fauna.healthObservations }}</td>
-                <td>{{ fauna.image }}</td>
                 <td>
-                    <ul>
-                        <li>
-                            <a href="{{ path('fauna_show', { 'id': fauna.id }) }}">show</a>
-                        </li>
-                        <li>
-                            <a href="{{ path('fauna_edit', { 'id': fauna.id }) }}">edit</a>
-                        </li>
-                    </ul>
+                <a class="btn btn-info" href="{{ path('fauna_show', { 'id': fauna.id }) }}">
+                  <i class="fa fa-eye"></i>
+                </a>
+                <a class="btn btn-success" href="{{ path('fauna_edit', { 'id': fauna.id }) }}">
+                  <i class="fa fa-pencil"></i>
+                </a>
+                <a class="btn btn-danger" href="{{ path('fauna_delete', { 'id': fauna.id }) }}">
+                  <i class="fa fa-trash"></i>
+                </a>
                 </td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
 
-    <ul>
-        <li>
-            <a href="{{ path('fauna_new') }}">Create a new fauna</a>
-        </li>
-    </ul>
+    </div>
+  </div>
+</div>
+{% endblock %}
+{% block javascripts %}
+<script src="{{ asset('scripts/dataTables/datatables.min.js') }}"></script>
+<script>
+  $(document).ready(function(){
+    $('#fauna-table').DataTable({
+      searching: false,
+      info: false,
+      lengthChange: false,
+      language: {
+        processing: "Procesando...",
+        emptyTable: "No se han encontrado individuos",
+        paginate: {
+          first: "Inicio",
+          last: "Fin",
+          next: "Siguiente",
+          previous: "Anterior"
+        }
+      }
+    });
+  });
+</script>
 {% endblock %}
