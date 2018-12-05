@@ -45,6 +45,14 @@ class FloraController extends Controller
 
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
+
+            //subida de imagen
+            $file=$form['image']->getData();
+            $ext=$file->guessExtension();
+            $file_name=time().".".$ext;
+            $file->move("uploads", $file_name);
+            $flora->setImage($file_name);
+
             $em->persist($flora);
             $em->flush();
 
