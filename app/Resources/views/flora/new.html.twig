@@ -1,16 +1,67 @@
 {% extends 'base.html.twig' %}
 
+{% block stylesheets %}
+
+<link rel="stylesheet" href="{{ asset('scripts/jquery-ui/jquery-ui.min.css') }}">
+
+<style>
+    .ui-datepicker-calendar {
+        display: none;
+    }
+</style>
+{% endblock %}
+
+{% block title %} Nuevo individuo de flora {% endblock %}
+
 {% block body %}
-    <h1>Flora creation</h1>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-7 col-center">
+        <h1 class="text-center">Nuevo individuo de flora</h1>
+        <br>
+        <br>
 
-    {{ form_start(form) }}
-        {{ form_widget(form) }}
-        <input type="submit" value="Create" />
-    {{ form_end(form) }}
+        {{ form_start(form, { 'enctype':"multipart/form-data"}) }}
+            {{ form_widget(form) }}
 
-    <ul>
-        <li>
-            <a href="{{ path('flora_index') }}">Back to the list</a>
-        </li>
-    </ul>
+            <div class="text-center">
+              <input type="submit" class="btn btn-success btn-md mt-lg-3" value="Crear individuo" />
+              <a class="btn btn-primary btn-md mt-lg-3 ml-md-1" href="{{ path('flora_index') }}">Volver al listado</a>
+            </div>
+
+        {{ form_end(form) }}
+
+      </div>
+    </div>
+  </div>
+{% endblock %}
+
+{% block javascripts %}
+<script src="{{ asset('scripts/jquery-ui/jquery-ui.min.js') }}"></script>
+<script>
+$(document).ready(function()
+{
+    $("#appbundle_flora_plantation_date").datepicker({
+        dateFormat: 'MM yy',
+        changeMonth: true,
+        changeYear: true,
+        showButtonPanel: true,
+
+        onClose: function(dateText, inst) {
+            var month = $("#ui-datepicker-div .ui-datepicker-month :selected").val();
+            var year = $("#ui-datepicker-div .ui-datepicker-year :selected").val();
+            $(this).val($.datepicker.formatDate('MM yy', new Date(year, month, 1)));
+        }
+    });
+
+    $("#appbundle_flora_plantation_date").focus(function () {
+        $(".ui-datepicker-calendar").hide();
+        $("#ui-datepicker-div").position({
+            my: "center top",
+            at: "center bottom",
+            of: $(this)
+        });
+    });
+});
+</script>
 {% endblock %}
