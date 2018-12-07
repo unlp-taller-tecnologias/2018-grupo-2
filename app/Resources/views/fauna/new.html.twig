@@ -14,7 +14,7 @@
         <br>
         <br>
 
-        {{ form_start(form) }}
+        {{ form_start(form, { 'enctype':"multipart/form-data"}) }}
             {{ form_widget(form) }}
 
             <div class="text-center">
@@ -37,4 +37,5 @@ $(document).ready(function() {
     $('#appbundle_fauna_attendants').select2();
 });
 </script>
+
 {% endblock %}

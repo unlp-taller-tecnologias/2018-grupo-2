@@ -9,6 +9,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 
 class FaunaType extends AbstractType
 {
@@ -56,13 +57,11 @@ class FaunaType extends AbstractType
                             'class' => 'form-control mb-lg-3',
                             'placeholder' => 'Ingrese las observaciones...'))
                     )
-                ->add(
-                    'image', null, array(
-                        'label' => 'Imagen',
-                        'attr' => array(
-                            'class' => 'form-control mb-lg-3',
-                            'placeholder' => 'Seleccione una imagen...'))
-                    )
+                ->add('image', FileType::class,array(
+                    "label" => "Imagen:",
+                    "attr" =>array("class" => "form-control")
+                ))
+
                 ->add(
                     'attendants', null, array(
                         'label' => 'Encargados',
@@ -85,9 +84,7 @@ class FaunaType extends AbstractType
                     'departure_date', DateType::class, array(
                         'label' => 'Fecha de traslado',
                         'required' => true,
-                        'widget' => 'single_text',
-                        'html5' => false,
-                        'attr' => ['class' => 'js-datepicker'],)
+                        'widget' => 'single_text',)
                         );
     }/**
      * {@inheritdoc}
