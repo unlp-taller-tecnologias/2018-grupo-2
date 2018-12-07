@@ -97,7 +97,6 @@ class ComposerStaticInitd52ade434dbf9c84e2cdda1ed29c43db
         ),
         'A' => 
         array (
-            'Area\\' => 5,
             'AppBundle\\' => 10,
         ),
     );
@@ -286,10 +285,6 @@ class ComposerStaticInitd52ade434dbf9c84e2cdda1ed29c43db
         array (
             0 => __DIR__ . '/..' . '/composer/ca-bundle/src',
         ),
-        'Area\\' => 
-        array (
-            0 => __DIR__ . '/../..' . '/src/AppBundle/Entity/Area',
-        ),
         'AppBundle\\' => 
         array (
             0 => __DIR__ . '/../..' . '/src/AppBundle',
@@ -306,6 +301,10 @@ class ComposerStaticInitd52ade434dbf9c84e2cdda1ed29c43db
             'Twig_' => 
             array (
                 0 => __DIR__ . '/..' . '/twig/twig/lib',
+            ),
+            'Tiloweb\\PaginationBundle\\' => 
+            array (
+                0 => __DIR__ . '/..' . '/tiloweb/pagination-bundle',
             ),
         ),
         'P' => 
