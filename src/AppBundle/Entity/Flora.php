@@ -29,9 +29,9 @@ class Flora
     private $observations;
 
     /**
-     * @var \DateTime
+     * @var string|null
      *
-     * @ORM\Column(name="plantation_date", type="datetime")
+     * @ORM\Column(name="plantation_date", type="text",nullable=true)
      */
     private $plantation_date;
 
@@ -98,7 +98,7 @@ class Flora
     /**
      * Set plantation_date.
      *
-     * @param int $plantation_date
+     * @param string $plantation_date
      *
      * @return Flora
      */
