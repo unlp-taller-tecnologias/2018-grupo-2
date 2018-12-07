@@ -5,7 +5,8 @@ namespace AppBundle\Controller;
 use AppBundle\Entity\FASpecie;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;use Symfony\Component\HttpFoundation\Request;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\HttpFoundation\Request;
 
 /**
  * Faspecie controller.
@@ -20,14 +21,17 @@ class FASpecieController extends Controller
      * @Route("/", name="faspecie_index")
      * @Method("GET")
      */
-    public function indexAction()
+    public function indexAction(Request $request)
     {
-        $em = $this->getDoctrine()->getManager();
+        $db = $this->getDoctrine()->getManager();
 
-        $fASpecies = $em->getRepository('AppBundle:FASpecie')->findAll();
+        $listFASpecie = $db->getRepository('AppBundle:FASpecie')->findByPage(
+            $request->query->getInt('page', 1),
+            5
+        );
 
         return $this->render('faspecie/index.html.twig', array(
-            'fASpecies' => $fASpecies,
+            'listFASpecie' => $listFASpecie
         ));
     }
 
