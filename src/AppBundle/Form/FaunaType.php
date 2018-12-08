@@ -82,8 +82,11 @@ class FaunaType extends AbstractType
                 ->add(
                     'departure_date', DateType::class, array(
                         'label' => 'Fecha de traslado',
-                        'widget' => 'single_text',)
-                        );
+                        'required' => false,
+                        'widget' => 'single_text',
+                        'attr' => array(
+                            'class' => 'form-control mb-lg-3'))
+                    );
     }/**
      * {@inheritdoc}
      */

@@ -22,7 +22,7 @@
                 <th>Subespecie</th>
                 <th>Nombre</th>
                 <th>Area</th>
-                <th>Año plantación</th>
+                <th>Fecha de plantación</th>
                 <th>Acciones</th>
             </tr>
         </thead>
@@ -33,7 +33,7 @@
                 <td>{{ flora.subspecie.name }}</td>
                 <td>{{ flora.name }}</td>
                 <td>{{ flora.area.name }}</td>
-                <td>{{ flora.age}}</td>
+                <td>{{ flora.plantationDate}}</td>
                 <td>
                 <a class="btn btn-info" href="{{ path('flora_show', { 'id': flora.id }) }}">
                   <i class="fa fa-eye"></i>

@@ -420,17 +420,17 @@
     },
     {
         "name": "doctrine/dbal",
-        "version": "v2.8.0",
-        "version_normalized": "2.8.0.0",
+        "version": "v2.9.0",
+        "version_normalized": "2.9.0.0",
         "source": {
             "type": "git",
             "url": "https://github.com/doctrine/dbal.git",
-            "reference": "5140a64c08b4b607b9bedaae0cedd26f04a0e621"
+            "reference": "21fdabe2fc01e004e1966f200d900554876bc63c"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/doctrine/dbal/zipball/5140a64c08b4b607b9bedaae0cedd26f04a0e621",
-            "reference": "5140a64c08b4b607b9bedaae0cedd26f04a0e621",
+            "url": "https://api.github.com/repos/doctrine/dbal/zipball/21fdabe2fc01e004e1966f200d900554876bc63c",
+            "reference": "21fdabe2fc01e004e1966f200d900554876bc63c",
             "shasum": ""
         },
         "require": {
@@ -440,32 +440,31 @@
             "php": "^7.1"
         },
         "require-dev": {
-            "doctrine/coding-standard": "^4.0",
+            "doctrine/coding-standard": "^5.0",
             "jetbrains/phpstorm-stubs": "^2018.1.2",
             "phpstan/phpstan": "^0.10.1",
-            "phpunit/phpunit": "^7.1.2",
-            "phpunit/phpunit-mock-objects": "!=3.2.4,!=3.2.5",
+            "phpunit/phpunit": "^7.4",
             "symfony/console": "^2.0.5|^3.0|^4.0",
             "symfony/phpunit-bridge": "^3.4.5|^4.0.5"
         },
         "suggest": {
             "symfony/console": "For helpful console commands such as SQL execution and import of files."
         },
-        "time": "2018-07-13T03:16:35+00:00",
+        "time": "2018-12-04T04:39:48+00:00",
         "bin": [
             "bin/doctrine-dbal"
         ],
         "type": "library",
         "extra": {
             "branch-alias": {
-                "dev-master": "2.8.x-dev",
+                "dev-master": "2.9.x-dev",
                 "dev-develop": "3.0.x-dev"
             }
         },
         "installation-source": "dist",
         "autoload": {
-            "psr-0": {
-                "Doctrine\\DBAL\\": "lib/"
+            "psr-4": {
+                "Doctrine\\DBAL\\": "lib/Doctrine/DBAL"
             }
         },
         "notification-url": "https://packagist.org/downloads/",
@@ -490,28 +489,32 @@
                 "email": "jonwage@gmail.com"
             }
         ],
-        "description": "Database Abstraction Layer",
-        "homepage": "http://www.doctrine-project.org",
+        "description": "Powerful PHP database abstraction layer (DBAL) with many features for database schema introspection and management.",
+        "homepage": "https://www.doctrine-project.org/projects/dbal.html",
         "keywords": [
+            "abstraction",
             "database",
             "dbal",
+            "mysql",
             "persistence",
+            "pgsql",
+            "php",
             "queryobject"
         ]
     },
     {
         "name": "doctrine/doctrine-bundle",
-        "version": "1.9.1",
-        "version_normalized": "1.9.1.0",
+        "version": "1.10.0",
+        "version_normalized": "1.10.0.0",
         "source": {
             "type": "git",
             "url": "https://github.com/doctrine/DoctrineBundle.git",
-            "reference": "703fad32e4c8cbe609caf45a71a1d4266c830f0f"
+            "reference": "82d2c63cd09acbde2332f55d9aa7b28aefe4983d"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/doctrine/DoctrineBundle/zipball/703fad32e4c8cbe609caf45a71a1d4266c830f0f",
-            "reference": "703fad32e4c8cbe609caf45a71a1d4266c830f0f",
+            "url": "https://api.github.com/repos/doctrine/DoctrineBundle/zipball/82d2c63cd09acbde2332f55d9aa7b28aefe4983d",
+            "reference": "82d2c63cd09acbde2332f55d9aa7b28aefe4983d",
             "shasum": ""
         },
         "require": {
@@ -529,8 +532,8 @@
         },
         "require-dev": {
             "doctrine/orm": "~2.4",
+            "php-coveralls/php-coveralls": "^2.1",
             "phpunit/phpunit": "^4.8.36|^5.7|^6.4",
-            "satooshi/php-coveralls": "^1.0",
             "symfony/phpunit-bridge": "~2.7|~3.0|~4.0",
             "symfony/property-info": "~2.8|~3.0|~4.0",
             "symfony/validator": "~2.7|~3.0|~4.0",
@@ -542,11 +545,11 @@
             "doctrine/orm": "The Doctrine ORM integration is optional in the bundle.",
             "symfony/web-profiler-bundle": "To use the data collector."
         },
-        "time": "2018-04-19T14:07:39+00:00",
+        "time": "2018-11-30T13:53:17+00:00",
         "type": "symfony-bundle",
         "extra": {
             "branch-alias": {
-                "dev-master": "1.8.x-dev"
+                "dev-master": "1.9.x-dev"
             }
         },
         "installation-source": "dist",
@@ -1247,17 +1250,17 @@
     },
     {
         "name": "easycorp/easyadmin-bundle",
-        "version": "v1.17.16",
-        "version_normalized": "1.17.16.0",
+        "version": "v1.17.18",
+        "version_normalized": "1.17.18.0",
         "source": {
             "type": "git",
             "url": "https://github.com/EasyCorp/EasyAdminBundle.git",
-            "reference": "4594ee30d9a7368539530292387bc8374a6d85c1"
+            "reference": "b1c79d051178ac578c813da2b10d547efb71077b"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/EasyCorp/EasyAdminBundle/zipball/4594ee30d9a7368539530292387bc8374a6d85c1",
-            "reference": "4594ee30d9a7368539530292387bc8374a6d85c1",
+            "url": "https://api.github.com/repos/EasyCorp/EasyAdminBundle/zipball/b1c79d051178ac578c813da2b10d547efb71077b",
+            "reference": "b1c79d051178ac578c813da2b10d547efb71077b",
             "shasum": ""
         },
         "require": {
@@ -1300,7 +1303,7 @@
             "symfony/var-dumper": "~2.3|~3.0|^4.0",
             "symfony/yaml": "~2.3|~3.0|^4.0"
         },
-        "time": "2018-11-23T19:01:56+00:00",
+        "time": "2018-12-05T15:45:59+00:00",
         "type": "symfony-bundle",
         "extra": {
             "branch-alias": {
@@ -2376,8 +2379,8 @@
     },
     {
         "name": "symfony/phpunit-bridge",
-        "version": "v3.4.19",
-        "version_normalized": "3.4.19.0",
+        "version": "v3.4.20",
+        "version_normalized": "3.4.20.0",
         "source": {
             "type": "git",
             "url": "https://github.com/symfony/phpunit-bridge.git",
@@ -2917,17 +2920,17 @@
     },
     {
         "name": "symfony/symfony",
-        "version": "v3.4.19",
-        "version_normalized": "3.4.19.0",
+        "version": "v3.4.20",
+        "version_normalized": "3.4.20.0",
         "source": {
             "type": "git",
             "url": "https://github.com/symfony/symfony.git",
-            "reference": "a8ff5a534372763544031ae68c981d396ffeb43f"
+            "reference": "f6b8ddc362b1cf3fb06548693c3adbb736092412"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/symfony/symfony/zipball/a8ff5a534372763544031ae68c981d396ffeb43f",
-            "reference": "a8ff5a534372763544031ae68c981d396ffeb43f",
+            "url": "https://api.github.com/repos/symfony/symfony/zipball/f6b8ddc362b1cf3fb06548693c3adbb736092412",
+            "reference": "f6b8ddc362b1cf3fb06548693c3adbb736092412",
             "shasum": ""
         },
         "require": {
@@ -3028,7 +3031,7 @@
             "symfony/phpunit-bridge": "~3.4|~4.0",
             "symfony/security-acl": "~2.8|~3.0"
         },
-        "time": "2018-11-26T14:07:44+00:00",
+        "time": "2018-12-06T15:24:36+00:00",
         "type": "library",
         "extra": {
             "branch-alias": {
@@ -3074,17 +3077,17 @@
     },
     {
         "name": "symfony/templating",
-        "version": "v4.1.8",
-        "version_normalized": "4.1.8.0",
+        "version": "v4.2.1",
+        "version_normalized": "4.2.1.0",
         "source": {
             "type": "git",
             "url": "https://github.com/symfony/templating.git",
-            "reference": "c303cb28dae64f2d9a97d88132318282af79ba4c"
+            "reference": "249b9dec50c98ef7cb4d4967888b91f095e9a15b"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/symfony/templating/zipball/c303cb28dae64f2d9a97d88132318282af79ba4c",
-            "reference": "c303cb28dae64f2d9a97d88132318282af79ba4c",
+            "url": "https://api.github.com/repos/symfony/templating/zipball/249b9dec50c98ef7cb4d4967888b91f095e9a15b",
+            "reference": "249b9dec50c98ef7cb4d4967888b91f095e9a15b",
             "shasum": ""
         },
         "require": {
@@ -3097,11 +3100,11 @@
         "suggest": {
             "psr/log-implementation": "For using debug logging in loaders"
         },
-        "time": "2018-11-20T16:14:00+00:00",
+        "time": "2018-11-20T16:22:05+00:00",
         "type": "library",
         "extra": {
             "branch-alias": {
-                "dev-master": "4.1-dev"
+                "dev-master": "4.2-dev"
             }
         },
         "installation-source": "dist",
@@ -3131,18 +3134,64 @@
         "homepage": "https://symfony.com"
     },
     {
-        "name": "twig/extensions",
-        "version": "v1.5.3",
-        "version_normalized": "1.5.3.0",
+        "name": "tiloweb/pagination-bundle",
+        "version": "dev-master",
+        "version_normalized": "9999999-dev",
+        "target-dir": "Tiloweb/PaginationBundle",
         "source": {
             "type": "git",
-            "url": "https://github.com/twigphp/Twig-extensions.git",
-            "reference": "e187386bea539a2cc2726689d6b4d468672a8ab4"
+            "url": "https://github.com/Tiloweb/SymfonyPaginationBundle.git",
+            "reference": "da5e0c89bc12e3a8fa023f451b56b2f9774efb90"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/twigphp/Twig-extensions/zipball/e187386bea539a2cc2726689d6b4d468672a8ab4",
-            "reference": "e187386bea539a2cc2726689d6b4d468672a8ab4",
+            "url": "https://api.github.com/repos/Tiloweb/SymfonyPaginationBundle/zipball/da5e0c89bc12e3a8fa023f451b56b2f9774efb90",
+            "reference": "da5e0c89bc12e3a8fa023f451b56b2f9774efb90",
+            "shasum": ""
+        },
+        "require": {
+            "php": ">=5.3.3",
+            "symfony/framework-bundle": ">=2.3",
+            "twig/twig": "~1.12|~2"
+        },
+        "time": "2017-12-09T13:33:25+00:00",
+        "type": "symfony-bundle",
+        "installation-source": "source",
+        "autoload": {
+            "psr-0": {
+                "Tiloweb\\PaginationBundle\\": ""
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "authors": [
+            {
+                "name": "Thibault Henry",
+                "homepage": "http://www.tiloweb.com"
+            }
+        ],
+        "description": "/",
+        "keywords": [
+            "Symfony2",
+            "bundle",
+            "pager",
+            "pagination",
+            "paginator",
+            "tiloweb"
+        ]
+    },
+    {
+        "name": "twig/extensions",
+        "version": "v1.5.4",
+        "version_normalized": "1.5.4.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/twigphp/Twig-extensions.git",
+            "reference": "57873c8b0c1be51caa47df2cdb824490beb16202"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/twigphp/Twig-extensions/zipball/57873c8b0c1be51caa47df2cdb824490beb16202",
+            "reference": "57873c8b0c1be51caa47df2cdb824490beb16202",
             "shasum": ""
         },
         "require": {
@@ -3155,7 +3204,7 @@
         "suggest": {
             "symfony/translation": "Allow the time_diff output to be translated"
         },
-        "time": "2018-11-16T03:34:09+00:00",
+        "time": "2018-12-05T18:34:18+00:00",
         "type": "library",
         "extra": {
             "branch-alias": {

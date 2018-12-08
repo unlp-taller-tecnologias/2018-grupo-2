@@ -82,6 +82,7 @@ class ComposerStaticInitd52ade434dbf9c84e2cdda1ed29c43db
         array (
             'Doctrine\\ORM\\' => 13,
             'Doctrine\\Instantiator\\' => 22,
+            'Doctrine\\DBAL\\' => 14,
             'Doctrine\\Common\\Inflector\\' => 26,
             'Doctrine\\Common\\DataFixtures\\' => 29,
             'Doctrine\\Common\\Cache\\' => 22,
@@ -97,7 +98,6 @@ class ComposerStaticInitd52ade434dbf9c84e2cdda1ed29c43db
         ),
         'A' => 
         array (
-            'Area\\' => 5,
             'AppBundle\\' => 10,
         ),
     );
@@ -247,6 +247,10 @@ class ComposerStaticInitd52ade434dbf9c84e2cdda1ed29c43db
         array (
             0 => __DIR__ . '/..' . '/doctrine/instantiator/src/Doctrine/Instantiator',
         ),
+        'Doctrine\\DBAL\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/doctrine/dbal/lib/Doctrine/DBAL',
+        ),
         'Doctrine\\Common\\Inflector\\' => 
         array (
             0 => __DIR__ . '/..' . '/doctrine/inflector/lib/Doctrine/Common/Inflector',
@@ -286,10 +290,6 @@ class ComposerStaticInitd52ade434dbf9c84e2cdda1ed29c43db
         array (
             0 => __DIR__ . '/..' . '/composer/ca-bundle/src',
         ),
-        'Area\\' => 
-        array (
-            0 => __DIR__ . '/../..' . '/src/AppBundle/Entity/Area',
-        ),
         'AppBundle\\' => 
         array (
             0 => __DIR__ . '/../..' . '/src/AppBundle',
@@ -307,6 +307,10 @@ class ComposerStaticInitd52ade434dbf9c84e2cdda1ed29c43db
             array (
                 0 => __DIR__ . '/..' . '/twig/twig/lib',
             ),
+            'Tiloweb\\PaginationBundle\\' => 
+            array (
+                0 => __DIR__ . '/..' . '/tiloweb/pagination-bundle',
+            ),
         ),
         'P' => 
         array (
@@ -317,10 +321,6 @@ class ComposerStaticInitd52ade434dbf9c84e2cdda1ed29c43db
         ),
         'D' => 
         array (
-            'Doctrine\\DBAL\\' => 
-            array (
-                0 => __DIR__ . '/..' . '/doctrine/dbal/lib',
-            ),
             'Doctrine\\Common\\Lexer\\' => 
             array (
                 0 => __DIR__ . '/..' . '/doctrine/lexer/lib',
