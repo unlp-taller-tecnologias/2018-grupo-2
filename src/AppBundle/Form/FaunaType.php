@@ -58,10 +58,10 @@ class FaunaType extends AbstractType
                             'placeholder' => 'Ingrese las observaciones...'))
                     )
                 ->add('image', FileType::class,array(
-                    "label" => "Imagen:",
-                    "attr" =>array("class" => "form-control")
-                ))
-
+                        'label' => 'Imagen',
+                        'attr' =>array('class' => 'form-control'),
+                        'data_class' => null)
+                    )
                 ->add(
                     'attendants', null, array(
                         'label' => 'Encargados',
@@ -75,7 +75,6 @@ class FaunaType extends AbstractType
                 ->add(
                     'destination', TextType::class, array(
                         'label' => 'Próximo destino',
-                        'required' => true,
                         'attr' => array(
                             'class' => 'form-control mb-lg-3',
                             'placeholder' => 'Ingrese próximo destino...'))
@@ -83,7 +82,6 @@ class FaunaType extends AbstractType
                 ->add(
                     'departure_date', DateType::class, array(
                         'label' => 'Fecha de traslado',
-                        'required' => true,
                         'widget' => 'single_text',)
                         );
     }/**
