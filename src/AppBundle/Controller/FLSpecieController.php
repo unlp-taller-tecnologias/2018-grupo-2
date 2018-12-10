@@ -20,11 +20,11 @@ class FLSpecieController extends Controller
      * @Route("/", name="flspecie_index")
      * @Method("GET")
      */
-    public function indexAction()
+    public function indexAction(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
 
-        $fLSpecies = $em->getRepository('AppBundle:FLSpecie')->findAll();
+        $fLSpecies = $em->getRepository('AppBundle:FLSpecie')->findByPage($request->query->getInt('page', 1),5);
 
         return $this->render('flspecie/index.html.twig', array(
             'fLSpecies' => $fLSpecies,

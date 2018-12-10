@@ -14,19 +14,19 @@ class DefaultEntityRepository extends \Doctrine\ORM\EntityRepository
   protected static $nameClass;
   protected static $orderByAttribute;
 
-  public function findByPage($page = 1, $max = 10)
+  public function findByPage($page = 1, $max = 10,$arrayParams = NULL)
   {
       $this->setNameClass();
       $this->setOrderByAttribute();
-      $dql = $this->createQueryBuilder(self::$nameClass);
-      $dql->orderBy(self::$orderByAttribute, 'DESC');
+
+      $dql = $this->setQuery($arrayParams);
 
       $firstResult = ($page - 1) * $max;
-
-      $query = $dql->getQuery();
+      $query = $dql;//$dql->getQuery();
       $query->setFirstResult($firstResult);
       $query->setMaxResults($max);
-
+      // var_dump($query);
+      // die();
       $paginator = new Paginator($query);
 
       if(($paginator->count() <=  $firstResult) && $page != 1) {
@@ -42,5 +42,13 @@ class DefaultEntityRepository extends \Doctrine\ORM\EntityRepository
 
   protected function setOrderByAttribute(){
     self::$orderByAttribute = '';
+  }
+
+  protected function setQuery($arrayParams){
+    if (is_null($arrayParams)) {
+      $dql = $this->createQueryBuilder(self::$nameClass);
+      $dql->orderBy(self::$orderByAttribute, 'DESC');
+      return $dql;
+    }
   }
 }

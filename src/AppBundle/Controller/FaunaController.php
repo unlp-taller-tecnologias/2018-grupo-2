@@ -5,8 +5,9 @@ namespace AppBundle\Controller;
 use AppBundle\Entity\Fauna;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;use Symfony\Component\HttpFoundation\Request;
-
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\JsonResponse;
 /**
  * Fauna controller.
  *
@@ -18,16 +19,25 @@ class FaunaController extends Controller
      * Lists all fauna entities.
      *
      * @Route("/", name="fauna_index")
-     * @Method("GET")
+     * @Method({"GET", "POST"})
      */
-    public function indexAction()
+    public function indexAction(Request $request)
     {
-        $em = $this->getDoctrine()->getManager();
+      $fauna = new Fauna();
+      $form = $this->createForm('AppBundle\Form\FaunaFilterType', $fauna);
+      $form->handleRequest($request);
 
-        $faunas = $em->getRepository('AppBundle:Fauna')->findAll();
+      $em = $this->getDoctrine()->getManager();
 
+      $arrayParams = array( 'destination' => $fauna->getDestination(),
+                            'attendants' => $fauna->getAttendants(),
+                            'specie' => $fauna->getSpecie(),
+                            'subspecie' => $fauna->getSubspecie());
+      $faunas = $em->getRepository('AppBundle:Fauna')->findByPage($request->query->getInt('page', 1),5,$arrayParams);
         return $this->render('fauna/index.html.twig', array(
             'faunas' => $faunas,
+            'fauna' => $fauna,
+            'form' => $form->createView(),
         ));
     }
 
@@ -45,7 +55,7 @@ class FaunaController extends Controller
 
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
-            //subida de imagen 
+            //subida de imagen
             $file=$form['image']->getData();
             $ext=$file->guessExtension();
             $file_name=time().".".$ext;

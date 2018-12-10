@@ -1,0 +1,53 @@
+<!-- <form action="{{ path('fauna_index') }}" method="post"> -->
+  <!-- <div class="form-row" >
+    <div class="form-group col-md-12">
+      <label>Proximo destino</label>
+      <input type="text" id="proxDestino" class="form-control" placeholder="Proximo destino" name="proxDestino">
+    </div>
+   <div class="form-group col-md-6">
+     <label>Encargado</label>
+     <select id="encargado" class="form-control" name="encargado">
+       <option value=""> Seleecione </option>
+     </select>
+   </div>
+   <div class="form-group col-md-3">
+     <label>Especie</label>
+     <select id="especie" class="form-control" name="especie">
+       <option value=""> Seleecione </option>
+     </select>
+   </div>
+   <div class="form-group col-md-3">
+     <label>Sub Especie</label>
+     <select id="subEspecie" class="form-control" name="subEspecie">
+       <option value=""> Seleecione </option>
+     </select>
+   </div>
+
+   <div class="form-group col-md-12">
+     <button id="button" type="submit" class="btn btn-info">Buscar</button>
+     <a class="btn btn-info float-right btn-m-r" href="{{ path('fauna_new') }}">Nuevo individuo</a>
+   </div>
+ </div> -->
+ <!-- </form> -->
+
+
+
+
+
+
+
+ // $proxDestino = $request->request->get("proxDestino");
+ // $encargado = $request->request->get("encargado");
+ // $especie = $request->request->get("especie");
+ // $subEspecie = $request->request->get("subEspecie");
+ //
+ // $proxDestino = (is_null($proxDestino) | $proxDestino == "" ) ? NULL :$proxDestino;//:"57HEisxErH";//
+ // $encargado = (is_null($encargado) | $encargado == "" ) ? NULL :$encargado;
+ // $especie = (is_null($especie) | $especie == "" ) ? NULL :$especie;
+ // $subEspecie = (is_null($subEspecie) | $subEspecie == "" ) ? NULL :$subEspecie;
+
+ // $arrayParams = array( 'destination' => $proxDestino,
+ //                       'attendants' => $encargado,
+ //                       'especie' => $especie,
+//                          'subspecie' => $subEspecie);
+ //
