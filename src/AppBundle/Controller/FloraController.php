@@ -119,7 +119,8 @@ class FloraController extends Controller
 
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
-            $em->remove($flora);
+            $flora->setDeleted(true);
+            $em->persist($flora);
             $em->flush();
         }
 

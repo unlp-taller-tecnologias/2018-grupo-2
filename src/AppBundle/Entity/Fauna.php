@@ -303,4 +303,35 @@ class Fauna
     {
         return $this->specie;
     }
+
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="deleted", type="boolean")
+     */
+    private $deleted=false;
+
+    /**
+     * Set deleted.
+     *
+     * @param boolean $deleted
+     *
+     * @return Fauna
+     */
+    public function setDeleted($deleted)
+    {
+        $this->deleted = $deleted;
+
+        return $this;
+    }
+
+    /**
+     * Get deleted.
+     *
+     * @return boolean
+     */
+    public function getDeleted()
+    {
+        return $this->deleted;
+    }
 }

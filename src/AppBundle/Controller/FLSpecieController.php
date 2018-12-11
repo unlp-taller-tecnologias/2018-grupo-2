@@ -95,7 +95,8 @@ class FLSpecieController extends Controller
 
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
-            $em->remove($fLSpecie);
+            $fLSpecie->setDeleted(true);
+            $em->persist($fLSpecie);
             $em->flush();
         }
 

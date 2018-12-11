@@ -95,7 +95,8 @@ class AreaController extends Controller
 
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
-            $em->remove($area);
+            $area->setDeleted(true);
+            $em->persist($area);
             $em->flush();
         }
 

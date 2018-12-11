@@ -95,7 +95,8 @@ class CategoryController extends Controller
 
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
-            $em->remove($category);
+            $category->setDeleted(true);
+            $em->persist($category);
             $em->flush();
         }
 

@@ -45,7 +45,7 @@ class FaunaController extends Controller
 
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
-            //subida de imagen 
+            //subida de imagen
             $file=$form['image']->getData();
             $ext=$file->guessExtension();
             $file_name=time().".".$ext;
@@ -118,7 +118,8 @@ class FaunaController extends Controller
 
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
-            $em->remove($fauna);
+            $fauna->setDeleted(true);
+            $em->persist($fauna);
             $em->flush();
         }
 

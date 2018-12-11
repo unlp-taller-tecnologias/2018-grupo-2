@@ -95,7 +95,8 @@ class FASubspecieController extends Controller
 
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
-            $em->remove($fASubspecie);
+            $fASubspecie->setDeleted(true);
+            $em->persist($fASubspecie);
             $em->flush();
         }
 
