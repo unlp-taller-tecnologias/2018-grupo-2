@@ -24,7 +24,7 @@ class Fauna
     /**
      * @var string
      *
-     * @ORM\Column(name="name", type="string", length=50, unique=true)
+     * @ORM\Column(name="name", type="string", length=50, unique=false)
      */
     private $name;
 
@@ -302,5 +302,36 @@ class Fauna
     public function getSpecie()
     {
         return $this->specie;
+    }
+
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="deleted", type="boolean")
+     */
+    private $deleted=false;
+
+    /**
+     * Set deleted.
+     *
+     * @param boolean $deleted
+     *
+     * @return Fauna
+     */
+    public function setDeleted($deleted)
+    {
+        $this->deleted = $deleted;
+
+        return $this;
+    }
+
+    /**
+     * Get deleted.
+     *
+     * @return boolean
+     */
+    public function getDeleted()
+    {
+        return $this->deleted;
     }
 }

@@ -95,7 +95,8 @@ class FLSubspecieController extends Controller
 
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
-            $em->remove($fLSubspecie);
+            $fLSubspecie->setDeleted(true);
+            $em->persist($fLSubspecie);
             $em->flush();
         }
 

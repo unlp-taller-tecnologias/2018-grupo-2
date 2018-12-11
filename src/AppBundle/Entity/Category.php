@@ -7,7 +7,7 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 /**
  * Category
  *
- * @UniqueEntity("name", message="El nombre ya está en uso.")  
+ * @UniqueEntity("name", message="El nombre ya está en uso.")
  * @ORM\Table(name="category")
  * @ORM\Entity(repositoryClass="AppBundle\Repository\CategoryRepository")
  */
@@ -76,5 +76,36 @@ class Category
 
     public function __toString(){
         return $this->name;
+    }
+
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="deleted", type="boolean")
+     */
+    private $deleted=false;
+
+    /**
+     * Set deleted.
+     *
+     * @param boolean $deleted
+     *
+     * @return Category
+     */
+    public function setDeleted($deleted)
+    {
+        $this->deleted = $deleted;
+
+        return $this;
+    }
+
+    /**
+     * Get deleted.
+     *
+     * @return boolean
+     */
+    public function getDeleted()
+    {
+        return $this->deleted;
     }
 }

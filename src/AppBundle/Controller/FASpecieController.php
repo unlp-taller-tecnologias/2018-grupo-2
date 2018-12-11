@@ -96,7 +96,8 @@ class FASpecieController extends Controller
 
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
-            $em->remove($fASpecie);
+            $fASpecie->setDeleted(true);
+            $em->persist($fASpecie);
             $em->flush();
         }
 

@@ -111,7 +111,8 @@ class AttendantController extends Controller
 
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
-            $em->remove($attendant);
+            $attendant->setDeleted(true);
+            $em->persist($attendant);
             $em->flush();
         }
 

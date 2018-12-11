@@ -29,11 +29,11 @@ class Flora
     private $observations;
 
     /**
-     * @var int
+     * @var string|null
      *
-     * @ORM\Column(name="age", type="integer")
+     * @ORM\Column(name="plantation_date", type="text",nullable=true)
      */
-    private $age;
+    private $plantation_date;
 
     /**
      * @var string|null
@@ -96,27 +96,27 @@ class Flora
     }
 
     /**
-     * Set age.
+     * Set plantation_date.
      *
-     * @param int $age
+     * @param string $plantation_date
      *
      * @return Flora
      */
-    public function setAge($age)
+    public function setPlantationDate($plantation_date)
     {
-        $this->age = $age;
+        $this->plantation_date = $plantation_date;
 
         return $this;
     }
 
     /**
-     * Get age.
+     * Get plantation_date.
      *
      * @return int
      */
-    public function getAge()
+    public function getPlantationDate()
     {
-        return $this->age;
+        return $this->plantation_date;
     }
 
     /**
@@ -213,5 +213,62 @@ class Flora
     public function getSubspecie()
     {
         return $this->subspecie;
+    }
+
+    private $specie;
+
+    /**
+     * Set specie.
+     *
+     * @param string $specie
+     *
+     * @return Flora
+     */
+    public function setSpecie($specie)
+    {
+        $this->specie = $specie;
+
+        return $this;
+    }
+
+    /**
+     * Get specie.
+     *
+     * @return string
+     */
+    public function getSpecie()
+    {
+        return $this->specie;
+    }
+
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="deleted", type="boolean")
+     */
+    private $deleted=false;
+
+    /**
+     * Set deleted.
+     *
+     * @param boolean $deleted
+     *
+     * @return Flora
+     */
+    public function setDeleted($deleted)
+    {
+        $this->deleted = $deleted;
+
+        return $this;
+    }
+
+    /**
+     * Get deleted.
+     *
+     * @return boolean
+     */
+    public function getDeleted()
+    {
+        return $this->deleted;
     }
 }
