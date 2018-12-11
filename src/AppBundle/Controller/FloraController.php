@@ -20,11 +20,11 @@ class FloraController extends Controller
      * @Route("/", name="flora_index")
      * @Method("GET")
      */
-    public function indexAction()
+    public function indexAction(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
 
-        $floras = $em->getRepository('AppBundle:Flora')->findAll();
+        $floras = $em->getRepository('AppBundle:Flora')->findByPage($request->query->getInt('page', 1),5);
 
         return $this->render('flora/index.html.twig', array(
             'floras' => $floras,

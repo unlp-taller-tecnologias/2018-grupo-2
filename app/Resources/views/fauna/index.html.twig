@@ -10,14 +10,19 @@
 {% block body %}
 
 <div class="container">
+<h2>Individuos Fauna</h2>
+<div class="jumbotron" style="padding-top: 2%; padding-bottom: 1%;">
+ <h4>Buscar individuos por:</h4>
+   {{ form_start(form, { 'enctype':"multipart/form-data"}) }}
+       {{ form_widget(form) }}
+       <button id="button" type="submit" class="btn btn-info">Buscar</button>
+       <a class="btn btn-info float-right btn-m-r" href="{{ path('fauna_new') }}">Nuevo individuo</a>
+   {{ form_end(form) }}
+</div>
   <div class="row">
     <div class="col-md-12 col-center">
-      <br>
-      <h1>Individuos Fauna</h1>
-      <br>
-      <a class="btn btn-info float-right btn-m-r" href="{{ path('fauna_new') }}">Nuevo individuo</a>
-    <table id="fauna-table" class="row-border hover stripe">
-        <thead>
+    <table id="fauna-table" class="table row-border hover stripe" name="TABLA">
+        <thead class="thead-dark">
             <tr>
                 <th>Especie</th>
                 <th>Subespecie</th>
@@ -45,10 +50,23 @@
                 </a>
                 </td>
             </tr>
-        {% endfor %}
+            {% else %}
+                <tr>
+                    <td colspan="5" class="text-center">
+                        <em>No fauna</em>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+            <tfoot>
+            <tr>
+                <td colspan="5" class="text-center">
+                    {{ pagination(faunas, 'page') }}
+                </td>
+            </tr>
+            </tfoot>
         </tbody>
     </table>
-
     </div>
   </div>
 </div>
@@ -61,17 +79,65 @@
       searching: false,
       info: false,
       lengthChange: false,
-      language: {
-        processing: "Procesando...",
-        emptyTable: "No se han encontrado individuos",
-        paginate: {
-          first: "Inicio",
-          last: "Fin",
-          next: "Siguiente",
-          previous: "Anterior"
-        }
-      }
+       "paging":   false,
+       "ordering": false,
+       "info":     false
     });
   });
+  $("#appbundle_fauna_destination").removeProp('required');
+  $("#appbundle_fauna_subspecie").removeProp('required');
+  $("#appbundle_fauna_specie").removeProp('required');
+  // $("form").submit(function() {
+  //   // var proxDestino = $('#proxDestino').val();
+  //   // var encargado = $('#encargado').val();
+  //   // //var especie = $('#especie').val();
+  //   $('#espe').val($('#appbundle_fauna_specie').val());
+  // });
+  $('#button').click(function() {
+    var proxDestino = $('#proxDestino').val();
+    var encargado = $('#encargado').val();
+    var especie = $('#especie').val();
+    var subEspecie = $('#subEspecie').val();
+    $.ajax({
+       method: "POST",
+       url: "",
+       data: {
+            "proxDestino" : proxDestino,
+            "encargado" : encargado,
+            "especie" : especie,
+            "subEspecie" : subEspecie
+             } ,
+       success: function(data) {
+                   var html = $.parseHTML( data );
+                   $.each( html, function( i, el ) {
+                    if (el.nodeName == 'SECTION') {
+                      //$(".principal").detach();
+                      //$(".principal").appendTo();
+                      $( ".principal" ).append( el );
+                      //$( el ).replaceAll( ".principal" );
+                      console.log("pinche");
+                    }
+                  });
+                }
+          });
+        });
+  //
+  // $('#buttonBorrar').click(function() {
+  //   console.log('enaaaaatra');
+  //   $.ajax({
+  //      method: "POST",
+  //      url: "",
+  //      success: function(data) {
+  //                 console.log('entra');
+  //                  var html = $.parseHTML( data );
+  //                  $.each( html, function( i, el ) {
+  //                   if (el.nodeName == 'SECTION') {
+  //                     $( el ).replaceAll( ".principal" );
+  //                     console.log("pinche");
+  //                   }
+  //                 });
+  //               }
+  //         });
+  //       });
 </script>
 {% endblock %}

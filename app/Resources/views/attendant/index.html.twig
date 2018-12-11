@@ -12,13 +12,12 @@
   <div class="container">
     <div class="row">
       <div class="col-md-12 col-center">
-        <br>
         <h1>Encargados</h1>
         <br>
         <a class="btn btn-info float-right btn-m-r" href="{{ path('attendant_new') }}">Nuevo encargado</a>
 
-          <table id="attendant-table" class="row-border hover stripe">
-            <thead>
+          <table id="attendant-table" class="table row-border hover stripe" name="TABLA">
+            <thead class="thead-dark">
               <tr>
                 <th width="35%">Nombre</th>
                 <th width="30%">Email</th>
@@ -44,8 +43,21 @@
                   </a>
                 </td>
               </tr>
+            {% else %}
+                <tr>
+                    <td colspan="4" class="text-center">
+                        <em>No attendants</em>
+                    </td>
+                </tr>
             {% endfor %}
-          </tbody>
+            </tbody>
+            <tfoot>
+            <tr>
+                <td colspan="4" class="text-center">
+                    {{ pagination(attendants, 'page') }}
+                </td>
+            </tr>
+            </tfoot>
         </table>
 
       </div>
@@ -59,19 +71,12 @@
 <script>
   $(document).ready(function(){
     $('#attendant-table').DataTable({
-      searching: false, 
+      searching: false,
       info: false,
       lengthChange: false,
-      language: {
-        processing: "Procesando...",
-        emptyTable: "No se han encontrado encargados",
-        paginate: {
-          first: "Inicio",
-          last: "Fin",
-          next: "Siguiente",
-          previous: "Anterior"
-        }
-      }
+       "paging":   false,
+       "ordering": false,
+       "info":     false
     });
   });
 </script>

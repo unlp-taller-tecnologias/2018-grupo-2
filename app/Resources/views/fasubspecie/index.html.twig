@@ -10,14 +10,13 @@
 {% block body %}
   <div class="container">
     <div class="row">
-      <div class="col-md-8 col-center">
-        <br>
+      <div class="col-md-12 col-center">
         <h1>Subespecies de Fauna</h1>
         <br>
         <a class="btn btn-info float-right btn-m-r" href="{{ path('fasubspecie_new') }}">Nueva subespecie</a>
 
-          <table id="fasubspecie-table" class="row-border hover stripe">
-            <thead>
+          <table id="fasubspecie-table" class="table row-border hover stripe" name="TABLA">
+            <thead class="thead-dark">
               <tr>
                 <th width="50%">Nombre</th>
                 <th width="35%">Especie</th>
@@ -38,8 +37,21 @@
                   </a>
                 </td>
               </tr>
+            {% else %}
+                <tr>
+                    <td colspan="3" class="text-center">
+                        <em>No fASubspecie</em>
+                    </td>
+                </tr>
             {% endfor %}
-          </tbody>
+            </tbody>
+            <tfoot>
+            <tr>
+                <td colspan="3" class="text-center">
+                    {{ pagination(fASubspecies, 'page') }}
+                </td>
+            </tr>
+            </tfoot>
         </table>
 
       </div>
@@ -53,19 +65,12 @@
 <script>
   $(document).ready(function(){
     $('#fasubspecie-table').DataTable({
-      searching: false, 
+      searching: false,
       info: false,
       lengthChange: false,
-      language: {
-        emptyTable: "No se han encontrado subespecies",
-        processing: "Procesando...",
-        paginate: {
-          first: "Inicio",
-          last: "Fin",
-          next: "Siguiente",
-          previous: "Anterior"
-        }
-      }
+       "paging":   false,
+       "ordering": false,
+       "info":     false
     });
   });
 </script>

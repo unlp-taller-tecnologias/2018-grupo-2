@@ -23,12 +23,9 @@ class FASpecieController extends Controller
      */
     public function indexAction(Request $request)
     {
-        $db = $this->getDoctrine()->getManager();
+        $em = $this->getDoctrine()->getManager();
 
-        $listFASpecie = $db->getRepository('AppBundle:FASpecie')->findByPage(
-            $request->query->getInt('page', 1),
-            5
-        );
+        $listFASpecie = $em->getRepository('AppBundle:FASpecie')->findByPage($request->query->getInt('page', 1),5);
 
         return $this->render('faspecie/index.html.twig', array(
             'listFASpecie' => $listFASpecie

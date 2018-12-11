@@ -20,11 +20,11 @@ class AttendantController extends Controller
      * @Route("/", name="attendant_index")
      * @Method("GET")
      */
-    public function indexAction()
+    public function indexAction(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
 
-        $attendants = $em->getRepository('AppBundle:Attendant')->findAll();
+        $attendants = $em->getRepository('AppBundle:Attendant')->findByPage($request->query->getInt('page', 1),5);
 
         return $this->render('attendant/index.html.twig', array(
             'attendants' => $attendants,

@@ -20,11 +20,11 @@ class FASubspecieController extends Controller
      * @Route("/", name="fasubspecie_index")
      * @Method("GET")
      */
-    public function indexAction()
+    public function indexAction(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
 
-        $fASubspecies = $em->getRepository('AppBundle:FASubspecie')->findAll();
+        $fASubspecies = $em->getRepository('AppBundle:FASubspecie')->findByPage($request->query->getInt('page', 1),5);
 
         return $this->render('fasubspecie/index.html.twig', array(
             'fASubspecies' => $fASubspecies,

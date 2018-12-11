@@ -8,44 +8,51 @@
 {% endblock %}
 
 {% block body %}
+
   <div class="container">
     <div class="row">
       <div class="col-md-12 col-center">
-        <br>
         <h1>Especies de Fauna</h1>
         <br>
         <a class="btn btn-info float-right btn-m-r" href="{{ path('faspecie_new') }}">Nueva especie</a>
-        <table class="table">
-        <thead>
+
+        <table id="flsubspecie-table" class="table row-border hover stripe" >
+          <thead class="thead-dark">
             <tr>
-              <th>Name</th>
-              <th>Editar</th>
-              <th>Eliminar</th>
+              <th width="70%">Nombre</th>
+              <th width="30%">Acciones</th>
             </tr>
-        </thead>
-        <tbody>
-            {% for fas in listFASpecie %}
-                <tr>
-                  <td>{{ fas.name}}</td>
-                  <td><a class="btn btn-success" href="{{ path('faspecie_edit', { 'id': fas.id }) }}"> >> </td>
-                  <td><a class="btn btn-danger" href="{{ path('faspecie_delete', { 'id': fas.id }) }}">  x  </td>
-                </tr>
-            {% else %}
-                <tr>
-                    <td colspan="2" class="text-center">
-                        <em>No FASpecie</em>
-                    </td>
-                </tr>
-            {% endfor %}
-        </tbody>
-        <tfoot>
-            <tr>
-                <td colspan="2">
-                    {{ pagination(listFASpecie, 'page') }}
+          </thead>
+          <tbody>
+          {% for fas in listFASpecie %}
+              <tr>
+                <td scope="row">{{ fas.name}}</td>
+                <td>
+                  <a class="btn btn-success" href="{{ path('faspecie_edit', { 'id': fas.id }) }}">
+                    <i class="fa fa-pencil"></i>
+                  </a>
+                  <a class="btn btn-danger" href="{{ path('faspecie_delete', { 'id': fas.id }) }}">
+                    <i class="fa fa-trash"></i>
+                  </a>
                 </td>
-            </tr>
-        </tfoot>
-    </table>
+              </tr>
+          {% else %}
+              <tr>
+                  <td colspan="3" class="text-center">
+                      <em>No FASpecie</em>
+                  </td>
+              </tr>
+          {% endfor %}
+          </tbody>
+          <tfoot>
+          <tr>
+              <td colspan="3" class="text-center">
+                  {{ pagination(listFASpecie, 'page') }}
+              </td>
+          </tr>
+          </tfoot>
+          </tbody>
+        </table>
       </div>
     </div>
   </div>
@@ -56,7 +63,15 @@
 <script src="{{ asset('scripts/dataTables/datatables.min.js') }}"></script>
 <script>
   $(document).ready(function(){
-    $('#faspecie-table').DataTable();
+    $('#flsubspecie-table').DataTable({
+      searching: false,
+      info: false,
+      lengthChange: false,
+      columns: columnDefs,
+       "paging":   false,
+       "ordering": false,
+       "info":     false
+    });
   });
 </script>
 {% endblock %}

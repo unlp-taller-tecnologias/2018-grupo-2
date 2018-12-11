@@ -10,20 +10,18 @@
 {% block body %}
   <div class="container">
     <div class="row">
-      <div class="col-md-8 col-center">
-        <br>
+      <div class="col-md-12 col-center">
         <h1>Especies de Flora</h1>
         <br>
         <a class="btn btn-info float-right btn-m-r" href="{{ path('flspecie_new') }}">Nueva especie</a>
-
-          <table id="flspecie-table" class="row-border hover stripe">
-            <thead>
-              <tr>
-                <th width="65%">Nombre</th>
-                <th width="35%"></th>
-              </tr>
-            </thead>
-            <tbody>
+        <table id="flspecie-table" class="table">
+          <thead class="thead-dark">
+            <tr>
+              <th width="65%">Nombre</th>
+              <th width="35%">Acciones</th>
+            </tr>
+          </thead>
+          <tbody>
             {% for fLSpecie in fLSpecies %}
               <tr>
                 <td>{{ fLSpecie.name }}</td>
@@ -37,10 +35,24 @@
                   </a>
                 </td>
               </tr>
-            {% endfor %}
+
+          {% else %}
+              <tr>
+                  <td colspan="3" class="text-center">
+                      <em>No FASpecie</em>
+                  </td>
+              </tr>
+          {% endfor %}
+          </tbody>
+          <tfoot>
+          <tr>
+              <td colspan="3" class="text-center">
+                  {{ pagination(fLSpecies, 'page') }}
+              </td>
+          </tr>
+          </tfoot>
           </tbody>
         </table>
-
       </div>
     </div>
   </div>
@@ -52,19 +64,13 @@
 <script>
   $(document).ready(function(){
     $('#flspecie-table').DataTable({
-      searching: false, 
+      searching: false,
       info: false,
       lengthChange: false,
-      language: {
-        emptyTable: "No se han encontrado especies",
-        processing: "Procesando...",
-        paginate: {
-          first: "Inicio",
-          last: "Fin",
-          next: "Siguiente",
-          previous: "Anterior"
-        }
-      }
+      columns: columnDefs,
+       "paging":   false,
+       "ordering": false,
+       "info":     false
     });
   });
 </script>

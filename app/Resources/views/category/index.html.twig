@@ -10,14 +10,13 @@
 {% block body %}
   <div class="container">
     <div class="row">
-      <div class="col-md-7 col-center">
-        <br>
+      <div class="col-md-12 col-center">
         <h1>Categorías</h1>
         <br>
         <a class="btn btn-info float-right btn-m-r" href="{{ path('category_new') }}">Nueva categoría</a>
 
-          <table id="category-table" class="row-border hover stripe">
-            <thead>
+          <table id="category-table" class="table row-border hover stripe" name="TABLA">
+            <thead class="thead-dark">
               <tr>
                 <th width="80%">Nombre</th>
                 <th width="20%"></th>
@@ -36,8 +35,21 @@
                   </a>
                 </td>
               </tr>
+            {% else %}
+                <tr>
+                    <td colspan="2" class="text-center">
+                        <em>No category</em>
+                    </td>
+                </tr>
             {% endfor %}
-          </tbody>
+            </tbody>
+            <tfoot>
+            <tr>
+                <td colspan="2" class="text-center">
+                    {{ pagination(categories, 'page') }}
+                </td>
+            </tr>
+            </tfoot>
         </table>
 
       </div>
@@ -51,19 +63,12 @@
 <script>
   $(document).ready(function(){
     $('#category-table').DataTable({
-      searching: false, 
+      searching: false,
       info: false,
       lengthChange: false,
-      language: {
-        processing: "Procesando...",
-        emptyTable: "No se han encontrado categorías",
-        paginate: {
-          first: "Inicio",
-          last: "Fin",
-          next: "Siguiente",
-          previous: "Anterior"
-        }
-      }
+       "paging":   false,
+       "ordering": false,
+       "info":     false
     });
   });
 </script>

@@ -20,11 +20,11 @@ class FLSubspecieController extends Controller
      * @Route("/", name="flsubspecie_index")
      * @Method("GET")
      */
-    public function indexAction()
+    public function indexAction(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
 
-        $fLSubspecies = $em->getRepository('AppBundle:FLSubspecie')->findAll();
+        $fLSubspecies = $em->getRepository('AppBundle:FLSubspecie')->findByPage($request->query->getInt('page', 1),5);
 
         return $this->render('flsubspecie/index.html.twig', array(
             'fLSubspecies' => $fLSubspecies,

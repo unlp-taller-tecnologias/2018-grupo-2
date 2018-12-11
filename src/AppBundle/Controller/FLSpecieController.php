@@ -5,7 +5,8 @@ namespace AppBundle\Controller;
 use AppBundle\Entity\FLSpecie;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;use Symfony\Component\HttpFoundation\Request;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\HttpFoundation\Request;
 
 /**
  * Flspecie controller.
@@ -20,11 +21,11 @@ class FLSpecieController extends Controller
      * @Route("/", name="flspecie_index")
      * @Method("GET")
      */
-    public function indexAction()
+    public function indexAction(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
 
-        $fLSpecies = $em->getRepository('AppBundle:FLSpecie')->findAll();
+        $fLSpecies = $em->getRepository('AppBundle:FLSpecie')->findByPage($request->query->getInt('page', 1),5);
 
         return $this->render('flspecie/index.html.twig', array(
             'fLSpecies' => $fLSpecies,
