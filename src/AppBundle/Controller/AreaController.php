@@ -92,13 +92,10 @@ class AreaController extends Controller
     {
         $form = $this->createDeleteForm($area);
         $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
             $area->setDeleted(true);
             $em->persist($area);
             $em->flush();
-        }
 
         return $this->redirectToRoute('area_index');
     }
