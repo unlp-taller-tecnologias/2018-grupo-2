@@ -26,14 +26,19 @@ class FaunaController extends Controller
       $fauna = new Fauna();
       $form = $this->createForm('AppBundle\Form\FaunaFilterType', $fauna);
       $form->handleRequest($request);
-
+      // var_dump($request->request->all());
+      // die();
+      //  $all = $request->request->all();
+      //  $var = $all['appbundle_fauna'];
+      //  // var_dump($var);
+      //  // die();
       $em = $this->getDoctrine()->getManager();
 
-      $arrayParams = array( 'destination' => $fauna->getDestination(),
-                            'attendants' => $fauna->getAttendants(),
-                            'specie' => $fauna->getSpecie(),
-                            'subspecie' => $fauna->getSubspecie());
-      $faunas = $em->getRepository('AppBundle:Fauna')->findByPage($request->query->getInt('page', 1),5,$arrayParams);
+      // $arrayParams = array( 'destination' => $var["destination"],
+      //                       'attendants' => $var["attendants"],
+      //                       'specie' => $var["specie"],
+      //                       'subspecie' => $var["subspecie"]);
+      $faunas = $em->getRepository('AppBundle:Fauna')->findByPage($request->query->getInt('page', 1),5,null);//$arrayParams);
         return $this->render('fauna/index.html.twig', array(
             'faunas' => $faunas,
             'fauna' => $fauna,

@@ -27,8 +27,8 @@
      <button id="button" type="submit" class="btn btn-info">Buscar</button>
      <a class="btn btn-info float-right btn-m-r" href="{{ path('fauna_new') }}">Nuevo individuo</a>
    </div>
- </div> -->
- <!-- </form> -->
+ </div> 
+ <!-- </form> 
 
 
 

@@ -15,8 +15,8 @@
       <h1>Individuos Flora</h1>
       <br>
       <a class="btn btn-info float-right btn-m-r" href="{{ path('flora_new') }}">Nuevo individuo</a>
-    <table id="flora-table" class="row-border hover stripe">
-        <thead>
+    <table id="flora-table" class="table row-border hover stripe" name="TABLA">
+        <thead class="thead-dark">
             <tr>
                 <th>Especie</th>
                 <th>Subespecie</th>
@@ -45,8 +45,21 @@
                   <i class="fa fa-trash"></i>
                 </a>
                 </td>
+            {% else %}
+                <tr>
+                    <td colspan="6" class="text-center">
+                        <em>No floras</em>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+            <tfoot>
+            <tr>
+                <td colspan="6" class="text-center">
+                    {{ pagination(floras, 'page') }}
+                </td>
             </tr>
-        {% endfor %}
+            </tfoot>
         </tbody>
     </table>
 
@@ -64,16 +77,9 @@
       searching: false,
       info: false,
       lengthChange: false,
-      language: {
-        processing: "Procesando...",
-        emptyTable: "No se han encontrado individuos",
-        paginate: {
-          first: "Inicio",
-          last: "Fin",
-          next: "Siguiente",
-          previous: "Anterior"
-        }
-      }
+       "paging":   false,
+       "ordering": false,
+       "info":     false
     });
   });
 </script>

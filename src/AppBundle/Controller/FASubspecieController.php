@@ -24,7 +24,7 @@ class FASubspecieController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $fASubspecies = $em->getRepository('AppBundle:FASubspecie')->findAll();
+        $fASubspecies = $em->getRepository('AppBundle:FASubspecie')->findByPage($request->query->getInt('page', 1),5);
 
         return $this->render('fasubspecie/index.html.twig', array(
             'fASubspecies' => $fASubspecies,

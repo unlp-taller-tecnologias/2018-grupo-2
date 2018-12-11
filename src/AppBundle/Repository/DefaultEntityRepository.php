@@ -19,14 +19,11 @@ class DefaultEntityRepository extends \Doctrine\ORM\EntityRepository
       $this->setNameClass();
       $this->setOrderByAttribute();
 
-      $dql = $this->setQuery($arrayParams);
+      $query = $this->setQuery($arrayParams);
 
       $firstResult = ($page - 1) * $max;
-      $query = $dql;//$dql->getQuery();
       $query->setFirstResult($firstResult);
       $query->setMaxResults($max);
-      // var_dump($query);
-      // die();
       $paginator = new Paginator($query);
 
       if(($paginator->count() <=  $firstResult) && $page != 1) {
