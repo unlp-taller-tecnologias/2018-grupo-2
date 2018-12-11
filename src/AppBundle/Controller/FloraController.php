@@ -20,7 +20,7 @@ class FloraController extends Controller
      * @Route("/", name="flora_index")
      * @Method("GET")
      */
-    public function indexAction()
+    public function indexAction(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
 

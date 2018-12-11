@@ -93,34 +93,34 @@
   //   // //var especie = $('#especie').val();
   //   $('#espe').val($('#appbundle_fauna_specie').val());
   // });
-  // $('#button').click(function() {
-  //   var proxDestino = $('#proxDestino').val();
-  //   var encargado = $('#encargado').val();
-  //   var especie = $('#especie').val();
-  //   var subEspecie = $('#subEspecie').val();
-  //   $.ajax({
-  //      method: "POST",
-  //      url: "",
-  //      data: {
-  //           "proxDestino" : proxDestino,
-  //           "encargado" : encargado,
-  //           "especie" : especie,
-  //           "subEspecie" : subEspecie
-  //            } ,
-  //      success: function(data) {
-  //                  var html = $.parseHTML( data );
-  //                  $.each( html, function( i, el ) {
-  //                   if (el.nodeName == 'SECTION') {
-  //                     //$(".principal").detach();
-  //                     //$(".principal").appendTo();
-  //                     $( ".principal" ).append( el );
-  //                     //$( el ).replaceAll( ".principal" );
-  //                     console.log("pinche");
-  //                   }
-  //                 });
-  //               }
-  //         });
-  //       });
+  $('#button').click(function() {
+    var proxDestino = $('#proxDestino').val();
+    var encargado = $('#encargado').val();
+    var especie = $('#especie').val();
+    var subEspecie = $('#subEspecie').val();
+    $.ajax({
+       method: "POST",
+       url: "",
+       data: {
+            "proxDestino" : proxDestino,
+            "encargado" : encargado,
+            "especie" : especie,
+            "subEspecie" : subEspecie
+             } ,
+       success: function(data) {
+                   var html = $.parseHTML( data );
+                   $.each( html, function( i, el ) {
+                    if (el.nodeName == 'SECTION') {
+                      //$(".principal").detach();
+                      //$(".principal").appendTo();
+                      $( ".principal" ).append( el );
+                      //$( el ).replaceAll( ".principal" );
+                      console.log("pinche");
+                    }
+                  });
+                }
+          });
+        });
   //
   // $('#buttonBorrar').click(function() {
   //   console.log('enaaaaatra');

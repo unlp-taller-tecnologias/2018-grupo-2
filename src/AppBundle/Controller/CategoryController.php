@@ -20,7 +20,7 @@ class CategoryController extends Controller
      * @Route("/", name="category_index")
      * @Method("GET")
      */
-    public function indexAction()
+    public function indexAction(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
 

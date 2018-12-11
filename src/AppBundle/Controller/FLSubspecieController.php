@@ -20,7 +20,7 @@ class FLSubspecieController extends Controller
      * @Route("/", name="flsubspecie_index")
      * @Method("GET")
      */
-    public function indexAction()
+    public function indexAction(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
 

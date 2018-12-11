@@ -20,7 +20,7 @@ class FASubspecieController extends Controller
      * @Route("/", name="fasubspecie_index")
      * @Method("GET")
      */
-    public function indexAction()
+    public function indexAction(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
 

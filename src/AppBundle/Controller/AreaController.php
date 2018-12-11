@@ -20,7 +20,7 @@ class AreaController extends Controller
      * @Route("/", name="area_index")
      * @Method("GET")
      */
-    public function indexAction()
+    public function indexAction(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
 

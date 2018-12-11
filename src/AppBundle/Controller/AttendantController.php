@@ -20,7 +20,7 @@ class AttendantController extends Controller
      * @Route("/", name="attendant_index")
      * @Method("GET")
      */
-    public function indexAction()
+    public function indexAction(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
 
