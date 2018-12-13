@@ -20,7 +20,30 @@ class FaunaRepository extends DefaultEntityRepository
     self::$orderByAttribute = 'FaunaRepository.name';
   }
 
-  // protected function setQuery($arrayParams){
+  protected function setQuery($arrayParams){
+    $destination= (is_null($arrayParams['destination']) | $arrayParams['destination'] == "")? NULL :$arrayParams['destination'];
+    $attendants= (is_null($arrayParams['attendants']) | $arrayParams['attendants'] == "")? NULL :$arrayParams['attendants'];
+    $specie= (is_null($arrayParams['specie']) | $arrayParams['specie'] == "")? NULL :$arrayParams['specie'];
+    $subspecie= (is_null($arrayParams['subspecie']) | $arrayParams['subspecie'] == "")? NULL :$arrayParams['subspecie'];
+    $qb = $this->getEntityManager()->createQueryBuilder();
+    $qb
+      ->select('f')
+      ->from('AppBundle:Fauna','f')
+      ->join('f.attendants', 'a')
+      ->join('f.subspecie', 'ss')
+      ->where($qb->expr()->orX(($qb->expr()->like('f.destination', ":destination")),($qb->expr()->isNull(':destination'))))
+      ->andWhere($qb->expr()->orX(($qb->expr()->eq('a.id', ':attendants')),($qb->expr()->isNull(':attendants'))))
+      ->andWhere($qb->expr()->orX(($qb->expr()->eq('f.subspecie', ':subspecie')),($qb->expr()->isNull(':subspecie'))))
+      ->andWhere($qb->expr()->orX(($qb->expr()->eq('ss.specie', ':specie')),($qb->expr()->isNull(':specie'))))
+      ->orWhere($qb->expr()->andX(($qb->expr()->isNull(':destination')),($qb->expr()->isNull(':attendants')),($qb->expr()->isNull(':subspecie')),($qb->expr()->isNull(':specie'))))
+      ->setParameters(array(
+        "destination" =>  "%".$destination."%",
+        "attendants" => $attendants,
+        "specie" => $specie,
+        "subspecie" => $subspecie,
+    ));
+    return $qb->getQuery();
+  }
 
   //   $destination= (is_null($arrayParams['destination']) | $arrayParams['destination'] == "")? 'NULL' :$arrayParams['destination'];
   //   $attendants= (is_null($arrayParams['attendants']) | $arrayParams['attendants'] == "")? 'NULL' :$arrayParams['attendants'];

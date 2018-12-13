@@ -15,7 +15,8 @@
  <h4>Buscar individuos por:</h4>
    {{ form_start(form, { 'enctype':"multipart/form-data"}) }}
        {{ form_widget(form) }}
-       <button id="button" type="submit" class="btn btn-info">Buscar</button>
+       <button id="button" onclick="enviar()" type="submit" class="btn btn-info">Buscar</button>
+       <button id="buttonClear" type="submit" class="btn btn-info">Limpiar filtros</button>
        <a class="btn btn-info float-right btn-m-r" href="{{ path('fauna_new') }}">Nuevo individuo</a>
    {{ form_end(form) }}
 </div>
@@ -74,6 +75,10 @@
 {% block javascripts %}
 <script src="{{ asset('scripts/dataTables/datatables.min.js') }}"></script>
 <script>
+  $("#appbundle_fauna_destination").removeProp('required');
+  $("#appbundle_fauna_specie").removeProp('required');
+  $("#appbundle_fauna_subspecie").removeProp('required');
+  $("#appbundle_fauna_attendants").removeProp('required');
   $(document).ready(function(){
     $('#fauna-table').DataTable({
       searching: false,
@@ -83,44 +88,86 @@
        "ordering": false,
        "info":     false
     });
+  $('#appbundle_fauna_destination').val(localStorage.getItem('destination'));
+  $('#appbundle_fauna_specie').val(localStorage.getItem('specie'));
+  $('#appbundle_fauna_subspecie').val(localStorage.getItem('subspecie'));
+  $('#appbundle_fauna_attendants').val(localStorage.getItem('attendants'));
   });
-  $("#appbundle_fauna_destination").removeProp('required');
-  $("#appbundle_fauna_subspecie").removeProp('required');
-  $("#appbundle_fauna_specie").removeProp('required');
-  // $("form").submit(function() {
-  //   // var proxDestino = $('#proxDestino').val();
-  //   // var encargado = $('#encargado').val();
-  //   // //var especie = $('#especie').val();
-  //   $('#espe').val($('#appbundle_fauna_specie').val());
-  // });
-  $('#button').click(function() {
-    var proxDestino = $('#proxDestino').val();
-    var encargado = $('#encargado').val();
-    var especie = $('#especie').val();
-    var subEspecie = $('#subEspecie').val();
-    $.ajax({
-       method: "POST",
-       url: "",
-       data: {
-            "proxDestino" : proxDestino,
-            "encargado" : encargado,
-            "especie" : especie,
-            "subEspecie" : subEspecie
-             } ,
-       success: function(data) {
-                   var html = $.parseHTML( data );
-                   $.each( html, function( i, el ) {
-                    if (el.nodeName == 'SECTION') {
-                      //$(".principal").detach();
-                      //$(".principal").appendTo();
-                      $( ".principal" ).append( el );
-                      //$( el ).replaceAll( ".principal" );
-                      console.log("pinche");
-                    }
-                  });
-                }
-          });
-        });
+
+  $('.page-link').click(function(){
+    $('#appbundle_fauna_destination').val(localStorage.getItem('destination'));
+    $('#appbundle_fauna_specie').val(localStorage.getItem('specie'));
+    $('#appbundle_fauna_subspecie').val(localStorage.getItem('subspecie'));
+    $('#appbundle_fauna_attendants').val(localStorage.getItem('attendants'));
+    localStorage.setItem('destination',destination);// para establecer
+    localStorage.setItem('specie',specie);// para establecer
+    localStorage.setItem('subspecie',subspecie);// para establecer
+    localStorage.setItem('attendants',attendants);// para establecer
+    Document.getElementById("button").submit
+  });
+
+
+  $('#button').click(function(){
+    var destination = $('#appbundle_fauna_destination').val();
+    var specie = $('#appbundle_fauna_specie').val();
+    var subspecie = $('#appbundle_fauna_subspecie').val();
+    var attendants = $('#appbundle_fauna_attendants').val();
+    localStorage.setItem('destination',destination);// para establecer
+    localStorage.setItem('specie',specie);// para establecer
+    localStorage.setItem('subspecie',subspecie);// para establecer
+    localStorage.setItem('attendants',attendants);// para establecer
+  });
+
+  $('#buttonClear').click(function() {
+    localStorage.removeItem('destination'); //Llegar.
+    localStorage.removeItem('specie'); //Llegar.
+    localStorage.removeItem('subspecie'); //Llegar.
+    localStorage.removeItem('attendants'); //Llegar.
+    $('#appbundle_fauna_destination').val('');
+    $('#appbundle_fauna_specie').val('');
+    $('#appbundle_fauna_subspecie').val('');
+    $('#appbundle_fauna_attendants').val('');
+  });
+    // var destination = $('#appbundle_fauna_destination').val();
+    // var specie = $('#appbundle_fauna_specie').val();
+    // var subspecie = $('#appbundle_fauna_subspecie').val();
+    // var attendants = $('#appbundle_fauna_attendants').val();
+    // localStorage.setItem('destination',destination);// para establecer
+    // localStorage.setItem('specie',specie);// para establecer
+    // localStorage.setItem('subspecie',subspecie);// para establecer
+    // localStorage.setItem('attendants',attendants);// para establecer
+    // localStorage.content = destination;
+    // localStorage.content = specie;
+    // localStorage.content = subspecie;
+    // localStorage.content = attendants;
+    //alert(localStorage.content);
+    // var proxDestino = $('#proxDestino').val();
+    // var encargado = $('#encargado').val();
+    // var especie = $('#especie').val();
+    // var subEspecie = $('#subEspecie').val();
+    // $.ajax({
+    //    method: "POST",
+    //    url: "",
+    //    data: {
+    //         "proxDestino" : proxDestino,
+    //         "encargado" : encargado,
+    //         "especie" : especie,
+    //         "subEspecie" : subEspecie
+    //          } ,
+    //    success: function(data) {
+    //                var html = $.parseHTML( data );
+    //                $.each( html, function( i, el ) {
+    //                 if (el.nodeName == 'SECTION') {
+    //                   //$(".principal").detach();
+    //                   //$(".principal").appendTo();
+    //                   $( ".principal" ).append( el );
+    //                   //$( el ).replaceAll( ".principal" );
+    //                   console.log("pinche");
+    //                 }
+    //               });
+    //             }
+    //       });
+        
   //
   // $('#buttonBorrar').click(function() {
   //   console.log('enaaaaatra');
