@@ -108,13 +108,10 @@ class AttendantController extends Controller
     {
         $form = $this->createDeleteForm($attendant);
         $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
             $attendant->setDeleted(true);
             $em->persist($attendant);
             $em->flush();
-        }
 
         return $this->redirectToRoute('attendant_index');
     }

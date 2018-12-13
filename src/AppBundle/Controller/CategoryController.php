@@ -92,13 +92,10 @@ class CategoryController extends Controller
     {
         $form = $this->createDeleteForm($category);
         $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
             $category->setDeleted(true);
             $em->persist($category);
             $em->flush();
-        }
 
         return $this->redirectToRoute('category_index');
     }

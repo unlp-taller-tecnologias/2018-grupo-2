@@ -32,9 +32,10 @@
                   <a class="btn btn-success" href="{{ path('fasubspecie_edit', { 'id': fASubspecie.id }) }}">
                     <i class="fa fa-pencil"></i>
                   </a>
-                  <a class="btn btn-danger" href="{{ path('fasubspecie_delete', { 'id': fASubspecie.id }) }}">
+                  <input class="fasubspecie_id" value="{{fASubspecie.id}}" hidden>
+                  <button type="button" class="button_delete btn btn-danger" data-toggle="modal" data-target="#delete_modal">
                     <i class="fa fa-trash"></i>
-                  </a>
+                  </button>
                 </td>
               </tr>
             {% else %}
@@ -58,6 +59,28 @@
     </div>
   </div>
 
+
+    <div class="modal" id='delete_modal' tabindex="-1" role="dialog">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Eliminar Subespecie</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <p>¿Estás seguro de que deseas eliminar esta subespecie?</p>
+          </div>
+          <div class="modal-footer">
+            <form class="form_m_d" method="post">
+              <button type="submit" class="btn btn-primary">Eliminar</button>
+            </form>
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+          </div>
+        </div>
+      </div>
+    </div>
 {% endblock %}
 {% block javascripts %}
 
@@ -73,5 +96,13 @@
        "info":     false
     });
   });
+</script>
+
+<script>
+
+$('#fasubspecie-table').on("click", ".button_delete", function() {
+  var id_fasub = $(this).closest('tr').find('.fasubspecie_id').val();
+  $('.form_m_d').attr('action', '/fasubspecie/'+id_fasub);
+});
 </script>
 {% endblock %}

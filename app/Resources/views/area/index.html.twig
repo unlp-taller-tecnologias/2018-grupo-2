@@ -70,7 +70,7 @@
           </button>
         </div>
         <div class="modal-body">
-          <p>¿Estás seguro de que deseas eliminar ésta área?</p>
+          <p>¿Estás seguro de que deseas eliminar esta área?</p>
         </div>
         <div class="modal-footer">
           <form class="form_m_d" method="post">
@@ -103,8 +103,6 @@
 $('#area-table').on("click", ".button_delete", function() {
   var id_area = $(this).closest('tr').find('.area_id').val();
   $('.form_m_d').attr('action', '/area/'+id_area);
-  console.log(id_area);
-
 });
 </script>
 {% endblock %}

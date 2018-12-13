@@ -92,13 +92,10 @@ class FLSubspecieController extends Controller
     {
         $form = $this->createDeleteForm($fLSubspecie);
         $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
             $fLSubspecie->setDeleted(true);
             $em->persist($fLSubspecie);
             $em->flush();
-        }
 
         return $this->redirectToRoute('flsubspecie_index');
     }
