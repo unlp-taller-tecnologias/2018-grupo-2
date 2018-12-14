@@ -121,4 +121,16 @@ class FASpecieController extends Controller
             ->getForm()
         ;
     }
+
+    /**
+     * Finds and displays a FASpecie FASubspecies.
+     *
+     * @Route("/{id}/subspecies", name="faspecie_subspecies")
+     * @Method({"GET", "POST"})
+     */
+    public function getSubspeciesAction(FASpecie $fASpecie) 
+    {
+      $subspecies = $fASpecie->getSubspecies();
+      return $subspecies;
+    }
 }

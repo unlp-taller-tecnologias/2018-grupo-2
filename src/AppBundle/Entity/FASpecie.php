@@ -75,4 +75,14 @@ class FASpecie
     public function __toString(){
         return $this->name;
     }
+
+    /**
+     * Get subspecies.
+     *
+     * @return FASubspecie
+     */
+    public function getSubspecies()
+    {
+        return $this->subspecies;
+    }
 }
