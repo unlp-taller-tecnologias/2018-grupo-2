@@ -20,11 +20,11 @@ class CategoryController extends Controller
      * @Route("/", name="category_index")
      * @Method("GET")
      */
-    public function indexAction()
+    public function indexAction(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
 
-        $categories = $em->getRepository('AppBundle:Category')->findAll();
+        $categories = $em->getRepository('AppBundle:Category')->findByPage($request->query->getInt('page', 1),5);
 
         return $this->render('category/index.html.twig', array(
             'categories' => $categories,
@@ -92,12 +92,10 @@ class CategoryController extends Controller
     {
         $form = $this->createDeleteForm($category);
         $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
-            $em->remove($category);
+            $category->setDeleted(true);
+            $em->persist($category);
             $em->flush();
-        }
 
         return $this->redirectToRoute('category_index');
     }

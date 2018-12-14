@@ -10,20 +10,18 @@
 {% block body %}
   <div class="container">
     <div class="row">
-      <div class="col-md-8 col-center">
-        <br>
+      <div class="col-md-12 col-center">
         <h1>Especies de Flora</h1>
         <br>
         <a class="btn btn-info float-right btn-m-r" href="{{ path('flspecie_new') }}">Nueva especie</a>
-
-          <table id="flspecie-table" class="row-border hover stripe">
-            <thead>
-              <tr>
-                <th width="65%">Nombre</th>
-                <th width="35%"></th>
-              </tr>
-            </thead>
-            <tbody>
+        <table id="flspecie-table" class="table">
+          <thead class="thead-dark">
+            <tr>
+              <th width="65%">Nombre</th>
+              <th width="35%">Acciones</th>
+            </tr>
+          </thead>
+          <tbody>
             {% for fLSpecie in fLSpecies %}
               <tr>
                 <td>{{ fLSpecie.name }}</td>
@@ -32,18 +30,56 @@
                   <a class="btn btn-success" href="{{ path('flspecie_edit', { 'id': fLSpecie.id }) }}">
                     <i class="fa fa-pencil"></i>
                   </a>
-                  <a class="btn btn-danger" href="{{ path('flspecie_delete', { 'id': fLSpecie.id }) }}">
+                  <input class="flspecie_id" value="{{fLSpecie.id}}" hidden>
+                  <button type="button" class="button_delete btn btn-danger" data-toggle="modal" data-target="#delete_modal">
                     <i class="fa fa-trash"></i>
-                  </a>
+                  </button>
                 </td>
               </tr>
-            {% endfor %}
+
+          {% else %}
+              <tr>
+                  <td colspan="3" class="text-center">
+                      <em>No FASpecie</em>
+                  </td>
+              </tr>
+          {% endfor %}
+          </tbody>
+          <tfoot>
+          <tr>
+              <td colspan="3" class="text-center">
+                  {{ pagination(fLSpecies, 'page') }}
+              </td>
+          </tr>
+          </tfoot>
           </tbody>
         </table>
-
       </div>
     </div>
   </div>
+
+
+    <div class="modal" id='delete_modal' tabindex="-1" role="dialog">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Eliminar especie</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <p>¿Estás seguro de que deseas eliminar esta especie?</p>
+          </div>
+          <div class="modal-footer">
+            <form class="form_m_d" method="post">
+              <button type="submit" class="btn btn-primary">Eliminar</button>
+            </form>
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+          </div>
+        </div>
+      </div>
+    </div>
 
 {% endblock %}
 {% block javascripts %}
@@ -52,20 +88,22 @@
 <script>
   $(document).ready(function(){
     $('#flspecie-table').DataTable({
-      searching: false, 
+      searching: false,
       info: false,
       lengthChange: false,
-      language: {
-        emptyTable: "No se han encontrado especies",
-        processing: "Procesando...",
-        paginate: {
-          first: "Inicio",
-          last: "Fin",
-          next: "Siguiente",
-          previous: "Anterior"
-        }
-      }
+      columns: columnDefs,
+       "paging":   false,
+       "ordering": false,
+       "info":     false
     });
   });
+</script>
+
+<script>
+
+$('#flspecie-table').on("click", ".button_delete", function() {
+  var id_flspecie = $(this).closest('tr').find('.flspecie_id').val();
+  $('.form_m_d').attr('action', '/flspecie/'+id_flspecie);
+});
 </script>
 {% endblock %}

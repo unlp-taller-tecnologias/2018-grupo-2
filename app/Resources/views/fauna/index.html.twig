@@ -10,14 +10,45 @@
 {% block body %}
 
 <div class="container">
+<h2>Individuos Fauna</h2>
+<div class="jumbotron" style="padding-top: 2%; padding-bottom: 1%;">
+ <h4>Buscar individuos por:</h4>
+  <form action="{{ path('fauna_index') }}" method="get">
+    <div class="form-row" >
+      <div class="form-group col-md-12">
+        <label>Proximo destino</label>
+        <input type="text" id="destination" class="form-control" placeholder="Proximo destino" name="destination">
+      </div>
+     <div class="form-group col-md-6">
+       <label>Encargado</label>
+       <select id="attendants" class="form-control" name="attendants">
+         <option value=""> Seleecione </option>
+       </select>
+     </div>
+     <div class="form-group col-md-3">
+       <label>Especie</label>
+       <select id="specie" class="form-control" name="specie">
+         <option value=""> Seleecione </option>
+       </select>
+     </div>
+     <div class="form-group col-md-3">
+       <label>Sub Especie</label>
+       <select id="subspecie" class="form-control" name="subspecie">
+         <option value=""> Seleecione </option>
+       </select>
+     </div>
+     <div class="form-group col-md-12">
+        <button id="button" type="submit" class="btn btn-info">Buscar</button>
+        <button id="buttonClear" type="submit" class="btn btn-info">Limpiar filtros</button>
+        <a class="btn btn-info float-right btn-m-r" href="{{ path('fauna_new') }}">Nuevo individuo</a>
+     </div>
+   </div> 
+  </form> 
+</div>
   <div class="row">
     <div class="col-md-12 col-center">
-      <br>
-      <h1>Individuos de Fauna</h1>
-      <br>
-      <a class="btn btn-info float-right btn-m-r" href="{{ path('fauna_new') }}">Nuevo individuo</a>
-    <table id="fauna-table" class="row-border hover stripe">
-        <thead>
+    <table id="fauna-table" class="table row-border hover stripe" name="TABLA">
+        <thead class="thead-dark">
             <tr>
                 <th>Especie</th>
                 <th>Subespecie</th>
@@ -40,18 +71,56 @@
                 <a class="btn btn-success" href="{{ path('fauna_edit', { 'id': fauna.id }) }}">
                   <i class="fa fa-pencil"></i>
                 </a>
-                <a class="btn btn-danger" href="{{ path('fauna_delete', { 'id': fauna.id }) }}">
+                <input class="fauna_id" value="{{fauna.id}}" hidden>
+                <button type="button" class="button_delete btn btn-danger" data-toggle="modal" data-target="#delete_modal">
                   <i class="fa fa-trash"></i>
-                </a>
+                </button>
                 </td>
             </tr>
-        {% endfor %}
+            {% else %}
+                <tr>
+                    <td colspan="5" class="text-center">
+                        <em>No fauna</em>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+            <tfoot>
+            <tr>
+                <td colspan="5" class="text-center">
+                    {{ pagination(faunas, 'page') }}
+                </td>
+            </tr>
+            </tfoot>
         </tbody>
     </table>
-
     </div>
   </div>
 </div>
+
+
+  <div class="modal" id='delete_modal' tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Eliminar individuo de fauna</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <p>¿Estás seguro de que deseas eliminar este individuo?</p>
+        </div>
+        <div class="modal-footer">
+          <form class="form_m_d" method="post">
+            <button type="submit" class="btn btn-primary">Eliminar</button>
+          </form>
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
 {% endblock %}
 {% block javascripts %}
 <script src="{{ asset('scripts/dataTables/datatables.min.js') }}"></script>
@@ -61,17 +130,97 @@
       searching: false,
       info: false,
       lengthChange: false,
-      language: {
-        processing: "Procesando...",
-        emptyTable: "No se han encontrado individuos",
-        paginate: {
-          first: "Inicio",
-          last: "Fin",
-          next: "Siguiente",
-          previous: "Anterior"
-        }
-      }
+       "paging":   false,
+       "ordering": false,
+       "info":     false
     });
+    $('#destination').val("{{params.destination}}");
+    $('#specie').val("{{params.specie}}");
+    $('#subspecie').val("{{params.subspecie}}");
+    $('#attendants').val("{{params.attendants}}");
   });
+
+  $('#buttonClear').click(function() {
+    $('#destination').val('');
+    $('#specie').val('');
+    $('#subspecie').val('');
+    $('#attendants').val('');
+  });
+
+  $.ajax({
+   url: "{{ path('listJsonAttendant') }}",
+   method: "GET",
+   success: function(data) {
+        var options = "";
+        $.each( data, function( i, option ) {
+          options += "<option value='" + option.id + "'>" + option.name + "</option>";
+        });
+        $("#attendants").append(options);
+        $("#attendants").val("{{params.attendants}}");
+     }
+   });
+
+  $.ajax({
+   url: "{{ path('listJsonFaspecie') }}",
+   method: "GET",
+   success: function(data) {
+     var options = "";
+        $.each( data, function( i, option ) {
+          options += "<option value='" + option.id + "'>" + option.name + "</option>";
+        });
+        $("#specie").append(options);
+        $('#specie').val("{{params.specie}}");
+     }
+   });
+
+  function setSubspecies(){  
+    $.ajax({
+     url: "{{ path('listJsonFasubspecie') }}",
+     method: "GET",
+     success: function(data) {
+       var options = "";
+          $.each( data, function( i, option ) {
+            options += "<option class=\"opSub\" value='" + option.id + "'>" + option.name + "</option>";
+          });
+          $("#subspecie").append(options);
+          $('#subspecie').val("{{params.subspecie}}");
+       }
+     });
+  }
+
+  $('#specie').change(function(){
+    var seleccion = $("#specie").val();
+    if (seleccion != '') {
+      $.ajax({
+       url: "{{ path('listJsonFasubspecie') }}",
+       method: "GET",
+       success: function(data) {
+         var options = "";
+            $.each( data, function( i, option ) {
+              if (option.idSpecie == seleccion) {
+                options += "<option class=\"opSub\" value='" + option.id + "'>" + option.name + "</option>";
+              }
+            });
+            if (options != "") {
+              $(".opSub").remove();
+              $("#subspecie").append(options);
+            }
+         }
+      });
+    }
+    else{
+      $(".opSub").remove();
+      setSubspecies();
+    }
+  });
+ 
+</script>
+
+<script>
+
+$('#fauna-table').on("click", ".button_delete", function() {
+  var id_fauna = $(this).closest('tr').find('.fauna_id').val();
+  $('.form_m_d').attr('action', '/fauna/'+id_fauna);
+});
 </script>
 {% endblock %}

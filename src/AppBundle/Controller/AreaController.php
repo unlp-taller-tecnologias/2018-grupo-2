@@ -5,7 +5,9 @@ namespace AppBundle\Controller;
 use AppBundle\Entity\Area;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;use Symfony\Component\HttpFoundation\Request;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Request;
 
 /**
  * Area controller.
@@ -20,11 +22,11 @@ class AreaController extends Controller
      * @Route("/", name="area_index")
      * @Method("GET")
      */
-    public function indexAction()
+    public function indexAction(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
 
-        $areas = $em->getRepository('AppBundle:Area')->findAll();
+        $areas = $em->getRepository('AppBundle:Area')->findByPage($request->query->getInt('page', 1),5);
 
         return $this->render('area/index.html.twig', array(
             'areas' => $areas,
@@ -92,12 +94,10 @@ class AreaController extends Controller
     {
         $form = $this->createDeleteForm($area);
         $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
-            $em->remove($area);
+            $area->setDeleted(true);
+            $em->persist($area);
             $em->flush();
-        }
 
         return $this->redirectToRoute('area_index');
     }
@@ -116,5 +116,25 @@ class AreaController extends Controller
             ->setMethod('DELETE')
             ->getForm()
         ;
+    }
+
+    /**
+     * Lists all listJsonArea.
+     *
+     * @Route("/list/listJsonArea", name="listJsonArea")
+     * @Method("GET")
+     */
+    public function listJsonAction(Request $request)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $Areas = $em->getRepository('AppBundle:Area')->findAll();
+        $rawResponse = ['rows'];
+          foreach($Areas as $Area) {
+            $rawResponse['rows'][] = array(
+              'id' => $Area->getId(),
+              'name' => $Area->getName(),
+            );
+          };
+      return new JsonResponse($rawResponse['rows']);
     }
 }

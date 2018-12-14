@@ -7,6 +7,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\JsonResponse;
+
 
 /**
  * Faspecie controller.
@@ -23,12 +25,9 @@ class FASpecieController extends Controller
      */
     public function indexAction(Request $request)
     {
-        $db = $this->getDoctrine()->getManager();
+        $em = $this->getDoctrine()->getManager();
 
-        $listFASpecie = $db->getRepository('AppBundle:FASpecie')->findByPage(
-            $request->query->getInt('page', 1),
-            5
-        );
+        $listFASpecie = $em->getRepository('AppBundle:FASpecie')->findByPage($request->query->getInt('page', 1),5);
 
         return $this->render('faspecie/index.html.twig', array(
             'listFASpecie' => $listFASpecie
@@ -96,12 +95,10 @@ class FASpecieController extends Controller
     {
         $form = $this->createDeleteForm($fASpecie);
         $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
-            $em->remove($fASpecie);
+            $fASpecie->setDeleted(true);
+            $em->persist($fASpecie);
             $em->flush();
-        }
 
         return $this->redirectToRoute('faspecie_index');
     }
@@ -132,5 +129,25 @@ class FASpecieController extends Controller
     {
       $subspecies = $fASpecie->getSubspecies();
       return $subspecies;
+    }
+
+    /**
+     * Lists all attendant listJsonFaspecie.
+     *
+     * @Route("/list/listJsonFaspecie", name="listJsonFaspecie")
+     * @Method("GET")
+     */
+    public function listJsonAction(Request $request)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $FASpecies = $em->getRepository('AppBundle:FASpecie')->findAll();
+        $rawResponse = ['rows'];
+          foreach($FASpecies as $FASpecie) {
+            $rawResponse['rows'][] = array(
+              'id' => $FASpecie->getId(),
+              'name' => $FASpecie->getName(),
+            );
+          };
+      return new JsonResponse($rawResponse['rows']);
     }
 }

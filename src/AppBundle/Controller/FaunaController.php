@@ -7,6 +7,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\JsonResponse;
 
 /**
  * Fauna controller.
@@ -19,16 +20,20 @@ class FaunaController extends Controller
      * Lists all fauna entities.
      *
      * @Route("/", name="fauna_index")
-     * @Method("GET")
+     * @Method({"GET", "POST"})
      */
-    public function indexAction()
+    public function indexAction(Request $request)
     {
+        $all = $request->query->all();
         $em = $this->getDoctrine()->getManager();
-
-        $faunas = $em->getRepository('AppBundle:Fauna')->findAll();
-
+        $arrayParams = array(   'destination' => isset($all["destination"])? $all["destination"]:NULL,
+                                'attendants' => isset($all["attendants"])? $all["attendants"]:NULL,
+                                'specie' => isset($all["specie"])? $all["specie"]:NULL,
+                                'subspecie' => isset($all["subspecie"])? $all["subspecie"]:NULL);
+        $faunas = $em->getRepository('AppBundle:Fauna')->findByPage($request->query->getInt('page', 1),5,$arrayParams);
         return $this->render('fauna/index.html.twig', array(
             'faunas' => $faunas,
+            'params' =>$arrayParams
         ));
     }
 
@@ -46,11 +51,11 @@ class FaunaController extends Controller
 
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
+            
             // se guarda la imagen 
             $file      = $form['image']->getData();
             $ext       = $file->guessExtension();
             $file_name = time().".".$ext;
-
             $file->move("uploads", $file_name);
             $fauna->setImage($file_name);
 
@@ -127,12 +132,10 @@ class FaunaController extends Controller
     {
         $form = $this->createDeleteForm($fauna);
         $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
-            $em->remove($fauna);
+            $fauna->setDeleted(true);
+            $em->persist($fauna);
             $em->flush();
-        }
 
         return $this->redirectToRoute('fauna_index');
     }

@@ -10,14 +10,13 @@
 {% block body %}
   <div class="container">
     <div class="row">
-      <div class="col-md-7 col-center">
-        <br>
+      <div class="col-md-12 col-center">
         <h1>Categorías</h1>
         <br>
         <a class="btn btn-info float-right btn-m-r" href="{{ path('category_new') }}">Nueva categoría</a>
 
-          <table id="category-table" class="row-border hover stripe">
-            <thead>
+          <table id="category-table" class="table row-border hover stripe" name="TABLA">
+            <thead class="thead-dark">
               <tr>
                 <th width="80%">Nombre</th>
                 <th width="20%"></th>
@@ -31,15 +30,51 @@
                   <a class="btn btn-success" href="{{ path('category_edit', { 'id': category.id }) }}">
                     <i class="fa fa-pencil"></i>
                   </a>
-                  <a class="btn btn-danger" href="{{ path('category_delete', { 'id': category.id }) }}">
+                  <input class="category_id" value="{{category.id}}" hidden>
+                  <button type="button" class="button_delete btn btn-danger" data-toggle="modal" data-target="#delete_modal">
                     <i class="fa fa-trash"></i>
-                  </a>
+                  </button>
                 </td>
               </tr>
+            {% else %}
+                <tr>
+                    <td colspan="2" class="text-center">
+                        <em>No category</em>
+                    </td>
+                </tr>
             {% endfor %}
-          </tbody>
+            </tbody>
+            <tfoot>
+            <tr>
+                <td colspan="2" class="text-center">
+                    {{ pagination(categories, 'page') }}
+                </td>
+            </tr>
+            </tfoot>
         </table>
 
+      </div>
+    </div>
+  </div>
+
+  <div class="modal" id='delete_modal' tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Eliminar categoría</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <p>¿Estás seguro de que deseas eliminar esta categoría?</p>
+        </div>
+        <div class="modal-footer">
+          <form class="form_m_d" method="post">
+            <button type="submit" class="btn btn-primary">Eliminar</button>
+          </form>
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+        </div>
       </div>
     </div>
   </div>
@@ -51,20 +86,21 @@
 <script>
   $(document).ready(function(){
     $('#category-table').DataTable({
-      searching: false, 
+      searching: false,
       info: false,
       lengthChange: false,
-      language: {
-        processing: "Procesando...",
-        emptyTable: "No se han encontrado categorías",
-        paginate: {
-          first: "Inicio",
-          last: "Fin",
-          next: "Siguiente",
-          previous: "Anterior"
-        }
-      }
+       "paging":   false,
+       "ordering": false,
+       "info":     false
     });
   });
+</script>
+
+<script>
+
+$('#category-table').on("click", ".button_delete", function() {
+  var id_category = $(this).closest('tr').find('.category_id').val();
+  $('.form_m_d').attr('action', '/category/'+id_category);
+});
 </script>
 {% endblock %}

@@ -5,7 +5,9 @@ namespace AppBundle\Controller;
 use AppBundle\Entity\FASubspecie;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;use Symfony\Component\HttpFoundation\Request;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\JsonResponse;
 
 /**
  * Fasubspecie controller.
@@ -20,11 +22,11 @@ class FASubspecieController extends Controller
      * @Route("/", name="fasubspecie_index")
      * @Method("GET")
      */
-    public function indexAction()
+    public function indexAction(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
 
-        $fASubspecies = $em->getRepository('AppBundle:FASubspecie')->findAll();
+        $fASubspecies = $em->getRepository('AppBundle:FASubspecie')->findByPage($request->query->getInt('page', 1),5);
 
         return $this->render('fasubspecie/index.html.twig', array(
             'fASubspecies' => $fASubspecies,
@@ -92,12 +94,10 @@ class FASubspecieController extends Controller
     {
         $form = $this->createDeleteForm($fASubspecie);
         $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
-            $em->remove($fASubspecie);
+            $fASubspecie->setDeleted(true);
+            $em->persist($fASubspecie);
             $em->flush();
-        }
 
         return $this->redirectToRoute('fasubspecie_index');
     }
@@ -117,4 +117,26 @@ class FASubspecieController extends Controller
             ->getForm()
         ;
     }
+
+    /**
+     * Lists all attendant fasubspecie.
+     *
+     * @Route("/list/listJsonFasubspecie", name="listJsonFasubspecie")
+     * @Method("GET")
+     */
+    public function listJsonAction(Request $request)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $fasubspecies = $em->getRepository('AppBundle:FASubspecie')->findAll();
+        $rawResponse = ['rows'];
+          foreach($fasubspecies as $fasubspecie) {
+            $rawResponse['rows'][] = array(
+              'id' => $fasubspecie->getId(),
+              'idSpecie' => $fasubspecie->getFASpecie()->getId(),
+              'name' => $fasubspecie->getName(),
+            );
+          };
+      return new JsonResponse($rawResponse['rows']);
+    }
+
 }

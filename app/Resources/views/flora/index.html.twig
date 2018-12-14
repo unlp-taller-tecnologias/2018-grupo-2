@@ -9,14 +9,41 @@
 
 {% block body %}
 <div class="container">
+  <h1>Individuos Flora</h1>
+  <div class="jumbotron" style="padding-top: 2%; padding-bottom: 1%;">
+ <h4>Buscar individuos por:</h4>
+  <form action="{{ path('flora_index') }}" method="get">
+    <div class="form-row" >
+     <div class="form-group col-md-4">
+       <label>Area</label>
+       <select id="area" class="form-control" name="area">
+         <option value=""> Seleecione </option>
+       </select>
+     </div>
+     <div class="form-group col-md-4">
+       <label>Especie</label>
+       <select id="specie" class="form-control" name="specie">
+         <option value=""> Seleecione </option>
+       </select>
+     </div>
+     <div class="form-group col-md-4">
+       <label>Sub Especie</label>
+       <select id="subspecie" class="form-control" name="subspecie">
+         <option value=""> Seleecione </option>
+       </select>
+     </div>
+     <div class="form-group col-md-12">
+        <button id="button" type="submit" class="btn btn-info">Buscar</button>
+        <button id="buttonClear" type="submit" class="btn btn-info">Limpiar filtros</button>
+        <a class="btn btn-info float-right btn-m-r" href="{{ path('flora_new') }}">Nuevo individuo</a>
+     </div>
+   </div> 
+  </form> 
+</div>
   <div class="row">
     <div class="col-md-12 col-center">
-      <br>
-      <h1>Individuos Flora</h1>
-      <br>
-      <a class="btn btn-info float-right btn-m-r" href="{{ path('flora_new') }}">Nuevo individuo</a>
-    <table id="flora-table" class="row-border hover stripe">
-        <thead>
+    <table id="flora-table" class="table row-border hover stripe" name="TABLA">
+        <thead class="thead-dark">
             <tr>
                 <th>Especie</th>
                 <th>Subespecie</th>
@@ -41,18 +68,55 @@
                 <a class="btn btn-success" href="{{ path('flora_edit', { 'id': flora.id }) }}">
                   <i class="fa fa-pencil"></i>
                 </a>
-                <a class="btn btn-danger" href="{{ path('flora_delete', { 'id': flora.id }) }}">
+                <input class="flora_id" value="{{flora.id}}" hidden>
+                <button type="button" class="button_delete btn btn-danger" data-toggle="modal" data-target="#delete_modal">
                   <i class="fa fa-trash"></i>
-                </a>
+                </button>
+                </td>
+            {% else %}
+                <tr>
+                    <td colspan="6" class="text-center">
+                        <em>No floras</em>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+            <tfoot>
+            <tr>
+                <td colspan="6" class="text-center">
+                    {{ pagination(floras, 'page') }}
                 </td>
             </tr>
-        {% endfor %}
+            </tfoot>
         </tbody>
     </table>
 
     </div>
   </div>
 </div>
+
+
+  <div class="modal" id='delete_modal' tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Eliminar individuo de flora</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <p>¿Estás seguro de que deseas eliminar este individuo?</p>
+        </div>
+        <div class="modal-footer">
+          <form class="form_m_d" method="post">
+            <button type="submit" class="btn btn-primary">Eliminar</button>
+          </form>
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+        </div>
+      </div>
+    </div>
+  </div>
 
 {% endblock %}
 
@@ -64,17 +128,97 @@
       searching: false,
       info: false,
       lengthChange: false,
-      language: {
-        processing: "Procesando...",
-        emptyTable: "No se han encontrado individuos",
-        paginate: {
-          first: "Inicio",
-          last: "Fin",
-          next: "Siguiente",
-          previous: "Anterior"
-        }
-      }
+       "paging":   false,
+       "ordering": false,
+       "info":     false
     });
+    $('#specie').val("{{params.specie}}");
+    $('#subspecie').val("{{params.subspecie}}");
+    $('#area').val("{{params.area}}");
   });
+
+  $('#buttonClear').click(function() {
+    $('#specie').val('');
+    $('#subspecie').val('');
+    $('#area').val('');
+  });
+
+  $.ajax({
+   url: "{{ path('listJsonArea') }}",
+   method: "GET",
+   success: function(data) {
+        var options = "";
+        $.each( data, function( i, option ) {
+          options += "<option value='" + option.id + "'>" + option.name + "</option>";
+        });
+        $("#area").append(options);
+        $("#area").val("{{params.area}}");
+     }
+   });
+
+  $.ajax({
+   url: "{{ path('listJsonFlspecie') }}",
+   method: "GET",
+   success: function(data) {
+     var options = "";
+        $.each( data, function( i, option ) {
+          options += "<option value='" + option.id + "'>" + option.name + "</option>";
+        });
+        $("#specie").append(options);
+        $('#specie').val("{{params.specie}}");
+     }
+   });
+
+  function setSubspecies(){  
+    $.ajax({
+     url: "{{ path('listJsonFlsubspecie') }}",
+     method: "GET",
+     success: function(data) {
+       var options = "";
+          $.each( data, function( i, option ) {
+            options += "<option class=\"opSub\" value='" + option.id + "'>" + option.name + "</option>";
+          });
+          $("#subspecie").append(options);
+          $('#subspecie').val("{{params.subspecie}}");
+       }
+     });
+  }
+
+  $('#specie').change(function(){
+    var seleccion = $("#specie").val();
+    if (seleccion != '') {
+      $.ajax({
+       url: "{{ path('listJsonFlsubspecie') }}",
+       method: "GET",
+       success: function(data) {
+         var options = "";
+            $.each( data, function( i, option ) {
+              if (option.idSpecie == seleccion) {
+                options += "<option class=\"opSub\" value='" + option.id + "'>" + option.name + "</option>";
+              }
+            });
+            if (options != "") {
+              $(".opSub").remove();
+              $("#subspecie").append(options);
+            }
+         }
+      });
+    }
+    else{
+      $(".opSub").remove();
+      setSubspecies();
+    }
+  });
+
+
+</script>
+
+<script>
+
+$('#flora-table').on("click", ".button_delete", function() {
+  var id_flora = $(this).closest('tr').find('.flora_id').val();
+  $('.form_m_d').attr('action', '/flora/'+id_flora);
+});
 </script>
 {% endblock %}
+

@@ -5,7 +5,9 @@ namespace AppBundle\Controller;
 use AppBundle\Entity\FLSubspecie;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;use Symfony\Component\HttpFoundation\Request;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Request;
 
 /**
  * Flsubspecie controller.
@@ -20,11 +22,11 @@ class FLSubspecieController extends Controller
      * @Route("/", name="flsubspecie_index")
      * @Method("GET")
      */
-    public function indexAction()
+    public function indexAction(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
 
-        $fLSubspecies = $em->getRepository('AppBundle:FLSubspecie')->findAll();
+        $fLSubspecies = $em->getRepository('AppBundle:FLSubspecie')->findByPage($request->query->getInt('page', 1),5);
 
         return $this->render('flsubspecie/index.html.twig', array(
             'fLSubspecies' => $fLSubspecies,
@@ -92,12 +94,10 @@ class FLSubspecieController extends Controller
     {
         $form = $this->createDeleteForm($fLSubspecie);
         $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
-            $em->remove($fLSubspecie);
+            $fLSubspecie->setDeleted(true);
+            $em->persist($fLSubspecie);
             $em->flush();
-        }
 
         return $this->redirectToRoute('flsubspecie_index');
     }
@@ -116,5 +116,26 @@ class FLSubspecieController extends Controller
             ->setMethod('DELETE')
             ->getForm()
         ;
+    }
+
+    /**
+     * Lists all flsubspecie.
+     *
+     * @Route("/list/listJsonFlsubspecie", name="listJsonFlsubspecie")
+     * @Method("GET")
+     */
+    public function listJsonAction(Request $request)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $flsubspecies = $em->getRepository('AppBundle:FLSubspecie')->findAll();
+        $rawResponse = ['rows'];
+          foreach($flsubspecies as $flsubspecie) {
+            $rawResponse['rows'][] = array(
+              'id' => $flsubspecie->getId(),
+              'idSpecie' => $flsubspecie->getFLSpecie()->getId(),
+              'name' => $flsubspecie->getName(),
+            );
+          };
+      return new JsonResponse($rawResponse['rows']);
     }
 }

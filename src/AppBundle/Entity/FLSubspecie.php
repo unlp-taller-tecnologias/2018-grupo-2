@@ -105,4 +105,45 @@ class FLSubspecie
     public function __toString(){
         return $this->name;
     }
+
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="deleted", type="boolean")
+     */
+    private $deleted=false;
+
+    /**
+     * Set deleted.
+     *
+     * @param boolean $deleted
+     *
+     * @return FLSubspecie
+     */
+    public function setDeleted($deleted)
+    {
+        $this->deleted = $deleted;
+
+        return $this;
+    }
+
+    /**
+     * Get deleted.
+     *
+     * @return boolean
+     */
+    public function getDeleted()
+    {
+        return $this->deleted;
+    }
+
+    /**
+     * Get FLSpecie.
+     *
+     * @return FLSpecie
+     */
+    public function getFLSpecie()
+    {
+        return $this->specie;
+    }
 }

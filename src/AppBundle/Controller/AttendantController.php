@@ -5,7 +5,9 @@ namespace AppBundle\Controller;
 use AppBundle\Entity\Attendant;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;use Symfony\Component\HttpFoundation\Request;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\JsonResponse;
 
 /**
  * Attendant controller.
@@ -20,11 +22,11 @@ class AttendantController extends Controller
      * @Route("/", name="attendant_index")
      * @Method("GET")
      */
-    public function indexAction()
+    public function indexAction(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
 
-        $attendants = $em->getRepository('AppBundle:Attendant')->findAll();
+        $attendants = $em->getRepository('AppBundle:Attendant')->findByPage($request->query->getInt('page', 1),5);
 
         return $this->render('attendant/index.html.twig', array(
             'attendants' => $attendants,
@@ -108,12 +110,10 @@ class AttendantController extends Controller
     {
         $form = $this->createDeleteForm($attendant);
         $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
-            $em->remove($attendant);
+            $attendant->setDeleted(true);
+            $em->persist($attendant);
             $em->flush();
-        }
 
         return $this->redirectToRoute('attendant_index');
     }
@@ -132,5 +132,25 @@ class AttendantController extends Controller
             ->setMethod('DELETE')
             ->getForm()
         ;
+    }
+
+    /**
+     * Lists all attendant entities.
+     *
+     * @Route("/list/listJsonAttendant", name="listJsonAttendant")
+     * @Method("GET")
+     */
+    public function listJsonAction(Request $request)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $attendants = $em->getRepository('AppBundle:Attendant')->findAll();
+        $rawResponse = ['rows'];
+          foreach($attendants as $attendant) {
+            $rawResponse['rows'][] = array(
+              'id' => $attendant->getId(),
+              'name' => $attendant->getName(),
+            );
+          };
+      return new JsonResponse($rawResponse['rows']);
     }
 }
