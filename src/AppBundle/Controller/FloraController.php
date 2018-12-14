@@ -121,13 +121,10 @@ class FloraController extends Controller
     {
         $form = $this->createDeleteForm($flora);
         $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
             $flora->setDeleted(true);
             $em->persist($flora);
             $em->flush();
-        }
 
         return $this->redirectToRoute('flora_index');
     }

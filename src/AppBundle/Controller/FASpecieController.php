@@ -95,13 +95,10 @@ class FASpecieController extends Controller
     {
         $form = $this->createDeleteForm($fASpecie);
         $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
             $fASpecie->setDeleted(true);
             $em->persist($fASpecie);
             $em->flush();
-        }
 
         return $this->redirectToRoute('faspecie_index');
     }

@@ -71,9 +71,10 @@
                 <a class="btn btn-success" href="{{ path('fauna_edit', { 'id': fauna.id }) }}">
                   <i class="fa fa-pencil"></i>
                 </a>
-                <a class="btn btn-danger" href="{{ path('fauna_delete', { 'id': fauna.id }) }}">
+                <input class="fauna_id" value="{{fauna.id}}" hidden>
+                <button type="button" class="button_delete btn btn-danger" data-toggle="modal" data-target="#delete_modal">
                   <i class="fa fa-trash"></i>
-                </a>
+                </button>
                 </td>
             </tr>
             {% else %}
@@ -96,6 +97,30 @@
     </div>
   </div>
 </div>
+
+
+  <div class="modal" id='delete_modal' tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Eliminar individuo de fauna</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <p>¿Estás seguro de que deseas eliminar este individuo?</p>
+        </div>
+        <div class="modal-footer">
+          <form class="form_m_d" method="post">
+            <button type="submit" class="btn btn-primary">Eliminar</button>
+          </form>
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
 {% endblock %}
 {% block javascripts %}
 <script src="{{ asset('scripts/dataTables/datatables.min.js') }}"></script>
@@ -189,5 +214,13 @@
     }
   });
  
+</script>
+
+<script>
+
+$('#fauna-table').on("click", ".button_delete", function() {
+  var id_fauna = $(this).closest('tr').find('.fauna_id').val();
+  $('.form_m_d').attr('action', '/fauna/'+id_fauna);
+});
 </script>
 {% endblock %}

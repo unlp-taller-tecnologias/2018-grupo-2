@@ -94,13 +94,10 @@ class FASubspecieController extends Controller
     {
         $form = $this->createDeleteForm($fASubspecie);
         $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
             $fASubspecie->setDeleted(true);
             $em->persist($fASubspecie);
             $em->flush();
-        }
 
         return $this->redirectToRoute('fasubspecie_index');
     }

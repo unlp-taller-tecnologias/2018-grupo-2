@@ -120,13 +120,10 @@ class FaunaController extends Controller
     {
         $form = $this->createDeleteForm($fauna);
         $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
             $fauna->setDeleted(true);
             $em->persist($fauna);
             $em->flush();
-        }
 
         return $this->redirectToRoute('fauna_index');
     }
