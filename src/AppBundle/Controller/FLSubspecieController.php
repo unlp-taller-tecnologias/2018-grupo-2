@@ -5,7 +5,9 @@ namespace AppBundle\Controller;
 use AppBundle\Entity\FLSubspecie;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;use Symfony\Component\HttpFoundation\Request;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Request;
 
 /**
  * Flsubspecie controller.
@@ -114,5 +116,26 @@ class FLSubspecieController extends Controller
             ->setMethod('DELETE')
             ->getForm()
         ;
+    }
+
+    /**
+     * Lists all flsubspecie.
+     *
+     * @Route("/list/listJsonFlsubspecie", name="listJsonFlsubspecie")
+     * @Method("GET")
+     */
+    public function listJsonAction(Request $request)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $flsubspecies = $em->getRepository('AppBundle:FLSubspecie')->findAll();
+        $rawResponse = ['rows'];
+          foreach($flsubspecies as $flsubspecie) {
+            $rawResponse['rows'][] = array(
+              'id' => $flsubspecie->getId(),
+              'idSpecie' => $flsubspecie->getFLSpecie()->getId(),
+              'name' => $flsubspecie->getName(),
+            );
+          };
+      return new JsonResponse($rawResponse['rows']);
     }
 }

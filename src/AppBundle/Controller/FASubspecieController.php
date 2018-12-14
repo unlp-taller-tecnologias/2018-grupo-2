@@ -5,7 +5,9 @@ namespace AppBundle\Controller;
 use AppBundle\Entity\FASubspecie;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;use Symfony\Component\HttpFoundation\Request;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\JsonResponse;
 
 /**
  * Fasubspecie controller.
@@ -115,4 +117,26 @@ class FASubspecieController extends Controller
             ->getForm()
         ;
     }
+
+    /**
+     * Lists all attendant fasubspecie.
+     *
+     * @Route("/list/listJsonFasubspecie", name="listJsonFasubspecie")
+     * @Method("GET")
+     */
+    public function listJsonAction(Request $request)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $fasubspecies = $em->getRepository('AppBundle:FASubspecie')->findAll();
+        $rawResponse = ['rows'];
+          foreach($fasubspecies as $fasubspecie) {
+            $rawResponse['rows'][] = array(
+              'id' => $fasubspecie->getId(),
+              'idSpecie' => $fasubspecie->getFASpecie()->getId(),
+              'name' => $fasubspecie->getName(),
+            );
+          };
+      return new JsonResponse($rawResponse['rows']);
+    }
+
 }

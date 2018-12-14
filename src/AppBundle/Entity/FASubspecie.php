@@ -135,4 +135,14 @@ class FASubspecie
     {
         return $this->deleted;
     }
+
+    /**
+     * Get FASpecie.
+     *
+     * @return FASpecie
+     */
+    public function getFASpecie()
+    {
+        return $this->specie;
+    }
 }

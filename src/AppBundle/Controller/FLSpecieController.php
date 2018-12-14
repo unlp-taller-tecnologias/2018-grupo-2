@@ -7,6 +7,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\JsonResponse;
 
 /**
  * Flspecie controller.
@@ -115,5 +116,25 @@ class FLSpecieController extends Controller
             ->setMethod('DELETE')
             ->getForm()
         ;
+    }
+
+    /**
+     * Lists all flspecie listJsonFlspecie.
+     *
+     * @Route("/list/listJsonFlspecie", name="listJsonFlspecie")
+     * @Method("GET")
+     */
+    public function listJsonAction(Request $request)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $FLSpecies = $em->getRepository('AppBundle:FLSpecie')->findAll();
+        $rawResponse = ['rows'];
+          foreach($FLSpecies as $FLSpecie) {
+            $rawResponse['rows'][] = array(
+              'id' => $FLSpecie->getId(),
+              'name' => $FLSpecie->getName(),
+            );
+          };
+      return new JsonResponse($rawResponse['rows']);
     }
 }

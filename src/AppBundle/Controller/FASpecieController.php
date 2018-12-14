@@ -7,6 +7,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\JsonResponse;
+
 
 /**
  * Faspecie controller.
@@ -115,5 +117,37 @@ class FASpecieController extends Controller
             ->setMethod('DELETE')
             ->getForm()
         ;
+    }
+
+    /**
+     * Finds and displays a FASpecie FASubspecies.
+     *
+     * @Route("/{id}/subspecies", name="faspecie_subspecies")
+     * @Method({"GET", "POST"})
+     */
+    public function getSubspeciesAction(FASpecie $fASpecie) 
+    {
+      $subspecies = $fASpecie->getSubspecies();
+      return $subspecies;
+    }
+
+    /**
+     * Lists all attendant listJsonFaspecie.
+     *
+     * @Route("/list/listJsonFaspecie", name="listJsonFaspecie")
+     * @Method("GET")
+     */
+    public function listJsonAction(Request $request)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $FASpecies = $em->getRepository('AppBundle:FASpecie')->findAll();
+        $rawResponse = ['rows'];
+          foreach($FASpecies as $FASpecie) {
+            $rawResponse['rows'][] = array(
+              'id' => $FASpecie->getId(),
+              'name' => $FASpecie->getName(),
+            );
+          };
+      return new JsonResponse($rawResponse['rows']);
     }
 }

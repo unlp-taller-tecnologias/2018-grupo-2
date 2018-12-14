@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %} individuos fauna {% endblock %}
+{% block title %} Individuos de Fauna {% endblock %}
 
 {% block stylesheets %}
   <link rel="stylesheet" type="text/css" href="{{ asset('scripts/dataTables/datatables.min.css') }}">
@@ -13,11 +13,37 @@
 <h2>Individuos Fauna</h2>
 <div class="jumbotron" style="padding-top: 2%; padding-bottom: 1%;">
  <h4>Buscar individuos por:</h4>
-   {{ form_start(form, { 'enctype':"multipart/form-data"}) }}
-       {{ form_widget(form) }}
-       <button id="button" type="submit" class="btn btn-info">Buscar</button>
-       <a class="btn btn-info float-right btn-m-r" href="{{ path('fauna_new') }}">Nuevo individuo</a>
-   {{ form_end(form) }}
+  <form action="{{ path('fauna_index') }}" method="get">
+    <div class="form-row" >
+      <div class="form-group col-md-12">
+        <label>Proximo destino</label>
+        <input type="text" id="destination" class="form-control" placeholder="Proximo destino" name="destination">
+      </div>
+     <div class="form-group col-md-6">
+       <label>Encargado</label>
+       <select id="attendants" class="form-control" name="attendants">
+         <option value=""> Seleecione </option>
+       </select>
+     </div>
+     <div class="form-group col-md-3">
+       <label>Especie</label>
+       <select id="specie" class="form-control" name="specie">
+         <option value=""> Seleecione </option>
+       </select>
+     </div>
+     <div class="form-group col-md-3">
+       <label>Sub Especie</label>
+       <select id="subspecie" class="form-control" name="subspecie">
+         <option value=""> Seleecione </option>
+       </select>
+     </div>
+     <div class="form-group col-md-12">
+        <button id="button" type="submit" class="btn btn-info">Buscar</button>
+        <button id="buttonClear" type="submit" class="btn btn-info">Limpiar filtros</button>
+        <a class="btn btn-info float-right btn-m-r" href="{{ path('fauna_new') }}">Nuevo individuo</a>
+     </div>
+   </div> 
+  </form> 
 </div>
   <div class="row">
     <div class="col-md-12 col-center">
@@ -108,62 +134,86 @@
        "ordering": false,
        "info":     false
     });
+    $('#destination').val("{{params.destination}}");
+    $('#specie').val("{{params.specie}}");
+    $('#subspecie').val("{{params.subspecie}}");
+    $('#attendants').val("{{params.attendants}}");
   });
-  $("#appbundle_fauna_destination").removeProp('required');
-  $("#appbundle_fauna_subspecie").removeProp('required');
-  $("#appbundle_fauna_specie").removeProp('required');
-  // $("form").submit(function() {
-  //   // var proxDestino = $('#proxDestino').val();
-  //   // var encargado = $('#encargado').val();
-  //   // //var especie = $('#especie').val();
-  //   $('#espe').val($('#appbundle_fauna_specie').val());
-  // });
-  $('#button').click(function() {
-    var proxDestino = $('#proxDestino').val();
-    var encargado = $('#encargado').val();
-    var especie = $('#especie').val();
-    var subEspecie = $('#subEspecie').val();
-    $.ajax({
-       method: "POST",
-       url: "",
-       data: {
-            "proxDestino" : proxDestino,
-            "encargado" : encargado,
-            "especie" : especie,
-            "subEspecie" : subEspecie
-             } ,
-       success: function(data) {
-                   var html = $.parseHTML( data );
-                   $.each( html, function( i, el ) {
-                    if (el.nodeName == 'SECTION') {
-                      //$(".principal").detach();
-                      //$(".principal").appendTo();
-                      $( ".principal" ).append( el );
-                      //$( el ).replaceAll( ".principal" );
-                      console.log("pinche");
-                    }
-                  });
-                }
-          });
+
+  $('#buttonClear').click(function() {
+    $('#destination').val('');
+    $('#specie').val('');
+    $('#subspecie').val('');
+    $('#attendants').val('');
+  });
+
+  $.ajax({
+   url: "{{ path('listJsonAttendant') }}",
+   method: "GET",
+   success: function(data) {
+        var options = "";
+        $.each( data, function( i, option ) {
+          options += "<option value='" + option.id + "'>" + option.name + "</option>";
         });
-  //
-  // $('#buttonBorrar').click(function() {
-  //   console.log('enaaaaatra');
-  //   $.ajax({
-  //      method: "POST",
-  //      url: "",
-  //      success: function(data) {
-  //                 console.log('entra');
-  //                  var html = $.parseHTML( data );
-  //                  $.each( html, function( i, el ) {
-  //                   if (el.nodeName == 'SECTION') {
-  //                     $( el ).replaceAll( ".principal" );
-  //                     console.log("pinche");
-  //                   }
-  //                 });
-  //               }
-  //         });
-  //       });
+        $("#attendants").append(options);
+        $("#attendants").val("{{params.attendants}}");
+     }
+   });
+
+  $.ajax({
+   url: "{{ path('listJsonFaspecie') }}",
+   method: "GET",
+   success: function(data) {
+     var options = "";
+        $.each( data, function( i, option ) {
+          options += "<option value='" + option.id + "'>" + option.name + "</option>";
+        });
+        $("#specie").append(options);
+        $('#specie').val("{{params.specie}}");
+     }
+   });
+
+  function setSubspecies(){  
+    $.ajax({
+     url: "{{ path('listJsonFasubspecie') }}",
+     method: "GET",
+     success: function(data) {
+       var options = "";
+          $.each( data, function( i, option ) {
+            options += "<option class=\"opSub\" value='" + option.id + "'>" + option.name + "</option>";
+          });
+          $("#subspecie").append(options);
+          $('#subspecie').val("{{params.subspecie}}");
+       }
+     });
+  }
+
+  $('#specie').change(function(){
+    var seleccion = $("#specie").val();
+    if (seleccion != '') {
+      $.ajax({
+       url: "{{ path('listJsonFasubspecie') }}",
+       method: "GET",
+       success: function(data) {
+         var options = "";
+            $.each( data, function( i, option ) {
+              if (option.idSpecie == seleccion) {
+                options += "<option class=\"opSub\" value='" + option.id + "'>" + option.name + "</option>";
+              }
+            });
+            if (options != "") {
+              $(".opSub").remove();
+              $("#subspecie").append(options);
+            }
+         }
+      });
+    }
+    else{
+      $(".opSub").remove();
+      setSubspecies();
+    }
+  });
+ 
 </script>
 
 <script>
