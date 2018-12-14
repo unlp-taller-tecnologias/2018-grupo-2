@@ -101,8 +101,8 @@ class AttendantController extends Controller
     /**
      * Deletes a attendant entity.
      *
-     * @Route("/{id}", name="attendant_delete")
-     * @Method("DELETE")
+     * @Route("/{id}/delete", name="attendant_delete")
+     * @Method("post")
      */
     public function deleteAction(Request $request, Attendant $attendant)
     {
@@ -110,6 +110,11 @@ class AttendantController extends Controller
         $form->handleRequest($request);
             $em = $this->getDoctrine()->getManager();
             $attendant->setDeleted(true);
+            $at='@';
+            while(!is_null($em->getRepository('AppBundle:Attendant')->findOneBy(array('email'=>$at.$attendant->getEmail())))){
+              $at=$at.'@';
+            }
+            $attendant->setEmail($at.$attendant->getEmail());
             $em->persist($attendant);
             $em->flush();
 

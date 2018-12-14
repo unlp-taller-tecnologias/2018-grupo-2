@@ -170,7 +170,7 @@
 
 $('#fauna-table').on("click", ".button_delete", function() {
   var id_fauna = $(this).closest('tr').find('.fauna_id').val();
-  $('.form_m_d').attr('action', '/fauna/'+id_fauna);
+  $('.form_m_d').attr('action', '/fauna/'+id_fauna+'/delete');
 });
 </script>
 {% endblock %}

@@ -111,7 +111,7 @@
 
 $('#flora-table').on("click", ".button_delete", function() {
   var id_flora = $(this).closest('tr').find('.flora_id').val();
-  $('.form_m_d').attr('action', '/flora/'+id_flora);
+  $('.form_m_d').attr('action', '/flora/'+id_flora+'/delete');
 });
 </script>
 {% endblock %}
