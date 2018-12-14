@@ -5,7 +5,9 @@ namespace AppBundle\Controller;
 use AppBundle\Entity\Area;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;use Symfony\Component\HttpFoundation\Request;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Request;
 
 /**
  * Area controller.
@@ -117,5 +119,25 @@ class AreaController extends Controller
             ->setMethod('DELETE')
             ->getForm()
         ;
+    }
+
+    /**
+     * Lists all listJsonArea.
+     *
+     * @Route("/list/listJsonArea", name="listJsonArea")
+     * @Method("GET")
+     */
+    public function listJsonAction(Request $request)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $Areas = $em->getRepository('AppBundle:Area')->findAll();
+        $rawResponse = ['rows'];
+          foreach($Areas as $Area) {
+            $rawResponse['rows'][] = array(
+              'id' => $Area->getId(),
+              'name' => $Area->getName(),
+            );
+          };
+      return new JsonResponse($rawResponse['rows']);
     }
 }

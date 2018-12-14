@@ -136,4 +136,14 @@ class FLSubspecie
     {
         return $this->deleted;
     }
+
+    /**
+     * Get FLSpecie.
+     *
+     * @return FLSpecie
+     */
+    public function getFLSpecie()
+    {
+        return $this->specie;
+    }
 }

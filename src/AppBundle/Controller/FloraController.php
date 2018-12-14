@@ -5,7 +5,9 @@ namespace AppBundle\Controller;
 use AppBundle\Entity\Flora;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;use Symfony\Component\HttpFoundation\Request;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\JsonResponse;
 
 /**
  * Flora controller.
@@ -18,16 +20,19 @@ class FloraController extends Controller
      * Lists all flora entities.
      *
      * @Route("/", name="flora_index")
-     * @Method("GET")
+     * @Method({"GET", "POST"})
      */
     public function indexAction(Request $request)
     {
+        $all = $request->query->all();
         $em = $this->getDoctrine()->getManager();
-
-        $floras = $em->getRepository('AppBundle:Flora')->findByPage($request->query->getInt('page', 1),5);
-
+        $arrayParams = array(   'area' => isset($all["area"])? $all["area"]:NULL,
+                                'specie' => isset($all["specie"])? $all["specie"]:NULL,
+                                'subspecie' => isset($all["subspecie"])? $all["subspecie"]:NULL);
+        $floras = $em->getRepository('AppBundle:Flora')->findByPage($request->query->getInt('page', 1),5,$arrayParams);
         return $this->render('flora/index.html.twig', array(
             'floras' => $floras,
+            'params' =>$arrayParams
         ));
     }
 

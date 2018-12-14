@@ -5,7 +5,9 @@ namespace AppBundle\Controller;
 use AppBundle\Entity\Attendant;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;use Symfony\Component\HttpFoundation\Request;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\JsonResponse;
 
 /**
  * Attendant controller.
@@ -133,5 +135,25 @@ class AttendantController extends Controller
             ->setMethod('DELETE')
             ->getForm()
         ;
+    }
+
+    /**
+     * Lists all attendant entities.
+     *
+     * @Route("/list/listJsonAttendant", name="listJsonAttendant")
+     * @Method("GET")
+     */
+    public function listJsonAction(Request $request)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $attendants = $em->getRepository('AppBundle:Attendant')->findAll();
+        $rawResponse = ['rows'];
+          foreach($attendants as $attendant) {
+            $rawResponse['rows'][] = array(
+              'id' => $attendant->getId(),
+              'name' => $attendant->getName(),
+            );
+          };
+      return new JsonResponse($rawResponse['rows']);
     }
 }

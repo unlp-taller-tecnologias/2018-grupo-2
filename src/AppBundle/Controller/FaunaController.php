@@ -23,29 +23,16 @@ class FaunaController extends Controller
      */
     public function indexAction(Request $request)
     {
-        $fauna = new Fauna();
-        $form = $this->createForm('AppBundle\Form\FaunaFilterType', $fauna);
-        $form->handleRequest($request);
-        $all = $request->request->all();
+        $all = $request->query->all();
         $em = $this->getDoctrine()->getManager();
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $arrayParams = array( 'destination' => $all["appbundle_fauna"]["destination"],
-                            'attendants' => $all["appbundle_fauna"]["attendants"],
-                            'specie' => $all["appbundle_fauna"]["specie"],
-                            'subspecie' => $all["appbundle_fauna"]["subspecie"]);
-             $request = new Request();
-             $request->query->set('page',"1");
-            $faunas = $em->getRepository('AppBundle:Fauna')->findByPage($request->query->getInt('page', 1),5,$arrayParams);
-        }else
-        {
-            $arrayParams = null;
-            $faunas = $em->getRepository('AppBundle:Fauna')->findByPage($request->query->getInt('page', 1),5,$arrayParams);
-        }
+        $arrayParams = array(   'destination' => isset($all["destination"])? $all["destination"]:NULL,
+                                'attendants' => isset($all["attendants"])? $all["attendants"]:NULL,
+                                'specie' => isset($all["specie"])? $all["specie"]:NULL,
+                                'subspecie' => isset($all["subspecie"])? $all["subspecie"]:NULL);
+        $faunas = $em->getRepository('AppBundle:Fauna')->findByPage($request->query->getInt('page', 1),5,$arrayParams);
         return $this->render('fauna/index.html.twig', array(
             'faunas' => $faunas,
-            'fauna' => $fauna,
-            'form' => $form->createView(),
+            'params' =>$arrayParams
         ));
     }
 

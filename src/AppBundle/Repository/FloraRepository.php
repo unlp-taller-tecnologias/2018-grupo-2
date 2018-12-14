@@ -19,4 +19,25 @@ class FloraRepository extends DefaultEntityRepository
   protected function setOrderByAttribute(){
     self::$orderByAttribute = 'FloraRepository.name';
   }
+
+  protected function setQuery($arrayParams){
+    $area= (is_null($arrayParams['area']) | $arrayParams['area'] == "")? NULL :$arrayParams['area'];
+    $specie= (is_null($arrayParams['specie']) | $arrayParams['specie'] == "")? NULL :$arrayParams['specie'];
+    $subspecie= (is_null($arrayParams['subspecie']) | $arrayParams['subspecie'] == "")? NULL :$arrayParams['subspecie'];
+    $qb = $this->getEntityManager()->createQueryBuilder();
+    $qb
+      ->select('f')
+      ->from('AppBundle:Flora','f')
+      ->join('f.subspecie', 'ss')
+      ->where($qb->expr()->orX(($qb->expr()->eq('f.area', ":area")),($qb->expr()->isNull(':area'))))
+      ->andWhere($qb->expr()->orX(($qb->expr()->eq('f.subspecie', ':subspecie')),($qb->expr()->isNull(':subspecie'))))
+      ->andWhere($qb->expr()->orX(($qb->expr()->eq('ss.specie', ':specie')),($qb->expr()->isNull(':specie'))))
+      ->orWhere(($qb->expr()->isNull(':area')),($qb->expr()->isNull(':subspecie')),($qb->expr()->isNull(':specie')))
+      ->setParameters(array(
+        "area" => $area,
+        "specie" => $specie,
+        "subspecie" => $subspecie,
+    ));
+    return $qb->getQuery();
+  }
 }
