@@ -19,3 +19,24 @@
         </li>
     </ul>
 {% endblock %}
+
+{% block javascripts %}
+<script>
+  $(document).ready(function(){
+    $.ajax({
+     url: "{{ path('listJsonFlsubspecie') }}",
+     method: "GET",
+     success: function(data) {
+          var id_subspecie=$('#appbundle_flora_subspecie').val();
+          $.each( data, function( i, option ) {
+            if (option.id == id_subspecie) {
+              var id_specie=option.idSpecie;
+              $('#appbundle_flora_specie').val(id_specie);
+            }
+          });
+
+       }
+    });
+  });
+</script>
+{% endblock %}

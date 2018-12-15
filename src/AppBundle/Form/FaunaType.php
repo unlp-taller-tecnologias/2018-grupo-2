@@ -39,7 +39,7 @@ class FaunaType extends AbstractType
                           'placeholder' => 'Seleccione una subespecie...',
                           'attr' => array(
                             'class' => 'form-control mb-lg-3',
-                            'disabled' => true
+                            'disabled' => true,
                           )
                         )
                       )
