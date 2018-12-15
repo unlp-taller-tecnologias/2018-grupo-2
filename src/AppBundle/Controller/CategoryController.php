@@ -93,11 +93,23 @@ class CategoryController extends Controller
         $form = $this->createDeleteForm($category);
         $form->handleRequest($request);
             $em = $this->getDoctrine()->getManager();
-            $category->setDeleted(true);
-            $em->persist($category);
-            $em->flush();
+            if(empty($em->getRepository('AppBundle:Attendant')->findOneBy(array('deleted'=>false,'category'=>$category->getId())))){
+              $category->setDeleted(true);
+              $at='@';
+              while(!is_null($em->getRepository('AppBundle:Category')->findOneBy(array('name'=>$at.$category->getName())))){
+                $at=$at.'@';
+              }
+              $category->setName($at.$category->getName());
+              $em->persist($category);
+              $em->flush();
+          }
+          else {
+            return $this->redirectToRoute('category_index');
+            //avisar que no se pudo borrar con toast
+          }
 
-        return $this->redirectToRoute('category_index');
+          return $this->redirectToRoute('category_index');
+          //avisar que se pudo borrar con toast
     }
 
     /**

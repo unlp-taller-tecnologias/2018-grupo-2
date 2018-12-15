@@ -103,19 +103,33 @@ class AttendantController extends Controller
     /**
      * Deletes a attendant entity.
      *
-     * @Route("/{id}", name="attendant_delete")
-     * @Method("DELETE")
+     * @Route("/{id}/delete", name="attendant_delete")
+     * @Method("post")
      */
     public function deleteAction(Request $request, Attendant $attendant)
     {
         $form = $this->createDeleteForm($attendant);
         $form->handleRequest($request);
             $em = $this->getDoctrine()->getManager();
-            $attendant->setDeleted(true);
-            $em->persist($attendant);
-            $em->flush();
+            if(empty($em->getRepository('AppBundle:Attendant')->getFaunasByAttendant($attendant->getId()))){
 
-        return $this->redirectToRoute('attendant_index');
+              $attendant->setDeleted(true);
+              $at='@';
+              while(!is_null($em->getRepository('AppBundle:Attendant')->findOneBy(array('email'=>$at.$attendant->getEmail())))){
+                $at=$at.'@';
+              }
+              $attendant->setEmail($at.$attendant->getEmail());
+              $em->persist($attendant);
+              $em->flush();
+
+            }
+            else{
+              return $this->redirectToRoute('attendant_index');
+              //avisar que no se pudo borrar con toast
+            }
+
+            return $this->redirectToRoute('attendant_index');
+            //avisar que se pudo borrar con toast
     }
 
     /**

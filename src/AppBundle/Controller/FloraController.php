@@ -114,8 +114,8 @@ class FloraController extends Controller
     /**
      * Deletes a flora entity.
      *
-     * @Route("/{id}", name="flora_delete")
-     * @Method("DELETE")
+     * @Route("/{id}/delete", name="flora_delete")
+     * @Method("post")
      */
     public function deleteAction(Request $request, Flora $flora)
     {

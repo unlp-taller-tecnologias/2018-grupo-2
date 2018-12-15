@@ -1,0 +1,26 @@
+{% extends "base.html.twig" %}
+
+{% block title %} Nuevo usuario {% endblock %}
+
+{% block body %}
+  <div class="container">
+    <div class="row">
+      <div class="col-md-7 col-center">
+        <h1 class="text-center">Nuevo usuario</h1>
+        <br>
+        <br>
+
+        {{ form_start(form, { 'enctype':"multipart/form-data"}) }}
+            {{ form_widget(form) }}
+
+            <div class="text-center">
+              <input type="submit" class="btn btn-success btn-md mt-lg-3" value="Crear usuario" />
+              <a class="btn btn-primary btn-md mt-lg-3 ml-md-1" href="{{ path('users_index') }}">Volver al listado</a>
+            </div>
+
+        {{ form_end(form) }}
+
+      </div>
+    </div>
+  </div>
+{% endblock %}

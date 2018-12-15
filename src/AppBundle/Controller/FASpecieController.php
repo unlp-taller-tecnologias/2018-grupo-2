@@ -96,11 +96,22 @@ class FASpecieController extends Controller
         $form = $this->createDeleteForm($fASpecie);
         $form->handleRequest($request);
             $em = $this->getDoctrine()->getManager();
-            $fASpecie->setDeleted(true);
-            $em->persist($fASpecie);
-            $em->flush();
-
+            if(empty($em->getRepository('AppBundle:FASubspecie')->findOneBy(array('deleted'=>false,'specie'=>$fASpecie->getId())))){
+              $fASpecie->setDeleted(true);
+              $at='@';
+              while(!is_null($em->getRepository('AppBundle:FASpecie')->findOneBy(array('name'=>$at.$fASpecie->getName())))){
+                $at=$at.'@';
+              }
+              $fASpecie->setName($at.$fASpecie->getName());
+              $em->persist($fASpecie);
+              $em->flush();
+          }
+          else {
+            return $this->redirectToRoute('faspecie_index');
+            //avisar que no se pudo borrar con toast
+          }
         return $this->redirectToRoute('faspecie_index');
+        //avisar que  se pudo borrar con toast
     }
 
     /**
@@ -125,7 +136,7 @@ class FASpecieController extends Controller
      * @Route("/{id}/subspecies", name="faspecie_subspecies")
      * @Method({"GET", "POST"})
      */
-    public function getSubspeciesAction(FASpecie $fASpecie) 
+    public function getSubspeciesAction(FASpecie $fASpecie)
     {
       $subspecies = $fASpecie->getSubspecies();
       return $subspecies;

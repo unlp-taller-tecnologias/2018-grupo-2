@@ -125,8 +125,8 @@ class FaunaController extends Controller
     /**
      * Deletes a fauna entity.
      *
-     * @Route("/{id}", name="fauna_delete")
-     * @Method("DELETE")
+     * @Route("/{id}/delete", name="fauna_delete")
+     * @Method("post")
      */
     public function deleteAction(Request $request, Fauna $fauna)
     {

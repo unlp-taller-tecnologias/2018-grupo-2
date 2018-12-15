@@ -19,4 +19,17 @@ class CategoryRepository extends DefaultEntityRepository
   protected function setOrderByAttribute(){
     self::$orderByAttribute = 'CategoryRepository.name';
   }
+
+  public function getAttendantsByCategory($id_category){
+    $qb = $this->getEntityManager()->createQueryBuilder();
+    $qb
+    ->select('a')
+    ->from('AppBundle:Attendant','a')
+    ->where($qb->expr()->eq('a.deleted',':state'))
+    ->andWhere($qb->expr()->eq('a.category', ':$id_category'))
+    ->setParameters(array(
+      'state'=>false,
+      'id_category'=>$id_category
+    ));
+  }
 }

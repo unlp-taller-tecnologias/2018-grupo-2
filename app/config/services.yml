@@ -38,6 +38,11 @@ services:
     # AppBundle\Service\ExampleService:
     #     arguments:
     #         $someArgument: 'some_value'
+
+    FOS\UserBundle\Mailer\MailerInterface:
+      alias: fos_user.mailer.default
+      public: true
+
     app.form.registration:
         class: AppBundle\Form\RegistrationType
         tags:
