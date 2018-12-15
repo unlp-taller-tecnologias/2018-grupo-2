@@ -10,6 +10,7 @@ use AppBundle\Entity\Fauna;
 use AppBundle\Entity\Flora;
 use AppBundle\Entity\FLSpecie;
 use AppBundle\Entity\FLSubspecie;
+use AppBundle\Entity\User;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Persistence\ObjectManager;
 
@@ -85,7 +86,7 @@ class AppFixtures extends Fixture
             $flora=new Flora();
             $flora->setObservations($this->generateRandomString(15));
             #CAMBIAR ESTO DE EDAD AL ALTERAR LA BD
-            $flora->setAge(rand(0,100));
+            $flora->setPlantationDate("January 2005");
             $flora->setName('plantita '.$i);
             $flora->setArea($this->getReference('area'.rand(0, 19)));
             $flora->setSubspecie($this->getReference('flsubspecie'.rand(0,9)));
@@ -104,9 +105,38 @@ class AppFixtures extends Fixture
             $manager->persist($fauna);
         }
 
+        //crea un usuario administrador, con nombre de usuario admin y contraseña admin
+        $userAdmin = new User();
+        $userAdmin->addRole("ROLE_ADMIN");
+        $userAdmin->setUsername("admin");
+        $userAdmin->setUsernameCanonical("admin");
+        $userAdmin->setEmail("admin@admin.com");
+        $userAdmin->setEmailCanonical("admin@admin.com");
+        $userAdmin->setPlainPassword('admin');
+        $userAdmin->setEnabled(true);
+        $manager->persist($userAdmin);
 
+        //crea un usuario responsable de informes, con nombre de usuario resp y contraseña resp
+        $userResp = new User();
+        $userResp->addRole("ROLE_REPORTS");
+        $userResp->setUsername("resp");
+        $userResp->setUsernameCanonical("resp");
+        $userResp->setEmail("resp@resp.com");
+        $userResp->setEmailCanonical("resp@resp.com");
+        $userResp->setPlainPassword('resp');
+        $userResp->setEnabled(true);
+        $manager->persist($userResp);
 
-
+        //crea un usuario data entry, con nombre de usuario data y contraseña data
+        $userData = new User();
+        $userData->addRole("ROLE_DATA_ENTRY");
+        $userData->setUsername("data");
+        $userData->setUsernameCanonical("data");
+        $userData->setEmail("data@data.com");
+        $userData->setEmailCanonical("data@data.com");
+        $userData->setPlainPassword('data');
+        $userData->setEnabled(true);
+        $manager->persist($userData);
 
         $manager->flush();
     }
