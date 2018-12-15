@@ -1,44 +1,57 @@
 {% extends 'base.html.twig' %}
 
+{% block title %} Ver individuo de flora {% endblock %}
+
 {% block body %}
-    <h1>Flora</h1>
 
-    <table>
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ flora.id }}</td>
-            </tr>
-            <tr>
-                <th>Observations</th>
-                <td>{{ flora.observations }}</td>
-            </tr>
-            <tr>
-                <th>Age</th>
-                <td>{{ flora.plantationDate }}</td>
-            </tr>
-            <tr>
-                <th>Image</th>
-                <td>{{ flora.image }}</td>
-            </tr>
-            <tr>
-                <th>Name</th>
-                <td>{{ flora.name }}</td>
-            </tr>
-        </tbody>
-    </table>
+<div class="container">
+  <div class="row">
+    <div class="col-md-10 col-center">
+      <h1 class="text-center">{{ flora.name }}</h1>
+      <br>
 
-    <ul>
-        <li>
-            <a href="{{ path('flora_index') }}">Back to the list</a>
-        </li>
-        <li>
-            <a href="{{ path('flora_edit', { 'id': flora.id }) }}">Edit</a>
-        </li>
-        <li>
-            {{ form_start(delete_form) }}
-                <input type="submit" value="Delete">
-            {{ form_end(delete_form) }}
-        </li>
-    </ul>
+      <div class="row">
+        <div class="col-md-6">
+          <ul class="list-group">
+            <li class="list-group-item"><b>Especie:</b> {{ flora.subspecie.specie }} </li>
+            <li class="list-group-item"><b>Subespecie:</b> {{ flora.subspecie }} </li>
+            <li class="list-group-item"><b>Área:</b> {{ flora.area.name }} </li>
+            <li class="list-group-item">
+                <b>Período de plantación:</b> 
+                {% if flora.plantationDate is null %}
+                    <i class="text-muted">Período indefinido</i>
+                {% else %}
+                    {{ flora.plantationDate }}
+                {% endif %}
+            </li>
+            <li class="list-group-item"><b>Observaciones:</b> {{ flora.observations }}</li>
+          </ul>
+        </div>
+
+        <div class="col-md-6">
+          <div class="card">
+            <div class="card-body" style="height:340px">
+              <div class="row">
+                <div class="col-md-2"></div>
+                <div class="col-md-10">
+                  {% if flora.image is null %}
+                    <i class="text-muted">No se ha cargado una imagen</i>
+                  {% else %}
+                    <img src="/uploads/{{flora.image}}" alt='Imagen del individuo de flora' class='img-rounded'>
+                  {% endif %}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="text-center mt-lg-4">
+        <a class="btn btn-success btn-md" href="{{ path('flora_edit', { 'id': flora.id }) }}">Editar</a>
+        <a class="btn btn-primary btn-md ml-md-1" href="{{ path('flora_index') }}">Volver al listado</a>
+      </div>
+
+    </div>
+  </div>
+</div>
 {% endblock %}

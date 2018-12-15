@@ -3,8 +3,8 @@ parameters:
     database_host: 127.0.0.1
     database_port: null
     database_name: bioparque
-    database_user: bioparque
-    database_password: bioparque
+    database_user: root
+    database_password: null
     mailer_transport: smtp
     mailer_host: gmail-smtp-in.l.google.com
     mailer_user: 'bioparque.gob@gmail.com'

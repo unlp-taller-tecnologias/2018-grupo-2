@@ -95,7 +95,14 @@ class FaunaController extends Controller
      */
     public function editAction(Request $request, Fauna $fauna)
     {
-        $deleteForm = $this->createDeleteForm($fauna);
+        $em = $this->getDoctrine()->getManager();
+
+        // cargo la imagen si existe, pasando un objeto de tipo File
+        // if($fauna->getImage()){
+        //     $image = new \Symfony\Component\HttpFoundation\File\File($fauna->getImage());
+        //     $fauna->setImage($image);
+        // }
+
         $editForm = $this->createForm('AppBundle\Form\FaunaType', $fauna);
         $editForm->handleRequest($request);
 
@@ -117,8 +124,7 @@ class FaunaController extends Controller
 
         return $this->render('fauna/edit.html.twig', array(
             'fauna' => $fauna,
-            'edit_form' => $editForm->createView(),
-            'delete_form' => $deleteForm->createView(),
+            'edit_form' => $editForm->createView()
         ));
     }
 
