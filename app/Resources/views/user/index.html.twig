@@ -1,0 +1,76 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} Usuarios {% endblock %}
+
+{% block stylesheets %}
+  <link rel="stylesheet" type="text/css" href="{{ asset('scripts/dataTables/datatables.min.css') }}">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+{% endblock %}
+
+{% block body %}
+
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12 col-center">
+        <br>
+        <h1>Usuarios</h1>
+        <br>
+        <a class="btn btn-info float-right btn-m-r" href="{{ path('fos_user_registration_register') }}">Nuevo usuario</a>
+
+          <table id="user-table" class="row-border hover stripe">
+            <thead>
+              <tr>
+                <th width="40%">Nombre</th>
+                <th width="40%">Email</th>
+                <th width="20%">Acciones</th>
+              </tr>
+            </thead>
+            <tbody>
+            {% for user in users %}
+              <tr>
+                <td>{{ user.username }}</td>
+                <td>{{ user.email }}</td>
+                <td>
+                  <a class="btn btn-info" href="{{ path('users_show', { 'id': user.id }) }}">
+                    <i class="fa fa-eye"></i>
+                  </a>
+                  <a class="btn btn-success" href="{{ path('users_edit', { 'id': user.id }) }}">
+                    <i class="fa fa-pencil"></i>
+                  </a>
+                  <a class="btn btn-danger" href="{{ path('users_delete', { 'id': user.id }) }}">
+                    <i class="fa fa-trash"></i>
+                  </a>
+                </td>
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+
+      </div>
+    </div>
+  </div>
+
+{% endblock %}
+{% block javascripts %}
+
+<script src="{{ asset('scripts/dataTables/datatables.min.js') }}"></script>
+<script>
+  $(document).ready(function(){
+    $('#user-table').DataTable({
+      searching: false,
+      info: false,
+      lengthChange: false,
+      language: {
+        processing: "Procesando...",
+        emptyTable: "No se han encontrado usuarios",
+        paginate: {
+          first: "Inicio",
+          last: "Fin",
+          next: "Siguiente",
+          previous: "Anterior"
+        }
+      }
+    });
+  });
+</script>
+{% endblock %}

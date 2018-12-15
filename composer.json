@@ -33,13 +33,14 @@
         "symfony/swiftmailer-bundle": "^2.6.4",
         "symfony/symfony": "3.4.*",
         "symfony/templating": "^4.1",
-        "tiloweb/pagination-bundle": "dev-master",
+        "tiloweb/pagination-bundle": ">=1.0",
         "twig/twig": "^1.0||^2.0"
     },
     "require-dev": {
         "doctrine/doctrine-fixtures-bundle": "^3.0",
         "sensio/generator-bundle": "^3.0",
-        "symfony/phpunit-bridge": "^3.0"
+        "symfony/phpunit-bridge": "^3.0",
+        "symfony/var-dumper": "^4.2"
     },
     "scripts": {
         "symfony-scripts": [

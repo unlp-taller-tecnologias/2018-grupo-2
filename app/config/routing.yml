@@ -2,10 +2,17 @@ app:
     resource: '@AppBundle/Controller/'
     type: annotation
 
-
 fos_user:
     resource: "@FOSUserBundle/Resources/config/routing/all.xml"
 
+fos_user_registration_register:
+     resource: "routingRegistration.xml"
+     prefix: /user
+
+#
+# fos_user_registration_confirm:
+#     resource: "@FOSUserBundle/Resources/config/routing/registration.xml"
+#     prefix: /confirmation
 
 easy_admin_bundle:
     resource: "@EasyAdminBundle/Controller/AdminController.php"
