@@ -95,11 +95,24 @@ class FASubspecieController extends Controller
         $form = $this->createDeleteForm($fASubspecie);
         $form->handleRequest($request);
             $em = $this->getDoctrine()->getManager();
-            $fASubspecie->setDeleted(true);
-            $em->persist($fASubspecie);
-            $em->flush();
+            if(empty($em->getRepository('AppBundle:Fauna')->findOneBy(array('deleted'=>false,'subspecie'=>$fASubspecie->getId())))){
+              $fASubspecie->setDeleted(true);
+              $at='@';
+              while(!is_null($em->getRepository('AppBundle:FASubspecie')->findOneBy(array('name'=>$at.$fASubspecie->getname())))){
+                $at=$at.'@';
+              }
+              $fASubspecie->setName($at.$fASubspecie->getName());
+              $em->persist($fASubspecie);
+              $em->flush();
+          }
+          else {
+            return $this->redirectToRoute('fasubspecie_index');
+            //avisar que no se pudo borrar con toast
+          }
+
 
         return $this->redirectToRoute('fasubspecie_index');
+        //avisar que se pudo borrar con toast
     }
 
     /**

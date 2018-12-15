@@ -95,11 +95,24 @@ class FLSubspecieController extends Controller
         $form = $this->createDeleteForm($fLSubspecie);
         $form->handleRequest($request);
             $em = $this->getDoctrine()->getManager();
-            $fLSubspecie->setDeleted(true);
-            $em->persist($fLSubspecie);
-            $em->flush();
+            if(empty($em->getRepository('AppBundle:Flora')->findOneBy(array('deleted'=>false,'subspecie'=>$fLSubspecie->getId())))){
+              $fLSubspecie->setDeleted(true);
+              $at='@';
+              while(!is_null($em->getRepository('AppBundle:FLSubspecie')->findOneBy(array('name'=>$at.$fLSubspecie->getname())))){
+                $at=$at.'@';
+              }
+              $fLSubspecie->setName($at.$fLSubspecie->getName());
+              $em->persist($fLSubspecie);
+              $em->flush();
+            }
+            else {
+              return $this->redirectToRoute('flsubspecie_index');
+              //avisar que no se pudo borrar con toast
+            }
+
 
         return $this->redirectToRoute('flsubspecie_index');
+        //avisar que se pudo borrar con toast
     }
 
     /**

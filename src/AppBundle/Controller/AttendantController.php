@@ -111,16 +111,25 @@ class AttendantController extends Controller
         $form = $this->createDeleteForm($attendant);
         $form->handleRequest($request);
             $em = $this->getDoctrine()->getManager();
-            $attendant->setDeleted(true);
-            $at='@';
-            while(!is_null($em->getRepository('AppBundle:Attendant')->findOneBy(array('email'=>$at.$attendant->getEmail())))){
-              $at=$at.'@';
-            }
-            $attendant->setEmail($at.$attendant->getEmail());
-            $em->persist($attendant);
-            $em->flush();
+            if(empty($em->getRepository('AppBundle:Attendant')->getFaunasByAttendant($attendant->getId()))){
 
-        return $this->redirectToRoute('attendant_index');
+              $attendant->setDeleted(true);
+              $at='@';
+              while(!is_null($em->getRepository('AppBundle:Attendant')->findOneBy(array('email'=>$at.$attendant->getEmail())))){
+                $at=$at.'@';
+              }
+              $attendant->setEmail($at.$attendant->getEmail());
+              $em->persist($attendant);
+              $em->flush();
+
+            }
+            else{
+              return $this->redirectToRoute('attendant_index');
+              //avisar que no se pudo borrar con toast
+            }
+
+            return $this->redirectToRoute('attendant_index');
+            //avisar que se pudo borrar con toast
     }
 
     /**

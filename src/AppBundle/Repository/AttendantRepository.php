@@ -19,4 +19,19 @@ class AttendantRepository extends DefaultEntityRepository
   protected function setOrderByAttribute(){
     self::$orderByAttribute = 'AttendantRepository.name';
   }
+
+  public function getFaunasByAttendant($id_attendant){
+    $qb = $this->getEntityManager()->createQueryBuilder();
+    $qb
+    ->select('f')
+    ->from('AppBundle:Fauna','f')
+    ->join('f.attendants', 'a')
+    ->where($qb->expr()->eq('f.deleted',':state'))
+    ->andWhere($qb->expr()->eq('a.id', ':id_attendant'))
+    ->setParameters(array(
+      'state'=>false,
+      'id_attendant'=>$id_attendant
+    ));
+    return $qb->getQuery()->getResult();
+  }
 }
