@@ -109,7 +109,7 @@
 
 $('#attendant-table').on("click", ".button_delete", function() {
   var id_attendant = $(this).closest('tr').find('.attendant_id').val();
-  $('.form_m_d').attr('action', '/attendant/'+id_attendant);
+  $('.form_m_d').attr('action', '/attendant/'+id_attendant+'/delete');
 });
 </script>
 

@@ -8,6 +8,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\JsonResponse;
+
 /**
  * Fauna controller.
  *
@@ -50,10 +51,11 @@ class FaunaController extends Controller
 
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
-            //subida de imagen
-            $file=$form['image']->getData();
-            $ext=$file->guessExtension();
-            $file_name=time().".".$ext;
+            
+            // se guarda la imagen 
+            $file      = $form['image']->getData();
+            $ext       = $file->guessExtension();
+            $file_name = time().".".$ext;
             $file->move("uploads", $file_name);
             $fauna->setImage($file_name);
 
@@ -98,9 +100,19 @@ class FaunaController extends Controller
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
-            $this->getDoctrine()->getManager()->flush();
+            $em = $this->getDoctrine()->getManager();
+            // se guarda la imagen 
+            $file      = $editForm['image']->getData();
+            $ext       = $file->guessExtension();
+            $file_name = time().".".$ext;
 
-            return $this->redirectToRoute('fauna_edit', array('id' => $fauna->getId()));
+            $file->move("uploads", $file_name);
+            $fauna->setImage($file_name);
+
+            $em->persist($fauna);
+            $em->flush();
+
+            return $this->redirectToRoute('fauna_show', array('id' => $fauna->getId()));
         }
 
         return $this->render('fauna/edit.html.twig', array(
@@ -113,8 +125,8 @@ class FaunaController extends Controller
     /**
      * Deletes a fauna entity.
      *
-     * @Route("/{id}", name="fauna_delete")
-     * @Method("DELETE")
+     * @Route("/{id}/delete", name="fauna_delete")
+     * @Method("post")
      */
     public function deleteAction(Request $request, Fauna $fauna)
     {

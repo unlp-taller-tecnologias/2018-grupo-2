@@ -35,6 +35,16 @@
 <script>
 $(document).ready(function() {
     $('#appbundle_fauna_attendants').select2();
+    
+    // ids autogenerados por el bundle
+    $('#appbundle_fauna_specie').on('change', function() {
+      $('#appbundle_fauna_subspecie').find('option').remove();
+      $('#appbundle_fauna_subspecie').removeAttr("disabled");
+
+      specie_id = $('#appbundle_fauna_specie').val();
+      $.php("<?php $subspecies = ; ?>");
+
+    });
 });
 </script>
 
