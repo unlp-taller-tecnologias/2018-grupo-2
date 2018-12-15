@@ -51,8 +51,8 @@ class FaunaController extends Controller
 
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
-            
-            // se guarda la imagen 
+
+            // se guarda la imagen
             $file      = $form['image']->getData();
             $ext       = $file->guessExtension();
             $file_name = time().".".$ext;
@@ -108,7 +108,7 @@ class FaunaController extends Controller
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $em = $this->getDoctrine()->getManager();
-            // se guarda la imagen 
+            // se guarda la imagen
             $file      = $editForm['image']->getData();
             $ext       = $file->guessExtension();
             $file_name = time().".".$ext;
