@@ -28,7 +28,7 @@ class FaunaType extends AbstractType
                         'required' => true,
                         'placeholder' => 'Seleccione una especie...',
                         'attr' => array(
-                          'class' => 'form-control mb-lg-3'
+                          'class' => 'form-control mb-lg-3 specie-id'
                         )
                       )
                     )
@@ -64,20 +64,11 @@ class FaunaType extends AbstractType
                         )
                       )
                 ->add(
-                      'healthObservations', TextareaType::class, array(
-                        'label' => 'Observaciones',
-                        'attr' => array(
-                          'class' => 'form-control mb-lg-3',
-                          'placeholder' => 'Ingrese las observaciones...'
-                        )
-                      )
-                    )
-                ->add(
                       'image', FileType::class,array(
                         'label' => 'Imagen',
                         'required' => false,
                         'attr' =>array(
-                          'class' => 'form-control'
+                          'class' => 'form-control mb-lg-3'
                         ),
                         'data_class' => null
                       )
@@ -88,9 +79,10 @@ class FaunaType extends AbstractType
                         'required' => true,
                         'multiple' => true,
                         'attr' => array(
-                          'class' => 'form-control mb-lg-3',
-                        ),
-                        'placeholder' => 'Seleccione un/os encargado/s...'
+                          'class' => 'form-control select2',
+                          'id' => 'attendants',
+                          'placeholder' => 'Seleccione un encargado/s...'
+                        )
                       )
                     )
                 ->add(
@@ -110,6 +102,15 @@ class FaunaType extends AbstractType
                         'widget' => 'single_text',
                         'attr' => array(
                           'class' => 'form-control mb-lg-3'
+                        )
+                      )
+                    )
+                ->add(
+                      'healthObservations', TextareaType::class, array(
+                        'label' => 'Observaciones',
+                        'attr' => array(
+                          'class' => 'form-control mb-lg-3',
+                          'placeholder' => 'Ingrese las observaciones...'
                         )
                       )
                     );
