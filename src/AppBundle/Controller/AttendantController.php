@@ -53,6 +53,7 @@ class AttendantController extends Controller
             return $this->redirectToRoute('attendant_show', array('id' => $attendant->getId()));
         }
 
+        $this->addFlash("success", "Encargado creado con éxito.");
         return $this->render('attendant/new.html.twig', array(
             'attendant' => $attendant,
             'form' => $form->createView(),
@@ -90,6 +91,7 @@ class AttendantController extends Controller
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
+            $this->addFlash("success", "Encargado editado con éxito.");
             return $this->redirectToRoute('attendant_show', array('id' => $attendant->getId()));
         }
 
@@ -124,10 +126,11 @@ class AttendantController extends Controller
 
             }
             else{
+              $this->addFlash("error", "No se pudo eliminar al encargado ya que tiene individuos de fauna a su cuidado.");
               return $this->redirectToRoute('attendant_index');
               //avisar que no se pudo borrar con toast
             }
-
+            $this->addFlash("success", "Encargado eliminado con éxito.");
             return $this->redirectToRoute('attendant_index');
             //avisar que se pudo borrar con toast
     }

@@ -49,7 +49,7 @@ class FASubspecieController extends Controller
             $em = $this->getDoctrine()->getManager();
             $em->persist($fASubspecie);
             $em->flush();
-
+            $this->addFlash("success", "Subespecie creada con éxito.");
             return $this->redirectToRoute('fasubspecie_index');
         }
 
@@ -73,7 +73,7 @@ class FASubspecieController extends Controller
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $this->getDoctrine()->getManager()->flush();
-
+            $this->addFlash("success", "Subespecie editada con éxito.");
             return $this->redirectToRoute('fasubspecie_index');
         }
 
@@ -106,13 +106,12 @@ class FASubspecieController extends Controller
               $em->flush();
           }
           else {
+            $this->addFlash("error", "No se pudo eliminar debido a que existen individuos pertenecientes a esa subespecie.");
             return $this->redirectToRoute('fasubspecie_index');
-            //avisar que no se pudo borrar con toast
           }
 
-
+        $this->addFlash("success", "Subespecie eliminada con éxito.");
         return $this->redirectToRoute('fasubspecie_index');
-        //avisar que se pudo borrar con toast
     }
 
     /**

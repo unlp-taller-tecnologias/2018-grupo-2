@@ -58,7 +58,7 @@ class FaunaController extends Controller
             $file_name = time().".".$ext;
             $file->move("uploads", $file_name);
             $fauna->setImage($file_name);
-
+            $this->addFlash("success", "Individuo creado con éxito.");
             $em->persist($fauna);
             $em->flush();
 
@@ -108,10 +108,9 @@ class FaunaController extends Controller
 
             $file->move("uploads", $file_name);
             $fauna->setImage($file_name);
-
             $em->persist($fauna);
             $em->flush();
-
+            $this->addFlash("success", "Individuo editado con éxito.");
             return $this->redirectToRoute('fauna_show', array('id' => $fauna->getId()));
         }
 
@@ -136,7 +135,7 @@ class FaunaController extends Controller
             $fauna->setDeleted(true);
             $em->persist($fauna);
             $em->flush();
-
+        $this->addFlash("success", "Individuo eliminado con éxito.");
         return $this->redirectToRoute('fauna_index');
     }
 
