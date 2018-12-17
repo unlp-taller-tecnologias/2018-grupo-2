@@ -24,7 +24,14 @@
                     {{ flora.plantationDate }}
                 {% endif %}
             </li>
-            <li class="list-group-item"><b>Observaciones:</b> {{ flora.observations }}</li>
+            <li class="list-group-item">
+                <b>Observaciones:</b> 
+                {% if flora.observations is null %}
+                    <i class="text-muted">No se han cargado</i>
+                {% else %}
+                    {{ flora.observations }}
+                {% endif %}
+            </li>
           </ul>
         </div>
 

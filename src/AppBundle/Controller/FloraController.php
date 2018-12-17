@@ -99,7 +99,19 @@ class FloraController extends Controller
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
-            $this->getDoctrine()->getManager()->flush();
+            $this->getDoctrine()->getManager();
+
+            // se guarda la imagen
+            $file      = $editForm['image']->getData();
+            $ext       = $file->guessExtension();
+            $file_name = time().".".$ext;
+
+            $file->move("uploads", $file_name);
+            $fauna->setImage($file_name);
+
+            $em->persist($flora);
+            $em->flush();
+
 
             return $this->redirectToRoute('flora_edit', array('id' => $flora->getId()));
         }
