@@ -16,7 +16,6 @@
 
         {{ form_start(edit_form) }}
           {{ form_widget(edit_form) }}
-
           <div class="text-center">
             <input type="submit" class="btn btn-success btn-md mt-lg-3" value="Guardar cambios" />
             <a class="btn btn-primary btn-md mt-lg-3 ml-md-1" href="{{ path('flora_index') }}">Volver al listado</a>
@@ -33,20 +32,20 @@
 <script>
   $(document).ready(function() {
     jQuery(".select2").select2();
-    $('#appbundle_fauna_subspecie').removeAttr('disabled');
+    $('#appbundle_flora_subspecie').removeAttr('disabled');
  });
 </script>
 <script>
   $(document).ready(function(){
     $.ajax({
-     url: "{{ path('listJsonFasubspecie') }}",
+     url: "{{ path('listJsonFlsubspecie') }}",
      method: "GET",
      success: function(data) {
-          var id_subspecie=$('#appbundle_fauna_subspecie').val();
+          var id_subspecie=$('#appbundle_flora_subspecie').val();
           $.each( data, function( i, option ) {
             if (option.id == id_subspecie) {
               var id_specie=option.idSpecie;
-              $('#appbundle_fauna_specie').val(id_specie);
+              $('#appbundle_flora_specie').val(id_specie);
             }
           });
 

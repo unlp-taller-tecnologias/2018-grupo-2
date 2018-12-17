@@ -95,26 +95,25 @@ class FaunaController extends Controller
      */
     public function editAction(Request $request, Fauna $fauna)
     {
-        $em = $this->getDoctrine()->getManager();
-
-        // cargo la imagen si existe, pasando un objeto de tipo File
-        // if($fauna->getImage()){
-        //     $image = new \Symfony\Component\HttpFoundation\File\File($fauna->getImage());
-        //     $fauna->setImage($image);
-        // }
-
+        $image_name = $fauna->getImage();
+        $deleteForm = $this->createDeleteForm($fauna);
         $editForm = $this->createForm('AppBundle\Form\FaunaType', $fauna);
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $em = $this->getDoctrine()->getManager();
+
             // se guarda la imagen
             $file      = $editForm['image']->getData();
-            $ext       = $file->guessExtension();
-            $file_name = time().".".$ext;
-
-            $file->move("uploads", $file_name);
-            $fauna->setImage($file_name);
+            if($file != null){
+              $ext       = $file->guessExtension();
+              $file_name = time().".".$ext;
+              $file->move("uploads", $file_name);
+              $fauna->setImage($file_name);
+            }
+            else{
+              $fauna->setImage($image_name);
+            }
             $em->persist($fauna);
             $em->flush();
             $this->addFlash("success", "Individuo editado con éxito.");

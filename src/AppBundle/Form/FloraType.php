@@ -19,7 +19,7 @@ class FloraType extends AbstractType
      * {@inheritdoc}
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
-    {
+    { 
         $builder->add(
                     'specie', EntityType::class, array(
                       'label' => 'Especie',
@@ -47,7 +47,9 @@ class FloraType extends AbstractType
                               'placeholder' => 'Ingrese un nombre...'))
                       )
                    ->add('image', FileType::class,array(
+                          "data_class" => null,
                           "label" => "Imagen",
+                          'required' => false,
                           "attr" =>array("class" => "form-control mb-lg-3")
                       ))
                   ->add(
