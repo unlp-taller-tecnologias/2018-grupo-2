@@ -60,7 +60,7 @@ class FloraController extends Controller
 
             $em->persist($flora);
             $em->flush();
-
+            $this->addFlash("success", "Individuo creado con éxito.");
             return $this->redirectToRoute('flora_show', array('id' => $flora->getId()));
         }
 
@@ -99,6 +99,7 @@ class FloraController extends Controller
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
+
             $this->getDoctrine()->getManager();
 
             // se guarda la imagen
@@ -111,8 +112,8 @@ class FloraController extends Controller
 
             $em->persist($flora);
             $em->flush();
-
-
+            
+            $this->addFlash("success", "Individuo editado con éxito.");
             return $this->redirectToRoute('flora_edit', array('id' => $flora->getId()));
         }
 
@@ -137,7 +138,7 @@ class FloraController extends Controller
             $flora->setDeleted(true);
             $em->persist($flora);
             $em->flush();
-
+        $this->addFlash("success", "Individuo eliminado con éxito.");
         return $this->redirectToRoute('flora_index');
     }
 

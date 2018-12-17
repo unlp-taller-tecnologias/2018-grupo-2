@@ -47,7 +47,7 @@ class CategoryController extends Controller
             $em = $this->getDoctrine()->getManager();
             $em->persist($category);
             $em->flush();
-
+            $this->addFlash("success", "Categoría creada con éxito.");
             return $this->redirectToRoute('category_index');
         }
 
@@ -71,7 +71,7 @@ class CategoryController extends Controller
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $this->getDoctrine()->getManager()->flush();
-
+            $this->addFlash("success", "Categoría editada con éxito.");
            return $this->redirectToRoute('category_index');
         }
 
@@ -104,12 +104,11 @@ class CategoryController extends Controller
               $em->flush();
           }
           else {
+            $this->addFlash("error", "No se pudo eliminar debido a que existen encargados con esa categoría.");
             return $this->redirectToRoute('category_index');
-            //avisar que no se pudo borrar con toast
           }
-
+          $this->addFlash("success", "Categoría eliminada con éxito.");
           return $this->redirectToRoute('category_index');
-          //avisar que se pudo borrar con toast
     }
 
     /**

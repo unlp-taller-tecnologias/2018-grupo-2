@@ -49,7 +49,7 @@ class AreaController extends Controller
             $em = $this->getDoctrine()->getManager();
             $em->persist($area);
             $em->flush();
-
+            $this->addFlash("success", "Área creada con éxito.");
             return $this->redirectToRoute('area_index');
         }
 
@@ -73,7 +73,7 @@ class AreaController extends Controller
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $this->getDoctrine()->getManager()->flush();
-
+            $this->addFlash("success", "Área editada con éxito.");
             return $this->redirectToRoute('area_index');
         }
 
@@ -98,7 +98,7 @@ class AreaController extends Controller
             $area->setDeleted(true);
             $em->persist($area);
             $em->flush();
-
+            $this->addFlash("success", "Área eliminada con éxito.");
         return $this->redirectToRoute('area_index');
     }
 
