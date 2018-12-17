@@ -8,6 +8,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 
 /**
  * Area controller.
@@ -20,6 +21,7 @@ class AreaController extends Controller
      * Lists all area entities.
      *
      * @Route("/", name="area_index")
+     * @Security("is_granted('ROLE_ADMIN')")
      * @Method("GET")
      */
     public function indexAction(Request $request)
@@ -37,6 +39,7 @@ class AreaController extends Controller
      * Creates a new area entity.
      *
      * @Route("/new", name="area_new")
+     * @Security("is_granted('ROLE_ADMIN')")
      * @Method({"GET", "POST"})
      */
     public function newAction(Request $request)
@@ -63,6 +66,7 @@ class AreaController extends Controller
      * Displays a form to edit an existing area entity.
      *
      * @Route("/{id}/edit", name="area_edit")
+     * @Security("is_granted('ROLE_ADMIN')")
      * @Method({"GET", "POST"})
      */
     public function editAction(Request $request, Area $area)
@@ -88,6 +92,7 @@ class AreaController extends Controller
      * Deletes a area entity.
      *
      * @Route("/{id}", name="area_delete")
+     * @Security("is_granted('ROLE_ADMIN')")
      * @Method("DELETE")
      */
     public function deleteAction(Request $request, Area $area)

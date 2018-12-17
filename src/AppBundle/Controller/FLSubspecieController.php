@@ -8,7 +8,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
-
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 /**
  * Flsubspecie controller.
  *
@@ -20,6 +20,7 @@ class FLSubspecieController extends Controller
      * Lists all fLSubspecie entities.
      *
      * @Route("/", name="flsubspecie_index")
+     * @Security("is_granted('ROLE_ADMIN')")
      * @Method("GET")
      */
     public function indexAction(Request $request)
@@ -37,6 +38,7 @@ class FLSubspecieController extends Controller
      * Creates a new fLSubspecie entity.
      *
      * @Route("/new", name="flsubspecie_new")
+     * @Security("is_granted('ROLE_ADMIN')")
      * @Method({"GET", "POST"})
      */
     public function newAction(Request $request)
@@ -63,6 +65,7 @@ class FLSubspecieController extends Controller
      * Displays a form to edit an existing fLSubspecie entity.
      *
      * @Route("/{id}/edit", name="flsubspecie_edit")
+     * @Security("is_granted('ROLE_ADMIN')")
      * @Method({"GET", "POST"})
      */
     public function editAction(Request $request, FLSubspecie $fLSubspecie)
@@ -88,6 +91,7 @@ class FLSubspecieController extends Controller
      * Deletes a fLSubspecie entity.
      *
      * @Route("/{id}", name="flsubspecie_delete")
+     * @Security("is_granted('ROLE_ADMIN')")
      * @Method("DELETE")
      */
     public function deleteAction(Request $request, FLSubspecie $fLSubspecie)

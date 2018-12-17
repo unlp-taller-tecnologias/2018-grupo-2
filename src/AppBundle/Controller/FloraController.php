@@ -9,7 +9,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\File\File;
-
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 /**
  * Flora controller.
  *
@@ -21,6 +21,7 @@ class FloraController extends Controller
      * Lists all flora entities.
      *
      * @Route("/", name="flora_index")
+     * @Security("is_granted('IS_AUTHENTICATED_REMEMBERED')")
      * @Method({"GET", "POST"})
      */
     public function indexAction(Request $request)
@@ -41,6 +42,7 @@ class FloraController extends Controller
      * Creates a new flora entity.
      *
      * @Route("/new", name="flora_new")
+     * @Security("is_granted['ROLE_ADMIN','ROLE_DATA_ENTRY']")
      * @Method({"GET", "POST"})
      */
     public function newAction(Request $request)
@@ -75,6 +77,7 @@ class FloraController extends Controller
      * Finds and displays a flora entity.
      *
      * @Route("/{id}", name="flora_show")
+     * @Security("is_granted('IS_AUTHENTICATED_REMEMBERED')")
      * @Method("GET")
      */
     public function showAction(Flora $flora)
@@ -90,6 +93,7 @@ class FloraController extends Controller
      * Displays a form to edit an existing flora entity.
      *
      * @Route("/{id}/edit", name="flora_edit")
+     * @Security("is_granted['ROLE_ADMIN','ROLE_DATA_ENTRY']")
      * @Method({"GET", "POST"})
      */
     public function editAction(Request $request, Flora $flora)
@@ -131,6 +135,7 @@ class FloraController extends Controller
      * Deletes a flora entity.
      *
      * @Route("/{id}/delete", name="flora_delete")
+     * @Security("is_granted['ROLE_ADMIN','ROLE_DATA_ENTRY']")
      * @Method("post")
      */
     public function deleteAction(Request $request, Flora $flora)

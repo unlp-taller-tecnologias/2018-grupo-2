@@ -8,7 +8,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\JsonResponse;
-
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 /**
  * Fasubspecie controller.
  *
@@ -20,6 +20,7 @@ class FASubspecieController extends Controller
      * Lists all fASubspecie entities.
      *
      * @Route("/", name="fasubspecie_index")
+     * @Security("is_granted('ROLE_ADMIN')")
      * @Method("GET")
      */
     public function indexAction(Request $request)
@@ -37,6 +38,7 @@ class FASubspecieController extends Controller
      * Creates a new fASubspecie entity.
      *
      * @Route("/new", name="fasubspecie_new")
+     * @Security("is_granted('ROLE_ADMIN')")
      * @Method({"GET", "POST"})
      */
     public function newAction(Request $request)
@@ -63,6 +65,7 @@ class FASubspecieController extends Controller
      * Displays a form to edit an existing fASubspecie entity.
      *
      * @Route("/{id}/edit", name="fasubspecie_edit")
+     * @Security("is_granted('ROLE_ADMIN')")
      * @Method({"GET", "POST"})
      */
     public function editAction(Request $request, FASubspecie $fASubspecie)
@@ -88,6 +91,7 @@ class FASubspecieController extends Controller
      * Deletes a fASubspecie entity.
      *
      * @Route("/{id}", name="fasubspecie_delete")
+     * @Security("is_granted('ROLE_ADMIN')")
      * @Method("DELETE")
      */
     public function deleteAction(Request $request, FASubspecie $fASubspecie)

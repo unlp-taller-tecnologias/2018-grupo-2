@@ -8,7 +8,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\JsonResponse;
-
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 /**
  * Fauna controller.
  *
@@ -20,6 +20,7 @@ class FaunaController extends Controller
      * Lists all fauna entities.
      *
      * @Route("/", name="fauna_index")
+     * @Security("is_granted('IS_AUTHENTICATED_REMEMBERED')")
      * @Method({"GET", "POST"})
      */
     public function indexAction(Request $request)
@@ -41,6 +42,7 @@ class FaunaController extends Controller
      * Creates a new fauna entity.
      *
      * @Route("/new", name="fauna_new")
+     * @Security("is_granted['ROLE_ADMIN','ROLE_DATA_ENTRY']")
      * @Method({"GET", "POST"})
      */
     public function newAction(Request $request)
@@ -75,6 +77,7 @@ class FaunaController extends Controller
      * Finds and displays a fauna entity.
      *
      * @Route("/{id}", name="fauna_show")
+     * @Security("is_granted('IS_AUTHENTICATED_REMEMBERED')")
      * @Method("GET")
      */
     public function showAction(Fauna $fauna)
@@ -91,6 +94,7 @@ class FaunaController extends Controller
      * Displays a form to edit an existing fauna entity.
      *
      * @Route("/{id}/edit", name="fauna_edit")
+     * @Security("is_granted['ROLE_ADMIN','ROLE_DATA_ENTRY']")
      * @Method({"GET", "POST"})
      */
     public function editAction(Request $request, Fauna $fauna)
@@ -130,6 +134,7 @@ class FaunaController extends Controller
      * Deletes a fauna entity.
      *
      * @Route("/{id}/delete", name="fauna_delete")
+     * @Security("is_granted['ROLE_ADMIN','ROLE_DATA_ENTRY']")
      * @Method("post")
      */
     public function deleteAction(Request $request, Fauna $fauna)

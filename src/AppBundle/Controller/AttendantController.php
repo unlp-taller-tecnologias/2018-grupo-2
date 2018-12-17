@@ -8,6 +8,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 
 /**
  * Attendant controller.
@@ -20,6 +21,7 @@ class AttendantController extends Controller
      * Lists all attendant entities.
      *
      * @Route("/", name="attendant_index")
+     * @Security("is_granted('ROLE_ADMIN')")
      * @Method("GET")
      */
     public function indexAction(Request $request)
@@ -37,6 +39,7 @@ class AttendantController extends Controller
      * Creates a new attendant entity.
      *
      * @Route("/new", name="attendant_new")
+     * @Security("is_granted('ROLE_ADMIN')")
      * @Method({"GET", "POST"})
      */
     public function newAction(Request $request)
@@ -64,6 +67,7 @@ class AttendantController extends Controller
      * Finds and displays a attendant entity.
      *
      * @Route("/{id}", name="attendant_show")
+     * @Security("is_granted('ROLE_ADMIN')")
      * @Method("GET")
      */
     public function showAction(Attendant $attendant)
@@ -80,6 +84,7 @@ class AttendantController extends Controller
      * Displays a form to edit an existing attendant entity.
      *
      * @Route("/{id}/edit", name="attendant_edit")
+     * @Security("is_granted('ROLE_ADMIN')")
      * @Method({"GET", "POST"})
      */
     public function editAction(Request $request, Attendant $attendant)
@@ -106,6 +111,7 @@ class AttendantController extends Controller
      * Deletes a attendant entity.
      *
      * @Route("/{id}/delete", name="attendant_delete")
+     * @Security("is_granted('ROLE_ADMIN')")
      * @Method("post")
      */
     public function deleteAction(Request $request, Attendant $attendant)
