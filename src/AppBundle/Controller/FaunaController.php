@@ -51,14 +51,14 @@ class FaunaController extends Controller
 
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
-            
-            // se guarda la imagen 
+
+            // se guarda la imagen
             $file      = $form['image']->getData();
             $ext       = $file->guessExtension();
             $file_name = time().".".$ext;
             $file->move("uploads", $file_name);
             $fauna->setImage($file_name);
-
+            $this->addFlash("success", "Individuo creado con éxito.");
             $em->persist($fauna);
             $em->flush();
 
@@ -95,30 +95,34 @@ class FaunaController extends Controller
      */
     public function editAction(Request $request, Fauna $fauna)
     {
+        $image_name = $fauna->getImage();
         $deleteForm = $this->createDeleteForm($fauna);
         $editForm = $this->createForm('AppBundle\Form\FaunaType', $fauna);
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $em = $this->getDoctrine()->getManager();
-            // se guarda la imagen 
+
+            // se guarda la imagen
             $file      = $editForm['image']->getData();
-            $ext       = $file->guessExtension();
-            $file_name = time().".".$ext;
-
-            $file->move("uploads", $file_name);
-            $fauna->setImage($file_name);
-
+            if($file != null){
+              $ext       = $file->guessExtension();
+              $file_name = time().".".$ext;
+              $file->move("uploads", $file_name);
+              $fauna->setImage($file_name);
+            }
+            else{
+              $fauna->setImage($image_name);
+            }
             $em->persist($fauna);
             $em->flush();
-
+            $this->addFlash("success", "Individuo editado con éxito.");
             return $this->redirectToRoute('fauna_show', array('id' => $fauna->getId()));
         }
 
         return $this->render('fauna/edit.html.twig', array(
             'fauna' => $fauna,
-            'edit_form' => $editForm->createView(),
-            'delete_form' => $deleteForm->createView(),
+            'edit_form' => $editForm->createView()
         ));
     }
 
@@ -136,7 +140,7 @@ class FaunaController extends Controller
             $fauna->setDeleted(true);
             $em->persist($fauna);
             $em->flush();
-
+        $this->addFlash("success", "Individuo eliminado con éxito.");
         return $this->redirectToRoute('fauna_index');
     }
 

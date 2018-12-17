@@ -8,6 +8,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\File\File;
 
 /**
  * Flora controller.
@@ -60,7 +61,7 @@ class FloraController extends Controller
 
             $em->persist($flora);
             $em->flush();
-
+            $this->addFlash("success", "Individuo creado con éxito.");
             return $this->redirectToRoute('flora_show', array('id' => $flora->getId()));
         }
 
@@ -79,7 +80,6 @@ class FloraController extends Controller
     public function showAction(Flora $flora)
     {
         $deleteForm = $this->createDeleteForm($flora);
-
         return $this->render('flora/show.html.twig', array(
             'flora' => $flora,
             'delete_form' => $deleteForm->createView(),
@@ -94,14 +94,30 @@ class FloraController extends Controller
      */
     public function editAction(Request $request, Flora $flora)
     {
+        $image_name = $flora->getImage();
         $deleteForm = $this->createDeleteForm($flora);
         $editForm = $this->createForm('AppBundle\Form\FloraType', $flora);
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
-            $this->getDoctrine()->getManager()->flush();
+            $em=$this->getDoctrine()->getManager();
 
-            return $this->redirectToRoute('flora_edit', array('id' => $flora->getId()));
+            // se guarda la imagen
+            $file      = $editForm['image']->getData();
+            if($file != null){
+              $ext       = $file->guessExtension();
+              $file_name = time().".".$ext;
+              $file->move("uploads", $file_name);
+              $flora->setImage($file_name);
+            }
+            else{
+              $flora->setImage($image_name);
+            }
+            $em->persist($flora);
+            $em->flush();
+
+            $this->addFlash("success", "Individuo editado con éxito.");
+            return $this->redirectToRoute('flora_show', array('id' => $flora->getId()));
         }
 
         return $this->render('flora/edit.html.twig', array(
@@ -125,7 +141,7 @@ class FloraController extends Controller
             $flora->setDeleted(true);
             $em->persist($flora);
             $em->flush();
-
+        $this->addFlash("success", "Individuo eliminado con éxito.");
         return $this->redirectToRoute('flora_index');
     }
 

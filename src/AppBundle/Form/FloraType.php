@@ -10,6 +10,8 @@ use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
+use AppBundle\Entity\FLSpecie;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 
 class FloraType extends AbstractType
 {
@@ -17,15 +19,17 @@ class FloraType extends AbstractType
      * {@inheritdoc}
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
-    {
+    { 
         $builder->add(
-                    'specie',ChoiceType::class, array(
-                    'label' => 'Especie',
-                    'required' => true,
-                    'attr' => array(
-                    'class' => 'form-control mb-lg-3',
-                    'placeholder' => 'Seleccione una especie...'))
-                  )
+                    'specie', EntityType::class, array(
+                      'label' => 'Especie',
+                      'class' => FLSpecie::class,
+                      'choice_label' => 'name',
+                      'required' => true,
+                      'placeholder' => 'Seleccione una especie...',
+                      'attr' => array(
+                        'class' => 'form-control mb-lg-3 specie-id'
+                      )))
                   ->add(
                       'subspecie', null, array(
                           'label' => 'Subespecie',
@@ -42,26 +46,28 @@ class FloraType extends AbstractType
                               'class' => 'form-control mb-lg-3',
                               'placeholder' => 'Ingrese un nombre...'))
                       )
+                   ->add('image', FileType::class,array(
+                          "data_class" => null,
+                          "label" => "Imagen",
+                          'required' => false,
+                          "attr" =>array("class" => "form-control mb-lg-3")
+                      ))
                   ->add(
                       'plantation_date', TextType::class, array(
-                        'label' => 'Fecha de plantación',
+                        'label' => 'Período de plantación',
                         'required' => false,
                         'attr' => array(
-                        'class' => 'form-control mb-lg-3',
+                        'class' => 'form-control col-md-6 mb-lg-3',
                         'placeholder' => ''))
                           )
-        ->add('image', FileType::class,array(
-            "label" => "Imagen:",
-            "attr" =>array("class" => "form-control")
-        ))
-        ->add(
-            'area', null, array(
-                'label' => 'Area',
-                'required' => true,
-                'attr' => array(
-                'class' => 'form-control mb-lg-3',
-                'placeholder' => 'Seleccione un área...'))
-          );
+                    ->add(
+                        'area', null, array(
+                            'label' => 'Área',
+                            'required' => true,
+                            'attr' => array(
+                            'class' => 'form-control col-md-6 mb-lg-3',
+                            'placeholder' => 'Seleccione un área...'))
+                      );
     }/**
      * {@inheritdoc}
      */
