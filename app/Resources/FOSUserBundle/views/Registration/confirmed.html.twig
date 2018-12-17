@@ -1,10 +1,16 @@
-{% extends "@FOSUser/layout.html.twig" %}
+{% extends "base.html.twig" %}
 
 {% trans_default_domain 'FOSUserBundle' %}
 
-{% block fos_user_content %}
+{% block body %}
+<div class="container">
+  <div class="row">
+    <div class="col-md-7 col-center">
     <p>{{ 'registration.confirmed'|trans({'%username%': user.username}) }}</p>
     {% if targetUrl %}
-    <p><a href="{{ targetUrl }}">{{ 'registration.back'|trans }}</a></p>
+    <p><a href="{{ path("homepage") }}">Menu principal</a></p>
     {% endif %}
-{% endblock fos_user_content %}
+    </div>
+  </div>
+</div>
+{% endblock body %}

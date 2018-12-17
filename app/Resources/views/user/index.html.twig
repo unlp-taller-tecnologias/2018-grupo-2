@@ -17,8 +17,8 @@
         <br>
         <a class="btn btn-info float-right btn-m-r" href="{{ path('fos_user_registration_register') }}">Nuevo usuario</a>
 
-          <table id="user-table" class="row-border hover stripe">
-            <thead>
+          <table id="user-table" class="table row-border hover stripe" name="TABLA">
+            <thead class="thead-dark">
               <tr>
                 <th width="40%">Nombre</th>
                 <th width="40%">Email</th>
@@ -60,17 +60,10 @@
       searching: false,
       info: false,
       lengthChange: false,
-      language: {
-        processing: "Procesando...",
-        emptyTable: "No se han encontrado usuarios",
-        paginate: {
-          first: "Inicio",
-          last: "Fin",
-          next: "Siguiente",
-          previous: "Anterior"
-        }
-      }
+      "paging":   false,
+      "ordering": false,
+      "info":     false
     });
-  });
+});
 </script>
 {% endblock %}

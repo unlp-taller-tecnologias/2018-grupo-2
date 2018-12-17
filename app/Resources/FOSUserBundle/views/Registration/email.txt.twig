@@ -8,6 +8,7 @@
 {% block body_text %}
 {% autoescape false %}
 {{ 'registration.email.message'|trans({'%username%': user.username, '%confirmationUrl%': confirmationUrl}) }}
+Tu contraseña es {{user.plainPassword}}, por favor modifiquela desde su perfil
 {% endautoescape %}
 {% endblock %}
 {% block body_html %}{% endblock %}

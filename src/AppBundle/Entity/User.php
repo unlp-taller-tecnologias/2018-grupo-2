@@ -23,13 +23,6 @@ class User extends BaseUser
      */
     public $id;
 
-    /**
-     * @var string|null
-     *
-     * @ORM\Column(name="color", type="string", length=255, nullable=true)
-     */
-    private $color;
-
     public function __construct()
     {
         parent::__construct();
@@ -44,30 +37,6 @@ class User extends BaseUser
     public function getId()
     {
         return $this->id;
-    }
-
-    /**
-     * Set color.
-     *
-     * @param string|null $color
-     *
-     * @return User
-     */
-    public function setColor($color = null)
-    {
-        $this->color = $color;
-
-        return $this;
-    }
-
-    /**
-     * Get color.
-     *
-     * @return string|null
-     */
-    public function getColor()
-    {
-        return $this->color;
     }
 
 }
