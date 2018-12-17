@@ -42,7 +42,7 @@ class FloraController extends Controller
      * Creates a new flora entity.
      *
      * @Route("/new", name="flora_new")
-     * @Security("is_granted['ROLE_ADMIN','ROLE_DATA_ENTRY']")
+     * @Security("is_granted('ROLE_ADMIN','ROLE_DATA_ENTRY')")
      * @Method({"GET", "POST"})
      */
     public function newAction(Request $request)
@@ -93,7 +93,7 @@ class FloraController extends Controller
      * Displays a form to edit an existing flora entity.
      *
      * @Route("/{id}/edit", name="flora_edit")
-     * @Security("is_granted['ROLE_ADMIN','ROLE_DATA_ENTRY']")
+     * @Security("is_granted('ROLE_ADMIN','ROLE_DATA_ENTRY')")
      * @Method({"GET", "POST"})
      */
     public function editAction(Request $request, Flora $flora)
@@ -135,7 +135,7 @@ class FloraController extends Controller
      * Deletes a flora entity.
      *
      * @Route("/{id}/delete", name="flora_delete")
-     * @Security("is_granted['ROLE_ADMIN','ROLE_DATA_ENTRY']")
+     * @Security("is_granted('ROLE_ADMIN','ROLE_DATA_ENTRY')")
      * @Method("post")
      */
     public function deleteAction(Request $request, Flora $flora)
