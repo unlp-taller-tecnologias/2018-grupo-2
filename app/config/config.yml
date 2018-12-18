@@ -82,7 +82,7 @@ fos_user:
         sender_name: "%mailer_user%"
     registration:
         form:
-            type: AppBundle\Form\RegistrationType
+            type: AppBundle\Form\RegistrationFormType
 
 # app/config/config.yml
 ps_pdf:
