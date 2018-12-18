@@ -32,11 +32,13 @@ class FloraRepository extends DefaultEntityRepository
       ->where($qb->expr()->orX(($qb->expr()->eq('f.area', ":area")),($qb->expr()->isNull(':area'))))
       ->andWhere($qb->expr()->orX(($qb->expr()->eq('f.subspecie', ':subspecie')),($qb->expr()->isNull(':subspecie'))))
       ->andWhere($qb->expr()->orX(($qb->expr()->eq('ss.specie', ':specie')),($qb->expr()->isNull(':specie'))))
-      ->orWhere($qb->expr()->andX(($qb->expr()->isNull(':area')),($qb->expr()->isNull(':subspecie')),($qb->expr()->isNull(':specie'))))
+      ->andWhere($qb->expr()->eq('f.deleted', ':deleted'))
+      ->orWhere($qb->expr()->andX(($qb->expr()->isNull(':area')),($qb->expr()->isNull(':subspecie')),($qb->expr()->isNull(':specie')),($qb->expr()->eq('f.deleted', ':deleted'))))
       ->setParameters(array(
         "area" => $area,
         "specie" => $specie,
         "subspecie" => $subspecie,
+        "deleted" => false,
     ));
     return $qb->getQuery();
   }

@@ -35,12 +35,14 @@ class FaunaRepository extends DefaultEntityRepository
       ->andWhere($qb->expr()->orX(($qb->expr()->eq('a.id', ':attendants')),($qb->expr()->isNull(':attendants'))))
       ->andWhere($qb->expr()->orX(($qb->expr()->eq('f.subspecie', ':subspecie')),($qb->expr()->isNull(':subspecie'))))
       ->andWhere($qb->expr()->orX(($qb->expr()->eq('ss.specie', ':specie')),($qb->expr()->isNull(':specie'))))
-      ->orWhere($qb->expr()->andX(($qb->expr()->isNull(':destination')),($qb->expr()->isNull(':attendants')),($qb->expr()->isNull(':subspecie')),($qb->expr()->isNull(':specie'))))
+      ->andWhere($qb->expr()->eq('f.deleted', ':deleted'))
+      ->orWhere($qb->expr()->andX(($qb->expr()->isNull(':destination')),($qb->expr()->isNull(':attendants')),($qb->expr()->isNull(':subspecie')),($qb->expr()->isNull(':specie')),($qb->expr()->eq('f.deleted', ':deleted'))))
       ->setParameters(array(
         "destination" =>  "%".$destination."%",
         "attendants" => $attendants,
         "specie" => $specie,
         "subspecie" => $subspecie,
+        "deleted" => false,
     ));
     return $qb->getQuery();
   }

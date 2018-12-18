@@ -37,15 +37,38 @@
                   <a class="btn btn-success" href="{{ path('users_edit', { 'id': user.id }) }}">
                     <i class="fa fa-pencil"></i>
                   </a>
-                  <a class="btn btn-danger" href="{{ path('users_delete', { 'id': user.id }) }}">
+                  <input class="attendant_id" value="{{user.id}}" hidden>
+                  <button type="button" class="button_delete btn btn-danger" data-toggle="modal" data-target="#delete_modal">
                     <i class="fa fa-trash"></i>
-                  </a>
+                  </button>
                 </td>
               </tr>
             {% endfor %}
           </tbody>
         </table>
 
+      </div>
+    </div>
+  </div>
+
+  <div class="modal" id='delete_modal' tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Eliminar usuario</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <p>¿Estás seguro de que deseas eliminar al usuario?</p>
+        </div>
+        <div class="modal-footer">
+          <form class="form_m_d" method="post">
+            <button type="submit" class="btn btn-primary">Eliminar</button>
+          </form>
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+        </div>
       </div>
     </div>
   </div>
@@ -64,6 +87,12 @@
       "ordering": false,
       "info":     false
     });
+});
+</script>
+<script>
+$('#user-table').on("click", ".button_delete", function() {
+  var id_user = $(this).closest('tr').find('.attendant_id').val();
+  $('.form_m_d').attr('action', '/users/'+id_user+'/delete');
 });
 </script>
 {% endblock %}
