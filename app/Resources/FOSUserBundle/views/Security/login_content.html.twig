@@ -22,7 +22,7 @@
           <br>
           <input type="checkbox" id="remember_me" name="_remember_me" value="on" />
           <label for="remember_me">{{ 'security.login.remember_me'|trans }}</label>
-          <a style= "margin-left: 5%; font-size:90%" href="#">Recuperar contraseña</a>
+          <a style= "margin-left: 5%; font-size:90%" href="{{path('fos_user_resetting_request')}}">Recuperar contraseña</a>
           <br>
           <br>
           <input type="submit" id=0_submit" name="_submit" value="{{ 'security.login.submit'|trans }}" />
