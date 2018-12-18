@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %} Subespecies de Fauna {% endblock %}
+{% block title %} Subespecies de fauna {% endblock %}
 
 {% block stylesheets %}
   <link rel="stylesheet" type="text/css" href="{{ asset('scripts/dataTables/datatables.min.css') }}">
@@ -11,19 +11,19 @@
   <div class="container">
     <div class="row">
       <div class="col-md-12 col-center">
-        <h1>Subespecies de Fauna</h1>
+        <h1>Subespecies de fauna</h1>
         <br>
-        <a class="btn btn-info float-right btn-m-r" href="{{ path('fasubspecie_new') }}">Nueva subespecie</a>
+        <a class="btn btn-info float-right btn-m-r mb-lg-3" href="{{ path('fasubspecie_new') }}">Nueva subespecie</a>
 
-          <table id="fasubspecie-table" class="table row-border hover stripe" name="TABLA">
-            <thead class="thead-dark">
-              <tr>
-                <th width="50%">Nombre</th>
-                <th width="35%">Especie</th>
-                <th width="25%"></th>
-              </tr>
-            </thead>
-            <tbody>
+        <table id="fasubspecie-table" class="table row-border hover stripe" name="TABLA">
+          <thead class="thead-light">
+            <tr>
+              <th width="45%">Nombre</th>
+              <th width="40%">Especie</th>
+              <th width="10%"></th>
+            </tr>
+          </thead>
+          <tbody>
             {% for fASubspecie in fASubspecies %}
               <tr>
                 <td>{{ fASubspecie.name }}</ts>
@@ -39,20 +39,20 @@
                 </td>
               </tr>
             {% else %}
-                <tr>
-                    <td colspan="3" class="text-center">
-                        <em>No fASubspecie</em>
-                    </td>
-                </tr>
-            {% endfor %}
-            </tbody>
-            <tfoot>
-            <tr>
+              <tr>
                 <td colspan="3" class="text-center">
-                    {{ pagination(fASubspecies, 'page') }}
+                  <em>No hay subespecies de fauna para mostrar</em>
                 </td>
+              </tr>
+            {% endfor %}
+          </tbody>
+          <tfoot>
+            <tr>
+              <td colspan="3" class="text-center">
+                {{ pagination(fASubspecies, 'page') }}
+              </td>
             </tr>
-            </tfoot>
+          </tfoot>
         </table>
 
       </div>
@@ -60,30 +60,30 @@
   </div>
 
 
-    <div class="modal" id='delete_modal' tabindex="-1" role="dialog">
-      <div class="modal-dialog" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title">Eliminar Subespecie</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-          <div class="modal-body">
-            <p>¿Estás seguro de que deseas eliminar esta subespecie?</p>
-          </div>
-          <div class="modal-footer">
-            <form class="form_m_d" method="post">
-              <button type="submit" class="btn btn-primary">Eliminar</button>
-            </form>
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-          </div>
+  <div class="modal" id='delete_modal' tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Eliminar Subespecie</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <p>¿Estás seguro de que deseas eliminar esta subespecie?</p>
+        </div>
+        <div class="modal-footer">
+          <form class="form_m_d" method="post">
+            <button type="submit" class="btn btn-primary">Eliminar</button>
+          </form>
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
         </div>
       </div>
     </div>
+  </div>
 {% endblock %}
-{% block javascripts %}
 
+{% block javascripts %}
 <script src="{{ asset('scripts/dataTables/datatables.min.js') }}"></script>
 <script>
   $(document).ready(function(){
@@ -96,13 +96,10 @@
        "info":     false
     });
   });
-</script>
 
-<script>
-
-$('#fasubspecie-table').on("click", ".button_delete", function() {
-  var id_fasub = $(this).closest('tr').find('.fasubspecie_id').val();
-  $('.form_m_d').attr('action', '/fasubspecie/'+id_fasub);
-});
+  $('#fasubspecie-table').on("click", ".button_delete", function() {
+    var id_fasub = $(this).closest('tr').find('.fasubspecie_id').val();
+    $('.form_m_d').attr('action', '/fasubspecie/'+id_fasub);
+  });
 </script>
 {% endblock %}

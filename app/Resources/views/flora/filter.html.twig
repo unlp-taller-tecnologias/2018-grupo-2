@@ -1,0 +1,36 @@
+<div class="jumbotron" style="padding-top: 2%; padding-bottom: 1%;">
+  <form action="{{ path('flora_index') }}" method="get">
+    <div class="row">
+      <div class="col-md-4">
+        <label>Área</label>
+        <select id="area" class="form-control" name="area">
+          <option value="">Buscar área</option>
+        </select>
+      </div>
+      <div class="col-md-4">
+        <label>Especie</label>
+        <select id="specie" class="form-control" name="specie">
+          <option value="">Buscar especie</option>
+        </select>
+      </div>
+      <div class="col-md-4">
+        <label>Subespecie</label>
+        <select id="subspecie" class="form-control" name="subspecie">
+          <option value="">Buscar subespecie</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="form-group mt-lg-3">
+      <input  id="format" type="text" hidden name="_format" value="html">
+      <button id="button" type="submit" class="btn btn-info">Filtrar</button>
+      <button id="buttonClear" type="submit" class="btn btn-info">Limpiar filtros</button>
+      <button id="buttonExportPDF" type="submit" class="btn btn-white border border-danger float-right ml-lg-1">
+        <i class="fa fa-file-pdf-o"></i> Exportar PDF
+      </button>
+      <button id="buttonExportXLS" type="submit" class="btn btn-white border border-success float-right">
+        <i class="fa fa-file-excel-o"></i> Exportar XLS
+      </button>
+    </div>
+  </form>
+</div>

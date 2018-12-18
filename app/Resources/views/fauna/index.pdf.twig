@@ -1,45 +1,29 @@
 <pdf>
-  <button id="btPrint" class="btn btn-info" type="button" onclick="imprimirPagina()" name="button">Guardar</button>
+  <button id="btPrint" class="btn btn-info mt-lg-3 ml-lg-3" type="button" onclick="imprimirPagina()" name="button">Descargar</button>
     <dynamic-page>
-      <h1>Listado Faunas</h1>
-      <table class="table row-border hover stripe" name="TABLA">
-          <thead class="thead-dark">
-              <tr>
-                  <th>Especie</th>
-                  <th>Subespecie</th>
-                  <th>Nombre</th>
-                  <th>Peso</th>
-              </tr>
+      <div class="container">
+      <h1 class="text-center mb-lg-4">Listado de individuos de fauna</h1>
+        <table class="table row-border hover stripe" name="TABLA">
+          <thead class="thead-light">
+            <tr>
+              <th>Especie</th>
+              <th>Subespecie</th>
+              <th>Nombre</th>
+              <th>Peso</th>
+            </tr>
           </thead>
           <tbody>
           {% for fauna in faunas %}
-              <tr>
-                  <td>{{fauna.subspecie.specie.name}}</td>
-                  <td>{{ fauna.subspecie.name }}</td>
-                  <td>{{ fauna.name }}</td>
-                  <td>{{ fauna.weight }}</td>
-              </tr>
-              {% endfor %}
+            <tr>
+                <td>{{fauna.subspecie.specie.name}}</td>
+                <td>{{ fauna.subspecie.name }}</td>
+                <td>{{ fauna.name }}</td>
+                <td>{{ fauna.weight }}</td>
+            </tr>
+          {% endfor %}
           </tbody>
-      </table>
-
-
-      <!-- <table style=" width:80%; border: 1px solid black; border-collapse: collapse;">
-              <tr style="border: 1px solid black; border-collapse: collapse;">
-                  <th>Especie</th>
-                  <th>Subespecie</th>
-                  <th>Nombre</th>
-                  <th>Area</th>
-                  <th>Fecha de plantación</th>
-              </tr>
-              <tr>
-                  <td style="border: 1px solid black; border-collapse: collapse;"></td>
-                  <td style="border: 1px solid black; border-collapse: collapse;"></td>
-                  <td style="border: 1px solid black; border-collapse: collapse;"></td>
-                  <td style="border: 1px solid black; border-collapse: collapse;"></td>
-                  <td style="border: 1px solid black; border-collapse: collapse;"></td>
-              <tr>
-      </table> -->
+        </table>
+      </div>
     </dynamic-page>
 </pdf>
 <script src="{{ asset('scripts/jquery.js') }}"></script>
@@ -57,7 +41,7 @@ var docDefinition = {
         body: [
           [ 'Especie', 'Subespecie', 'Nombre', 'Peso' ],
           {% for fauna in faunas %}
-          [ '{{fauna.subspecie.specie.name}}', '{{fauna.subspecie.name}}', '{{fauna.name}}', '{{fauna.weight}}'],
+          [ '{{fauna.subspecie.specie.name}}', '{{fauna.subspecie.name}}', '{{fauna.name}}', '{{fauna.weight}} kg.'],
           {% endfor %}
         ]
       }
@@ -66,7 +50,7 @@ var docDefinition = {
 };
 
 function imprimirPagina() {
-   pdfMake.createPdf(docDefinition).download('Faunas.pdf');
+   pdfMake.createPdf(docDefinition).download('listado_fauna.pdf');
 }
 
 </script>

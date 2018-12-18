@@ -1,27 +1,27 @@
 <pdf>
-  <button id="btPrint" class="btn btn-info" type="button" onclick="imprimirPagina()" name="button">Guardar</button>
+  <button id="btPrint" class="btn btn-info mt-lg-3 ml-lg-3" type="button" onclick="imprimirPagina()" name="button">Decargar</button>
     <dynamic-page>
-      <h1>Listado Floras</h1>
+      <div class="container">
+      <h1 class="text-center mb-lg-4">Listado de individuos de flora</h1>
       <table class="table row-border hover stripe" name="TABLA">
-          <thead class="thead-dark">
-                  <th>Especie</th>
-                  <th>Subespecie</th>
-                  <th>Nombre</th>
-                  <th>Area</th>
-                  <th>Fecha de plantación</th>
-              </tr>
-          </thead>
-          <tbody>
-          {% for flora in floras %}
-              <tr>
-                  <td>{{flora.subspecie.specie.name}}</td>
-                  <td>{{ flora.subspecie.name }}</td>
-                  <td>{{ flora.name }}</td>
-                  <td>{{ flora.area.name }}</td>
-                  <td>{{ flora.plantationDate}}</td>
-              <tr>
-              {% endfor %}
-          </tbody>
+        <thead class="thead-light">
+          <th>Especie</th>
+          <th>Subespecie</th>
+          <th>Nombre</th>
+          <th>Area</th>
+          <th>Fecha de plantación</th>
+        </thead>
+        <tbody>
+        {% for flora in floras %}
+          <tr>
+            <td>{{flora.subspecie.specie.name}}</td>
+            <td>{{ flora.subspecie.name }}</td>
+            <td>{{ flora.name }}</td>
+            <td>{{ flora.area.name }}</td>
+            <td>{{ flora.plantationDate}}</td>
+          <tr>
+        {% endfor %}
+        </tbody>
       </table>
     </dynamic-page>
 </pdf>
@@ -38,7 +38,7 @@ var docDefinition = {
         headerRows: 1,
         widths: [ '*', '*', '*', '*','*' ],
         body: [
-          [ 'Especie', 'Subespecie', 'Nombre', 'Area','Fecha de plantación' ],
+          [ 'Especie', 'Subespecie', 'Nombre', 'Área','Fecha de plantación' ],
           {% for flora in floras %}
           [ '{{flora.subspecie.specie.name}}', '{{flora.subspecie.name}}', '{{flora.name}}', '{{flora.area.name}}','{{flora.plantationDate}}' ],
           {% endfor %}
@@ -49,7 +49,7 @@ var docDefinition = {
 };
 
 function imprimirPagina() {
-   pdfMake.createPdf(docDefinition).download('Floras.pdf');
+   pdfMake.createPdf(docDefinition).download('listado_flora.pdf');
 }
 
 </script>

@@ -13,46 +13,46 @@
       <div class="col-md-12 col-center">
         <h1>Áreas</h1>
         <br>
-          <a class="btn btn-info float-right btn-m-r" href="{{ path('area_new') }}">Nueva área</a>
+        <a class="btn btn-info float-right btn-m-r mb-lg-3" href="{{ path('area_new') }}">Nueva área</a>
 
-          <table id="area-table" class="table row-border hover stripe" name="TABLA">
-            <thead class="thead-dark">
-              <tr>
-                <th width="50%">Nombre</th>
-                <th width="35%">Polígono</th>
-                <th width="15%"></th>
-              </tr>
-            </thead>
-            <tbody>
-            {% for area in areas %}
-              <tr>
-                <td>{{ area.name }}</td>
-                <td>{{ area.polygon }}</td>
-                <td>
-                  <a class="btn btn-success" href="{{ path('area_edit', { 'id': area.id }) }}">
-                    <i class="fa fa-pencil"></i>
-                  </a>
-                  <input class="area_id" value="{{area.id}}" hidden>
-                  <button type="button" class="button_delete btn btn-danger" data-toggle="modal" data-target="#delete_modal">
-                    <i class="fa fa-trash"></i>
-                  </button>
-                </td>
-              </tr>
-            {% else %}
-                <tr>
-                    <td colspan="3" class="text-center">
-                        <em>No Area</em>
-                    </td>
-                </tr>
-            {% endfor %}
-            </tbody>
-            <tfoot>
+        <table id="area-table" class="table row-border hover stripe" name="TABLA">
+          <thead class="thead-light">
             <tr>
-                <td colspan="3" class="text-center">
-                    {{ pagination(areas, 'page') }}
-                </td>
+              <th width="50%">Nombre</th>
+              <th width="35%">Polígono</th>
+              <th width="15%"></th>
             </tr>
-            </tfoot>
+          </thead>
+          <tbody>
+          {% for area in areas %}
+            <tr>
+              <td>{{ area.name }}</td>
+              <td>{{ area.polygon }}</td>
+              <td>
+                <a class="btn btn-success" href="{{ path('area_edit', { 'id': area.id }) }}">
+                  <i class="fa fa-pencil"></i>
+                </a>
+                <input class="area_id" value="{{area.id}}" hidden>
+                <button type="button" class="button_delete btn btn-danger" data-toggle="modal" data-target="#delete_modal">
+                  <i class="fa fa-trash"></i>
+                </button>
+              </td>
+            </tr>
+          {% else %}
+            <tr>
+              <td colspan="3" class="text-center">
+                <em>No hay áreas para mostrar</em>
+              </td>
+            </tr>
+          {% endfor %}
+          </tbody>
+          <tfoot>
+          <tr>
+            <td colspan="3" class="text-center">
+              {{ pagination(areas, 'page') }}
+            </td>
+          </tr>
+          </tfoot>
         </table>
 
       </div>
@@ -82,8 +82,8 @@
     </div>
   </div>
 {% endblock %}
-{% block javascripts %}
 
+{% block javascripts %}
 <script src="{{ asset('scripts/dataTables/datatables.min.js') }}"></script>
 <script>
   $(document).ready(function(){
@@ -91,18 +91,15 @@
       searching: false,
       info: false,
       lengthChange: false,
-       "paging":   false,
-       "ordering": false,
-       "info":     false
+        paging:   false,
+        ordering: false,
+        info:     false
     });
   });
-</script>
 
-<script>
-
-$('#area-table').on("click", ".button_delete", function() {
-  var id_area = $(this).closest('tr').find('.area_id').val();
-  $('.form_m_d').attr('action', '/area/'+id_area);
-});
+  $('#area-table').on("click", ".button_delete", function() {
+    var id_area = $(this).closest('tr').find('.area_id').val();
+    $('.form_m_d').attr('action', '/area/'+id_area);
+  });
 </script>
 {% endblock %}

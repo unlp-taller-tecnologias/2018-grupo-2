@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %} Especies de Flora {% endblock %}
+{% block title %} Especies de flora {% endblock %}
 
 {% block stylesheets %}
   <link rel="stylesheet" type="text/css" href="{{ asset('scripts/dataTables/datatables.min.css') }}">
@@ -10,15 +10,16 @@
 {% block body %}
   <div class="container">
     <div class="row">
-      <div class="col-md-12 col-center">
-        <h1>Especies de Flora</h1>
+      <div class="col-md-10 col-center">
+        <h1>Especies de flora</h1>
         <br>
-        <a class="btn btn-info float-right btn-m-r" href="{{ path('flspecie_new') }}">Nueva especie</a>
+        <a class="btn btn-info float-right btn-m-r mb-lg-3" href="{{ path('flspecie_new') }}">Nueva especie</a>
         <table id="flspecie-table" class="table">
-          <thead class="thead-dark">
+          <thead class="thead-light">
             <tr>
-              <th width="65%">Nombre</th>
-              <th width="35%">Acciones</th>
+              <th width="60%">Nombre</th>
+              <th></th>
+              <th width="15%"></th>
             </tr>
           </thead>
           <tbody>
@@ -26,7 +27,11 @@
               <tr>
                 <td>{{ fLSpecie.name }}</td>
                 <td>
-                  <a class="btn btn-primary" href="#">Subespecies</a>
+                  <button type="button" class="button_subspecies btn btn-primary" data-toggle="modal" data-target="#subspecies_modal">
+                    Subespecies
+                  </button>
+                </td>
+                <td>
                   <a class="btn btn-success" href="{{ path('flspecie_edit', { 'id': fLSpecie.id }) }}">
                     <i class="fa fa-pencil"></i>
                   </a>
@@ -36,22 +41,21 @@
                   </button>
                 </td>
               </tr>
-
-          {% else %}
+            {% else %}
               <tr>
-                  <td colspan="3" class="text-center">
-                      <em>No FASpecie</em>
-                  </td>
+                <td colspan="3" class="text-center">
+                  <em>No hay especies de flora para mostrar</em>
+                </td>
               </tr>
-          {% endfor %}
-          </tbody>
-          <tfoot>
-          <tr>
-              <td colspan="3" class="text-center">
+            {% endfor %}
+            </tbody>
+            <tfoot>
+              <tr>
+                <td colspan="3" class="text-center">
                   {{ pagination(fLSpecies, 'page') }}
-              </td>
-          </tr>
-          </tfoot>
+                </td>
+              </tr>
+            </tfoot>
           </tbody>
         </table>
       </div>
@@ -59,27 +63,44 @@
   </div>
 
 
-    <div class="modal" id='delete_modal' tabindex="-1" role="dialog">
-      <div class="modal-dialog" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title">Eliminar especie</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-          <div class="modal-body">
-            <p>¿Estás seguro de que deseas eliminar esta especie?</p>
-          </div>
-          <div class="modal-footer">
-            <form class="form_m_d" method="post">
-              <button type="submit" class="btn btn-primary">Eliminar</button>
-            </form>
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-          </div>
+  <div class="modal" id='delete_modal' tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Eliminar especie</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <p>¿Estás seguro de que deseas eliminar esta especie?</p>
+        </div>
+        <div class="modal-footer">
+          <form class="form_m_d" method="post">
+            <button type="submit" class="btn btn-primary">Eliminar</button>
+          </form>
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
         </div>
       </div>
     </div>
+  </div>
+
+  <div class="modal" id='subspecies_modal' tabindex="-1" role="dialog" style="margin-top: 5%">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Listado de subespecies</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <ul id="subespecies-list">
+          <ul>
+        </div>
+      </div>
+    </div>
+  </div>
 
 {% endblock %}
 {% block javascripts %}
@@ -97,13 +118,35 @@
        "info":     false
     });
   });
-</script>
 
-<script>
+  $('#flspecie-table').on("click", ".button_delete", function() {
+    var id_flspecie = $(this).closest('tr').find('.flspecie_id').val();
+    $('.form_m_d').attr('action', '/flspecie/'+id_flspecie);
+  });
 
-$('#flspecie-table').on("click", ".button_delete", function() {
-  var id_flspecie = $(this).closest('tr').find('.flspecie_id').val();
-  $('.form_m_d').attr('action', '/flspecie/'+id_flspecie);
-});
+  $('#flspecie-table').on("click", ".button_subspecies", function() {
+    $('.subspecies').remove();
+    var specie_id = $(this).closest('tr').find('.flspecie_id').val();
+
+    $.ajax({
+        url: "{{ path('listJsonFasubspecie') }}",
+        method: 'GET',
+        success: function(data) {
+          list = '';
+
+          $.each(data, function(index, option) {
+            if (option.idSpecie == specie_id) {
+              list += '<li class="subspecies">' + option.name + '</li>';
+            }
+          });
+
+          if (list.length == 0) {
+            list = '<li class="subspecies">Aún no posee subespecies</li>'
+          }
+
+          $("#subespecies-list").append(list);
+        }
+      });
+  });
 </script>
 {% endblock %}
