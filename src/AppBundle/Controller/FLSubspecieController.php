@@ -146,11 +146,13 @@ class FLSubspecieController extends Controller
         $flsubspecies = $em->getRepository('AppBundle:FLSubspecie')->findAll();
         $rawResponse = ['rows'];
           foreach($flsubspecies as $flsubspecie) {
-            $rawResponse['rows'][] = array(
-              'id' => $flsubspecie->getId(),
-              'idSpecie' => $flsubspecie->getFLSpecie()->getId(),
-              'name' => $flsubspecie->getName(),
-            );
+            if ($flsubspecie->getDeleted() != true) {
+              $rawResponse['rows'][] = array(
+                'id' => $flsubspecie->getId(),
+                'idSpecie' => $flsubspecie->getFLSpecie()->getId(),
+                'name' => $flsubspecie->getName(),
+              );
+            }
           };
       return new JsonResponse($rawResponse['rows']);
     }

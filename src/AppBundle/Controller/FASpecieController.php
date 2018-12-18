@@ -158,10 +158,12 @@ class FASpecieController extends Controller
         $FASpecies = $em->getRepository('AppBundle:FASpecie')->findAll();
         $rawResponse = ['rows'];
           foreach($FASpecies as $FASpecie) {
-            $rawResponse['rows'][] = array(
-              'id' => $FASpecie->getId(),
-              'name' => $FASpecie->getName(),
-            );
+            if ($FASpecie->getDeleted() != true) {
+              $rawResponse['rows'][] = array(
+                'id' => $FASpecie->getId(),
+                'name' => $FASpecie->getName(),
+              );
+            }
           };
       return new JsonResponse($rawResponse['rows']);
     }

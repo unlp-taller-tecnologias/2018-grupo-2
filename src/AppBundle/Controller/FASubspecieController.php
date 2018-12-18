@@ -146,11 +146,13 @@ class FASubspecieController extends Controller
         $fasubspecies = $em->getRepository('AppBundle:FASubspecie')->findAll();
         $rawResponse = ['rows'];
           foreach($fasubspecies as $fasubspecie) {
-            $rawResponse['rows'][] = array(
-              'id' => $fasubspecie->getId(),
-              'idSpecie' => $fasubspecie->getFASpecie()->getId(),
-              'name' => $fasubspecie->getName(),
-            );
+            if ($fasubspecie->getDeleted() != true) {
+              $rawResponse['rows'][] = array(
+                'id' => $fasubspecie->getId(),
+                'idSpecie' => $fasubspecie->getFASpecie()->getId(),
+                'name' => $fasubspecie->getName(),
+              );
+            }
           };
       return new JsonResponse($rawResponse['rows']);
     }

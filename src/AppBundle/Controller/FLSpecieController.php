@@ -145,10 +145,12 @@ class FLSpecieController extends Controller
         $FLSpecies = $em->getRepository('AppBundle:FLSpecie')->findAll();
         $rawResponse = ['rows'];
           foreach($FLSpecies as $FLSpecie) {
-            $rawResponse['rows'][] = array(
-              'id' => $FLSpecie->getId(),
-              'name' => $FLSpecie->getName(),
-            );
+            if ($FLSpecie->getDeleted() != true) {
+              $rawResponse['rows'][] = array(
+                'id' => $FLSpecie->getId(),
+                'name' => $FLSpecie->getName(),
+              );
+            }
           };
       return new JsonResponse($rawResponse['rows']);
     }

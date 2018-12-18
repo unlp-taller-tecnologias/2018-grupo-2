@@ -44,9 +44,12 @@ class DefaultEntityRepository extends \Doctrine\ORM\EntityRepository
 
   protected function setQuery($arrayParams){
     if (is_null($arrayParams)) {
-      $dql = $this->createQueryBuilder(self::$nameClass);
-      $dql->orderBy(self::$orderByAttribute, 'DESC');
-      return $dql;
+      $qb = $this->createQueryBuilder(self::$nameClass)
+                  ->andWhere(self::$nameClass.'.deleted = :deleted')
+                  ->setParameter('deleted', false)
+                  ->orderBy(self::$orderByAttribute, 'ASC')
+                  ->getQuery();
+      return $qb;
     }
   }
 }
