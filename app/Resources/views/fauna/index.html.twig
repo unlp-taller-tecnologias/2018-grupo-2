@@ -22,28 +22,31 @@
      <div class="form-group col-md-6">
        <label>Encargado</label>
        <select id="attendants" class="form-control" name="attendants">
-         <option value=""> Seleecione </option>
+         <option value=""> Seleccione </option>
        </select>
      </div>
      <div class="form-group col-md-3">
        <label>Especie</label>
        <select id="specie" class="form-control" name="specie">
-         <option value=""> Seleecione </option>
+         <option value=""> Seleccione </option>
        </select>
      </div>
      <div class="form-group col-md-3">
        <label>Sub Especie</label>
        <select id="subspecie" class="form-control" name="subspecie">
-         <option value=""> Seleecione </option>
+         <option value=""> Seleccione </option>
        </select>
      </div>
      <div class="form-group col-md-12">
+        <input  id="format" type="text" hidden name="_format" value="html">
         <button id="button" type="submit" class="btn btn-info">Buscar</button>
         <button id="buttonClear" type="submit" class="btn btn-info">Limpiar filtros</button>
+        <button id="buttonExportPDF" type="submit" class="btn btn-info">Exportar PDF</button>
+        <button id="buttonExportXLS" type="submit" class="btn btn-info">Exportar XLS</button>
         <a class="btn btn-info float-right btn-m-r" href="{{ path('fauna_new') }}">Nuevo individuo</a>
      </div>
-   </div> 
-  </form> 
+   </div>
+  </form>
 </div>
   <div class="row">
     <div class="col-md-12 col-center">
@@ -134,10 +137,12 @@
        "ordering": false,
        "info":     false
     });
+    setSubspecies();
     $('#destination').val("{{params.destination}}");
     $('#specie').val("{{params.specie}}");
     $('#subspecie').val("{{params.subspecie}}");
     $('#attendants').val("{{params.attendants}}");
+    $('#format').val('html');
   });
 
   $('#buttonClear').click(function() {
@@ -173,7 +178,7 @@
      }
    });
 
-  function setSubspecies(){  
+  function setSubspecies(){
     $.ajax({
      url: "{{ path('listJsonFasubspecie') }}",
      method: "GET",
@@ -204,20 +209,29 @@
             if (options != "") {
               $(".opSub").remove();
               $("#subspecie").append(options);
+              $("#subspecie").prop('disabled', false);
+            }else {
+              $("#subspecie").prop('disabled', true);
             }
          }
       });
     }
     else{
       $(".opSub").remove();
+      $("#subspecie").prop('disabled', false);
       setSubspecies();
     }
   });
- 
+
+  $('#buttonExportPDF').click(function() {
+    $('#format').val('pdf');
+  });
+  $('#buttonExportXLS').click(function() {
+    $('#format').val('xls');
+  });
+
 </script>
-
 <script>
-
 $('#fauna-table').on("click", ".button_delete", function() {
   var id_fauna = $(this).closest('tr').find('.fauna_id').val();
   $('.form_m_d').attr('action', '/fauna/'+id_fauna);

@@ -17,28 +17,31 @@
      <div class="form-group col-md-4">
        <label>Area</label>
        <select id="area" class="form-control" name="area">
-         <option value=""> Seleecione </option>
+         <option value=""> Seleccione </option>
        </select>
      </div>
      <div class="form-group col-md-4">
        <label>Especie</label>
        <select id="specie" class="form-control" name="specie">
-         <option value=""> Seleecione </option>
+         <option value=""> Seleccione </option>
        </select>
      </div>
      <div class="form-group col-md-4">
        <label>Sub Especie</label>
        <select id="subspecie" class="form-control" name="subspecie">
-         <option value=""> Seleecione </option>
+         <option value=""> Seleccione </option>
        </select>
      </div>
      <div class="form-group col-md-12">
+        <input  id="format" type="text" hidden name="_format" value="html">
         <button id="button" type="submit" class="btn btn-info">Buscar</button>
         <button id="buttonClear" type="submit" class="btn btn-info">Limpiar filtros</button>
+        <button id="buttonExportPDF" type="submit" class="btn btn-info">Exportar PDF</button>
+        <button id="buttonExportXLS" type="submit" class="btn btn-info">Exportar XLS</button>
         <a class="btn btn-info float-right btn-m-r" href="{{ path('flora_new') }}">Nuevo individuo</a>
      </div>
-   </div> 
-  </form> 
+   </div>
+  </form>
 </div>
   <div class="row">
     <div class="col-md-12 col-center">
@@ -122,6 +125,7 @@
 
 {% block javascripts %}
 <script src="{{ asset('scripts/dataTables/datatables.min.js') }}"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
 <script>
   $(document).ready(function(){
     $('#flora-table').DataTable({
@@ -132,9 +136,11 @@
        "ordering": false,
        "info":     false
     });
+    setSubspecies();
     $('#specie').val("{{params.specie}}");
     $('#subspecie').val("{{params.subspecie}}");
     $('#area').val("{{params.area}}");
+    $('#format').val('html');
   });
 
   $('#buttonClear').click(function() {
@@ -166,10 +172,11 @@
         });
         $("#specie").append(options);
         $('#specie').val("{{params.specie}}");
+
      }
    });
 
-  function setSubspecies(){  
+  function setSubspecies(){
     $.ajax({
      url: "{{ path('listJsonFlsubspecie') }}",
      method: "GET",
@@ -200,16 +207,26 @@
             if (options != "") {
               $(".opSub").remove();
               $("#subspecie").append(options);
+              $("#subspecie").prop('disabled', false);
+            }else {
+              $("#subspecie").prop('disabled', true);
             }
          }
       });
     }
     else{
       $(".opSub").remove();
+      $("#subspecie").prop('disabled', false);
       setSubspecies();
     }
   });
 
+  $('#buttonExportPDF').click(function() {
+    $('#format').val('pdf');
+  });
+  $('#buttonExportXLS').click(function() {
+    $('#format').val('xls');
+  });
 
 </script>
 
@@ -221,4 +238,3 @@ $('#flora-table').on("click", ".button_delete", function() {
 });
 </script>
 {% endblock %}
-

@@ -20,16 +20,17 @@ class DefaultEntityRepository extends \Doctrine\ORM\EntityRepository
       $this->setOrderByAttribute();
 
       $query = $this->setQuery($arrayParams);
-
+      $format= ((!is_null($arrayParams)) && (isset($arrayParams['format'])))? $arrayParams['format']:"html";
+      if ($format != "html") {
+        return $query->getResult();
+      }
       $firstResult = ($page - 1) * $max;
       $query->setFirstResult($firstResult);
       $query->setMaxResults($max);
       $paginator = new Paginator($query);
-
       if(($paginator->count() <=  $firstResult) && $page != 1) {
-          throw new NotFoundHttpException('Page not found');
+        throw new NotFoundHttpException('Page not found');
       }
-
       return $paginator;
   }
 
