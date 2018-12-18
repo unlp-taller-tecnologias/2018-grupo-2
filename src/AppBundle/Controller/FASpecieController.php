@@ -8,7 +8,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\JsonResponse;
-
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 
 /**
  * Faspecie controller.
@@ -21,6 +21,7 @@ class FASpecieController extends Controller
      * Lists all fASpecie entities.
      *
      * @Route("/", name="faspecie_index")
+     * @Security("is_granted('ROLE_ADMIN')")
      * @Method("GET")
      */
     public function indexAction(Request $request)
@@ -38,6 +39,7 @@ class FASpecieController extends Controller
      * Creates a new fASpecie entity.
      *
      * @Route("/new", name="faspecie_new")
+     * @Security("is_granted('ROLE_ADMIN')")
      * @Method({"GET", "POST"})
      */
     public function newAction(Request $request)
@@ -64,6 +66,7 @@ class FASpecieController extends Controller
      * Displays a form to edit an existing fASpecie entity.
      *
      * @Route("/{id}/edit", name="faspecie_edit")
+     * @Security("is_granted('ROLE_ADMIN')")
      * @Method({"GET", "POST"})
      */
     public function editAction(Request $request, FASpecie $fASpecie)
@@ -89,6 +92,7 @@ class FASpecieController extends Controller
      * Deletes a fASpecie entity.
      *
      * @Route("/{id}", name="faspecie_delete")
+     * @Security("is_granted('ROLE_ADMIN')")
      * @Method("DELETE")
      */
     public function deleteAction(Request $request, FASpecie $fASpecie)
@@ -151,13 +155,13 @@ class FASpecieController extends Controller
     public function listJsonAction(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
-        $FASpecies = $em->getRepository('AppBundle:FASpecie')->findAll();
+        $FASpecies = $em->getRepository('AppBundle:FASpecie')->findBy(array('deleted' => false ));
         $rawResponse = ['rows'];
           foreach($FASpecies as $FASpecie) {
-            $rawResponse['rows'][] = array(
-              'id' => $FASpecie->getId(),
-              'name' => $FASpecie->getName(),
-            );
+              $rawResponse['rows'][] = array(
+                'id' => $FASpecie->getId(),
+                'name' => $FASpecie->getName(),
+              );
           };
       return new JsonResponse($rawResponse['rows']);
     }

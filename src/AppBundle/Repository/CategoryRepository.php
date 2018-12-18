@@ -16,7 +16,7 @@ class CategoryRepository extends DefaultEntityRepository
     self::$nameClass = 'CategoryRepository';
   }
 
-  protected function setOrderByAttribute(){
+  public function setOrderByAttribute(){
     self::$orderByAttribute = 'CategoryRepository.name';
   }
 

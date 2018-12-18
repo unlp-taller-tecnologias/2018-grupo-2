@@ -14,51 +14,51 @@
       <div class="col-md-12 col-center">
         <h1>Encargados</h1>
         <br>
-        <a class="btn btn-info float-right btn-m-r" href="{{ path('attendant_new') }}">Nuevo encargado</a>
+        <a class="btn btn-info float-right btn-m-r mb-lg-3" href="{{ path('attendant_new') }}">Nuevo encargado</a>
 
-          <table id="attendant-table" class="table row-border hover stripe" name="TABLA">
-            <thead class="thead-dark">
-              <tr>
-                <th width="35%">Nombre</th>
-                <th width="30%">Email</th>
-                <th width="20%">Categoría</th>
-                <th width="25%"></th>
-              </tr>
-            </thead>
-            <tbody>
-            {% for attendant in attendants %}
-              <tr>
-                <td>{{ attendant.lastName }}, {{ attendant.name }}</td>
-                <td>{{ attendant.email }}</td>
-                <td>{{ attendant.category }}</td>
-                <td>
-                  <a class="btn btn-info" href="{{ path('attendant_show', { 'id': attendant.id }) }}">
-                    <i class="fa fa-eye"></i>
-                  </a>
-                  <a class="btn btn-success" href="{{ path('attendant_edit', { 'id': attendant.id }) }}">
-                    <i class="fa fa-pencil"></i>
-                  </a>
-                  <input class="attendant_id" value="{{attendant.id}}" hidden>
-                  <button type="button" class="button_delete btn btn-danger" data-toggle="modal" data-target="#delete_modal">
-                    <i class="fa fa-trash"></i>
-                  </button>
-                </td>
-              </tr>
-            {% else %}
-                <tr>
-                    <td colspan="4" class="text-center">
-                        <em>No attendants</em>
-                    </td>
-                </tr>
-            {% endfor %}
-            </tbody>
-            <tfoot>
+        <table id="attendant-table" class="table row-border hover stripe" name="TABLA">
+          <thead class="thead-light">
             <tr>
-                <td colspan="4" class="text-center">
-                    {{ pagination(attendants, 'page') }}
-                </td>
+              <th width="35%">Nombre</th>
+              <th width="30%">Email</th>
+              <th width="20%">Categoría</th>
+              <th width="25%"></th>
             </tr>
-            </tfoot>
+          </thead>
+          <tbody>
+          {% for attendant in attendants %}
+            <tr>
+              <td>{{ attendant.lastName }}, {{ attendant.name }}</td>
+              <td>{{ attendant.email }}</td>
+              <td>{{ attendant.category }}</td>
+              <td>
+                <a class="btn btn-info" href="{{ path('attendant_show', { 'id': attendant.id }) }}">
+                  <i class="fa fa-eye"></i>
+                </a>
+                <a class="btn btn-success" href="{{ path('attendant_edit', { 'id': attendant.id }) }}">
+                  <i class="fa fa-pencil"></i>
+                </a>
+                <input class="attendant_id" value="{{attendant.id}}" hidden>
+                <button type="button" class="button_delete btn btn-danger" data-toggle="modal" data-target="#delete_modal">
+                  <i class="fa fa-trash"></i>
+                </button>
+              </td>
+            </tr>
+          {% else %}
+            <tr>
+              <td colspan="4" class="text-center">
+                <em>No hay encargados para mostrar</em>
+              </td>
+            </tr>
+          {% endfor %}
+          </tbody>
+          <tfoot>
+            <tr>
+              <td colspan="4" class="text-center">
+                {{ pagination(attendants, 'page') }}
+              </td>
+            </tr>
+          </tfoot>
         </table>
 
       </div>

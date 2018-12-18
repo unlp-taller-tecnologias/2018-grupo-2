@@ -1,8 +1,9 @@
 {% extends "base.html.twig" %}
 
-{% block title %} Iniciar Sesion {% endblock %}
+{% block title %} Iniciar sesión {% endblock %}
 
 {% block body %}
+  <div class="container">
     <div class="row">
         <div class="col s12 m8 offset-m2">
             {% include "FOSUserBundle:Security:login_content.html.twig" %}

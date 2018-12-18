@@ -8,7 +8,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\JsonResponse;
-
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 /**
  * Flspecie controller.
  *
@@ -20,6 +20,7 @@ class FLSpecieController extends Controller
      * Lists all fLSpecie entities.
      *
      * @Route("/", name="flspecie_index")
+     * @Security("is_granted('ROLE_ADMIN')")
      * @Method("GET")
      */
     public function indexAction(Request $request)
@@ -37,6 +38,7 @@ class FLSpecieController extends Controller
      * Creates a new fLSpecie entity.
      *
      * @Route("/new", name="flspecie_new")
+     * @Security("is_granted('ROLE_ADMIN')")
      * @Method({"GET", "POST"})
      */
     public function newAction(Request $request)
@@ -63,6 +65,7 @@ class FLSpecieController extends Controller
      * Displays a form to edit an existing fLSpecie entity.
      *
      * @Route("/{id}/edit", name="flspecie_edit")
+     * @Security("is_granted('ROLE_ADMIN')")
      * @Method({"GET", "POST"})
      */
     public function editAction(Request $request, FLSpecie $fLSpecie)
@@ -88,6 +91,7 @@ class FLSpecieController extends Controller
      * Deletes a fLSpecie entity.
      *
      * @Route("/{id}", name="flspecie_delete")
+     * @Security("is_granted('ROLE_ADMIN')")
      * @Method("DELETE")
      */
     public function deleteAction(Request $request, FLSpecie $fLSpecie)
@@ -138,13 +142,13 @@ class FLSpecieController extends Controller
     public function listJsonAction(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
-        $FLSpecies = $em->getRepository('AppBundle:FLSpecie')->findAll();
+        $FLSpecies = $em->getRepository('AppBundle:FLSpecie')->findBy(array('deleted' => false ));
         $rawResponse = ['rows'];
           foreach($FLSpecies as $FLSpecie) {
-            $rawResponse['rows'][] = array(
-              'id' => $FLSpecie->getId(),
-              'name' => $FLSpecie->getName(),
-            );
+              $rawResponse['rows'][] = array(
+                'id' => $FLSpecie->getId(),
+                'name' => $FLSpecie->getName(),
+              );
           };
       return new JsonResponse($rawResponse['rows']);
     }

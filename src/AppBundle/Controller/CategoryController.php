@@ -5,8 +5,9 @@ namespace AppBundle\Controller;
 use AppBundle\Entity\Category;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;use Symfony\Component\HttpFoundation\Request;
-
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\HttpFoundation\Request;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 /**
  * Category controller.
  *
@@ -18,6 +19,7 @@ class CategoryController extends Controller
      * Lists all category entities.
      *
      * @Route("/", name="category_index")
+     * @Security("is_granted('ROLE_ADMIN')")
      * @Method("GET")
      */
     public function indexAction(Request $request)
@@ -35,6 +37,7 @@ class CategoryController extends Controller
      * Creates a new category entity.
      *
      * @Route("/new", name="category_new")
+     * @Security("is_granted('ROLE_ADMIN')")
      * @Method({"GET", "POST"})
      */
     public function newAction(Request $request)
@@ -61,6 +64,7 @@ class CategoryController extends Controller
      * Displays a form to edit an existing category entity.
      *
      * @Route("/{id}/edit", name="category_edit")
+     * @Security("is_granted('ROLE_ADMIN')")
      * @Method({"GET", "POST"})
      */
     public function editAction(Request $request, Category $category)
@@ -86,6 +90,7 @@ class CategoryController extends Controller
      * Deletes a category entity.
      *
      * @Route("/{id}", name="category_delete")
+     * @Security("is_granted('ROLE_ADMIN')")
      * @Method("DELETE")
      */
     public function deleteAction(Request $request, Category $category)

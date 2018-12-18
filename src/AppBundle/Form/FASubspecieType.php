@@ -15,14 +15,6 @@ class FASubspecieType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder->add(
-                    'name', TextType::class, array(
-                        'label' => 'Nombre', 
-                        'required' => true,
-                        'attr' => array(
-                            'class' => 'form-control mb-lg-3',
-                            'placeholder' => 'Ingrese un nombre...'))
-                    )
-                ->add(
                     'specie', null, array(
                         'label' => 'Especie', 
                         'required' => true,
@@ -30,6 +22,14 @@ class FASubspecieType extends AbstractType
                             'class' => 'form-control mb-lg-3'
                         ),
                         'placeholder' => 'Seleccione una especie...')
+                    )
+                ->add(
+                    'name', TextType::class, array(
+                        'label' => 'Nombre', 
+                        'required' => true,
+                        'attr' => array(
+                            'class' => 'form-control mb-lg-3',
+                            'placeholder' => 'Ingrese un nombre...'))
                     );
     }/**
      * {@inheritdoc}

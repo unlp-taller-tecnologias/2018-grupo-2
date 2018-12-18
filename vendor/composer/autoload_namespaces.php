@@ -6,10 +6,15 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
+    'ZendPdf\\' => array($vendorDir . '/zendframework/zendpdf/library'),
     'Twig_Extensions_' => array($vendorDir . '/twig/extensions/lib'),
     'Twig_' => array($vendorDir . '/twig/twig/lib'),
     'Tiloweb\\PaginationBundle\\' => array($vendorDir . '/tiloweb/pagination-bundle'),
+    'Ps\\PdfBundle' => array($vendorDir . '/psliwa/pdf-bundle'),
     'Pagerfanta\\' => array($vendorDir . '/pagerfanta/pagerfanta/src'),
+    'PHPPdf' => array($vendorDir . '/psliwa/php-pdf/lib'),
+    'PHPExcel' => array($vendorDir . '/phpoffice/phpexcel/Classes'),
+    'Imagine' => array($vendorDir . '/psliwa/php-pdf/lib'),
     'Doctrine\\Common\\Lexer\\' => array($vendorDir . '/doctrine/lexer/lib'),
     'Doctrine\\Common\\Collections\\' => array($vendorDir . '/doctrine/collections/lib'),
 );

@@ -57,6 +57,13 @@ class Attendant
     private $faunas;
 
     /**
+     * @var int
+     *
+     * @ORM\Column(name="doc_num", type="integer")
+     */
+     private $doc_num;
+
+    /**
      * Get id.
      *
      * @return int
@@ -206,5 +213,29 @@ class Attendant
     public function getDeleted()
     {
         return $this->deleted;
+    }
+
+    /**
+     * Set doc_num.
+     *
+     * @param int $doc_num
+     *
+     * @return Attendant
+     */
+    public function setDocNum($doc_num)
+    {
+        $this->doc_num = $doc_num;
+
+        return $this;
+    }
+
+    /**
+     * Get doc_num.
+     *
+     * @return int
+     */
+    public function getDocNum()
+    {
+        return $this->doc_num;
     }
 }
