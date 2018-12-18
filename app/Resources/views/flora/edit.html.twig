@@ -4,6 +4,14 @@
 
 {% block stylesheets %}
   <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
+
+  <link rel="stylesheet" href="{{ asset('scripts/jquery-ui/jquery-ui.min.css') }}">
+
+  <style>
+      .ui-datepicker-calendar {
+          display: none;
+      }
+  </style>
 {% endblock %}
 
 {% block body %}
@@ -48,9 +56,105 @@
               $('#appbundle_flora_specie').val(id_specie);
             }
           });
+          $.ajax({
+           url: "{{ path('listJsonFlsubspecie') }}",
+           method: "GET",
+           success: function(data) {
+                var id_specie=$('#appbundle_flora_specie').val();
+                $.each( data, function( i, option ) {
+                  if (option.idSpecie != id_specie) {
+                    $("#appbundle_flora_subspecie option[value ="+option.id+"]").remove();
+                  }
+                });
 
+             }
+          });
        }
     });
   });
 </script>
+
+<script>
+  $(document).ready(function() {
+
+    // ids autogenerados por el bundle
+    $('#appbundle_flora_specie').on('change', function(){
+      // habilito el campo de subespecies y elimino las que haya tenido cargadas
+      $('#appbundle_flora_subspecie').removeAttr('disabled');
+      $('#appbundle_flora_subspecie option').remove().end();
+      $('#appbundle_flora_subspecie').append('<option>Seleccione una subespecie</option>');
+
+      specie_id = $("#appbundle_flora_specie").val();
+
+      // recupero las nuevas subespecies
+      $.ajax({
+        url: "{{ path('listJsonFlsubspecie') }}",
+        method: 'GET',
+        success: function(data) {
+          options = '';
+
+          $.each(data, function(index, option) {
+            if (option.idSpecie == specie_id) {
+              options += "<option class='subspecies-ids' value='" + option.id + "'>" + option.name + "</option>";
+            }
+          });
+
+          $("#appbundle_flora_subspecie").append(options);
+        }
+      });
+    });
+  });
+</script>
+<script src="{{ asset('scripts/jquery-ui/jquery-ui.min.js') }}"></script>
+<script>
+$(document).ready(function()
+{
+    $("#appbundle_flora_plantation_date").datepicker({
+        dateFormat: 'MM yy',
+        changeMonth: true,
+        changeYear: true,
+        showButtonPanel: true,
+
+        onClose: function(dateText, inst) {
+            var month = $("#ui-datepicker-div .ui-datepicker-month :selected").val();
+            var year = $("#ui-datepicker-div .ui-datepicker-year :selected").val();
+            $(this).val($.datepicker.formatDate('MM yy', new Date(year, month, 1)));
+        }
+    });
+
+    $("#appbundle_flora_plantation_date").focus(function () {
+        $(".ui-datepicker-calendar").hide();
+        $("#ui-datepicker-div").position({
+            my: "center top",
+            at: "center bottom",
+            of: $(this)
+        });
+    });
+});
+</script>
+
+<script>
+ $.datepicker.regional['es'] = {
+ closeText: 'Cerrar',
+ prevText: '< Ant',
+ nextText: 'Sig >',
+ currentText: 'Hoy',
+ monthNames: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
+ monthNamesShort: ['Ene','Feb','Mar','Abr', 'May','Jun','Jul','Ago','Sep', 'Oct','Nov','Dic'],
+ dayNames: ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'],
+ dayNamesShort: ['Dom','Lun','Mar','Mié','Juv','Vie','Sáb'],
+ dayNamesMin: ['Do','Lu','Ma','Mi','Ju','Vi','Sá'],
+ weekHeader: 'Sm',
+ dateFormat: 'dd/mm/yy',
+ firstDay: 1,
+ isRTL: false,
+ showMonthAfterYear: false,
+ yearSuffix: ''
+ };
+ $.datepicker.setDefaults($.datepicker.regional['es']);
+$(function () {
+$("#fecha").datepicker();
+});
+</script>
+
 {% endblock %}
