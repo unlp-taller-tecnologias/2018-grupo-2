@@ -61,10 +61,15 @@ class FloraController extends Controller
 
             //subida de imagen
             $file=$form['image']->getData();
-            $ext=$file->guessExtension();
-            $file_name=time().".".$ext;
-            $file->move("uploads", $file_name);
-            $flora->setImage($file_name);
+            if($file != null){
+              $ext       = $file->guessExtension();
+              $file_name = time().".".$ext;
+              $file->move("uploads", $file_name);
+              $flora->setImage($file_name);
+            }
+            else{
+              $flora->setImage(null);
+            }
 
             $em->persist($flora);
             $em->flush();

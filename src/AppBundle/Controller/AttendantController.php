@@ -53,10 +53,11 @@ class AttendantController extends Controller
             $em->persist($attendant);
             $em->flush();
 
+            $this->addFlash("success", "Encargado creado con éxito.");
             return $this->redirectToRoute('attendant_show', array('id' => $attendant->getId()));
         }
 
-        $this->addFlash("success", "Encargado creado con éxito.");
+
         return $this->render('attendant/new.html.twig', array(
             'attendant' => $attendant,
             'form' => $form->createView(),
