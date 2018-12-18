@@ -43,6 +43,7 @@ class AppFixtures extends Fixture
             $attendant->setName($this->generateRandomString(8));
             $attendant->setLastName($this->generateRandomString(8));
             $attendant->setCategory($this->getReference('category'.rand(0, 9)));
+            $attendant->setDocNum($i+100);
             $manager->persist($attendant);
             $this->addReference('attendant'.$i, $attendant);
         }

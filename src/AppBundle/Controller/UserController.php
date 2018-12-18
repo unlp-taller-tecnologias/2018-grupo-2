@@ -87,7 +87,7 @@ class UserController extends Controller
     /**
      * Deletes a user entity.
      *
-     * @Route("/{id}", name="users_delete")
+     * @Route("/{id}/delete", name="users_delete")
      * @Security("is_granted('ROLE_ADMIN')")
      * @Method("DELETE")
      */
@@ -96,13 +96,15 @@ class UserController extends Controller
         $form = $this->createDeleteForm($user);
         $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
+        if ($this->getUser()->getId() != $user->getId()) {
             $em = $this->getDoctrine()->getManager();
             $user->setEnabled(false);
             $em->persist($user);
             $em->flush();
+            $this->addFlash("success", "Usuario eliminado con éxito.");
+        } else {
+            $this->addFlash("error", "No puedes borrarte a ti mismo.");
         }
-        $this->addFlash("success", "Usuario eliminado con éxito.");
         return $this->redirectToRoute('users_index');
     }
 
