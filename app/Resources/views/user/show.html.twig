@@ -1,28 +1,66 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>User</h1>
+{% if app.user.id == user.id %}
+     <a class="btn btn-info float-right btn-m-r" href="{{ path('fos_user_change_password') }}">Modificar contraseña</a>
+{% endif %}
+<div class="container">
+   <div class="row">
+     <div class="col-md-6 col-center">
+       <h1 class="text-center">{{ user.lastName }}, {{ user.name }}</h1>
+       <br>
+       <br>
 
-    <table>
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ user.id }}</td>
-            </tr>
-        </tbody>
-    </table>
+       <div class="row">
+         <div class="col-md-6">
+           <div class="row">
+             <div class="col-md-12">
+               <div class="card">
+                 <div class="card-body">
+                   <h5 class="card-title">Email</h5>
+                   <p class="card-text">{{ user.email }}</p>
+                 </div>
+               </div>
+             </div>
+           </div>
 
-    <ul>
-        <li>
-            <a href="{{ path('users_index') }}">Back to the list</a>
-        </li>
-        <li>
-            <a href="{{ path('users_edit', { 'id': user.id }) }}">Edit</a>
-        </li>
-        <li>
-            {{ form_start(delete_form) }}
-                <input type="submit" value="Delete">
-            {{ form_end(delete_form) }}
-        </li>
-    </ul>
+           <div class="row mt-2">
+             <div class="col-md-12">
+               <div class="card">
+                 <div class="card-body">
+                   <h5 class="card-title">Nombre de usuario</h5>
+                   <p class="card-text">{{ user.username }}</p>
+                 </div>
+               </div>
+             </div>
+           </div>
+         </div>
+
+         <div class="col-md-6">
+           <div class="card" style="height: 100%">
+             <div class="card-body">
+               <h5 class="card-title">Roles</h5>
+               {% if 'ROLE_ADMIN' in user.roles %}
+                  <p class="card-text">Administrador</p>
+               {% endif %}
+               {% if 'ROLE_DATA_ENTRY' in user.roles %}
+                  <p class="card-text">Data entry</p>
+               {% endif %}
+               {% if 'ROLE_REPORTS' in user.roles %}
+                  <p class="card-text">Responsable de informes</p>
+               {% endif %}
+             </div>
+           </div>
+         </div>
+       </div>
+
+       <div class="text-center mt-lg-4">
+         <a class="btn btn-success btn-md" href="{{ path('users_edit', { 'id': user.id }) }}">Editar</a>
+        {% if is_granted('ROLE_ADMIN') %}
+          <a class="btn btn-primary btn-md ml-md-1" href="{{ path('users_index') }}">Volver al listado</a>
+        {% endif %}
+       </div>
+     </div>
+   </div>
+ </div>
 {% endblock %}

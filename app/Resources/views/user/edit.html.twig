@@ -1,21 +1,29 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>User edit</h1>
+<div class="container">
+  <div class="row">
+    <div class="col-md-7 col-center">
+      <h1 class="text-center">Editar perfil</h1>
+      <br>
+      <br>
 
-    {{ form_start(edit_form) }}
-        {{ form_widget(edit_form) }}
-        <input type="submit" value="Edit" />
-    {{ form_end(edit_form) }}
+      {{ form_start(edit_form, { 'enctype':"multipart/form-data"}) }}
+      {{ form_row(edit_form.email) }}
+      {{ form_row(edit_form.username) }}
+      {{ form_row(edit_form.name) }}
+      {{ form_row(edit_form.lastname) }}
+      {% if is_granted('ROLE_ADMIN') %}
+        {{ form_row(edit_form.roles) }}
+      {% endif %}
+      {{ form_row(edit_form._token) }}
+        <div class="text-center">
+          <input type="submit" class="btn btn-success btn-md mt-lg-3" value="Guardar cambios" />
+          <a class="btn btn-primary btn-md mt-lg-3 ml-md-1" href="{{ path('users_show', { 'id': user.id }) }}">Volver al perfil</a>
+        </div>
+      {{ form_end(edit_form,{'render_rest': false}) }}
 
-    <ul>
-        <li>
-            <a href="{{ path('users_index') }}">Back to the list</a>
-        </li>
-        <li>
-            {{ form_start(delete_form) }}
-                <input type="submit" value="Delete">
-            {{ form_end(delete_form) }}
-        </li>
-    </ul>
+    </div>
+  </div>
+</div>
 {% endblock %}

@@ -23,6 +23,21 @@ class User extends BaseUser
      */
     public $id;
 
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="name", type="string", length=50)
+     */
+    private $name;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="last_name", type="string", length=50)
+     */
+    private $lastName;
+
+
     public function __construct()
     {
         parent::__construct();
@@ -39,4 +54,51 @@ class User extends BaseUser
         return $this->id;
     }
 
+    /**
+     * Set name.
+     *
+     * @param string $name
+     *
+     * @return User
+     */
+    public function setName($name)
+    {
+        $this->name = $name;
+
+        return $this;
+    }
+
+    /**
+     * Get name.
+     *
+     * @return string
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    /**
+     * Set lastName.
+     *
+     * @param string $lastName
+     *
+     * @return User
+     */
+    public function setLastName($lastName)
+    {
+        $this->lastName = $lastName;
+
+        return $this;
+    }
+
+    /**
+     * Get lastName.
+     *
+     * @return string
+     */
+    public function getLastName()
+    {
+        return $this->lastName;
+    }
 }

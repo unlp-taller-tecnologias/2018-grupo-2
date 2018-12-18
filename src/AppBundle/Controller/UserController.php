@@ -9,6 +9,8 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
+use Symfony\Component\HttpFoundation\Session\Session;
+
 
 /**
  * User controller.
@@ -43,6 +45,9 @@ class UserController extends Controller
      */
     public function showAction(User $user)
     {
+        if($this->getUser()->getId() != $user->getId()){
+          $this->denyAccessUnlessGranted('ROLE_ADMIN', null, 'Unable to access this page!');
+        }
         $deleteForm = $this->createDeleteForm($user);
 
         return $this->render('user/show.html.twig', array(
@@ -59,14 +64,17 @@ class UserController extends Controller
      */
     public function editAction(Request $request, User $user)
     {
+        if($this->getUser()->getId() != $user->getId()){
+          $this->denyAccessUnlessGranted('ROLE_ADMIN', null, 'Unable to access this page!');
+        }
         $deleteForm = $this->createDeleteForm($user);
         $editForm = $this->createForm('AppBundle\Form\UserType', $user);
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $this->getDoctrine()->getManager()->flush();
-
-            return $this->redirectToRoute('users_edit', array('id' => $user->getId()));
+            $this->addFlash("success", "Perfil modificado con éxito.");
+            return $this->redirectToRoute('users_show', array('id' => $user->getId()));
         }
 
         return $this->render('user/edit.html.twig', array(
@@ -80,6 +88,7 @@ class UserController extends Controller
      * Deletes a user entity.
      *
      * @Route("/{id}", name="users_delete")
+     * @Security("is_granted('ROLE_ADMIN')")
      * @Method("DELETE")
      */
     public function deleteAction(Request $request, User $user)
@@ -89,10 +98,11 @@ class UserController extends Controller
 
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
-            $em->remove($user);
+            $user->setEnabled(false);
+            $em->persist($user);
             $em->flush();
         }
-
+        $this->addFlash("success", "Usuario eliminado con éxito.");
         return $this->redirectToRoute('users_index');
     }
 

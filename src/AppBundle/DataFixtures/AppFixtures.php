@@ -110,6 +110,8 @@ class AppFixtures extends Fixture
         $userAdmin->addRole("ROLE_ADMIN");
         $userAdmin->setUsername("admin");
         $userAdmin->setUsernameCanonical("admin");
+        $userAdmin->setName("Cristina");
+        $userAdmin->setLastName("Garcia");
         $userAdmin->setEmail("admin@admin.com");
         $userAdmin->setEmailCanonical("admin@admin.com");
         $userAdmin->setPlainPassword('admin');
@@ -119,6 +121,8 @@ class AppFixtures extends Fixture
         //crea un usuario responsable de informes, con nombre de usuario resp y contraseña resp
         $userResp = new User();
         $userResp->addRole("ROLE_REPORTS");
+        $userResp->setName("Charles Montgomery");
+        $userResp->setLastName("Burns");
         $userResp->setUsername("resp");
         $userResp->setUsernameCanonical("resp");
         $userResp->setEmail("resp@resp.com");
@@ -130,6 +134,8 @@ class AppFixtures extends Fixture
         //crea un usuario data entry, con nombre de usuario data y contraseña data
         $userData = new User();
         $userData->addRole("ROLE_DATA_ENTRY");
+        $userData->setName("Romualdo Hector");
+        $userData->setLastName("Izaguirre Belmont");
         $userData->setUsername("data");
         $userData->setUsernameCanonical("data");
         $userData->setEmail("data@data.com");
