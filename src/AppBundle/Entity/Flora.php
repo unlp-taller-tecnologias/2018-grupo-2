@@ -3,10 +3,12 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Validator\Constraints as Assert;
 /**
  * Flora
  *
+ * @UniqueEntity("name", message="El nombre ya está en uso.")
  * @ORM\Table(name="flora")
  * @ORM\Entity(repositoryClass="AppBundle\Repository\FloraRepository")
  */
@@ -39,6 +41,7 @@ class Flora
      * @var string|null
      *
      * @ORM\Column(name="image", type="string", length=255, nullable=true)
+     * @Assert\File(mimeTypes={ "image/jpeg", "image/png"})
      */
     private $image;
 

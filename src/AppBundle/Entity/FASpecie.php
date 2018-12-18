@@ -77,6 +77,16 @@ class FASpecie
     }
 
     /**
+     * Get subspecies.
+     *
+     * @return FASubspecie
+     */
+    public function getSubspecies()
+    {
+        return $this->subspecies;
+    }
+
+    /**
      * @var boolean
      *
      * @ORM\Column(name="deleted", type="boolean")

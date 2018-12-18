@@ -20,6 +20,7 @@ security:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
         main:
+            access_denied_handler: AppBundle\Security\AccessDeniedHandler
             pattern: ^/
             form_login:
                 provider: fos_userbundle
@@ -44,7 +45,8 @@ security:
         #- { path: ^/area, role: ROLE_ADMIN }
         #- { path: ^/category, role: ROLE_ADMIN }
         #- { path: ^/destination, role: ROLE_ADMIN }
-        #- { path: ^/register, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/user/new/, role: ROLE_ADMIN }
+        #- { path: ^/user/new/*, role: IS_AUTHENTICATED_ANONYMOUSLY }
         #- { path: ^/*, role: IS_AUTHENTICATED_ANONYMOUSLY }
         #- { path: ^/resetting, role: IS_AUTHENTICATED_ANONYMOUSLY }
         #- { path: ^/panel/, role: IS_AUTHENTICATED_FULLY }

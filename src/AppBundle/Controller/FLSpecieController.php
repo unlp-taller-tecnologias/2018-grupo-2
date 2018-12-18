@@ -8,7 +8,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\JsonResponse;
-
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 /**
  * Flspecie controller.
  *
@@ -20,6 +20,7 @@ class FLSpecieController extends Controller
      * Lists all fLSpecie entities.
      *
      * @Route("/", name="flspecie_index")
+     * @Security("is_granted('ROLE_ADMIN')")
      * @Method("GET")
      */
     public function indexAction(Request $request)
@@ -37,6 +38,7 @@ class FLSpecieController extends Controller
      * Creates a new fLSpecie entity.
      *
      * @Route("/new", name="flspecie_new")
+     * @Security("is_granted('ROLE_ADMIN')")
      * @Method({"GET", "POST"})
      */
     public function newAction(Request $request)
@@ -49,7 +51,7 @@ class FLSpecieController extends Controller
             $em = $this->getDoctrine()->getManager();
             $em->persist($fLSpecie);
             $em->flush();
-
+            $this->addFlash("success", "Especie creada con éxito.");
             return $this->redirectToRoute('flspecie_index');
         }
 
@@ -63,6 +65,7 @@ class FLSpecieController extends Controller
      * Displays a form to edit an existing fLSpecie entity.
      *
      * @Route("/{id}/edit", name="flspecie_edit")
+     * @Security("is_granted('ROLE_ADMIN')")
      * @Method({"GET", "POST"})
      */
     public function editAction(Request $request, FLSpecie $fLSpecie)
@@ -73,7 +76,7 @@ class FLSpecieController extends Controller
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $this->getDoctrine()->getManager()->flush();
-
+            $this->addFlash("success", "Especie editada con éxito.");
             return $this->redirectToRoute('flspecie_index');
         }
 
@@ -88,6 +91,7 @@ class FLSpecieController extends Controller
      * Deletes a fLSpecie entity.
      *
      * @Route("/{id}", name="flspecie_delete")
+     * @Security("is_granted('ROLE_ADMIN')")
      * @Method("DELETE")
      */
     public function deleteAction(Request $request, FLSpecie $fLSpecie)
@@ -95,10 +99,21 @@ class FLSpecieController extends Controller
         $form = $this->createDeleteForm($fLSpecie);
         $form->handleRequest($request);
             $em = $this->getDoctrine()->getManager();
-            $fLSpecie->setDeleted(true);
-            $em->persist($fLSpecie);
-            $em->flush();
-
+            if(empty($em->getRepository('AppBundle:FLSubspecie')->findOneBy(array('deleted'=>false,'specie'=>$fLSpecie->getId())))){
+              $fLSpecie->setDeleted(true);
+              $at='@';
+              while(!is_null($em->getRepository('AppBundle:FLSpecie')->findOneBy(array('name'=>$at.$fLSpecie->getName())))){
+                $at=$at.'@';
+              }
+              $fLSpecie->setName($at.$fLSpecie->getName());
+              $em->persist($fLSpecie);
+              $em->flush();
+            }
+            else {
+              $this->addFlash("error", "No se pudo eliminar debido a que existen subespecies de esa especie.");
+              return $this->redirectToRoute('flspecie_index');
+            }
+        $this->addFlash("success", "Especie eliminada con éxito.");
         return $this->redirectToRoute('flspecie_index');
     }
 

@@ -8,7 +8,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\JsonResponse;
-
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 
 /**
  * Faspecie controller.
@@ -21,6 +21,7 @@ class FASpecieController extends Controller
      * Lists all fASpecie entities.
      *
      * @Route("/", name="faspecie_index")
+     * @Security("is_granted('ROLE_ADMIN')")
      * @Method("GET")
      */
     public function indexAction(Request $request)
@@ -38,6 +39,7 @@ class FASpecieController extends Controller
      * Creates a new fASpecie entity.
      *
      * @Route("/new", name="faspecie_new")
+     * @Security("is_granted('ROLE_ADMIN')")
      * @Method({"GET", "POST"})
      */
     public function newAction(Request $request)
@@ -50,7 +52,7 @@ class FASpecieController extends Controller
             $em = $this->getDoctrine()->getManager();
             $em->persist($fASpecie);
             $em->flush();
-
+            $this->addFlash("success", "Especie creada con éxito.");
             return $this->redirectToRoute('faspecie_index');
         }
 
@@ -64,6 +66,7 @@ class FASpecieController extends Controller
      * Displays a form to edit an existing fASpecie entity.
      *
      * @Route("/{id}/edit", name="faspecie_edit")
+     * @Security("is_granted('ROLE_ADMIN')")
      * @Method({"GET", "POST"})
      */
     public function editAction(Request $request, FASpecie $fASpecie)
@@ -74,7 +77,7 @@ class FASpecieController extends Controller
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $this->getDoctrine()->getManager()->flush();
-
+            $this->addFlash("success", "Especie editada con éxito.");
             return $this->redirectToRoute('faspecie_index');
         }
 
@@ -89,6 +92,7 @@ class FASpecieController extends Controller
      * Deletes a fASpecie entity.
      *
      * @Route("/{id}", name="faspecie_delete")
+     * @Security("is_granted('ROLE_ADMIN')")
      * @Method("DELETE")
      */
     public function deleteAction(Request $request, FASpecie $fASpecie)
@@ -96,10 +100,21 @@ class FASpecieController extends Controller
         $form = $this->createDeleteForm($fASpecie);
         $form->handleRequest($request);
             $em = $this->getDoctrine()->getManager();
-            $fASpecie->setDeleted(true);
-            $em->persist($fASpecie);
-            $em->flush();
-
+            if(empty($em->getRepository('AppBundle:FASubspecie')->findOneBy(array('deleted'=>false,'specie'=>$fASpecie->getId())))){
+              $fASpecie->setDeleted(true);
+              $at='@';
+              while(!is_null($em->getRepository('AppBundle:FASpecie')->findOneBy(array('name'=>$at.$fASpecie->getName())))){
+                $at=$at.'@';
+              }
+              $fASpecie->setName($at.$fASpecie->getName());
+              $em->persist($fASpecie);
+              $em->flush();
+          }
+          else {
+            $this->addFlash("error", "No se pudo eliminar debido a que existen subespecies de esa especie.");
+            return $this->redirectToRoute('faspecie_index');
+          }
+        $this->addFlash("success", "Especie eliminada con éxito.");
         return $this->redirectToRoute('faspecie_index');
     }
 
@@ -117,6 +132,18 @@ class FASpecieController extends Controller
             ->setMethod('DELETE')
             ->getForm()
         ;
+    }
+
+    /**
+     * Finds and displays a FASpecie FASubspecies.
+     *
+     * @Route("/{id}/subspecies", name="faspecie_subspecies")
+     * @Method({"GET", "POST"})
+     */
+    public function getSubspeciesAction(FASpecie $fASpecie)
+    {
+      $subspecies = $fASpecie->getSubspecies();
+      return $subspecies;
     }
 
     /**
@@ -138,5 +165,4 @@ class FASpecieController extends Controller
           };
       return new JsonResponse($rawResponse['rows']);
     }
-
 }

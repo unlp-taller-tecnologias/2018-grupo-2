@@ -10,7 +10,8 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Ps\PdfBundle\Annotation\Pdf;
 use Symfony\Component\HttpFoundation\ResponseHeaderBag;
-
+use Symfony\Component\HttpFoundation\File\File;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 /**
  * Flora controller.
  *
@@ -22,6 +23,7 @@ class FloraController extends Controller
      * Lists all flora entities.
      *
      * @Route("/", name="flora_index")
+     * @Security("is_granted('IS_AUTHENTICATED_REMEMBERED')")
      * @Method({"GET", "POST"})
      */
     public function indexAction(Request $request)
@@ -45,6 +47,7 @@ class FloraController extends Controller
      * Creates a new flora entity.
      *
      * @Route("/new", name="flora_new")
+     * @Security("is_granted('ROLE_ADMIN','ROLE_DATA_ENTRY')")
      * @Method({"GET", "POST"})
      */
     public function newAction(Request $request)
@@ -65,7 +68,7 @@ class FloraController extends Controller
 
             $em->persist($flora);
             $em->flush();
-
+            $this->addFlash("success", "Individuo creado con éxito.");
             return $this->redirectToRoute('flora_show', array('id' => $flora->getId()));
         }
 
@@ -79,12 +82,12 @@ class FloraController extends Controller
      * Finds and displays a flora entity.
      *
      * @Route("/{id}", name="flora_show")
+     * @Security("is_granted('IS_AUTHENTICATED_REMEMBERED')")
      * @Method("GET")
      */
     public function showAction(Flora $flora)
     {
         $deleteForm = $this->createDeleteForm($flora);
-
         return $this->render('flora/show.html.twig', array(
             'flora' => $flora,
             'delete_form' => $deleteForm->createView(),
@@ -95,18 +98,35 @@ class FloraController extends Controller
      * Displays a form to edit an existing flora entity.
      *
      * @Route("/{id}/edit", name="flora_edit")
+     * @Security("is_granted('ROLE_ADMIN','ROLE_DATA_ENTRY')")
      * @Method({"GET", "POST"})
      */
     public function editAction(Request $request, Flora $flora)
     {
+        $image_name = $flora->getImage();
         $deleteForm = $this->createDeleteForm($flora);
         $editForm = $this->createForm('AppBundle\Form\FloraType', $flora);
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
-            $this->getDoctrine()->getManager()->flush();
+            $em=$this->getDoctrine()->getManager();
 
-            return $this->redirectToRoute('flora_edit', array('id' => $flora->getId()));
+            // se guarda la imagen
+            $file      = $editForm['image']->getData();
+            if($file != null){
+              $ext       = $file->guessExtension();
+              $file_name = time().".".$ext;
+              $file->move("uploads", $file_name);
+              $flora->setImage($file_name);
+            }
+            else{
+              $flora->setImage($image_name);
+            }
+            $em->persist($flora);
+            $em->flush();
+
+            $this->addFlash("success", "Individuo editado con éxito.");
+            return $this->redirectToRoute('flora_show', array('id' => $flora->getId()));
         }
 
         return $this->render('flora/edit.html.twig', array(
@@ -119,8 +139,9 @@ class FloraController extends Controller
     /**
      * Deletes a flora entity.
      *
-     * @Route("/{id}", name="flora_delete")
-     * @Method("DELETE")
+     * @Route("/{id}/delete", name="flora_delete")
+     * @Security("is_granted('ROLE_ADMIN','ROLE_DATA_ENTRY')")
+     * @Method("post")
      */
     public function deleteAction(Request $request, Flora $flora)
     {
@@ -130,7 +151,7 @@ class FloraController extends Controller
             $flora->setDeleted(true);
             $em->persist($flora);
             $em->flush();
-
+        $this->addFlash("success", "Individuo eliminado con éxito.");
         return $this->redirectToRoute('flora_index');
     }
 

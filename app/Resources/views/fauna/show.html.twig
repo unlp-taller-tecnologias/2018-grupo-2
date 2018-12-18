@@ -1,44 +1,62 @@
 {% extends 'base.html.twig' %}
 
+{% block title %} Ver individuo de fauna {% endblock %}
+
 {% block body %}
-    <h1>Fauna</h1>
 
-    <table>
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ fauna.id }}</td>
-            </tr>
-            <tr>
-                <th>Name</th>
-                <td>{{ fauna.name }}</td>
-            </tr>
-            <tr>
-                <th>Weight</th>
-                <td>{{ fauna.weight }}</td>
-            </tr>
-            <tr>
-                <th>Healthobservations</th>
-                <td>{{ fauna.healthObservations }}</td>
-            </tr>
-            <tr>
-                <th>Image</th>
-                <td>{{ fauna.image }}</td>
-            </tr>
-        </tbody>
-    </table>
+<div class="container">
+  <div class="row">
+    <div class="col-md-10 col-center">
+      <h1 class="text-center">{{ fauna.name }}</h1>
+      <br>
 
-    <ul>
-        <li>
-            <a href="{{ path('fauna_index') }}">Back to the list</a>
-        </li>
-        <li>
-            <a href="{{ path('fauna_edit', { 'id': fauna.id }) }}">Edit</a>
-        </li>
-        <li>
-            {{ form_start(delete_form) }}
-                <input type="submit" value="Delete">
-            {{ form_end(delete_form) }}
-        </li>
-    </ul>
+      <div class="row">
+        <div class="col-md-6">
+          <ul class="list-group">
+            <li class="list-group-item"><b>Especie:</b> {{ fauna.subspecie.specie }} </li>
+            <li class="list-group-item"><b>Subespecie:</b> {{ fauna.subspecie }} </li>
+            <li class="list-group-item"><b>Peso:</b> {{ fauna.weight }} kg.</li>
+            <li class="list-group-item"><b>Observaciones de salud:</b> {{ fauna.healthObservations }}</li>
+            <li class="list-group-item">
+              <b>Encargado/s</b>
+              <ul>
+                {% for attendant in fauna.attendants %}
+                  <li>{{ attendant.name }}</li>
+                {% endfor %}
+              </ul>
+            </li>
+            <li class="list-group-item">
+              <b>Próximo destino</b><br>
+              &emsp;<b>Lugar:</b> {% if fauna.destination is null %} <i class="text-muted">No se ha definido</i> {% else %} {{ fauna.destination }} {% endif %} <br>
+              &emsp;<b>Fecha:</b> {% if fauna.departureDate is null %} <i class="text-muted">No se ha definido</i> {% else %} {{ fauna.departureDate}} {% endif %} <br>
+            </li>
+          </ul>
+        </div>
+
+        <div class="col-md-6">
+          <div class="card">
+            <div class="card-body" style="height:340px">
+              <div class="row">
+                <div class="col-md-2"></div>
+                <div class="col-md-10">
+                  {% if fauna.image is null %}
+                    <i class="text-muted">No se ha cargado una imagen</i>
+                  {% else %}
+                    <img src="/uploads/{{fauna.image}}" alt='Imagen del individuo de fauna' class='img-rounded'>
+                  {% endif %}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="text-center mt-lg-4">
+        <a class="btn btn-success btn-md" href="{{ path('fauna_edit', { 'id': fauna.id }) }}">Editar</a>
+        <a class="btn btn-primary btn-md ml-md-1" href="{{ path('fauna_index') }}">Volver al listado</a>
+      </div>
+
+    </div>
+  </div>
+</div>
 {% endblock %}

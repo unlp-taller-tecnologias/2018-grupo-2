@@ -8,7 +8,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\JsonResponse;
-
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 /**
  * Fasubspecie controller.
  *
@@ -20,6 +20,7 @@ class FASubspecieController extends Controller
      * Lists all fASubspecie entities.
      *
      * @Route("/", name="fasubspecie_index")
+     * @Security("is_granted('ROLE_ADMIN')")
      * @Method("GET")
      */
     public function indexAction(Request $request)
@@ -37,6 +38,7 @@ class FASubspecieController extends Controller
      * Creates a new fASubspecie entity.
      *
      * @Route("/new", name="fasubspecie_new")
+     * @Security("is_granted('ROLE_ADMIN')")
      * @Method({"GET", "POST"})
      */
     public function newAction(Request $request)
@@ -49,7 +51,7 @@ class FASubspecieController extends Controller
             $em = $this->getDoctrine()->getManager();
             $em->persist($fASubspecie);
             $em->flush();
-
+            $this->addFlash("success", "Subespecie creada con éxito.");
             return $this->redirectToRoute('fasubspecie_index');
         }
 
@@ -63,6 +65,7 @@ class FASubspecieController extends Controller
      * Displays a form to edit an existing fASubspecie entity.
      *
      * @Route("/{id}/edit", name="fasubspecie_edit")
+     * @Security("is_granted('ROLE_ADMIN')")
      * @Method({"GET", "POST"})
      */
     public function editAction(Request $request, FASubspecie $fASubspecie)
@@ -73,7 +76,7 @@ class FASubspecieController extends Controller
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $this->getDoctrine()->getManager()->flush();
-
+            $this->addFlash("success", "Subespecie editada con éxito.");
             return $this->redirectToRoute('fasubspecie_index');
         }
 
@@ -88,6 +91,7 @@ class FASubspecieController extends Controller
      * Deletes a fASubspecie entity.
      *
      * @Route("/{id}", name="fasubspecie_delete")
+     * @Security("is_granted('ROLE_ADMIN')")
      * @Method("DELETE")
      */
     public function deleteAction(Request $request, FASubspecie $fASubspecie)
@@ -95,10 +99,22 @@ class FASubspecieController extends Controller
         $form = $this->createDeleteForm($fASubspecie);
         $form->handleRequest($request);
             $em = $this->getDoctrine()->getManager();
-            $fASubspecie->setDeleted(true);
-            $em->persist($fASubspecie);
-            $em->flush();
+            if(empty($em->getRepository('AppBundle:Fauna')->findOneBy(array('deleted'=>false,'subspecie'=>$fASubspecie->getId())))){
+              $fASubspecie->setDeleted(true);
+              $at='@';
+              while(!is_null($em->getRepository('AppBundle:FASubspecie')->findOneBy(array('name'=>$at.$fASubspecie->getname())))){
+                $at=$at.'@';
+              }
+              $fASubspecie->setName($at.$fASubspecie->getName());
+              $em->persist($fASubspecie);
+              $em->flush();
+          }
+          else {
+            $this->addFlash("error", "No se pudo eliminar debido a que existen individuos pertenecientes a esa subespecie.");
+            return $this->redirectToRoute('fasubspecie_index');
+          }
 
+        $this->addFlash("success", "Subespecie eliminada con éxito.");
         return $this->redirectToRoute('fasubspecie_index');
     }
 

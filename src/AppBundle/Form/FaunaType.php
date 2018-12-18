@@ -10,6 +10,8 @@ use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
+use AppBundle\Entity\FASpecie;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 
 class FaunaType extends AbstractType
 {
@@ -19,75 +21,99 @@ class FaunaType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder->add(
-                    'specie',ChoiceType::class, array(
-                    'label' => 'Especie',
-                    'required' => true,
-                    'attr' => array(
-                    'class' => 'form-control mb-lg-3',
-                    'placeholder' => 'Seleccione una especie...'))
-                  )
+                      'specie',EntityType::class, array(
+                        'label' => 'Especie',
+                        'class' => FASpecie::class,
+                        'choice_label' => 'name',
+                        'required' => true,
+                        'placeholder' => 'Seleccione una especie...',
+                        'attr' => array(
+                          'class' => 'form-control mb-lg-3 specie-id'
+                        )
+                      )
+                    )
                   ->add(
-                      'subspecie', null, array(
+                        'subspecie', null, array(
                           'label' => 'Subespecie',
                           'required' => true,
+                          'placeholder' => 'Seleccione una subespecie...',
                           'attr' => array(
-                          'class' => 'form-control mb-lg-3',
-                          'placeholder' => 'Seleccione una subespecie...'))
-                    )
+                            'class' => 'form-control mb-lg-3',
+                            'disabled' => true,
+                          )
+                        )
+                      )
                 ->add(
-                    'name', TextType::class, array(
+                      'name', TextType::class, array(
                         'label' => 'Nombre',
                         'required' => true,
                         'attr' => array(
-                            'class' => 'form-control mb-lg-3',
-                            'placeholder' => 'Ingrese un nombre...'))
+                          'class' => 'form-control mb-lg-3',
+                          'placeholder' => 'Ingrese un nombre...'
+                        )
+                      )
                     )
                 ->add(
-                    'weight', TextType::class, array(
-                        'label' => 'Peso',
-                        'required' => true,
-                        'attr' => array(
+                      'weight', TextType::class, array(
+                          'label' => 'Peso',
+                          'required' => true,
+                          'attr' => array(
                             'class' => 'form-control mb-lg-3',
-                            'placeholder' => 'Ingrese un peso...'))
+                            'placeholder' => 'Ingrese un peso...'
+                          )
+                        )
+                      )
+                ->add(
+                      'image', FileType::class,array(
+                        'label' => 'Imagen',
+                        'required' => false,
+                        'attr' =>array(
+                          'class' => 'form-control mb-lg-3'
+                        ),
+                        'data_class' => null
+                      )
                     )
                 ->add(
-                    'healthObservations', TextareaType::class, array(
-                        'label' => 'Observaciones',
-                        'attr' => array(
-                            'class' => 'form-control mb-lg-3',
-                            'placeholder' => 'Ingrese las observaciones...'))
-                    )
-                ->add('image', FileType::class,array(
-                    "label" => "Imagen:",
-                    "attr" =>array("class" => "form-control")
-                ))
-
-                ->add(
-                    'attendants', null, array(
+                      'attendants', null, array(
                         'label' => 'Encargados',
                         'required' => true,
                         'multiple' => true,
                         'attr' => array(
-                            'class' => 'form-control mb-lg-3',
-                        ),
-                        'placeholder' => 'Seleccione un/os encargado/s...')
+                          'class' => 'form-control select2',
+                          'id' => 'attendants',
+                          'placeholder' => 'Seleccione un encargado/s...'
+                        )
+                      )
                     )
                 ->add(
-                    'destination', TextType::class, array(
+                      'destination', TextType::class, array(
                         'label' => 'Próximo destino',
                         'required' => false,
                         'attr' => array(
-                            'class' => 'form-control mb-lg-3',
-                            'placeholder' => 'Ingrese próximo destino...'))
+                          'class' => 'form-control mb-lg-3',
+                          'placeholder' => 'Ingrese próximo destino...'
+                        )
+                      )
                     )
                 ->add(
-                    'departure_date', DateType::class, array(
+                      'departure_date', DateType::class, array(
                         'label' => 'Fecha de traslado',
                         'required' => false,
                         'widget' => 'single_text',
                         'attr' => array(
-                            'class' => 'form-control mb-lg-3'))
-                        );
+                          'class' => 'form-control mb-lg-3'
+                        )
+                      )
+                    )
+                ->add(
+                      'healthObservations', TextareaType::class, array(
+                        'label' => 'Observaciones',
+                        'attr' => array(
+                          'class' => 'form-control mb-lg-3',
+                          'placeholder' => 'Ingrese las observaciones...'
+                        )
+                      )
+                    );
     }/**
      * {@inheritdoc}
      */

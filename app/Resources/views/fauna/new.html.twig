@@ -2,6 +2,7 @@
 
 {% block stylesheets %}
   <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
+
 {% endblock %}
 
 {% block title %} Nuevo individuo de fauna {% endblock %}
@@ -30,12 +31,38 @@
 {% endblock %}
 
 {% block javascripts %}
-
 <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
 <script>
-$(document).ready(function() {
-    $('#appbundle_fauna_attendants').select2();
-});
+  $(document).ready(function() {
+    jQuery(".select2").select2();
+  
+    // ids autogenerados por el bundle
+    $('#appbundle_fauna_specie').on('change', function(){
+      // habilito el campo de subespecies y elimino las que haya tenido cargadas
+      $('#appbundle_fauna_subspecie').removeAttr('disabled');
+      $('#appbundle_fauna_subspecie option').remove().end();
+      $('#appbundle_fauna_subspecie').append('<option>Seleccione una subespecie</option>');
+
+      specie_id = $("#appbundle_fauna_specie").val();
+
+      // recupero las nuevas subespecies
+      $.ajax({
+        url: "{{ path('listJsonFasubspecie') }}",
+        method: 'GET',
+        success: function(data) {
+          options = '';
+
+          $.each(data, function(index, option) {
+            if (option.idSpecie == specie_id) {
+              options += "<option class='subspecies-ids' value='" + option.id + "'>" + option.name + "</option>";
+            }
+          });
+
+          $("#appbundle_fauna_subspecie").append(options);
+        }
+      });
+    });
+  });
 </script>
 
 {% endblock %}
