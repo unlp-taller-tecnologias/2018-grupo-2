@@ -155,15 +155,13 @@ class FASpecieController extends Controller
     public function listJsonAction(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
-        $FASpecies = $em->getRepository('AppBundle:FASpecie')->findAll();
+        $FASpecies = $em->getRepository('AppBundle:FASpecie')->findBy(array('deleted' => false ));
         $rawResponse = ['rows'];
           foreach($FASpecies as $FASpecie) {
-            if ($FASpecie->getDeleted() != true) {
               $rawResponse['rows'][] = array(
                 'id' => $FASpecie->getId(),
                 'name' => $FASpecie->getName(),
               );
-            }
           };
       return new JsonResponse($rawResponse['rows']);
     }
