@@ -207,4 +207,34 @@ class Attendant
     {
         return $this->deleted;
     }
+
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="doc_num", type="integer")
+     */
+     private $doc_num;
+    /**
+     * Set doc_num.
+     *
+     * @param int $doc_num
+     *
+     * @return Attendant
+     */
+    public function setDocNum($doc_num)
+    {
+        $this->doc_num = $doc_num;
+
+        return $this;
+    }
+
+    /**
+     * Get doc_num.
+     *
+     * @return int
+     */
+    public function getDocNum()
+    {
+        return $this->doc_num;
+    }
 }

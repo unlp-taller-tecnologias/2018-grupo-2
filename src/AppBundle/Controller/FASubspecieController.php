@@ -143,14 +143,14 @@ class FASubspecieController extends Controller
     public function listJsonAction(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
-        $fasubspecies = $em->getRepository('AppBundle:FASubspecie')->findAll();
+        $fasubspecies = $em->getRepository('AppBundle:FASubspecie')->findBy(array('deleted' => false ));
         $rawResponse = ['rows'];
           foreach($fasubspecies as $fasubspecie) {
-            $rawResponse['rows'][] = array(
-              'id' => $fasubspecie->getId(),
-              'idSpecie' => $fasubspecie->getFASpecie()->getId(),
-              'name' => $fasubspecie->getName(),
-            );
+              $rawResponse['rows'][] = array(
+                'id' => $fasubspecie->getId(),
+                'idSpecie' => $fasubspecie->getFASpecie()->getId(),
+                'name' => $fasubspecie->getName(),
+              );
           };
       return new JsonResponse($rawResponse['rows']);
     }

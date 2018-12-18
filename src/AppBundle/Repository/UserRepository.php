@@ -20,4 +20,15 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
    protected function setOrderByAttribute(){
      self::$orderByAttribute = 'UserRepository.username';
    }
+
+   protected function setQuery($arrayParams){
+     if (is_null($arrayParams)) {
+       $qb = $this->createQueryBuilder(self::$nameClass)
+                   ->andWhere(self::$nameClass.'.enabled = :enabled')
+                   ->setParameter('enabled', true)
+                   ->orderBy(self::$orderByAttribute, 'ASC')
+                   ->getQuery();
+       return $qb;
+     }
+   }
  }

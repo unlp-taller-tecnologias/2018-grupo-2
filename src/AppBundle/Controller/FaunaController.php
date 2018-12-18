@@ -61,10 +61,15 @@ class FaunaController extends Controller
 
             // se guarda la imagen
             $file      = $form['image']->getData();
-            $ext       = $file->guessExtension();
-            $file_name = time().".".$ext;
-            $file->move("uploads", $file_name);
-            $fauna->setImage($file_name);
+            if($file != null){
+              $ext       = $file->guessExtension();
+              $file_name = time().".".$ext;
+              $file->move("uploads", $file_name);
+              $fauna->setImage($file_name);
+            }
+            else{
+              $fauna->setImage(null);
+            }
             $this->addFlash("success", "Individuo creado con éxito.");
             $em->persist($fauna);
             $em->flush();

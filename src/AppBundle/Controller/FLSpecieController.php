@@ -142,13 +142,13 @@ class FLSpecieController extends Controller
     public function listJsonAction(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
-        $FLSpecies = $em->getRepository('AppBundle:FLSpecie')->findAll();
+        $FLSpecies = $em->getRepository('AppBundle:FLSpecie')->findBy(array('deleted' => false ));
         $rawResponse = ['rows'];
           foreach($FLSpecies as $FLSpecie) {
-            $rawResponse['rows'][] = array(
-              'id' => $FLSpecie->getId(),
-              'name' => $FLSpecie->getName(),
-            );
+              $rawResponse['rows'][] = array(
+                'id' => $FLSpecie->getId(),
+                'name' => $FLSpecie->getName(),
+              );
           };
       return new JsonResponse($rawResponse['rows']);
     }

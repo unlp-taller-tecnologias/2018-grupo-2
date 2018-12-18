@@ -6,6 +6,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use AppBundle\Entity\Category;
@@ -19,7 +20,7 @@ class AttendantType extends AbstractType
     {
         $builder->add(
                     'name', TextType::class, array(
-                        'label' => 'Nombre', 
+                        'label' => 'Nombre',
                         'required' => true,
                         'attr' => array(
                             'class' => 'form-control mb-lg-3',
@@ -27,15 +28,23 @@ class AttendantType extends AbstractType
                     )
                 ->add(
                     'lastName', TextType::class, array(
-                        'label' => 'Apellido', 
+                        'label' => 'Apellido',
                         'required' => true,
                         'attr' => array(
                             'class' => 'form-control mb-lg-3',
                             'placeholder' => 'Ingrese un apellido...'))
                     )
+                    ->add(
+                        'doc_num', IntegerType::class, array(
+                            'label' => 'Número de documento',
+                            'required' => true,
+                            'attr' => array(
+                                'class' => 'form-control mb-lg-3',
+                                'placeholder' => 'Ingrese un número de documento...'))
+                        )
                 ->add(
                     'email', EmailType::class, array(
-                        'label' => 'Email', 
+                        'label' => 'Email',
                         'required' => true,
                         'attr' => array(
                             'class' => 'form-control mb-lg-3',

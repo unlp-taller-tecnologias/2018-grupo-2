@@ -3,6 +3,7 @@
 {% block stylesheets %}
 
 <link rel="stylesheet" href="{{ asset('scripts/jquery-ui/jquery-ui.min.css') }}">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
 
 <style>
     .ui-datepicker-calendar {
@@ -87,5 +88,39 @@ $(document).ready(function()
 $(function () {
 $("#fecha").datepicker();
 });
+</script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
+<script>
+  $(document).ready(function() {
+    jQuery(".select2").select2();
+
+    // ids autogenerados por el bundle
+    $('#appbundle_flora_specie').on('change', function(){
+      // habilito el campo de subespecies y elimino las que haya tenido cargadas
+      $('#appbundle_flora_subspecie').removeAttr('disabled');
+      $('#appbundle_flora_subspecie option').remove().end();
+      $('#appbundle_flora_subspecie').append('<option>Seleccione una subespecie</option>');
+
+      specie_id = $("#appbundle_flora_specie").val();
+
+      // recupero las nuevas subespecies
+      $.ajax({
+        url: "{{ path('listJsonFlsubspecie') }}",
+        method: 'GET',
+        success: function(data) {
+          options = '';
+
+          $.each(data, function(index, option) {
+            if (option.idSpecie == specie_id) {
+              options += "<option class='subspecies-ids' value='" + option.id + "'>" + option.name + "</option>";
+            }
+          });
+
+          $("#appbundle_flora_subspecie").append(options);
+        }
+      });
+    });
+  });
 </script>
 {% endblock %}
