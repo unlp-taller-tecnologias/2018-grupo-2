@@ -36,22 +36,37 @@
           </div>
 
           <div class="col-md-6">
-            <div class="card" style="height: 100%">
-              <div class="card-body">
-                <h5 class="card-title">Individuos a cargo</h5>
-                <h6 class="card-subtitle text-muted">
-                  Cantidad
-                  <span class="badge badge-info badge-pill">{{ attendant.faunas.count }}</span>
-                </h6>
+            <div class="row">
+              <div class="col-md-12">
+                <div class="card">
+                  <div class="card-body">
+                    <h5 class="card-title">Número de documento</h5>
+                    {% if attendant.doc_num is null %}
+                      <i class="text-muted">No se ha cargado el número</i>
+                    {% else %}
+                      <p class="card-text">{{ attendant.doc_num }}</p>
+                    {% endif %}
+                  </div>
+                </div>
+              </div>
+            </div>
 
-                <a href="#" class="card-link btn btn-info btn-xs" style="margin-top: 30%; margin-left: 10%;">
-                  Ver listado de individuos
-                </a>
+            <div class="row mt-2">
+              <div class="col-md-12">
+                <div class="card">
+                  <div class="card-body">
+                    <h5 class="card-title">Individuos a cargo</h5>
+                    <h6 class="card-subtitle text-muted">
+                      Cantidad
+                      <span class="badge badge-info badge-pill">{{ attendant.faunas.count }}</span>
+                    </h6>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
         </div>
-
+         
         <div class="text-center mt-lg-4">
           <a class="btn btn-success btn-md" href="{{ path('attendant_edit', { 'id': attendant.id }) }}">Editar</a>
           <a class="btn btn-primary btn-md ml-md-1" href="{{ path('attendant_index') }}">Volver al listado</a>
