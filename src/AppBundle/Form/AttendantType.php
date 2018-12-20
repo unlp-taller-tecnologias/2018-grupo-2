@@ -35,7 +35,7 @@ class AttendantType extends AbstractType
                             'placeholder' => 'Ingrese un apellido...'))
                     )
                     ->add(
-                        'doc_num', IntegerType::class, array(
+                        'docNum', IntegerType::class, array(
                             'label' => 'Número de documento',
                             'required' => true,
                             'attr' => array(

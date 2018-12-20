@@ -59,9 +59,9 @@ class Attendant
     /**
      * @var int
      *
-     * @ORM\Column(name="doc_num", type="integer")
+     * @ORM\Column(name="docNum", type="integer")
      */
-     private $doc_num;
+     private $docNum;
 
     /**
      * Get id.
@@ -222,9 +222,9 @@ class Attendant
      *
      * @return Attendant
      */
-    public function setDocNum($doc_num)
+    public function setDocNum($docNum)
     {
-        $this->doc_num = $doc_num;
+        $this->docNum = $docNum;
 
         return $this;
     }
@@ -236,6 +236,6 @@ class Attendant
      */
     public function getDocNum()
     {
-        return $this->doc_num;
+        return $this->docNum;
     }
 }

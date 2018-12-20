@@ -41,10 +41,10 @@
                 <div class="card">
                   <div class="card-body">
                     <h5 class="card-title">Número de documento</h5>
-                    {% if attendant.doc_num is null %}
+                    {% if attendant.docNum is null %}
                       <i class="text-muted">No se ha cargado el número</i>
                     {% else %}
-                      <p class="card-text">{{ attendant.doc_num }}</p>
+                      <p class="card-text">{{ attendant.docNum }}</p>
                     {% endif %}
                   </div>
                 </div>
@@ -66,7 +66,7 @@
             </div>
           </div>
         </div>
-         
+
         <div class="text-center mt-lg-4">
           <a class="btn btn-success btn-md" href="{{ path('attendant_edit', { 'id': attendant.id }) }}">Editar</a>
           <a class="btn btn-primary btn-md ml-md-1" href="{{ path('attendant_index') }}">Volver al listado</a>
