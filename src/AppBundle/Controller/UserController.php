@@ -30,7 +30,7 @@ class UserController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $users = $em->getRepository('AppBundle:User')->findByPage($request->query->getInt('page', 1),5);
+        $users = $em->getRepository('AppBundle:User')->findByPage($request->query->getInt('page', 1),$this->container->getParameter('pagination'));
 
         return $this->render('user/index.html.twig', array(
             'users' => $users,

@@ -27,7 +27,7 @@ class FLSpecieController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $fLSpecies = $em->getRepository('AppBundle:FLSpecie')->findByPage($request->query->getInt('page', 1),5);
+        $fLSpecies = $em->getRepository('AppBundle:FLSpecie')->findByPage($request->query->getInt('page', 1),$this->container->getParameter('pagination'));
 
         return $this->render('flspecie/index.html.twig', array(
             'fLSpecies' => $fLSpecies,

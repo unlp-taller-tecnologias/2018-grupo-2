@@ -28,7 +28,7 @@ class AreaController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $areas = $em->getRepository('AppBundle:Area')->findByPage($request->query->getInt('page', 1),5);
+        $areas = $em->getRepository('AppBundle:Area')->findByPage($request->query->getInt('page', 1),$this->container->getParameter('pagination'));
 
         return $this->render('area/index.html.twig', array(
             'areas' => $areas,

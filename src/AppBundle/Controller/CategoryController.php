@@ -26,7 +26,7 @@ class CategoryController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $categories = $em->getRepository('AppBundle:Category')->findByPage($request->query->getInt('page', 1),5);
+        $categories = $em->getRepository('AppBundle:Category')->findByPage($request->query->getInt('page', 1),$this->container->getParameter('pagination'));
 
         return $this->render('category/index.html.twig', array(
             'categories' => $categories,

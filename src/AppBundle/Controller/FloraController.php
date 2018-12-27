@@ -36,7 +36,7 @@ class FloraController extends Controller
                                 'subspecie' => isset($all["subspecie"])? $all["subspecie"]:NULL,
                                 'format' => $format
                                 );
-        $floras = $em->getRepository('AppBundle:Flora')->findByPage($request->query->getInt('page', 1),5,$arrayParams);
+        $floras = $em->getRepository('AppBundle:Flora')->findByPage($request->query->getInt('page', 1),$this->container->getParameter('pagination'),$arrayParams);
         return $this->render(sprintf('flora/index.%s.twig', $format), array(
             'floras' => $floras,
             'params' =>$arrayParams

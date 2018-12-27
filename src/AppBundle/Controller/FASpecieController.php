@@ -28,7 +28,7 @@ class FASpecieController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $listFASpecie = $em->getRepository('AppBundle:FASpecie')->findByPage($request->query->getInt('page', 1),5);
+        $listFASpecie = $em->getRepository('AppBundle:FASpecie')->findByPage($request->query->getInt('page', 1),$this->container->getParameter('pagination'));
 
         return $this->render('faspecie/index.html.twig', array(
             'listFASpecie' => $listFASpecie

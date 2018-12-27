@@ -27,7 +27,7 @@ class FLSubspecieController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $fLSubspecies = $em->getRepository('AppBundle:FLSubspecie')->findByPage($request->query->getInt('page', 1),5);
+        $fLSubspecies = $em->getRepository('AppBundle:FLSubspecie')->findByPage($request->query->getInt('page', 1),$this->container->getParameter('pagination'));
 
         return $this->render('flsubspecie/index.html.twig', array(
             'fLSubspecies' => $fLSubspecies,

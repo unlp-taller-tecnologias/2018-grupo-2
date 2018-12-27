@@ -36,7 +36,7 @@ class FaunaController extends Controller
                                 'subspecie' => isset($all["subspecie"])? $all["subspecie"]:NULL,
                                 'format' => $format
                               );
-        $faunas = $em->getRepository('AppBundle:Fauna')->findByPage($request->query->getInt('page', 1),5,$arrayParams);
+        $faunas = $em->getRepository('AppBundle:Fauna')->findByPage($request->query->getInt('page', 1),$this->container->getParameter('pagination'),$arrayParams);
         return $this->render(sprintf('fauna/index.%s.twig', $format), array(
             'faunas' => $faunas,
             'params' =>$arrayParams
