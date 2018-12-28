@@ -31,11 +31,11 @@
 {% endblock %}
 
 {% block javascripts %}
-<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
+<script src="{{ asset('scripts/select2/js/select2.min.js') }}"></script>
 <script>
   $(document).ready(function() {
     jQuery(".select2").select2();
-  
+
     // ids autogenerados por el bundle
     $('#appbundle_fauna_specie').on('change', function(){
       // habilito el campo de subespecies y elimino las que haya tenido cargadas

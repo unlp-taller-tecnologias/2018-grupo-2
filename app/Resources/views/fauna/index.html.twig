@@ -94,6 +94,7 @@
 {% endblock %}
 {% block javascripts %}
 <script src="{{ asset('scripts/dataTables/datatables.min.js') }}"></script>
+<script src="{{ asset('scripts/select2/js/select2.min.js') }}"></script>
 <script>
   $(document).ready(function(){
     $('#fauna-table').DataTable({
@@ -110,6 +111,7 @@
     $('#subspecie').val("{{params.subspecie}}");
     $('#attendants').val("{{params.attendants}}");
     $('#format').val('html');
+    $('.select2').select2();
   });
 
   $('#buttonClear').click(function() {
@@ -130,6 +132,7 @@
         $("#attendants").append(options);
         $("#attendants").val("{{params.attendants}}");
      }
+
    });
 
   $.ajax({
