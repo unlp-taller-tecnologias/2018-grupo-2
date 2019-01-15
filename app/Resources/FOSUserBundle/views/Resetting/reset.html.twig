@@ -1,0 +1,13 @@
+{% extends "base.html.twig" %}
+
+{% block title %} Cambiar contraseña {% endblock %}
+
+{% block body %}
+  <div class="container">
+    <div class="row">
+        <div class="col s12 m8 offset-m2">
+            {% include "@FOSUser/Resetting/reset_content.html.twig" %}
+        </div>
+    </div>
+  </div>
+{% endblock body %}

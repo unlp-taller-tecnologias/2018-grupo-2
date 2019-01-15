@@ -453,17 +453,17 @@
     },
     {
         "name": "doctrine/dbal",
-        "version": "v2.9.1",
-        "version_normalized": "2.9.1.0",
+        "version": "v2.9.2",
+        "version_normalized": "2.9.2.0",
         "source": {
             "type": "git",
             "url": "https://github.com/doctrine/dbal.git",
-            "reference": "ec74d6e300d78fbc896669c3ca57ef9719adc9c6"
+            "reference": "22800bd651c1d8d2a9719e2a3dc46d5108ebfcc9"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/doctrine/dbal/zipball/ec74d6e300d78fbc896669c3ca57ef9719adc9c6",
-            "reference": "ec74d6e300d78fbc896669c3ca57ef9719adc9c6",
+            "url": "https://api.github.com/repos/doctrine/dbal/zipball/22800bd651c1d8d2a9719e2a3dc46d5108ebfcc9",
+            "reference": "22800bd651c1d8d2a9719e2a3dc46d5108ebfcc9",
             "shasum": ""
         },
         "require": {
@@ -483,7 +483,7 @@
         "suggest": {
             "symfony/console": "For helpful console commands such as SQL execution and import of files."
         },
-        "time": "2018-12-14T04:51:13+00:00",
+        "time": "2018-12-31T03:27:51+00:00",
         "bin": [
             "bin/doctrine-dbal"
         ],
@@ -537,17 +537,17 @@
     },
     {
         "name": "doctrine/doctrine-bundle",
-        "version": "1.10.0",
-        "version_normalized": "1.10.0.0",
+        "version": "1.10.1",
+        "version_normalized": "1.10.1.0",
         "source": {
             "type": "git",
             "url": "https://github.com/doctrine/DoctrineBundle.git",
-            "reference": "82d2c63cd09acbde2332f55d9aa7b28aefe4983d"
+            "reference": "98551d71f515692c2278073e0d483763ac70b341"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/doctrine/DoctrineBundle/zipball/82d2c63cd09acbde2332f55d9aa7b28aefe4983d",
-            "reference": "82d2c63cd09acbde2332f55d9aa7b28aefe4983d",
+            "url": "https://api.github.com/repos/doctrine/DoctrineBundle/zipball/98551d71f515692c2278073e0d483763ac70b341",
+            "reference": "98551d71f515692c2278073e0d483763ac70b341",
             "shasum": ""
         },
         "require": {
@@ -578,7 +578,7 @@
             "doctrine/orm": "The Doctrine ORM integration is optional in the bundle.",
             "symfony/web-profiler-bundle": "To use the data collector."
         },
-        "time": "2018-11-30T13:53:17+00:00",
+        "time": "2019-01-07T15:31:08+00:00",
         "type": "symfony-bundle",
         "extra": {
             "branch-alias": {
@@ -1043,12 +1043,12 @@
         "version_normalized": "2.6.3.0",
         "source": {
             "type": "git",
-            "url": "https://github.com/doctrine/doctrine2.git",
+            "url": "https://github.com/doctrine/orm.git",
             "reference": "434820973cadf2da2d66e7184be370084cc32ca8"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/doctrine/doctrine2/zipball/434820973cadf2da2d66e7184be370084cc32ca8",
+            "url": "https://api.github.com/repos/doctrine/orm/zipball/434820973cadf2da2d66e7184be370084cc32ca8",
             "reference": "434820973cadf2da2d66e7184be370084cc32ca8",
             "shasum": ""
         },
@@ -1891,17 +1891,17 @@
     },
     {
         "name": "paragonie/random_compat",
-        "version": "v2.0.17",
-        "version_normalized": "2.0.17.0",
+        "version": "v2.0.18",
+        "version_normalized": "2.0.18.0",
         "source": {
             "type": "git",
             "url": "https://github.com/paragonie/random_compat.git",
-            "reference": "29af24f25bab834fcbb38ad2a69fa93b867e070d"
+            "reference": "0a58ef6e3146256cc3dc7cc393927bcc7d1b72db"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/paragonie/random_compat/zipball/29af24f25bab834fcbb38ad2a69fa93b867e070d",
-            "reference": "29af24f25bab834fcbb38ad2a69fa93b867e070d",
+            "url": "https://api.github.com/repos/paragonie/random_compat/zipball/0a58ef6e3146256cc3dc7cc393927bcc7d1b72db",
+            "reference": "0a58ef6e3146256cc3dc7cc393927bcc7d1b72db",
             "shasum": ""
         },
         "require": {
@@ -1913,7 +1913,7 @@
         "suggest": {
             "ext-libsodium": "Provides a modern crypto API that can be used to generate random bytes."
         },
-        "time": "2018-07-04T16:31:37+00:00",
+        "time": "2019-01-03T20:59:08+00:00",
         "type": "library",
         "installation-source": "dist",
         "autoload": {
@@ -1942,25 +1942,29 @@
     },
     {
         "name": "phpoffice/phpexcel",
-        "version": "1.8.1",
-        "version_normalized": "1.8.1.0",
+        "version": "1.8.2",
+        "version_normalized": "1.8.2.0",
         "source": {
             "type": "git",
             "url": "https://github.com/PHPOffice/PHPExcel.git",
-            "reference": "372c7cbb695a6f6f1e62649381aeaa37e7e70b32"
+            "reference": "1441011fb7ecdd8cc689878f54f8b58a6805f870"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/PHPOffice/PHPExcel/zipball/372c7cbb695a6f6f1e62649381aeaa37e7e70b32",
-            "reference": "372c7cbb695a6f6f1e62649381aeaa37e7e70b32",
+            "url": "https://api.github.com/repos/PHPOffice/PHPExcel/zipball/1441011fb7ecdd8cc689878f54f8b58a6805f870",
+            "reference": "1441011fb7ecdd8cc689878f54f8b58a6805f870",
             "shasum": ""
         },
         "require": {
+            "ext-mbstring": "*",
             "ext-xml": "*",
             "ext-xmlwriter": "*",
-            "php": ">=5.2.0"
+            "php": "^5.2|^7.0"
         },
-        "time": "2015-05-01T07:00:55+00:00",
+        "require-dev": {
+            "squizlabs/php_codesniffer": "2.*"
+        },
+        "time": "2018-11-22T23:07:24+00:00",
         "type": "library",
         "installation-source": "dist",
         "autoload": {
@@ -1970,7 +1974,7 @@
         },
         "notification-url": "https://packagist.org/downloads/",
         "license": [
-            "LGPL"
+            "LGPL-2.1"
         ],
         "authors": [
             {
@@ -1978,18 +1982,19 @@
                 "homepage": "http://blog.maartenballiauw.be"
             },
             {
-                "name": "Mark Baker"
+                "name": "Erik Tilt"
             },
             {
                 "name": "Franck Lefevre",
-                "homepage": "http://blog.rootslabs.net"
+                "homepage": "http://rootslabs.net"
             },
             {
-                "name": "Erik Tilt"
+                "name": "Mark Baker",
+                "homepage": "http://markbakeruk.net"
             }
         ],
         "description": "PHPExcel - OpenXML - Read, Create and Write Spreadsheet documents in PHP - Spreadsheet engine",
-        "homepage": "http://phpexcel.codeplex.com",
+        "homepage": "https://github.com/PHPOffice/PHPExcel",
         "keywords": [
             "OpenXML",
             "excel",
@@ -2706,17 +2711,17 @@
     },
     {
         "name": "symfony/phpunit-bridge",
-        "version": "v3.4.20",
-        "version_normalized": "3.4.20.0",
+        "version": "v3.4.21",
+        "version_normalized": "3.4.21.0",
         "source": {
             "type": "git",
             "url": "https://github.com/symfony/phpunit-bridge.git",
-            "reference": "2155067dfc73e0e77dbc26f236af17e4df552de5"
+            "reference": "5dab0d4b2ac99ab22b447b615fdfdc10ec4af3d5"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/symfony/phpunit-bridge/zipball/2155067dfc73e0e77dbc26f236af17e4df552de5",
-            "reference": "2155067dfc73e0e77dbc26f236af17e4df552de5",
+            "url": "https://api.github.com/repos/symfony/phpunit-bridge/zipball/5dab0d4b2ac99ab22b447b615fdfdc10ec4af3d5",
+            "reference": "5dab0d4b2ac99ab22b447b615fdfdc10ec4af3d5",
             "shasum": ""
         },
         "require": {
@@ -2729,7 +2734,7 @@
             "ext-zip": "Zip support is required when using bin/simple-phpunit",
             "symfony/debug": "For tracking deprecated interfaces usages at runtime with DebugClassLoader"
         },
-        "time": "2018-11-20T16:47:12+00:00",
+        "time": "2019-01-01T13:45:19+00:00",
         "bin": [
             "bin/simple-phpunit"
         ],
@@ -3304,17 +3309,17 @@
     },
     {
         "name": "symfony/symfony",
-        "version": "v3.4.20",
-        "version_normalized": "3.4.20.0",
+        "version": "v3.4.21",
+        "version_normalized": "3.4.21.0",
         "source": {
             "type": "git",
             "url": "https://github.com/symfony/symfony.git",
-            "reference": "f6b8ddc362b1cf3fb06548693c3adbb736092412"
+            "reference": "c7a57e0bcc3c57ae697f072b3e862487b6fd0030"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/symfony/symfony/zipball/f6b8ddc362b1cf3fb06548693c3adbb736092412",
-            "reference": "f6b8ddc362b1cf3fb06548693c3adbb736092412",
+            "url": "https://api.github.com/repos/symfony/symfony/zipball/c7a57e0bcc3c57ae697f072b3e862487b6fd0030",
+            "reference": "c7a57e0bcc3c57ae697f072b3e862487b6fd0030",
             "shasum": ""
         },
         "require": {
@@ -3415,7 +3420,7 @@
             "symfony/phpunit-bridge": "~3.4|~4.0",
             "symfony/security-acl": "~2.8|~3.0"
         },
-        "time": "2018-12-06T15:24:36+00:00",
+        "time": "2019-01-06T15:54:26+00:00",
         "type": "library",
         "extra": {
             "branch-alias": {
@@ -3461,17 +3466,17 @@
     },
     {
         "name": "symfony/templating",
-        "version": "v4.2.1",
-        "version_normalized": "4.2.1.0",
+        "version": "v4.2.2",
+        "version_normalized": "4.2.2.0",
         "source": {
             "type": "git",
             "url": "https://github.com/symfony/templating.git",
-            "reference": "249b9dec50c98ef7cb4d4967888b91f095e9a15b"
+            "reference": "61d5e24def14197599eeb94658e1432c47a573a2"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/symfony/templating/zipball/249b9dec50c98ef7cb4d4967888b91f095e9a15b",
-            "reference": "249b9dec50c98ef7cb4d4967888b91f095e9a15b",
+            "url": "https://api.github.com/repos/symfony/templating/zipball/61d5e24def14197599eeb94658e1432c47a573a2",
+            "reference": "61d5e24def14197599eeb94658e1432c47a573a2",
             "shasum": ""
         },
         "require": {
@@ -3484,7 +3489,7 @@
         "suggest": {
             "psr/log-implementation": "For using debug logging in loaders"
         },
-        "time": "2018-11-20T16:22:05+00:00",
+        "time": "2019-01-03T09:07:35+00:00",
         "type": "library",
         "extra": {
             "branch-alias": {
@@ -3519,17 +3524,17 @@
     },
     {
         "name": "symfony/var-dumper",
-        "version": "v4.2.1",
-        "version_normalized": "4.2.1.0",
+        "version": "v4.2.2",
+        "version_normalized": "4.2.2.0",
         "source": {
             "type": "git",
             "url": "https://github.com/symfony/var-dumper.git",
-            "reference": "db61258540350725f4beb6b84006e32398acd120"
+            "reference": "85bde661b178173d85c6f11ea9d03b61d1212bb2"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/symfony/var-dumper/zipball/db61258540350725f4beb6b84006e32398acd120",
-            "reference": "db61258540350725f4beb6b84006e32398acd120",
+            "url": "https://api.github.com/repos/symfony/var-dumper/zipball/85bde661b178173d85c6f11ea9d03b61d1212bb2",
+            "reference": "85bde661b178173d85c6f11ea9d03b61d1212bb2",
             "shasum": ""
         },
         "require": {
@@ -3543,6 +3548,7 @@
         },
         "require-dev": {
             "ext-iconv": "*",
+            "symfony/console": "~3.4|~4.0",
             "symfony/process": "~3.4|~4.0",
             "twig/twig": "~1.34|~2.4"
         },
@@ -3551,7 +3557,7 @@
             "ext-intl": "To show region name in time zone dump",
             "symfony/console": "To use the ServerDumpCommand and/or the bin/var-dump-server script"
         },
-        "time": "2018-11-25T12:50:42+00:00",
+        "time": "2019-01-03T09:07:35+00:00",
         "bin": [
             "Resources/bin/var-dump-server"
         ],
@@ -3699,17 +3705,17 @@
     },
     {
         "name": "twig/twig",
-        "version": "v2.6.0",
-        "version_normalized": "2.6.0.0",
+        "version": "v2.6.2",
+        "version_normalized": "2.6.2.0",
         "source": {
             "type": "git",
             "url": "https://github.com/twigphp/Twig.git",
-            "reference": "a11dd39f5b6589e14f0ff3b36675d06047c589b1"
+            "reference": "7d7342c8a4059fefb9b8d07db0cc14007021f9b7"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/twigphp/Twig/zipball/a11dd39f5b6589e14f0ff3b36675d06047c589b1",
-            "reference": "a11dd39f5b6589e14f0ff3b36675d06047c589b1",
+            "url": "https://api.github.com/repos/twigphp/Twig/zipball/7d7342c8a4059fefb9b8d07db0cc14007021f9b7",
+            "reference": "7d7342c8a4059fefb9b8d07db0cc14007021f9b7",
             "shasum": ""
         },
         "require": {
@@ -3722,7 +3728,7 @@
             "symfony/debug": "^2.7",
             "symfony/phpunit-bridge": "^3.4.19|^4.1.8"
         },
-        "time": "2018-12-16T10:36:48+00:00",
+        "time": "2019-01-14T15:00:48+00:00",
         "type": "library",
         "extra": {
             "branch-alias": {

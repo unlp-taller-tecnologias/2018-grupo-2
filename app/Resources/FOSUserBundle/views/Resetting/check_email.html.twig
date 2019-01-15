@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} Reestablecer contraseña {% endblock %}
+
+{% block body %}
+
+{% trans_default_domain 'FOSUserBundle' %}
+
+<p>
+{{ 'resetting.check_email'|trans({'%tokenLifetime%': tokenLifetime})|nl2br }}
+</p>
+{% endblock %}
