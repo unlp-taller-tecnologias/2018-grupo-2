@@ -1,13 +1,14 @@
 <pdf>
-  <form action="{{ path('saveExcel') }}" method="get">
-   <input hidden id="area" class="form-control" name="area">
-   <input hidden id="specie" class="form-control" name="specie">
-   <input hidden id="subspecie" class="form-control" name="subspecie">
-   <input hidden id="format" class="form-control" name="_format">
-   <button id="btPrint" class="btn btn-info mt-lg-3 ml-lg-3" type="submit">Descargar</button>
+  <form id="idForm" action="" method="get">
+    <input hidden="hidden" id="area" class="form-control" name="area" value="">
+    <input hidden="hidden" id="specie" class="form-control" name="specie" value="">
+    <input hidden="hidden" id="subspecie" class="form-control" name="subspecie" value="">
+    <input hidden="hidden" id="format" class="form-control" name="_format" value="">
+    <button id="btVolver" class="btn btn-info mt-lg-3 ml-lg-3">Volver al listado</button>
+    <button id="btPrint" class="btn btn-info mt-lg-3 ml-lg-3">Descargar</button>
   </form>
-    <dynamic-page>
-      <div class="container">
+  <dynamic-page>
+    <div class="container">
       <h1 class="text-center mb-lg-4">Listado de individuos de flora</h1>
       <table class="table row-border hover stripe" name="TABLA">
         <thead class="thead-light">
@@ -18,25 +19,34 @@
           <th>Fecha de plantación</th>
         </thead>
         <tbody>
-        {% for flora in floras %}
-          <tr>
-            <td>{{flora.subspecie.specie.name}}</td>
-            <td>{{ flora.subspecie.name }}</td>
-            <td>{{ flora.name }}</td>
-            <td>{{ flora.area.name }}</td>
-            <td>{{ flora.plantationDate}}</td>
-          </tr>
-        {% endfor %}
+          {% for flora in floras %}
+            <tr>
+              <td>{{flora.subspecie.specie.name}}</td>
+              <td>{{ flora.subspecie.name }}</td>
+              <td>{{ flora.name }}</td>
+              <td>{{ flora.area.name }}</td>
+              <td>{{ flora.plantationDate}}</td>
+            </tr>
+          {% endfor %}
         </tbody>
       </table>
     </dynamic-page>
-</pdf>
-<script src="{{ asset('scripts/jquery.js') }}"></script>
-<link href="{{ asset('bootstrap/css/style.css') }}" rel="stylesheet">
-<link href="{{ asset('bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
-<script>
-  $('#specie').val("{{params.specie}}");
-  $('#subspecie').val("{{params.subspecie}}");
-  $('#area').val("{{params.area}}");
-  $('#format').val('xls');
-</script>
+  </pdf>
+  <script src="{{ asset('scripts/jquery.js') }}"></script>
+  <link href="{{ asset('bootstrap/css/style.css') }}" rel="stylesheet">
+  <link href="{{ asset('bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
+  <script>
+    $('#specie').val("{{params.specie}}");
+    $('#subspecie').val("{{params.subspecie}}");
+    $('#area').val("{{params.area}}");
+    $('#format').val('xls');
+    $('#btVolver').click(function() {
+      $('#format').val('html');
+      $('#idForm').attr('action', "{{ path('flora_index') }}");
+      $("#idForm").submit();
+    });
+    $('#btPrint').click(function() {
+      $('#idForm').attr('action', "{{ path('saveExcel') }}");
+      $("#idForm").submit();
+    });
+  </script>

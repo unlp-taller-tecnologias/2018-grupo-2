@@ -1,11 +1,12 @@
 <pdf>
-  <form action="{{ path('saveExcelFaunas') }}" method="get">
+  <form id="idForm" action="" method="get">
      <input hidden type="text" id="destination" class="form-control" placeholder="Próximo destino" name="destination">
      <input hidden id="attendants" class="form-control" name="attendants">
      <input hidden id="specie" class="form-control" name="specie">
      <input hidden id="subspecie" class="form-control" name="subspecie">
      <input hidden id="format" class="form-control" name="_format">
-     <button id="btPrint" class="btn btn-info mt-lg-3 ml-lg-3" type="submit">Descargar</button>
+     <button id="btVolver" class="btn btn-info mt-lg-3 ml-lg-3">Volver al listado</button>
+     <button id="btPrint" class="btn btn-info mt-lg-3 ml-lg-3">Descargar</button>
   </form>
     <dynamic-page>
       <div class="container">
@@ -42,4 +43,13 @@
   $('#subspecie').val("{{params.subspecie}}");
   $('#attendants').val("{{params.attendants}}");
   $('#format').val('xls');
+  $('#btVolver').click(function() {
+    $('#format').val('html');
+    $('#idForm').attr('action', "{{ path('fauna_index') }}");
+    $("#idForm").submit();
+  });
+  $('#btPrint').click(function() {
+    $('#idForm').attr('action', "{{ path('saveExcelFaunas') }}");
+    $("#idForm").submit();
+  });
 </script>

@@ -1,4 +1,5 @@
 <pdf>
+  <a id="btVolver" class="btn btn-info mt-lg-3 ml-lg-3" href="{{ path('flora_index') }}">Volver al listado</a>
   <button id="btPrint" class="btn btn-info mt-lg-3 ml-lg-3" type="button" onclick="imprimirPagina()" name="button">Descargar</button>
     <dynamic-page>
       <div class="container">
@@ -50,6 +51,7 @@ var docDefinition = {
 
 function imprimirPagina() {
    pdfMake.createPdf(docDefinition).download('listado_flora.pdf');
+   window.location = $('#btVolver').attr('href');
 }
 
 </script>
