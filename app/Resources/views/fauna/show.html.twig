@@ -28,7 +28,7 @@
             <li class="list-group-item">
               <b>Próximo destino</b><br>
               &emsp;<b>Lugar:</b> {% if fauna.destination is null %} <i class="text-muted">No se ha definido</i> {% else %} {{ fauna.destination }} {% endif %} <br>
-              &emsp;<b>Fecha:</b> {% if fauna.departureDate is null %} <i class="text-muted">No se ha definido</i> {% else %} {{ fauna.departureDate}} {% endif %} <br>
+              &emsp;<b>Fecha:</b> {% if fauna.departureDate is null %} <i class="text-muted">No se ha definido</i> {% else %} {{ fauna.departureDate | date('Y-m-d')}} {% endif %} <br>
             </li>
           </ul>
         </div>
