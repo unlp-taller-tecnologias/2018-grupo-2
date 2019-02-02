@@ -25,12 +25,13 @@ class FLSubspecieController extends Controller
      */
     public function indexAction(Request $request)
     {
+        $all = $request->query->all();
         $em = $this->getDoctrine()->getManager();
-
-        $fLSubspecies = $em->getRepository('AppBundle:FLSubspecie')->findByPage($request->query->getInt('page', 1),$this->container->getParameter('pagination'));
-
+        $arrayParams = array('name' => isset($all["name"])? $all["name"]:NULL);
+        $fLSubspecies = $em->getRepository('AppBundle:FLSubspecie')->findByPage($request->query->getInt('page', 1),$this->container->getParameter('pagination'),$arrayParams);
         return $this->render('flsubspecie/index.html.twig', array(
             'fLSubspecies' => $fLSubspecies,
+            'params' =>$arrayParams,
         ));
     }
 
