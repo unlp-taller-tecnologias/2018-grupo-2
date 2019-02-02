@@ -11,6 +11,7 @@ use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use AppBundle\Entity\FASpecie;
+use Doctrine\ORM\EntityRepository;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 
 class FaunaType extends AbstractType
@@ -24,6 +25,12 @@ class FaunaType extends AbstractType
                       'specie',EntityType::class, array(
                         'label' => 'Especie',
                         'class' => FASpecie::class,
+                        'query_builder' => function (EntityRepository $er) {
+                          return $er->createQueryBuilder('f')
+                          ->andWhere('f.deleted = :deleted')
+                          ->setParameter('deleted', false)
+                          ->orderBy('f.name', 'ASC');
+                        },
                         'choice_label' => 'name',
                         'required' => true,
                         'placeholder' => 'Seleccione una especie...',
