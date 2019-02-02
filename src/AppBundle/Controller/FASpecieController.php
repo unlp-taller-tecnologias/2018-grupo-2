@@ -26,13 +26,15 @@ class FASpecieController extends Controller
      */
     public function indexAction(Request $request)
     {
-        $em = $this->getDoctrine()->getManager();
-
-        $listFASpecie = $em->getRepository('AppBundle:FASpecie')->findByPage($request->query->getInt('page', 1),$this->container->getParameter('pagination'));
-
-        return $this->render('faspecie/index.html.twig', array(
-            'listFASpecie' => $listFASpecie
-        ));
+      $all = $request->query->all();
+      $em = $this->getDoctrine()->getManager();
+      $arrayParams = array('name' => isset($all["name"])? $all["name"]:NULL);
+      $listFASpecie = $em->getRepository('AppBundle:FASpecie')->findByPage($request->query->getInt('page', 1),$this->container->getParameter('pagination'),$arrayParams);
+      return $this->render('faspecie/index.html.twig', array(
+          'listFASpecie' => $listFASpecie,
+          'params' =>$arrayParams,
+          'name' => 'aaaaaa'
+      ));
     }
 
     /**
