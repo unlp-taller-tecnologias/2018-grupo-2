@@ -13,9 +13,9 @@
     <div class="row">
       <div class="col-md-10 col-center">
         <h1>Especies de fauna</h1>
-        <br>
         <a class="btn btn-info float-right btn-m-r mb-lg-3" href="{{ path('faspecie_new') }}">Nueva especie</a>
-
+        <br><br>
+        {% include 'faspecie/filter.html.twig' %}
         <table id="faspecie-table" class="table row-border hover stripe" >
           <thead class="thead-light">
             <tr>
@@ -114,13 +114,13 @@
       searching: false,
       info: false,
       lengthChange: false,
-      columns: columnDefs,
+      "columns": "columnDefs",
        "paging":   false,
        "ordering": false,
        "info":     false
     });
+    $('#name').val("{{params.name}}");
   });
-
   $('#faspecie-table').on("click", ".button_delete", function() {
     var id_fas = $(this).closest('tr').find('.faspecie_id').val();
     $('.form_m_d').attr('action', '/faspecie/'+id_fas);
@@ -150,5 +150,10 @@
         }
       });
   });
+
+  $('#buttonClear').click(function() {
+    $('#name').val('');
+  });
+
 </script>
 {% endblock %}

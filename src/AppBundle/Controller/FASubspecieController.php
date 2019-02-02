@@ -25,13 +25,14 @@ class FASubspecieController extends Controller
      */
     public function indexAction(Request $request)
     {
-        $em = $this->getDoctrine()->getManager();
-
-        $fASubspecies = $em->getRepository('AppBundle:FASubspecie')->findByPage($request->query->getInt('page', 1),$this->container->getParameter('pagination'));
-
-        return $this->render('fasubspecie/index.html.twig', array(
-            'fASubspecies' => $fASubspecies,
-        ));
+      $all = $request->query->all();
+      $em = $this->getDoctrine()->getManager();
+      $arrayParams = array('name' => isset($all["name"])? $all["name"]:NULL);
+      $fASubspecies = $em->getRepository('AppBundle:FASubspecie')->findByPage($request->query->getInt('page', 1),$this->container->getParameter('pagination'),$arrayParams);
+      return $this->render('fasubspecie/index.html.twig', array(
+          'fASubspecies' => $fASubspecies,
+          'params' =>$arrayParams,
+      ));
     }
 
     /**
