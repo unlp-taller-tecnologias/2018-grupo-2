@@ -8,6 +8,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
+use Doctrine\ORM\EntityRepository;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use AppBundle\Entity\Category;
 
@@ -50,6 +51,7 @@ class AttendantType extends AbstractType
                             'class' => 'form-control mb-lg-3',
                             'placeholder' => 'Ingrese un email...'))
                     )
+
                 ->add(
                     'category', EntityType::class, array(
                         'label' => 'Categoría',
@@ -58,6 +60,12 @@ class AttendantType extends AbstractType
                             'class' => 'form-control mb-lg-3'
                         ),
                         'class' => Category::class,
+                        'query_builder' => function (EntityRepository $er) {
+                            return $er->createQueryBuilder('c')
+                            ->andWhere('c.deleted = :deleted')
+                            ->setParameter('deleted', false)
+                            ->orderBy('c.name', 'ASC');
+                        },
                         'placeholder' => 'Seleccione una categoría...'
                     )
                 );

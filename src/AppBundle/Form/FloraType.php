@@ -11,6 +11,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use AppBundle\Entity\FLSpecie;
+use Doctrine\ORM\EntityRepository;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 
 class FloraType extends AbstractType
@@ -24,6 +25,12 @@ class FloraType extends AbstractType
                     'specie', EntityType::class, array(
                       'label' => 'Especie',
                       'class' => FLSpecie::class,
+                      'query_builder' => function (EntityRepository $er) {
+                        return $er->createQueryBuilder('f')
+                        ->andWhere('f.deleted = :deleted')
+                        ->setParameter('deleted', false)
+                        ->orderBy('f.name', 'ASC');
+                      },
                       'choice_label' => 'name',
                       'required' => true,
                       'placeholder' => 'Seleccione una especie...',
