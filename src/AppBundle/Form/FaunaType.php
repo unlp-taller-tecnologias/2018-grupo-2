@@ -12,6 +12,7 @@ use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use AppBundle\Entity\FASpecie;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Symfony\Component\Form\Extension\Core\Type\NumberType;
 
 class FaunaType extends AbstractType
 {
@@ -54,8 +55,8 @@ class FaunaType extends AbstractType
                       )
                     )
                 ->add(
-                      'weight', TextType::class, array(
-                          'label' => 'Peso',
+                      'weight', NumberType::class, array(
+                          'label' => 'Peso (medido en kilos)',
                           'required' => true,
                           'attr' => array(
                             'class' => 'form-control mb-lg-3',
