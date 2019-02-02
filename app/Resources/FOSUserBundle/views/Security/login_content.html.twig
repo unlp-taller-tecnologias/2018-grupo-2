@@ -1,7 +1,15 @@
 {% trans_default_domain 'FOSUserBundle' %}
 
 {% if error %}
-    <div>{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+<div class="flash-notice">
+  <div class="alert alert-danger alert-dismissible fade show" role="alert">
+      {{ error.messageKey|trans(error.messageData, 'security') }}
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+    <br>
+  </div>
+</div>
 {% endif %}
 
 <form action="{{ path("fos_user_security_check") }}" method="post">
@@ -11,21 +19,18 @@
     <div class="container">
       <div class="row">
         <div class="col-md-5 col-center">
-          <h4 class="card-panel teal lighten-2 white-head">Iniciar Sesión</h4>
+          <h1 class="card-panel teal lighten-2 white-head">Iniciar sesión</h1>
           <br>
           <br>
           <label for="username">Email</label>
-          <input type="text" id="username" name="_username" value="{{ last_username }}" required="required" autocomplete="username" />
+          <input class='form-control mb-lg-3' type="text" id="username" name="_username" value="{{ last_username }}" required="required" autocomplete="username" />
           <br>
           <label for="password">{{ 'security.login.password'|trans }}</label>
-          <input type="password" id="password" name="_password" required="required" autocomplete="current-password" />
-          <br>
-          <input type="checkbox" id="remember_me" name="_remember_me" value="on" />
-          <label for="remember_me">{{ 'security.login.remember_me'|trans }}</label>
-          <a style= "margin-left: 5%; font-size:90%" href="{{path('fos_user_resetting_request')}}">Recuperar contraseña</a>
+          <input class='form-control mb-lg-3' type="password" id="password" name="_password" required="required" autocomplete="current-password" />
+          <a style= "font-size:90%" href="{{path('fos_user_resetting_request')}}">Recuperar contraseña</a>
           <br>
           <br>
-          <input type="submit" id=0_submit" name="_submit" value="{{ 'security.login.submit'|trans }}" />
+          <input class="btn btn-success btn-md mt-lg-3" type="submit" id=0_submit" name="_submit" value="{{ 'security.login.submit'|trans }}" />
 
         </div>
       </div>

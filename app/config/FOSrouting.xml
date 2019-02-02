@@ -16,6 +16,6 @@
         resource="FOSprofile.xml"
         prefix="/users" />
     <import
-        resource="@FOSUserBundle/Resources/config/routing/change_password.xml"
+        resource="change_password.xml"
         prefix="/password" />
 </routes>

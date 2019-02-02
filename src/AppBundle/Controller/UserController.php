@@ -99,6 +99,11 @@ class UserController extends Controller
         if ($this->getUser()->getId() != $user->getId()) {
             $em = $this->getDoctrine()->getManager();
             $user->setEnabled(false);
+            $at='@';
+            while(!is_null($em->getRepository('AppBundle:User')->findOneBy(array('email'=>$at.$user->getEmail())))){
+              $at=$at.'@';
+            }
+            $user->setEmail($at.$user->getEmail());
             $em->persist($user);
             $em->flush();
             $this->addFlash("success", "Usuario eliminado con éxito.");

@@ -1,14 +1,5 @@
 <?php
 
-/*
- * This file is part of the FOSUserBundle package.
- *
- * (c) FriendsOfSymfony <http://friendsofsymfony.github.com/>
- *
- * For the full copyright and license information, please view the LICENSE
- * file that was distributed with this source code.
- */
-
 namespace AppBundle\Controller;
 
 use FOS\UserBundle\Event\FilterUserResponseEvent;
@@ -60,7 +51,7 @@ class ChangePasswordController extends Controller
             return $event->getResponse();
         }
 
-        $form = $this->formFactory->createForm();
+        $form = $this->formFactory->createForm('AppBundle\Form\ChangePasswordFormType', $user);
         $form->setData($user);
 
         $form->handleRequest($request);
@@ -72,7 +63,7 @@ class ChangePasswordController extends Controller
             $this->userManager->updateUser($user);
 
             if (null === $response = $event->getResponse()) {
-                $url = $this->generateUrl('users_show',$this->getUser()->getId());
+                $url = $this->generateUrl('users_show', array('id' => $user->getId()));
                 $response = new RedirectResponse($url);
             }
 

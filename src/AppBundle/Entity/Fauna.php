@@ -40,7 +40,7 @@ class Fauna
     /**
      * @var string
      *
-     * @ORM\Column(name="health_observations", type="string", length=255)
+     * @ORM\Column(name="health_observations", type="string", length=255, nullable=true)
      */
     private $healthObservations;
 

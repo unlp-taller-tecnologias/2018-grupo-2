@@ -16,7 +16,7 @@
             <li class="list-group-item"><b>Especie:</b> {{ fauna.subspecie.specie }} </li>
             <li class="list-group-item"><b>Subespecie:</b> {{ fauna.subspecie }} </li>
             <li class="list-group-item"><b>Peso:</b> {{ fauna.weight }} kg.</li>
-            <li class="list-group-item"><b>Observaciones de salud:</b> {{ fauna.healthObservations }}</li>
+            <li class="list-group-item"><b>Observaciones de salud:</b> {% if fauna.destination is null %} <i class="text-muted">No se ha definido</i> {% else %} {{ fauna.healthObservations }} {% endif %}</li>
             <li class="list-group-item">
               <b>Encargado/s</b>
               <ul>

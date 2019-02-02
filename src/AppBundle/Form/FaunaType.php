@@ -115,6 +115,7 @@ class FaunaType extends AbstractType
                 ->add(
                       'healthObservations', TextareaType::class, array(
                         'label' => 'Observaciones',
+                        'required' => false,
                         'attr' => array(
                           'class' => 'form-control mb-lg-3',
                           'placeholder' => 'Ingrese las observaciones...'

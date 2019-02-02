@@ -83,6 +83,9 @@ fos_user:
     registration:
         form:
             type: AppBundle\Form\RegistrationFormType
+    change_password:
+        form:
+            type: AppBundle\Form\ChangePasswordFormType
 
 # app/config/config.yml
 ps_pdf:
