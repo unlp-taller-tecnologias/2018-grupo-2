@@ -25,13 +25,14 @@ class FLSpecieController extends Controller
      */
     public function indexAction(Request $request)
     {
-        $em = $this->getDoctrine()->getManager();
-
-        $fLSpecies = $em->getRepository('AppBundle:FLSpecie')->findByPage($request->query->getInt('page', 1),$this->container->getParameter('pagination'));
-
-        return $this->render('flspecie/index.html.twig', array(
-            'fLSpecies' => $fLSpecies,
-        ));
+      $all = $request->query->all();
+      $em = $this->getDoctrine()->getManager();
+      $arrayParams = array('name' => isset($all["name"])? $all["name"]:NULL);
+      $fLSpecies = $em->getRepository('AppBundle:FLSpecie')->findByPage($request->query->getInt('page', 1),$this->container->getParameter('pagination'),$arrayParams);
+      return $this->render('flspecie/index.html.twig', array(
+          'fLSpecies' => $fLSpecies,
+          'params' =>$arrayParams,
+      ));
     }
 
     /**

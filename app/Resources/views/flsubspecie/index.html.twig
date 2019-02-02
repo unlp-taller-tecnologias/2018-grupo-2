@@ -12,9 +12,9 @@
     <div class="row">
       <div class="col-md-12 col-center">
         <h1>Subespecies de flora</h1>
-        <br>
         <a class="btn btn-info float-right btn-m-r mb-lg-3" href="{{ path('flsubspecie_new') }}">Nueva subespecie</a>
-
+        <br><br>
+        {% include 'flsubspecie/filter.html.twig' %}
         <table id="flsubspecie-table" class="table row-border hover stripe" name="TABLA">
           <thead class="thead-light">
             <tr>
@@ -29,11 +29,11 @@
               <td>{{ fLSubspecie.name }}</ts>
               <td>{{ fLSubspecie.specie }}</td>
               <td>
-                <a class="btn btn-success" href="{{ path('flsubspecie_edit', { 'id': fLSubspecie.id }) }}">
+                <a class="btn btn-success btn-sm" href="{{ path('flsubspecie_edit', { 'id': fLSubspecie.id }) }}">
                   <i class="fa fa-pencil"></i>
                 </a>
                 <input class="flsubspecie_id" value="{{fLSubspecie.id}}" hidden>
-                <button type="button" class="button_delete btn btn-danger" data-toggle="modal" data-target="#delete_modal">
+                <button type="button" class="button_delete btn btn-danger btn-sm" data-toggle="modal" data-target="#delete_modal">
                   <i class="fa fa-trash"></i>
                 </button>
               </td>
@@ -96,11 +96,15 @@
        "ordering": false,
        "info":     false
     });
+    $('#name').val("{{params.name}}");
   });
-  
+
   $('#flsubspecie-table').on("click", ".button_delete", function() {
     var id_flsubspecie = $(this).closest('tr').find('.flsubspecie_id').val();
     $('.form_m_d').attr('action', '/flsubspecie/'+id_flsubspecie);
+  });
+  $('#buttonClear').click(function() {
+    $('#name').val('');
   });
 </script>
 {% endblock %}

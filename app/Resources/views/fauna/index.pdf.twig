@@ -44,6 +44,12 @@
 var docDefinition = {
   content: [
     {
+      text: 'Listado de individuos de fauna\n\n',
+      style: 'header',
+      alignment: 'center',
+      bold: true
+    },
+    {
       table: {
         headerRows: 1,
         widths: [ '*', '*', '*', '*'],
@@ -55,7 +61,10 @@ var docDefinition = {
         ]
       }
     }
-  ]
+  ],
+  footer: function(currentPage, pageCount) {
+    return currentPage.toString() + ' de ' + pageCount;
+  }
 };
 
 function imprimirPagina() {

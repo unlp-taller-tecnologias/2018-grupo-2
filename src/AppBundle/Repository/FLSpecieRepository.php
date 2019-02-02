@@ -20,4 +20,21 @@ class FLSpecieRepository extends DefaultEntityRepository
   protected function setOrderByAttribute(){
     self::$orderByAttribute = 'FLSpecieRepository.name';
   }
+
+
+  protected function setQuery($arrayParams){
+    $name= (is_null($arrayParams['name']) | $arrayParams['name'] == "")? NULL :$arrayParams['name'];
+    $qb = $this->getEntityManager()->createQueryBuilder();
+    $qb
+      ->select('f')
+      ->from('AppBundle:FLSpecie','f')
+      ->where($qb->expr()->orX(($qb->expr()->like('f.name', ":name")),($qb->expr()->isNull(':name'))))
+      ->andWhere($qb->expr()->eq('f.deleted', ':deleted'))
+      ->orWhere($qb->expr()->andX(($qb->expr()->isNull(':name')),($qb->expr()->eq('f.deleted', ':deleted'))))
+      ->setParameters(array(
+        "name" => '%'.$name.'%',
+        "deleted" => false,
+    ));
+    return $qb->getQuery();
+  }
 }

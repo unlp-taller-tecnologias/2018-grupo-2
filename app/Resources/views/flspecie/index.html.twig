@@ -12,8 +12,9 @@
     <div class="row">
       <div class="col-md-10 col-center">
         <h1>Especies de flora</h1>
-        <br>
         <a class="btn btn-info float-right btn-m-r mb-lg-3" href="{{ path('flspecie_new') }}">Nueva especie</a>
+        <br><br>
+        {% include 'flspecie/filter.html.twig' %}
         <table id="flspecie-table" class="table">
           <thead class="thead-light">
             <tr>
@@ -27,16 +28,16 @@
               <tr>
                 <td>{{ fLSpecie.name }}</td>
                 <td>
-                  <button type="button" class="button_subspecies btn btn-primary" data-toggle="modal" data-target="#subspecies_modal">
+                  <button type="button" class="button_subspecies btn btn-primary btn-sm" data-toggle="modal" data-target="#subspecies_modal">
                     Subespecies
                   </button>
                 </td>
                 <td>
-                  <a class="btn btn-success" href="{{ path('flspecie_edit', { 'id': fLSpecie.id }) }}">
+                  <a class="btn btn-success btn-sm" href="{{ path('flspecie_edit', { 'id': fLSpecie.id }) }}">
                     <i class="fa fa-pencil"></i>
                   </a>
                   <input class="flspecie_id" value="{{fLSpecie.id}}" hidden>
-                  <button type="button" class="button_delete btn btn-danger" data-toggle="modal" data-target="#delete_modal">
+                  <button type="button" class="button_delete btn btn-danger btn-sm" data-toggle="modal" data-target="#delete_modal">
                     <i class="fa fa-trash"></i>
                   </button>
                 </td>
@@ -117,6 +118,7 @@
        "ordering": false,
        "info":     false
     });
+    $('#name').val("{{params.name}}");
   });
 
   $('#flspecie-table').on("click", ".button_delete", function() {
@@ -148,5 +150,9 @@
         }
       });
   });
+  
+$('#buttonClear').click(function() {
+  $('#name').val('');
+});
 </script>
 {% endblock %}

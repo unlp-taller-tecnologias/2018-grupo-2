@@ -36,6 +36,10 @@ class UserType extends AbstractType
                 'Data entry' => 'ROLE_DATA_ENTRY',
                 'Responsable de informes' => 'ROLE_REPORTS'
             ],
+            'choice_attr' => function($val, $key, $index) {
+              // agrega la clase a cada opción
+              return ['class' => 'ml-lg-5'];
+            },
             'multiple' => true,
             'expanded'=> true,
             'attr' => array( 'class' => 'mb-lg-3' )

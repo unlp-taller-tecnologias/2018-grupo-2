@@ -39,14 +39,14 @@
               <td>{{ flora.area.name }}</td>
               <td>{{ flora.plantationDate}}</td>
               <td>
-                <a class="btn btn-info" href="{{ path('flora_show', { 'id': flora.id }) }}">
+                <a class="btn btn-info btn-sm" href="{{ path('flora_show', { 'id': flora.id }) }}">
                   <i class="fa fa-eye"></i>
                 </a>
-                <a class="btn btn-success" href="{{ path('flora_edit', { 'id': flora.id }) }}">
+                <a class="btn btn-success btn-sm" href="{{ path('flora_edit', { 'id': flora.id }) }}">
                   <i class="fa fa-pencil"></i>
                 </a>
                 <input class="flora_id" value="{{flora.id}}" hidden>
-                <button type="button" class="button_delete btn btn-danger" data-toggle="modal" data-target="#delete_modal">
+                <button type="button" class="button_delete btn btn-danger btn-sm" data-toggle="modal" data-target="#delete_modal">
                   <i class="fa fa-trash"></i>
                 </button>
               </td>
@@ -99,7 +99,7 @@
 
 {% block javascripts %}
 <script src="{{ asset('scripts/dataTables/datatables.min.js') }}"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
+<script src="{{ asset('scripts/select2/js/select2.min.js') }}"></script>
 <script>
   $(document).ready(function(){
     $('#flora-table').DataTable({
@@ -115,6 +115,7 @@
     $('#subspecie').val("{{params.subspecie}}");
     $('#area').val("{{params.area}}");
     $('#format').val('html');
+    $('.select2').select2()
   });
 
   $('#buttonClear').click(function() {

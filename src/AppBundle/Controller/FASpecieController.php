@@ -33,7 +33,6 @@ class FASpecieController extends Controller
       return $this->render('faspecie/index.html.twig', array(
           'listFASpecie' => $listFASpecie,
           'params' =>$arrayParams,
-          'name' => 'aaaaaa'
       ));
     }
 
