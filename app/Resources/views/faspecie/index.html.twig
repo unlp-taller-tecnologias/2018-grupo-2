@@ -29,16 +29,16 @@
               <tr>
                 <td scope="row">{{ fas.name}}</td>
                 <td>
-                  <button type="button" class="button_subspecies btn btn-primary" data-toggle="modal" data-target="#subspecies_modal">
+                  <button type="button" class="button_subspecies btn btn-primary btn-sm" data-toggle="modal" data-target="#subspecies_modal">
                     Subespecies
                   </button>
                 </td>
                 <td>
-                  <a class="btn btn-success" href="{{ path('faspecie_edit', { 'id': fas.id }) }}">
+                  <a class="btn btn-success btn-sm" href="{{ path('faspecie_edit', { 'id': fas.id }) }}">
                     <i class="fa fa-pencil"></i>
                   </a>
                   <input class="faspecie_id" value="{{fas.id}}" hidden>
-                  <button type="button" class="button_delete btn btn-danger" data-toggle="modal" data-target="#delete_modal">
+                  <button type="button" class="button_delete btn btn-danger btn-sm" data-toggle="modal" data-target="#delete_modal">
                     <i class="fa fa-trash"></i>
                   </button>
                 </td>

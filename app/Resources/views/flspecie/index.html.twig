@@ -28,16 +28,16 @@
               <tr>
                 <td>{{ fLSpecie.name }}</td>
                 <td>
-                  <button type="button" class="button_subspecies btn btn-primary" data-toggle="modal" data-target="#subspecies_modal">
+                  <button type="button" class="button_subspecies btn btn-primary btn-sm" data-toggle="modal" data-target="#subspecies_modal">
                     Subespecies
                   </button>
                 </td>
                 <td>
-                  <a class="btn btn-success" href="{{ path('flspecie_edit', { 'id': fLSpecie.id }) }}">
+                  <a class="btn btn-success btn-sm" href="{{ path('flspecie_edit', { 'id': fLSpecie.id }) }}">
                     <i class="fa fa-pencil"></i>
                   </a>
                   <input class="flspecie_id" value="{{fLSpecie.id}}" hidden>
-                  <button type="button" class="button_delete btn btn-danger" data-toggle="modal" data-target="#delete_modal">
+                  <button type="button" class="button_delete btn btn-danger btn-sm" data-toggle="modal" data-target="#delete_modal">
                     <i class="fa fa-trash"></i>
                   </button>
                 </td>

@@ -29,11 +29,11 @@
               <td>{{ fLSubspecie.name }}</ts>
               <td>{{ fLSubspecie.specie }}</td>
               <td>
-                <a class="btn btn-success" href="{{ path('flsubspecie_edit', { 'id': fLSubspecie.id }) }}">
+                <a class="btn btn-success btn-sm" href="{{ path('flsubspecie_edit', { 'id': fLSubspecie.id }) }}">
                   <i class="fa fa-pencil"></i>
                 </a>
                 <input class="flsubspecie_id" value="{{fLSubspecie.id}}" hidden>
-                <button type="button" class="button_delete btn btn-danger" data-toggle="modal" data-target="#delete_modal">
+                <button type="button" class="button_delete btn btn-danger btn-sm" data-toggle="modal" data-target="#delete_modal">
                   <i class="fa fa-trash"></i>
                 </button>
               </td>
