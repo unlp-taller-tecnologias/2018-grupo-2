@@ -15,7 +15,4 @@
     <import
         resource="FOSprofile.xml"
         prefix="/users" />
-    <import
-        resource="change_password.xml"
-        prefix="/password" />
 </routes>

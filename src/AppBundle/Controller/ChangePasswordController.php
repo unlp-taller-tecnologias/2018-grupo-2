@@ -17,7 +17,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use FOS\UserBundle\Controller\ChangePasswordController as BaseController;
 
-class ChangePasswordController extends Controller
+class ChangePasswordController extends UserController
 {
     private $eventDispatcher;
     private $formFactory;
@@ -50,8 +50,7 @@ class ChangePasswordController extends Controller
         if (null !== $event->getResponse()) {
             return $event->getResponse();
         }
-
-        $form = $this->formFactory->createForm('AppBundle\Form\ChangePasswordFormType', $user);
+        $form = $this->createForm('AppBundle\Form\ChangePasswordFormType', $user);
         $form->setData($user);
 
         $form->handleRequest($request);

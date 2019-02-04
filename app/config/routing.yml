@@ -9,6 +9,9 @@ fos_user_registration_register:
      resource: "routingRegistration.xml"
      prefix: /user
 
+fos_user_change_password:
+    resource: "FOSchangePassword.xml"
+
 #
 # fos_user_registration_confirm:
 #     resource: "@FOSUserBundle/Resources/config/routing/registration.xml"

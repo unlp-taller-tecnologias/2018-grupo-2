@@ -13,6 +13,7 @@ use FOS\UserBundle\Form\Type\ChangePasswordFormType as BaseChangePasswordFormTyp
 
 class ChangePasswordFormType extends AbstractType
 {
+    
     public function buildForm(FormBuilderInterface $builder, array $options){
 
         $constraintsOptions = array(
