@@ -88,15 +88,15 @@ fos_user:
             type: AppBundle\Form\ChangePasswordFormType
 
 # app/config/config.yml
-ps_pdf:
-    nodes_file: ~
-    fonts_file: ~
-    complex_attributes_file: ~
-    colors_file: ~
-    use_cache_in_stylesheet: ~
-    cache:
-      type: ~
-      options: ~
-    markdown_stylesheet_filepath: ~
-    markdown_document_template_filepath: ~
-    document_parser_type: ~
+# ps_pdf:
+#     nodes_file: ~
+#     fonts_file: ~
+#     complex_attributes_file: ~
+#     colors_file: ~
+#     use_cache_in_stylesheet: ~
+#     cache:
+#       type: ~
+#       options: ~
+#     markdown_stylesheet_filepath: ~
+#     markdown_document_template_filepath: ~
+#     document_parser_type: ~

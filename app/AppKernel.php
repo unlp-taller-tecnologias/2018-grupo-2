@@ -21,7 +21,7 @@ class AppKernel extends Kernel
             new FOS\UserBundle\FOSUserBundle(),
             new EasyCorp\Bundle\EasyAdminBundle\EasyAdminBundle(),
             new Tiloweb\PaginationBundle\TilowebPaginationBundle(),
-            new Ps\PdfBundle\PsPdfBundle(),
+            // new Ps\PdfBundle\PsPdfBundle(),
             new Liuggio\ExcelBundle\LiuggioExcelBundle(),
         ];
 
