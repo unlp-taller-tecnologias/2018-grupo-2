@@ -9,4 +9,5 @@ Instalación:
   - Crear una base de datos llamada bioparque.
   - Abrir consola en la carpeta descargada, y ejecutar el comando composer install.
   - Ejecutar el comando php bin/console d:s:u --force.
+  - Ejecución de php bin/console doctrine:fixtures:load.
   - El sistema esta listo!
