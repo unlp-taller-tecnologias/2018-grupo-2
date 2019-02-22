@@ -11,3 +11,5 @@ Instalación:
   - Ejecutar el comando php bin/console d:s:u --force.
   - Ejecución de php bin/console doctrine:fixtures:load.
   - El sistema esta listo!
+  
+  dbb4d3db397189ef45a055649a2fbf9e6be8f30c
